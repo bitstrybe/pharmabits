@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXSpinner?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="stockpane" prefHeight="456.0" prefWidth="498.0" styleClass="form_background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.AddStockOutController">
+   <children>
+      <DatePicker fx:id="stockoutdate" layoutX="180.0" layoutY="190.0" prefHeight="35.0" prefWidth="144.0" />
+      <JFXTextField fx:id="qnttextfield" focusColor="#cccccc" layoutX="333.0" layoutY="189.0" prefHeight="35.0" prefWidth="144.0" styleClass="form_field">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextArea fx:id="remarktxtarea" layoutX="29.0" layoutY="266.0" prefHeight="80.0" prefWidth="445.0" styleClass="form_field">
+         <font>
+            <Font size="13.0" />
+         </font></JFXTextArea>
+      <JFXButton fx:id="save" layoutX="118.0" layoutY="364.0" prefHeight="36.0" prefWidth="130.0" styleClass="savebtn" stylesheets="@style.css" text="SAVE" />
+      <JFXButton layoutX="263.0" layoutY="364.0" onAction="#closemtd" prefHeight="36.0" prefWidth="130.0" styleClass="closebtn" text="CLOSE" />
+      <HBox prefHeight="42.0" prefWidth="498.0">
+         <children>
+            <AnchorPane prefHeight="42.0" prefWidth="502.0" style="-fx-background-color: #ddddff; -fx-border-color: #cccccc;">
+               <children>
+                  <Label layoutX="24.0" layoutY="13.0" text="STOCK OUT">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Button fx:id="closeButton" layoutX="464.0" layoutY="9.0" mnemonicParsing="false" onAction="#closemtd" styleClass="closeform" stylesheets="@style.css">
+                     <graphic>
+                        <FontAwesomeIcon glyphName="CLOSE" />
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <Label layoutX="27.0" layoutY="162.0" text="BATCH NO" />
+      <Label fx:id="displayinfo" layoutX="117.0" layoutY="412.0" prefHeight="17.0" prefWidth="292.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <graphic>
+            <StackPane>
+               <children>
+                  <JFXSpinner fx:id="spinner" prefHeight="20.0" visible="false" />
+                  <FontAwesomeIcon fx:id="check" fill="#11cd33" glyphName="CHECK" size="2em" visible="false">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </FontAwesomeIcon>
+                  <FontAwesomeIcon fx:id="duplicatelock" glyphName="LOCK" size="2em" visible="false" />
+               </children>
+            </StackPane>
+         </graphic>
+      </Label>
+      <Label layoutX="27.0" layoutY="81.0" text="ITEM NAME" />
+      <Label layoutX="333.0" layoutY="163.0" text="QUANTITY" />
+      <Label layoutX="30.0" layoutY="235.0" text="REMARKS" />
+      <Label layoutX="184.0" layoutY="162.0" text="DATE" />
+      <Label fx:id="itemname" layoutX="29.0" layoutY="111.0" prefHeight="29.0" prefWidth="445.0" style="-fx-background-color: #EEEEEE;" styleClass="form_field">
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </Label>
+      <Label fx:id="batchnoname" layoutX="26.0" layoutY="188.0" prefHeight="36.0" prefWidth="144.0" style="-fx-background-color: #F0F0F0;" styleClass="form_field">
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

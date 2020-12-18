@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="boarderpane" prefHeight="690.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.MainAppController">
+   <left>
+      <VBox id="sidebackground" fx:id="sidemenu" prefHeight="661.0" prefWidth="173.0" style="-fx-background-color: #ccccff;" stylesheets="@style.css" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="79.0" prefWidth="173.0">
+               <children>
+                  <Label prefHeight="28.0" prefWidth="95.0" text="Pharmabits" textFill="WHITE">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Label fx:id="user" alignment="CENTER" prefHeight="18.0" prefWidth="180.0" text="Label" textFill="WHITE">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="user_role" alignment="CENTER" opacity="0.49" prefHeight="17.0" prefWidth="180.0" text="Label" textAlignment="CENTER" textFill="WHITE">
+               <VBox.margin>
+                  <Insets bottom="40.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+            <Line endX="70.0" opacity="0.45" startX="-100.0" stroke="#3f3f3f" />
+            <HBox fx:id="dashboard" prefHeight="88.0" prefWidth="207.0" styleClass="menu-btn" stylesheets="@style.css">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="88.0" prefWidth="179.0" styleClass="menu-btn" stylesheets="@style.css">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="88.0" prefWidth="175.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <children>
+                              <FontAwesomeIcon fx:id="dashawesome" fill="WHITE" glyphName="BAR_CHART" opacity="0.41" size="2.9em" wrappingWidth="39.62142753601074" />
+                              <Text fx:id="dashtext" fill="WHITE" opacity="0.59" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard" textAlignment="CENTER" wrappingWidth="148.08100128173828" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <Line endX="70.0" opacity="0.45" startX="-100.0" stroke="#3f3f3f" />
+            <HBox fx:id="sales" prefHeight="88.0" prefWidth="207.0" styleClass="menu-btn" stylesheets="@style.css">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="88.0" prefWidth="179.0" styleClass="menu-btn">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="88.0" prefWidth="174.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <children>
+                              <FontAwesomeIcon fill="WHITE" glyphName="ALIGN_LEFT" opacity="0.41" size="2.9em" styleClass="menu-btn" wrappingWidth="39.62142753601074" />
+                              <Text fill="WHITE" opacity="0.59" strokeType="OUTSIDE" strokeWidth="0.0" text="Catalog" textAlignment="CENTER" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <Line endX="70.0" opacity="0.45" startX="-100.0" stroke="#3f3f3f" />
+            <HBox fx:id="stocks" prefHeight="88.0" prefWidth="207.0" styleClass="menu-btn" stylesheets="@style.css">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="88.0" prefWidth="179.0" styleClass="menu-btn">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <children>
+                        <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <children>
+                              <FontAwesomeIcon fx:id="stockawesome" fill="WHITE" glyphName="CUBE" opacity="0.41" size="2.9em" wrappingWidth="39.62142753601074" />
+                              <Text fx:id="stocktext" fill="WHITE" opacity="0.59" strokeType="OUTSIDE" strokeWidth="0.0" text="Stock" textAlignment="CENTER" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <Line endX="70.0" opacity="0.45" startX="-100.0" stroke="#3f3f3f" />
+            <HBox fx:id="backup" prefHeight="88.0" prefWidth="207.0" styleClass="menu-btn" stylesheets="@style.css">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="88.0" prefWidth="179.0" styleClass="menu-btn">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <children>
+                        <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <children>
+                              <FontAwesomeIcon fill="WHITE" glyphName="SAVE" opacity="0.41" size="2.9em" wrappingWidth="39.62142753601074" />
+                              <Text fill="WHITE" opacity="0.59" strokeType="OUTSIDE" strokeWidth="0.0" text="Backup" textAlignment="CENTER" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </left>
+   <top>
+      <StackPane alignment="CENTER_RIGHT" style="-fx-background-color: #030b0e;" BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar prefHeight="37.0" prefWidth="800.0" style="-fx-background-color: transparent;" styleClass="menu-b" stylesheets="@style.css">
+               <menus>
+                  <Menu fx:id="admintopmenu" mnemonicParsing="false" text="Setup">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#addcategory" text="Category" />
+                        <MenuItem mnemonicParsing="false" onAction="#addmanufacturer" text="Manufacturer" />
+                        <MenuItem mnemonicParsing="false" onAction="#additems" text="Items" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Report">
+                     <items>
+                        <Menu mnemonicParsing="false" text="Stocks">
+                          <items>
+                              <MenuItem fx:id="reorderlevel" mnemonicParsing="false" onAction="#stockreorderlevel" text="Re-Order Level Report" />
+                            <MenuItem mnemonicParsing="false" onAction="#stocksreport" text="Stock Report" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Items">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#itemlistreport" text="Item List" />
+                          </items>
+                        </Menu>
+                     </items>
+                  </Menu>
+                  <Menu disable="true" mnemonicParsing="false" text="Help">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                     </items>
+                  </Menu>
+               </menus>
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin>
+               <padding>
+                  <Insets top="7.0" />
+               </padding>
+            </MenuBar>
+            <MenuButton fx:id="mainmenu" alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: transparent;" textFill="WHITE">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Profile" />
+                  <MenuItem mnemonicParsing="false" text="Settings" />
+                  <MenuItem mnemonicParsing="false" onAction="#signOut" text="Sign out" />
+               </items>
+               <graphic>
+                  <FontAwesomeIcon fill="WHITE" glyphName="USER" />
+               </graphic>
+               <StackPane.margin>
+                  <Insets right="30.0" />
+               </StackPane.margin>
+            </MenuButton>
+            <Button mnemonicParsing="false" onAction="#minimize" styleClass="homebtn" stylesheets="@style.css">
+               <graphic>
+                  <FontAwesomeIcon fill="WHITE" glyphName="MINUS" />
+               </graphic>
+               <StackPane.margin>
+                  <Insets right="5.0" />
+               </StackPane.margin>
+            </Button>
+         </children>
+      </StackPane>
+   </top>
+</BorderPane>

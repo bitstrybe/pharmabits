@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="662.0" prefWidth="1144.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.StockController">
+   <children>
+      <TableView fx:id="stock" layoutX="36.0" layoutY="71.0" prefHeight="290.0" prefWidth="1044.0" styleClass="table-cell" stylesheets="@style.css" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="89.0">
+        <columns>
+          <TableColumn fx:id="stkbatchno" prefWidth="86.0" resizable="false" text="Batch No" />
+          <TableColumn fx:id="stkitem" minWidth="0.0" prefWidth="420.0" resizable="false" text="Items" />
+            <TableColumn fx:id="stkinqty" prefWidth="79.0" resizable="false" text="Stockin Qty" />
+            <TableColumn fx:id="stkoutqty" prefWidth="89.0" resizable="false" text="Stockout Qty" />
+            <TableColumn fx:id="salesqty" prefWidth="69.0" resizable="false" text="Sales Qty" />
+            <TableColumn fx:id="stkbal" prefWidth="88.0" resizable="false" text="Stock Balance" />
+            <TableColumn fx:id="cstprice" resizable="false" text="Cost Price" />
+            <TableColumn fx:id="salesprice" prefWidth="94.0" resizable="false" text="Sales Price" />
+            <TableColumn fx:id="nhisprice" prefWidth="78.0" resizable="false" text="NHIS Price" />
+        </columns>
+      </TableView>
+      <TableView fx:id="stockin" layoutX="50.0" layoutY="394.0" prefHeight="172.0" prefWidth="503.0" styleClass="table-cell" stylesheets="@style.css" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="440.0">
+         <columns>
+            <TableColumn fx:id="stkinbatchno" prefWidth="78.0" resizable="false" text="Batch No" />
+            <TableColumn fx:id="stkinitems" minWidth="50.0" prefWidth="190.0" resizable="false" text="Items" />
+            <TableColumn fx:id="stkqty" minWidth="30.0" prefWidth="50.0" resizable="false" text="Qty" />
+            <TableColumn fx:id="stkindate" minWidth="5.0" prefWidth="91.0" resizable="false" text="Stockin date" />
+            <TableColumn fx:id="expirydate" minWidth="5.0" prefWidth="91.0" resizable="false" text="Expiry date" />
+            <TableColumn fx:id="stkaction" maxWidth="99.0" minWidth="0.0" prefWidth="100.0" resizable="false" text="Actions" />
+         </columns>
+      </TableView>
+      <JFXButton fx:id="stockinbtn" buttonType="RAISED" layoutX="465.0" layoutY="396.0" onAction="#addstockinpopup" prefHeight="30.0" prefWidth="88.0" styleClass="savebtn" stylesheets="@style.css" text="STOCKIN">
+         <graphic>
+            <FontAwesomeIcon fill="#fcfcfc" glyphName="PLUS" />
+         </graphic>
+         <font>
+            <Font size="10.0" />
+         </font>
+      </JFXButton>
+      <JFXTextField fx:id="stocksearch" layoutX="856.0" layoutY="37.0" prefHeight="25.0" prefWidth="238.0" promptText="Search Stocks" AnchorPane.topAnchor="50.0" />
+      <TableView fx:id="stockout" layoutX="561.0" layoutY="414.0" prefHeight="172.0" prefWidth="503.0" styleClass="table-cell" stylesheets="@style.css" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="591.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="440.0">
+        <columns>
+          <TableColumn fx:id="stkoutbatchno" prefWidth="78.0" resizable="false" text="Batch No" />
+          <TableColumn fx:id="stkoutitems" prefWidth="262.0" resizable="false" text="Items" />
+            <TableColumn fx:id="stkoutqtytb" prefWidth="55.0" resizable="false" text="Qty" />
+            <TableColumn fx:id="stkoutdate" minWidth="5.0" prefWidth="100.0" resizable="false" text="Stockout date" />
+            <TableColumn fx:id="stkoutaction" maxWidth="99.0" minWidth="0.0" prefWidth="53.0" resizable="false" text="Action" />
+        </columns>
+      </TableView>
+      <JFXButton fx:id="stockoutbtn" buttonType="RAISED" disable="true" layoutX="1024.0" layoutY="401.0" onAction="#addstockoutpopup" prefHeight="30.0" prefWidth="88.0" styleClass="savebtn" stylesheets="@style.css" text="SOCKOUT" AnchorPane.rightAnchor="50.0">
+         <graphic>
+            <FontAwesomeIcon fill="#fcfcfc" glyphName="PLUS" />
+         </graphic>
+         <font>
+            <Font size="10.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="50.0" layoutY="407.0" prefHeight="17.0" prefWidth="88.0" text="STOCK IN">
+         <graphic>
+            <FontAwesomeIcon glyphName="FORWARD" />
+         </graphic>
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="591.0" layoutY="411.0" text="STOCK OUT" AnchorPane.leftAnchor="591.0">
+         <graphic>
+            <FontAwesomeIcon glyphName="BACKWARD" />
+         </graphic>
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="stockinsearch" layoutX="132.0" layoutY="404.0" prefHeight="25.0" prefWidth="186.0" promptText="Search Stockin" />
+      <JFXTextField fx:id="search11" layoutX="685.0" layoutY="405.0" prefHeight="27.0" prefWidth="218.0" promptText="Search Stockout" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,146 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 9, 2020, 8:04:47 PM
+    Author     : JScare
+*/
+
+#rootPane{
+    -fx-background-image:url(phamabitretail-background.jpg);
+    -fx-background-size: cover;
+}
+#sidebackground {
+    -fx-background-image:url(phamabitretail-home.png);
+    -fx-background-size: cover;
+}
+#homebackground {
+    -fx-background-image:url(home-background.jpg);
+    -fx-background-size: cover;
+}
+.homebtn{
+    -fx-background-color: transparent;
+}
+.homebtn:hover{
+    -fx-background-color:  #f3f3f3;
+}
+.homebtnnew{
+    -fx-background-color:  #f3f3f3;
+}
+
+.closeform{
+    -fx-background-color: transparent;
+}
+.closeform:hover{
+    -fx-background-color: #666666;
+}
+/*.actionbtn{
+    -fx-background-color: ;
+}*/
+
+.table-row-cell .table-cell{
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 2 0 2 10; 
+    -fx-background-color: transparent;
+    -fx-border-color:  #e2e2e2 -fx-table-cell-border-color  #e2e2e2  #e2e2e2;
+    -fx-border-width: 0.04333em; 
+    -fx-cell-size: 40px; 
+    -fx-text-fill: -fx-text-inner-color;
+    -fx-font-size: 14px;
+    -fx-background-color: #999999
+
+}
+.savebtn{
+    -fx-background-color: #6699ff;
+    -fx-text-fill:#ffffff;
+}
+.main-title{
+    -fx-text-fill: #ccccff;
+    -fx-font-family: 'Raleway',sans-serif; 
+    -fx-font-size: 24px;
+    -fx-font-weight: 800; 
+    -fx-line-height: 72px; 
+    -fx-margin: 0 0 24px; 
+    -fx-text-align: center; 
+    -fx-text-transform: uppercase;
+}
+
+.menu-b .label {
+    -fx-text-fill: #ffffff;
+}
+
+
+.menu-item .label {
+    -fx-text-fill: #000000;
+}
+.menu-item :focused {
+    -fx-background-color: #ffffff;
+}
+
+.menu-item:focused {
+     -fx-background-color: #000000;
+}
+
+.menu-item:focused .label {
+    -fx-text-fill: #cccccc;
+}
+.context-menu {
+    -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
+    -fx-background-color: white;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
+/*    -fx-padding: 0.666667em 0.083333em 0.666667em 0.083333em;  8 1 8 1 */
+    -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em; /* 4 1 8 1 */
+}
+
+.list-cell{
+    -fx-background-color:  transparent;
+    -fx-text-fill: #000000;
+}
+
+.default-color0.chart-series-line{-fx-stroke: #9999ff;}
+.default-color0.chart-line-symbol{-fx-background-color: #9999ff, #ffffff;}
+
+.form_background{
+    -fx-background-color: #E1E1E1;
+}
+.form_field{
+    -fx-background-color: #F0F0F0;
+}
+.form_header{
+    -fx-background-color: #ddddff;
+   -fx-border-color : #cccccc;
+}
+.closebtn{
+    -fx-background-color: #cccccc;
+}
+/*.button{
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-family:"Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 1.2em;
+    -fx-text-fill: #000000;
+}
+.button:focused {
+    -fx-border-color: transparent, black;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid, segments(1, 2);
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+.button:pressed {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}*/
+.top-menu{
+    -fx-text-fill: #ffffff;
+}
+.dashboard-color{
+    -fx-text-fill: #999999;
+    -fx-fill: #999999;
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="PharmabitRetailPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>lxe.pharmabitretail.entity.Manufacturer</class>
+    <class>lxe.pharmabitretail.entity.Sales</class>
+    <class>lxe.pharmabitretail.entity.Stockin</class>
+    <class>lxe.pharmabitretail.entity.Receipt</class>
+    <class>lxe.pharmabitretail.entity.Business</class>
+    <class>lxe.pharmabitretail.entity.SalesDetails</class>
+    <class>lxe.pharmabitretail.entity.Licensing</class>
+    <class>lxe.pharmabitretail.entity.Users</class>
+    <class>lxe.pharmabitretail.entity.UomDef</class>
+    <class>lxe.pharmabitretail.entity.Customers</class>
+    <class>lxe.pharmabitretail.entity.Items</class>
+    <class>lxe.pharmabitretail.entity.Logs</class>
+    <class>lxe.pharmabitretail.entity.Uom</class>
+    <class>lxe.pharmabitretail.entity.Category</class>
+    <class>lxe.pharmabitretail.entity.Stockout</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:h2:file:./pharmabitsdb;DATABASE_TO_UPPER=false"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="1234"/>
+    </properties>
+  </persistence-unit>
+</persistence>
