@@ -129,7 +129,6 @@ public class AddItemsController implements Initializable {
         volumevalue.getItems().add("ml");
         volumevalue.getItems().add("mega");
         volumevalue.getItems().add("others");
-
     }
     public void getUnitOfMeasurement(){
         uomlist.getItems().add("Box");
