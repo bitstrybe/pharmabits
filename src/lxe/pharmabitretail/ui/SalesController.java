@@ -1646,4 +1646,5 @@ public class SalesController implements Initializable {
         stage.showAndWait();
     }
 
+  
 }
