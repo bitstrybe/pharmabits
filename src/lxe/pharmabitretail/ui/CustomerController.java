@@ -5,6 +5,7 @@
  */
 package lxe.pharmabitretail.ui;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -34,6 +36,8 @@ public class CustomerController implements Initializable {
     private TableColumn<?, ?> custbphone;
     @FXML
     private TableColumn<?, ?> action;
+    @FXML
+    private JFXButton closebtn;
 
  
     /**
@@ -42,6 +46,11 @@ public class CustomerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }  
+    @FXML
+    public void closefrom() {
+        Stage stage = (Stage) closebtn.getScene().getWindow();
+        stage.close();
+    }
+
 }
