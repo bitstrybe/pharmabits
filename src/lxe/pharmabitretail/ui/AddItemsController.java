@@ -1,4 +1,3 @@
-
 package lxe.pharmabitretail.ui;
 
 import com.jfoenix.controls.JFXButton;
@@ -7,7 +6,6 @@ import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -95,16 +93,14 @@ public class AddItemsController implements Initializable {
     private TableColumn<ItemTableModel, Number> rol;
     @FXML
     private TableColumn<ItemTableModel, Boolean> action;
-    private JFXTextField roltextfield;
-    private JFXTextField volume;
-    private ComboBox<String> volumevalue;
-    private ChoiceBox<String> uomlist;
     @FXML
     private ComboBox<?> manufacturercombo1;
     @FXML
     private JFXTextField itmtextfield1;
     @FXML
     private ComboBox<?> umocombo;
+    @FXML
+    private JFXButton closebtn;
 
     public void getManufacturer() {
         List<Manufacturer> list = new ManufacturerBL().getAllManufacturer();
@@ -122,21 +118,20 @@ public class AddItemsController implements Initializable {
         });
     }
 
-    public void getVolumeValue() {
-        volumevalue.getItems().add("g");
-        volumevalue.getItems().add("mg");
-        volumevalue.getItems().add("l");
-        volumevalue.getItems().add("ml");
-        volumevalue.getItems().add("mega");
-        volumevalue.getItems().add("others");
-
-    }
-    public void getUnitOfMeasurement(){
-        uomlist.getItems().add("Box");
-        uomlist.getItems().add("Pack");
-        uomlist.getItems().add("Strips");
-    }
-
+//    public void getVolumeValue() {
+//        volumevalue.getItems().add("g");
+//        volumevalue.getItems().add("mg");
+//        volumevalue.getItems().add("l");
+//        volumevalue.getItems().add("ml");
+//        volumevalue.getItems().add("mega");
+//        volumevalue.getItems().add("others");
+//
+//    }
+//    public void getUnitOfMeasurement(){
+//        uomlist.getItems().add("Box");
+//        uomlist.getItems().add("Pack");
+//        uomlist.getItems().add("Strips");
+//    }
     /**
      * Initializes the controller class.
      */
@@ -145,8 +140,8 @@ public class AddItemsController implements Initializable {
         // TODOg
         getCategory();
         getManufacturer();
-        getVolumeValue();
-        getUnitOfMeasurement();
+//        getVolumeValue();
+//        getUnitOfMeasurement();
         TableData();
         searchbtn.textProperty().addListener(e -> {
             if (searchbtn.getText().length() > 1) {
@@ -176,18 +171,17 @@ public class AddItemsController implements Initializable {
             }
 
         });
-        volumevalue.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                String s = FilterComboBox.jumpTo(event.getText(), volumevalue.getValue(), volumevalue.getItems());
-                if (s != null) {
-                    volumevalue.setValue(s);
-                }
-            }
-
-        });
+//        volumevalue.setOnKeyReleased(new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent event) {
+//                String s = FilterComboBox.jumpTo(event.getText(), volumevalue.getValue(), volumevalue.getItems());
+//                if (s != null) {
+//                    volumevalue.setValue(s);
+//                }
+//            }
+//
+//        });
     }
-
 
     private void closemtd(ActionEvent event) {
         Stage stage = (Stage) closeButton.getScene().getWindow();
@@ -206,44 +200,44 @@ public class AddItemsController implements Initializable {
             }
         };
         displayinfo.textProperty().bind(task.messageProperty());
-        task.setOnSucceeded(s -> {
-            displayinfo.textProperty().unbind();
-            Items cat = new Items();
-            String itemcode = itmtextfield.getText() + " " + categorycombo.getValue() + " " + volume.getText() + volumevalue.getValue() + " (" + manufacturercombo.getValue() + ")";
-            try {
-                cat.setItemDesc(itemcode);
-                cat.setItemName(itmtextfield.getText());
-                cat.setCategory(new Category(categorycombo.getValue()));
-                cat.setManufacturer(new Manufacturer(manufacturercombo.getValue()));
-                cat.setVomDef(Double.parseDouble(volume.getText()));
-                cat.setVom(volumevalue.getValue());
-                cat.setRol(Integer.parseInt(roltextfield.getText()));
-                cat.setUsers(new Users(LoginController.u.getUserid()));
-                cat.setEntryLog(new Date());
-                cat.setLastModified(new Date());
-
-                int result = new InsertUpdateBL().insertData(cat);
-                switch (result) {
-                    case 1:
-                        displayinfo.setText("SUCCESSFULLY SAVED");
-                        Utilities.clearAllField(itemspane);
-                        spinner.setVisible(false);
-                        check.setVisible(true);
-                        TableData();
-                        break;
-                    default:
-                        displayinfo.setText("NOTICE! AN ERROR OCCURED");
-                        spinner.setVisible(false);
-                        check.setVisible(false);
-                        break;
-
-                }
-            } catch (NumberFormatException ex) {
-                spinner.setVisible(false);
-                displayinfo.setText("Invalid Input");
-
-            }
-        });
+//        task.setOnSucceeded(s -> {
+//            displayinfo.textProperty().unbind();
+//            Items cat = new Items();
+//            String itemcode = itmtextfield.getText() + " " + categorycombo.getValue() + " " + volume.getText() + volumevalue.getValue() + " (" + manufacturercombo.getValue() + ")";
+//            try {
+//                cat.setItemDesc(itemcode);
+//                cat.setItemName(itmtextfield.getText());
+//                cat.setCategory(new Category(categorycombo.getValue()));
+//                cat.setManufacturer(new Manufacturer(manufacturercombo.getValue()));
+//                cat.setVomDef(Double.parseDouble(volume.getText()));
+//                cat.setVom(volumevalue.getValue());
+//                cat.setRol(Integer.parseInt(roltextfield.getText()));
+//                cat.setUsers(new Users(LoginController.u.getUserid()));
+//                cat.setEntryLog(new Date());
+//                cat.setLastModified(new Date());
+//
+//                int result = new InsertUpdateBL().insertData(cat);
+//                switch (result) {
+//                    case 1:
+//                        displayinfo.setText("SUCCESSFULLY SAVED");
+//                        Utilities.clearAllField(itemspane);
+//                        spinner.setVisible(false);
+//                        check.setVisible(true);
+//                        TableData();
+//                        break;
+//                    default:
+//                        displayinfo.setText("NOTICE! AN ERROR OCCURED");
+//                        spinner.setVisible(false);
+//                        check.setVisible(false);
+//                        break;
+//
+//                }
+//            } catch (NumberFormatException ex) {
+//                spinner.setVisible(false);
+//                displayinfo.setText("Invalid Input");
+//
+//            }
+//        });
         Thread d = new Thread(task);
         d.setDaemon(true);
         d.start();
@@ -441,6 +435,12 @@ public class AddItemsController implements Initializable {
                 setGraphic(null);
             }
         }
+    }
+
+    @FXML
+    public void closefrom() {
+        Stage stage = (Stage) closebtn.getScene().getWindow();
+        stage.close();
     }
 
 }

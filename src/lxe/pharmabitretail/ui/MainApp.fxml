@@ -55,7 +55,7 @@
                               <Insets />
                            </HBox.margin>
                            <children>
-                              <FontAwesomeIcon fx:id="dashawesome" fill="#dddee0" glyphName="BAR_CHART"  size="2.9em" wrappingWidth="39.62142753601074" />
+                              <FontAwesomeIcon fx:id="dashawesome" fill="#dddee0" glyphName="BAR_CHART" size="2.9em" wrappingWidth="39.62142753601074" />
                               <Text fx:id="dashtext" fill="#dddee0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard" textAlignment="CENTER" wrappingWidth="148.08100128173828" />
                            </children>
                         </VBox>
@@ -135,7 +135,7 @@
    <top>
       <StackPane alignment="CENTER_RIGHT" style="-fx-background-color: #030b0e;" BorderPane.alignment="CENTER">
          <children>
-            <MenuBar prefHeight="37.0" prefWidth="800.0" style="-fx-background-color: transparent;" styleClass="menu-b" stylesheets="@style.css">
+            <MenuBar prefHeight="50.0" prefWidth="800.0" style="-fx-background-color: transparent;" styleClass="menu-b" stylesheets="@style.css">
                <menus>
                   <Menu fx:id="admintopmenu" mnemonicParsing="false" text="Setup">
                      <items>
@@ -169,7 +169,7 @@
                   <Insets />
                </StackPane.margin>
                <padding>
-                  <Insets top="7.0" />
+                  <Insets top="13.0" />
                </padding>
             </MenuBar>
             <MenuButton fx:id="mainmenu" alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: transparent;" textFill="WHITE">

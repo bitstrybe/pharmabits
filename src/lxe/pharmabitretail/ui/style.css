@@ -96,7 +96,7 @@ and open the template in the editor.
 }
 
 .list-cell{
-    -fx-background-color:   #e2e2e2;
+    -fx-background-color:   #F4F4F4;
     -fx-text-fill: #000000;
 }
 
@@ -147,4 +147,7 @@ and open the template in the editor.
 .sidebar-color{
     -fx-fill: #dddee0;
     
+}
+.form_border_color{
+    -fx-border-color: #cccccc;
 }
