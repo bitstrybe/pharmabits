@@ -69,17 +69,11 @@ public class AddItemsController implements Initializable {
 
     @FXML
     public JFXTextField itmtextfield;
-    @FXML
     private Button closeButton;
-    @FXML
     public Label displayinfo;
-    @FXML
     public JFXSpinner spinner;
-    @FXML
     public FontAwesomeIcon check;
-    @FXML
     public FontAwesomeIcon duplicatelock;
-    @FXML
     public AnchorPane itemspane;
     @FXML
     private ComboBox<String> categorycombo;
@@ -101,14 +95,16 @@ public class AddItemsController implements Initializable {
     private TableColumn<ItemTableModel, Number> rol;
     @FXML
     private TableColumn<ItemTableModel, Boolean> action;
-    @FXML
     private JFXTextField roltextfield;
-    @FXML
     private JFXTextField volume;
-    @FXML
     private ComboBox<String> volumevalue;
-    @FXML
     private ChoiceBox<String> uomlist;
+    @FXML
+    private ComboBox<?> manufacturercombo1;
+    @FXML
+    private JFXTextField itmtextfield1;
+    @FXML
+    private ComboBox<?> umocombo;
 
     public void getManufacturer() {
         List<Manufacturer> list = new ManufacturerBL().getAllManufacturer();
@@ -193,13 +189,11 @@ public class AddItemsController implements Initializable {
     }
 
 
-    @FXML
     private void closemtd(ActionEvent event) {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
 
-    @FXML
     public void saveAction() {
         Task<Void> task = new Task<Void>() {
             @Override
