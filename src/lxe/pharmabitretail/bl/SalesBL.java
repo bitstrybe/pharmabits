@@ -99,7 +99,7 @@ public class SalesBL extends DdsBL {
     }
 
     public List<Sales> getSalesDateRange(Date startdate, Date enddate) {
-        TypedQuery q = em.createQuery("SELECT s FROM Sales s WHERE s.date BETWEEN :date1 AND :date2", Sales.class);
+        TypedQuery q = em.createQuery("SELECT s FROM Sales s WHERE s.dateS BETWEEN :date1 AND :date2", Sales.class);
         q.setParameter("date1", startdate);
         q.setParameter("date2", enddate);
         q.setHint("org.hibernate.cacheMode", "IGNORE");
