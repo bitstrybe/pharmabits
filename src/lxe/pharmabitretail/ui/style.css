@@ -144,3 +144,7 @@ and open the template in the editor.
     -fx-text-fill: #999999;
     -fx-fill: #999999;
 }
+.sidebar-color{
+    -fx-fill: #dddee0;
+    
+}
