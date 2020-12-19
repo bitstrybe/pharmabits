@@ -122,8 +122,6 @@ public class SalesController implements Initializable {
     @FXML
     private TableColumn<SalesTableModel, Number> salecode;
     @FXML
-    private TableColumn<SalesTableModel, String> customer;
-    @FXML
     private TableColumn<SalesTableModel, Number> saleprice;
     @FXML
     private TableColumn<SalesTableModel, String> date;
@@ -176,6 +174,8 @@ public class SalesController implements Initializable {
     String lsv;
     @FXML
     private AnchorPane saleanchorpane;
+    @FXML
+    private JFXButton cuspopup;
 
     public void getStockingItemList() {
         StockinBL sk = new StockinBL();
@@ -256,7 +256,7 @@ public class SalesController implements Initializable {
         // TODO
         getTodaysDate();
         getStockingItemList();
-        
+
         itemsearch.textProperty().addListener(e -> {
             if (itemsearch.getText().length() > 1) {
                 SearchStockingItemList(itemsearch.getText());
@@ -288,7 +288,6 @@ public class SalesController implements Initializable {
         startdate.setValue(Utilities.convertDateToLocalDate(new Date(System.currentTimeMillis())));
         enddate.setValue(Utilities.convertDateToLocalDate(new Date(System.currentTimeMillis())));
     }
-
 
     @FXML
     private void addtoitemtable() throws IOException {
@@ -599,7 +598,7 @@ public class SalesController implements Initializable {
                             });
                             totalp = Float.parseFloat(df.format(Utilities.sumList(getPrice())));
                             totalprice.setText(df.format(totalp));
-                           // seleteditemtableview.refresh();
+                            // seleteditemtableview.refresh();
                             stage.close();
                         });
                         Scene scene = new Scene(parent);
@@ -686,7 +685,7 @@ public class SalesController implements Initializable {
                             if (selectedRecord.getDiscountValue() >= 0) {
                                 totalp = Float.parseFloat(df.format(Utilities.sumList(getPrice())));
                                 totalprice.setText(df.format(totalp));
-                               // seleteditemtableview.refresh();
+                                // seleteditemtableview.refresh();
                                 stage.close();
                             }
 
@@ -752,16 +751,15 @@ public class SalesController implements Initializable {
                         childController.displayinfo.textProperty().unbind();
                         Sales sale = new Sales();
                         List<Integer> salescount = sb.getSalesCount();
-                        if(salescount.isEmpty()){
-                             int slc = 1;
-                              sale.setSalesId(1);
-                        }else{
+                        if (salescount.isEmpty()) {
+                            int slc = 1;
+                            sale.setSalesId(1);
+                        } else {
                             int slc = salescount.get(0);
-                             sale.setSalesId(++slc);
+                            sale.setSalesId(++slc);
                         }
-                       
+
 //                    System.out.println("Sales Count "+ ++slc);
-                       
 //                        sale.setCustomer(new Customer(spiltedval.get(0)));
                         sale.setDateS(new Date(System.currentTimeMillis()));
                         sale.setUsers(new Users(LoginController.u.getUserid()));
@@ -1161,15 +1159,14 @@ public class SalesController implements Initializable {
                             Receipt rt = new Receipt();
                             childController.save.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
                                 List<Integer> recCount = rec.getReceiptCount();
-                                if(recCount.isEmpty()){
-                                     int recl = 1;
-                                     rt.setReceiptId(recl);
-                                }else{
-                                     int recl = recCount.get(0);
-                                      rt.setReceiptId(++recl);
+                                if (recCount.isEmpty()) {
+                                    int recl = 1;
+                                    rt.setReceiptId(recl);
+                                } else {
+                                    int recl = recCount.get(0);
+                                    rt.setReceiptId(++recl);
                                 }
-                               
-                               
+
                                 rt.setSalesId(new Sales(selectedRecord.getSalesId()));
                                 rt.setAmountPaid(Double.parseDouble(childController.amountpaid.getText()));
                                 rt.setDateR(new Date(System.currentTimeMillis()));
@@ -1633,6 +1630,20 @@ public class SalesController implements Initializable {
             totalp = Float.parseFloat(df.format(Utilities.sumList(getPrice())));
             totalprice.setText(df.format(totalp));
         }
+    }
+
+    @FXML
+    public void CustomerPopup() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Customer.fxml"));
+        Parent parent = (Parent) fxmlLoader.load();
+        Scene scene = new Scene(parent);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(parent.getScene().getWindow());
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.resizableProperty().setValue(false);
+        stage.showAndWait();
     }
 
 }

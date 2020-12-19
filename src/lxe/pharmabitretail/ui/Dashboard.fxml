@@ -161,10 +161,10 @@
          <children>
             <LineChart fx:id="linechart" prefHeight="427.0" prefWidth="724.0" styleClass="chart-series-line" stylesheets="@style.css" title="Sales Chart">
                <xAxis>
-                  <CategoryAxis side="BOTTOM" styleClass="dashboard-color" tickLabelFill="WHITE" fx:id="xAxis" />
+                  <CategoryAxis side="BOTTOM" tickLabelFill="#999999" fx:id="xAxis" />
                </xAxis>
                <yAxis>
-                  <NumberAxis fx:id="yAxis" side="LEFT" styleClass="dashboard-color" tickLabelFill="WHITE" />
+                  <NumberAxis fx:id="yAxis" side="LEFT" tickLabelFill="#999999" />
                </yAxis>
                <effect>
                   <DropShadow color="#d3d0d0" />
@@ -177,7 +177,7 @@
             <DropShadow color="#a8a7a7" />
          </effect>
          <children>
-            <JFXListView fx:id="expirylist" prefHeight="316.0" prefWidth="226.0" style="-fx-background-color: #eeeeee;" stylesheets="@style.css">
+            <JFXListView fx:id="expirylist" prefHeight="316.0" prefWidth="226.0" stylesheets="@style.css">
                <styleClass>
                   <String fx:value="list-view" />
                   <String fx:value="list-cell" />

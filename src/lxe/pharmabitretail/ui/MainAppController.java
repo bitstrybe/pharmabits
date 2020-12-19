@@ -89,7 +89,7 @@ public class MainAppController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
-        mainmenu.setText("username : " + LoginController.u.getUsername());
+        mainmenu.setText("Welcome, : " + LoginController.u.getUsername());
         user.setText(LoginController.u.getFname().toUpperCase() + " " + LoginController.u.getLname().toUpperCase());
         user_role.setText(LoginController.u.getRoles().toString());
         if (LoginController.u.getRoles().equals("Administrator") || LoginController.u.getRoles().equals("Sales Supervisor")) {
@@ -100,7 +100,7 @@ public class MainAppController implements Initializable {
 
         try {
             setScene("Dashboard.fxml");
-            dashboard.setStyle("-fx-background-color: #e2e2e2");
+            dashboard.setStyle("-fx-background-color:#dddee0");
             dashawesome.setFill(Color.BLACK);
             dashtext.setFill(Color.BLACK);
             stocks.setStyle("-fx-background-color: transparent");
@@ -112,13 +112,13 @@ public class MainAppController implements Initializable {
         dashboard.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             try {
                 setScene("Dashboard.fxml");
-                dashboard.setStyle("-fx-background-color:  #e2e2e2");
+                dashboard.setStyle("-fx-background-color:#dddee0");
                 dashawesome.setFill(Color.BLACK);
                 dashtext.setFill(Color.BLACK);
-                stockawesome.setFill(Color.WHITE);
-                stocktext.setFill(Color.WHITE);
-                catalogawesome.setFill(Color.WHITE);
-                catalogtext.setFill(Color.WHITE);
+                stockawesome.setFill(Color.valueOf("#dddee0"));
+                stocktext.setFill(Color.valueOf("#dddee0"));
+                catalogawesome.setFill(Color.valueOf("#dddee0"));
+                catalogtext.setFill(Color.valueOf("#dddee0"));
                 stocks.setStyle("-fx-background-color: transparent");
                 sales.setStyle("-fx-background-color: transparent");
             } catch (IOException ex) {
@@ -129,13 +129,13 @@ public class MainAppController implements Initializable {
         stocks.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             try {
                 setScene("Stock.fxml");
-                stocks.setStyle("-fx-background-color:  #e2e2e2");
+                stocks.setStyle("-fx-background-color:#dddee0");
                 stockawesome.setFill(Color.BLACK);
                 stocktext.setFill(Color.BLACK);
-                dashawesome.setFill(Color.WHITE);
-                dashtext.setFill(Color.WHITE);
-                catalogawesome.setFill(Color.WHITE);
-                catalogtext.setFill(Color.WHITE);
+                dashawesome.setFill(Color.valueOf("#dddee0"));
+                dashtext.setFill(Color.valueOf("#dddee0"));
+                catalogawesome.setFill(Color.valueOf("#dddee0"));
+                catalogtext.setFill(Color.valueOf("#dddee0"));
                 
                 sales.setStyle("-fx-background-color:  transparent");
                 dashboard.setStyle("-fx-background-color: transparent");
@@ -147,13 +147,13 @@ public class MainAppController implements Initializable {
         sales.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             try {
                 setScene("Sales.fxml");
-                sales.setStyle("-fx-background-color:  #e2e2e2");
+                sales.setStyle("-fx-background-color:#dddee0");
                 catalogawesome.setFill(Color.BLACK);
                 catalogtext.setFill(Color.BLACK);
-                dashawesome.setFill(Color.WHITE);
-                dashtext.setFill(Color.WHITE);
-                stockawesome.setFill(Color.WHITE);
-                stocktext.setFill(Color.WHITE);
+                dashawesome.setFill(Color.valueOf("#dddee0"));
+                dashtext.setFill(Color.valueOf("#dddee0"));
+                stockawesome.setFill(Color.valueOf("#dddee0"));
+                stocktext.setFill(Color.valueOf("#dddee0"));
                 stocks.setStyle("-fx-background-color:  transparent");
                 dashboard.setStyle("-fx-background-color: transparent");
             } catch (IOException ex) {
