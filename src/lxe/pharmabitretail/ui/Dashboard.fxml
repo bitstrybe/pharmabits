@@ -10,24 +10,21 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="homebackground" fx:id="dashpane" prefHeight="779.0" prefWidth="1144.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.DashboardController">
+<AnchorPane id="homebackground" fx:id="dashpane" prefHeight="740.0" prefWidth="1144.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.DashboardController">
    <children>
-      <Label alignment="CENTER" layoutX="32.0" layoutY="32.0" prefHeight="63.0" prefWidth="303.0" text="Dashboard">
+      <Label alignment="CENTER" layoutX="41.0" layoutY="21.0" prefHeight="63.0" prefWidth="303.0" text="Dashboard">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font size="30.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="158.0" layoutY="74.0" prefHeight="17.0" prefWidth="153.0" styleClass="dashboard-color" text="RETAIL" textFill="WHITE">
-         <font>
-            <Font size="7.0" />
-         </font></Label>
-      <HBox layoutX="103.0" layoutY="106.0" prefHeight="175.0" prefWidth="970.0">
+      <HBox layoutX="103.0" layoutY="84.0" prefHeight="175.0" prefWidth="970.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="135.0" prefWidth="33.0" style="-fx-background-color: #e2e2e2;" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER" prefHeight="135.0" prefWidth="33.0" style="-fx-background-color: #F4F4F4;" HBox.hgrow="ALWAYS">
                <children>
                   <HBox prefHeight="6.0" prefWidth="183.0">
                      <children>
@@ -59,7 +56,7 @@
                   <DropShadow color="#a8a7a7" height="10.0" radius="4.5" width="10.0" />
                </effect>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="135.0" prefWidth="33.0" style="-fx-background-color: #e2e2e2;" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER" prefHeight="135.0" prefWidth="33.0" style="-fx-background-color: #F4F4F4;" HBox.hgrow="ALWAYS">
                <children>
                   <HBox prefHeight="6.0" prefWidth="183.0">
                      <children>
@@ -91,7 +88,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </HBox.margin>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="135.0" prefWidth="33.0" style="-fx-background-color: #e2e2e2;" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER" prefHeight="135.0" prefWidth="33.0" style="-fx-background-color: #F4F4F4;" HBox.hgrow="ALWAYS">
                <children>
                   <HBox prefHeight="6.0" prefWidth="183.0">
                      <children>
@@ -123,7 +120,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </HBox.margin>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="135.0" prefWidth="33.0" style="-fx-background-color: #e2e2e2;" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER" prefHeight="135.0" prefWidth="33.0" style="-fx-background-color: #F4F4F4;" HBox.hgrow="ALWAYS">
                <children>
                   <HBox prefHeight="6.0" prefWidth="183.0">
                      <children>
@@ -157,47 +154,52 @@
             </VBox>
          </children>
       </HBox>
-      <HBox layoutX="106.0" layoutY="297.0" prefHeight="440.0" prefWidth="724.0">
+      <Pane layoutX="97.0" layoutY="253.0" prefHeight="484.0" prefWidth="993.0">
          <children>
-            <LineChart fx:id="linechart" prefHeight="427.0" prefWidth="724.0" styleClass="chart-series-line" stylesheets="@style.css" title="Sales Chart">
-               <xAxis>
-                  <CategoryAxis side="BOTTOM" tickLabelFill="#999999" fx:id="xAxis" />
-               </xAxis>
-               <yAxis>
-                  <NumberAxis fx:id="yAxis" side="LEFT" tickLabelFill="#999999" />
-               </yAxis>
+            <HBox layoutX="-21.0" layoutY="9.0" prefHeight="452.0" prefWidth="728.0">
+               <children>
+                  <LineChart fx:id="linechart" prefHeight="440.0" prefWidth="762.0" styleClass="chart-series-line" stylesheets="@style.css" title="Sales Chart">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" tickLabelFill="#999999" fx:id="xAxis" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis fx:id="yAxis" side="LEFT" tickLabelFill="#999999" />
+                     </yAxis>
+                     <effect>
+                        <DropShadow color="#d3d0d0" />
+                     </effect>
+                  </LineChart>
+               </children>
+            </HBox>
+            <VBox layoutX="726.0" layoutY="48.0" prefHeight="322.0" prefWidth="233.0" style="-fx-background-color: #eeeeee;">
                <effect>
-                  <DropShadow color="#d3d0d0" />
+                  <DropShadow color="#a8a7a7" />
                </effect>
-            </LineChart>
+               <children>
+                  <JFXListView fx:id="expirylist" prefHeight="375.0" prefWidth="218.0" stylesheets="@style.css">
+                     <styleClass>
+                        <String fx:value="list-view" />
+                        <String fx:value="list-cell" />
+                     </styleClass>
+                  </JFXListView>
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" layoutX="730.0" layoutY="9.0" prefHeight="32.0" prefWidth="225.0">
+               <children>
+                  <Label text="Expiry Drug List (1 Month)">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <effect>
+                        <DropShadow color="#d3d0d0" />
+                     </effect>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" top="5.0" />
+               </padding>
+            </HBox>
          </children>
-      </HBox>
-      <VBox layoutX="845.0" layoutY="336.0" prefHeight="314.0" prefWidth="226.0" style="-fx-background-color: #eeeeee;">
-         <effect>
-            <DropShadow color="#a8a7a7" />
-         </effect>
-         <children>
-            <JFXListView fx:id="expirylist" prefHeight="316.0" prefWidth="226.0" stylesheets="@style.css">
-               <styleClass>
-                  <String fx:value="list-view" />
-                  <String fx:value="list-cell" />
-               </styleClass></JFXListView>
-         </children>
-      </VBox>
-      <HBox alignment="CENTER" layoutX="846.0" layoutY="297.0" prefHeight="32.0" prefWidth="225.0">
-         <children>
-            <Label text="Expiry Drug List (1 Month)">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <effect>
-                  <DropShadow color="#d3d0d0" />
-               </effect>
-            </Label>
-         </children>
-         <padding>
-            <Insets bottom="5.0" left="5.0" top="5.0" />
-         </padding>
-      </HBox>
+      </Pane>
    </children>
 </AnchorPane>

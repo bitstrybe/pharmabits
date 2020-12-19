@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.geometry.Insets?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.AddItemsController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="934.0" styleClass="form_border_color" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.AddItemsController">
    <left>
       <VBox prefHeight="617.0" prefWidth="294.0" styleClass="form_background" stylesheets="@style.css" BorderPane.alignment="CENTER">
          <children>
@@ -94,6 +95,20 @@
                   <ComboBox fx:id="umocombo" layoutX="-1.0" layoutY="286.0" prefHeight="29.0" prefWidth="188.0" />
                   <Label layoutX="1.0" layoutY="264.0" prefHeight="17.0" prefWidth="130.0" text="Volume: value &amp;  unit" />
                   <Spinner layoutX="189.0" layoutY="288.0" prefHeight="27.0" prefWidth="90.0" />
+                  <HBox alignment="CENTER" layoutX="1.0" layoutY="334.0" prefHeight="53.0" prefWidth="281.0">
+                     <children>
+                        <JFXButton prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #cccccc;" text="Save" textFill="#323232">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                        <JFXButton contentDisplay="CENTER" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #cccccc;" text="Clear">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                     </children>
+                  </HBox>
                </children>
                <VBox.margin>
                   <Insets top="30.0" />
@@ -110,29 +125,33 @@
          <children>
             <Pane prefHeight="49.0" prefWidth="958.0" style="-fx-background-color: #eee;" stylesheets="@style.css" HBox.hgrow="ALWAYS">
                <children>
-                  <Label layoutX="14.0" layoutY="11.0" text="TITLE" textFill="#544848">
+                  <Label layoutX="14.0" layoutY="11.0" text="ADD ITEMS" textFill="#544848">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <FontAwesomeIcon glyphName="CLOSE" layoutX="975.0" layoutY="29.0" />
+                  <JFXButton fx:id="closebtn" layoutX="891.0" layoutY="12.0" onAction="#closefrom" prefHeight="25.0" prefWidth="17.0">
+                     <graphic>
+                        <FontAwesomeIcon glyphName="CLOSE" wrappingWidth="1.0" />
+                     </graphic>
+                  </JFXButton>
                </children>
             </Pane>
          </children>
       </HBox>
    </top>
    <center>
-      <Pane prefHeight="617.0" prefWidth="717.0" BorderPane.alignment="CENTER">
+      <Pane prefHeight="470.0" prefWidth="700.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXTextField fx:id="searchbtn" layoutX="426.0" layoutY="34.0" prefHeight="25.0" prefWidth="217.0" promptText="Search Item" />
-            <TableView fx:id="itemtableview" layoutX="20.0" layoutY="71.0" prefHeight="513.0" prefWidth="683.0" styleClass="table-cell" stylesheets="@style.css">
+            <JFXTextField fx:id="searchbtn" layoutX="395.0" layoutY="14.0" prefHeight="25.0" prefWidth="217.0" promptText="Search Item" />
+            <TableView fx:id="itemtableview" layoutX="19.0" layoutY="47.0" prefHeight="395.0" prefWidth="604.0" styleClass="table-cell" stylesheets="@style.css">
                <columns>
-                  <TableColumn fx:id="itemname" prefWidth="180.0" text="Item Name" />
-                  <TableColumn fx:id="category" prefWidth="100.0" text="Category" />
-                  <TableColumn fx:id="manufacturer" prefWidth="180.0" text="Manufacturer" />
-                  <TableColumn fx:id="uom" prefWidth="76.0" text="Uom" />
-                  <TableColumn fx:id="rol" prefWidth="90.0" text="Re-Order Level" />
-                  <TableColumn fx:id="action" prefWidth="50.0" resizable="false" text="Action" />
+                  <TableColumn fx:id="itemname" prefWidth="127.0" text="Item Name" />
+                  <TableColumn fx:id="category" prefWidth="112.0" text="Category" />
+                  <TableColumn fx:id="manufacturer" prefWidth="161.0" text="Manufacturer" />
+                  <TableColumn fx:id="uom" prefWidth="59.0" text="Uom" />
+                  <TableColumn fx:id="rol" prefWidth="94.0" text="Re-Order Level" />
+                  <TableColumn fx:id="action" prefWidth="44.0" resizable="false" text="Action" />
                </columns>
             </TableView>
          </children>
