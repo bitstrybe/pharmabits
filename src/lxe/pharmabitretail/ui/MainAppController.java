@@ -70,6 +70,10 @@ public class MainAppController implements Initializable {
     private FontAwesomeIcon stockawesome;
     @FXML
     private Text stocktext;
+    @FXML
+    private FontAwesomeIcon catalogawesome;
+    @FXML
+    private Text catalogtext;
 
     public void setScene(String scenechange) throws IOException {
         Parent root;
@@ -113,6 +117,8 @@ public class MainAppController implements Initializable {
                 dashtext.setFill(Color.BLACK);
                 stockawesome.setFill(Color.WHITE);
                 stocktext.setFill(Color.WHITE);
+                catalogawesome.setFill(Color.WHITE);
+                catalogtext.setFill(Color.WHITE);
                 stocks.setStyle("-fx-background-color: transparent");
                 sales.setStyle("-fx-background-color: transparent");
             } catch (IOException ex) {
@@ -124,10 +130,13 @@ public class MainAppController implements Initializable {
             try {
                 setScene("Stock.fxml");
                 stocks.setStyle("-fx-background-color:  #e2e2e2");
-                dashawesome.setFill(Color.WHITE);
-                dashtext.setFill(Color.WHITE);
                 stockawesome.setFill(Color.BLACK);
                 stocktext.setFill(Color.BLACK);
+                dashawesome.setFill(Color.WHITE);
+                dashtext.setFill(Color.WHITE);
+                catalogawesome.setFill(Color.WHITE);
+                catalogtext.setFill(Color.WHITE);
+                
                 sales.setStyle("-fx-background-color:  transparent");
                 dashboard.setStyle("-fx-background-color: transparent");
             } catch (IOException ex) {
@@ -138,10 +147,15 @@ public class MainAppController implements Initializable {
         sales.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             try {
                 setScene("Sales.fxml");
-//                stocks.setStyle("-fx-background-color:  transparent");
-//                sales.setStyle("-fx-background-color:  #f3f3f3");
-//                dashboard.getStyleClass().remove("-fx-background-color");
-//                dashboard.setStyle("-fx-background-color: transparent");
+                sales.setStyle("-fx-background-color:  #e2e2e2");
+                catalogawesome.setFill(Color.BLACK);
+                catalogtext.setFill(Color.BLACK);
+                dashawesome.setFill(Color.WHITE);
+                dashtext.setFill(Color.WHITE);
+                stockawesome.setFill(Color.WHITE);
+                stocktext.setFill(Color.WHITE);
+                stocks.setStyle("-fx-background-color:  transparent");
+                dashboard.setStyle("-fx-background-color: transparent");
             } catch (IOException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -55,8 +55,8 @@
                               <Insets />
                            </HBox.margin>
                            <children>
-                              <FontAwesomeIcon fx:id="dashawesome" fill="WHITE" glyphName="BAR_CHART" opacity="0.41" size="2.9em" wrappingWidth="39.62142753601074" />
-                              <Text fx:id="dashtext" fill="WHITE" opacity="0.59" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard" textAlignment="CENTER" wrappingWidth="148.08100128173828" />
+                              <FontAwesomeIcon fx:id="dashawesome" fill="WHITE" glyphName="BAR_CHART" size="2.9em" wrappingWidth="39.62142753601074" />
+                              <Text fx:id="dashtext" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard" textAlignment="CENTER" wrappingWidth="148.08100128173828" />
                            </children>
                         </VBox>
                      </children>
@@ -79,8 +79,8 @@
                               <Insets />
                            </HBox.margin>
                            <children>
-                              <FontAwesomeIcon fill="WHITE" glyphName="ALIGN_LEFT" opacity="0.41" size="2.9em" styleClass="menu-btn" wrappingWidth="39.62142753601074" />
-                              <Text fill="WHITE" opacity="0.59" strokeType="OUTSIDE" strokeWidth="0.0" text="Catalog" textAlignment="CENTER" />
+                              <FontAwesomeIcon fx:id="catalogawesome" fill="WHITE" glyphName="ALIGN_LEFT" size="2.9em" styleClass="menu-btn" wrappingWidth="39.62142753601074" />
+                              <Text fx:id="catalogtext" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Catalog" textAlignment="CENTER" />
                            </children>
                         </VBox>
                      </children>
@@ -100,8 +100,8 @@
                               <Insets />
                            </HBox.margin>
                            <children>
-                              <FontAwesomeIcon fx:id="stockawesome" fill="WHITE" glyphName="CUBE" opacity="0.41" size="2.9em" wrappingWidth="39.62142753601074" />
-                              <Text fx:id="stocktext" fill="WHITE" opacity="0.59" strokeType="OUTSIDE" strokeWidth="0.0" text="Stock" textAlignment="CENTER" />
+                              <FontAwesomeIcon fx:id="stockawesome" fill="WHITE" glyphName="CUBE" size="2.9em" wrappingWidth="39.62142753601074" />
+                              <Text fx:id="stocktext" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Stock" textAlignment="CENTER" />
                            </children>
                         </VBox>
                      </children>
@@ -121,8 +121,8 @@
                               <Insets />
                            </HBox.margin>
                            <children>
-                              <FontAwesomeIcon fill="WHITE" glyphName="SAVE" opacity="0.41" size="2.9em" wrappingWidth="39.62142753601074" />
-                              <Text fill="WHITE" opacity="0.59" strokeType="OUTSIDE" strokeWidth="0.0" text="Backup" textAlignment="CENTER" />
+                              <FontAwesomeIcon fill="WHITE" glyphName="SAVE" size="2.9em" wrappingWidth="39.62142753601074" />
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Backup" textAlignment="CENTER" />
                            </children>
                         </VBox>
                      </children>
