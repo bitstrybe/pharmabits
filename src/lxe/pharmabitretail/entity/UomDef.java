@@ -27,7 +27,8 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "UomDef.findAll", query = "SELECT u FROM UomDef u")
     , @NamedQuery(name = "UomDef.findByUomItem", query = "SELECT u FROM UomDef u WHERE u.uomItem = :uomItem")
-    , @NamedQuery(name = "UomDef.findByUomValue", query = "SELECT u FROM UomDef u WHERE u.uomValue = :uomValue")})
+    , @NamedQuery(name = "UomDef.findByUomDm", query = "SELECT u FROM UomDef u WHERE u.uomDm = :uomDm")
+    , @NamedQuery(name = "UomDef.findByUomNm", query = "SELECT u FROM UomDef u WHERE u.uomNm = :uomNm")})
 public class UomDef implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,8 +38,11 @@ public class UomDef implements Serializable {
     @Column(name = "uom_item", nullable = false)
     private Integer uomItem;
     @Basic(optional = false)
-    @Column(name = "uom_value", nullable = false)
-    private int uomValue;
+    @Column(name = "uom_dm", nullable = false)
+    private int uomDm;
+    @Basic(optional = false)
+    @Column(name = "uom_nm", nullable = false)
+    private int uomNm;
     @JoinColumn(name = "item_code", referencedColumnName = "item_desc", nullable = false)
     @ManyToOne(optional = false)
     private Items itemCode;
@@ -53,9 +57,10 @@ public class UomDef implements Serializable {
         this.uomItem = uomItem;
     }
 
-    public UomDef(Integer uomItem, int uomValue) {
+    public UomDef(Integer uomItem, int uomDm, int uomNm) {
         this.uomItem = uomItem;
-        this.uomValue = uomValue;
+        this.uomDm = uomDm;
+        this.uomNm = uomNm;
     }
 
     public Integer getUomItem() {
@@ -66,12 +71,20 @@ public class UomDef implements Serializable {
         this.uomItem = uomItem;
     }
 
-    public int getUomValue() {
-        return uomValue;
+    public int getUomDm() {
+        return uomDm;
     }
 
-    public void setUomValue(int uomValue) {
-        this.uomValue = uomValue;
+    public void setUomDm(int uomDm) {
+        this.uomDm = uomDm;
+    }
+
+    public int getUomNm() {
+        return uomNm;
+    }
+
+    public void setUomNm(int uomNm) {
+        this.uomNm = uomNm;
     }
 
     public Items getItemCode() {

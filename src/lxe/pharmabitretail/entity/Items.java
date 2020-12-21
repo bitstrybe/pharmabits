@@ -32,6 +32,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Items.findAll", query = "SELECT i FROM Items i")
     , @NamedQuery(name = "Items.findByItemDesc", query = "SELECT i FROM Items i WHERE i.itemDesc = :itemDesc")
     , @NamedQuery(name = "Items.findByItemName", query = "SELECT i FROM Items i WHERE i.itemName = :itemName")
+    , @NamedQuery(name = "Items.findByItemImg", query = "SELECT i FROM Items i WHERE i.itemImg = :itemImg")
     , @NamedQuery(name = "Items.findByVom", query = "SELECT i FROM Items i WHERE i.vom = :vom")
     , @NamedQuery(name = "Items.findByVomDef", query = "SELECT i FROM Items i WHERE i.vomDef = :vomDef")
     , @NamedQuery(name = "Items.findByRol", query = "SELECT i FROM Items i WHERE i.rol = :rol")
@@ -47,6 +48,8 @@ public class Items implements Serializable {
     @Basic(optional = false)
     @Column(name = "item_name", nullable = false, length = 245)
     private String itemName;
+    @Column(name = "item_img", length = 545)
+    private String itemImg;
     @Basic(optional = false)
     @Column(name = "vom", nullable = false, length = 45)
     private String vom;
@@ -109,6 +112,14 @@ public class Items implements Serializable {
 
     public void setItemName(String itemName) {
         this.itemName = itemName;
+    }
+
+    public String getItemImg() {
+        return itemImg;
+    }
+
+    public void setItemImg(String itemImg) {
+        this.itemImg = itemImg;
     }
 
     public String getVom() {
