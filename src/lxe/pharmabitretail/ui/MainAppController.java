@@ -1,10 +1,14 @@
 package lxe.pharmabitretail.ui;
 
+import com.sun.deploy.util.FXLoader;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,10 +22,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -136,7 +143,7 @@ public class MainAppController implements Initializable {
                 dashtext.setFill(Color.valueOf("#dddee0"));
                 catalogawesome.setFill(Color.valueOf("#dddee0"));
                 catalogtext.setFill(Color.valueOf("#dddee0"));
-                
+
                 sales.setStyle("-fx-background-color:  transparent");
                 dashboard.setStyle("-fx-background-color: transparent");
             } catch (IOException ex) {
@@ -208,15 +215,22 @@ public class MainAppController implements Initializable {
 
     @FXML
     private void addcategory(ActionEvent event) throws IOException {
+
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddCategory.fxml"));
         Parent parent = (Parent) fxmlLoader.load();
-        Scene scene = new Scene(parent);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initOwner(parent.getScene().getWindow());
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double width = screenSize.getWidth();
+        double height = screenSize.getHeight();
+        Scene scene = new Scene(parent,width,height);
+        scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.resizableProperty().setValue(false);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.initModality(Modality.APPLICATION_MODAL);
+//        stage.initOwner(parent.getScene().getWindow());
+//        stage.setScene(scene);
+//        stage.initStyle(StageStyle.UNDECORATED);
+//        stage.resizableProperty().setValue(false);
         stage.showAndWait();
     }
 
