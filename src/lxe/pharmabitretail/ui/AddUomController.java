@@ -1,4 +1,3 @@
-
 package lxe.pharmabitretail.ui;
 
 import com.jfoenix.controls.JFXButton;
@@ -32,6 +31,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
@@ -75,15 +76,15 @@ public class AddUomController implements Initializable {
     private TableColumn<UomTableModel, String> uomtb;
     @FXML
     private TableColumn<UomTableModel, Boolean> action;
-    
-     ObservableList<UomTableModel> data;
+
+    ObservableList<UomTableModel> data;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         // TODO
         UomBL ca = new UomBL();
 
@@ -117,6 +118,61 @@ public class AddUomController implements Initializable {
             }
         });
 
+        uomtextfield.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (!uomtextfield.getText().isEmpty()) {
+                    if (event.getCode() == KeyCode.ENTER) {
+
+                        save.setDisable(true);
+                        Task<Void> task = new Task<Void>() {
+                            @Override
+                            protected Void call() throws Exception {
+                                spinner.setVisible(true);
+                                check.setVisible(false);
+                                updateMessage("PROCESSING PLS WAIT.....");
+                                Thread.sleep(1000);
+                                return null;
+                            }
+                        };
+                        displayinfo.textProperty().bind(task.messageProperty());
+                        task.setOnSucceeded(s -> {
+                            displayinfo.textProperty().unbind();
+                            Uom cat = new Uom();
+                            cat.setUomDesc(uomtextfield.getText());
+                            int result = new InsertUpdateBL().insertData(cat);
+                            switch (result) {
+                                case 1:
+                                    save.setDisable(true);
+                                    displayinfo.setText("SUCCESSFULLY SAVED");
+                                    uomtextfield.clear();
+                                    spinner.setVisible(false);
+                                    check.setVisible(true);
+                                    TableData();
+                                    break;
+                                default:
+                                    displayinfo.setText("NOTICE! AN ERROR OCCURED");
+                                    spinner.setVisible(false);
+                                    check.setVisible(false);
+                                    break;
+
+                            }
+                        });
+                        Thread d = new Thread(task);
+                        d.setDaemon(true);
+                        d.start();
+
+                    }
+                } else {
+                    displayinfo.setText("!FIELD IS EMPTY");
+                    spinner.setVisible(false);
+                    check.setVisible(false);
+                }
+
+            }
+
+        });
+
     }
 
     @FXML
@@ -127,8 +183,6 @@ public class AddUomController implements Initializable {
 
     @FXML
     private void saveAction(ActionEvent event) {
-
-        System.out.println("testing addUOM");
         save.setDisable(true);
         Task<Void> task = new Task<Void>() {
             @Override
@@ -168,6 +222,7 @@ public class AddUomController implements Initializable {
         d.start();
 
     }
+
     public void TableData() {
         List<Uom> c = new UomBL().getAllUom();
         data = FXCollections.observableArrayList();
@@ -194,8 +249,7 @@ public class AddUomController implements Initializable {
         cattableview.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     }
-    
-    
+
     public void TableData(String value) {
         List<Uom> c = new UomBL().searchAllUom(value);
         data = FXCollections.observableArrayList();
@@ -222,9 +276,8 @@ public class AddUomController implements Initializable {
         cattableview.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     }
-    
-    
-     public class AddPersonCell extends TableCell<UomTableModel, Boolean> {
+
+    public class AddPersonCell extends TableCell<UomTableModel, Boolean> {
 
         //Image img = new Image(getClass().getResourceAsStream("edit.png"));
         Image img2 = new Image(getClass().getResourceAsStream("delete.png"));
@@ -280,27 +333,27 @@ public class AddUomController implements Initializable {
                                 childController.displayinfo.textProperty().unbind();
 //                                List catname = new ItemsBL().getItemsFromCategory(selectedRecord.getUomName());
 //                                if (catname.isEmpty()) {
-                                    int result = new UomBL().removeData(selectedRecord.getUomName());
-                                    System.out.println(result);
-                                    switch (result) {
-                                        case 1:
-                                            childController.displayinfo.setText("SUCCESSFULLY DELETED");
-                                            childController.spinner.setVisible(false);
-                                            childController.check.setVisible(true);
-                                            TableData();
-                                            stage.close();
-                                            break;
-                                        default:
-                                            childController.displayinfo.setText("NOTICE! AN ERROR OCCURED");
-                                            childController.spinner.setVisible(false);
-                                            childController.check.setVisible(false);
-                                            break;
+                                int result = new UomBL().removeData(selectedRecord.getUomName());
+                                System.out.println(result);
+                                switch (result) {
+                                    case 1:
+                                        childController.displayinfo.setText("SUCCESSFULLY DELETED");
+                                        childController.spinner.setVisible(false);
+                                        childController.check.setVisible(true);
+                                        TableData();
+                                        stage.close();
+                                        break;
+                                    default:
+                                        childController.displayinfo.setText("NOTICE! AN ERROR OCCURED");
+                                        childController.spinner.setVisible(false);
+                                        childController.check.setVisible(false);
+                                        break;
 
-                                    }
+                                }
 //                                } else {
-                                    childController.displayinfo.setText("UNABLE TO DELETE RECORD");
-                                    childController.spinner.setVisible(false);
-                                    childController.check.setVisible(false);
+                                childController.displayinfo.setText("UNABLE TO DELETE RECORD");
+                                childController.spinner.setVisible(false);
+                                childController.check.setVisible(false);
 //                                }
                             });
                             Thread d = new Thread(task);

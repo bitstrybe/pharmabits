@@ -33,6 +33,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -119,6 +121,63 @@ public class AddCategoryController implements Initializable {
             } else {
                 TableData();
             }
+        });
+
+        cattextfield.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (!cattextfield.getText().isEmpty()) {
+                    if (event.getCode() == KeyCode.ENTER) {
+
+                        save.setDisable(true);
+                        Task<Void> task = new Task<Void>() {
+                            @Override
+                            protected Void call() throws Exception {
+                                spinner.setVisible(true);
+                                check.setVisible(false);
+                                updateMessage("PROCESSING PLS WAIT.....");
+                                Thread.sleep(1000);
+                                return null;
+                            }
+                        };
+                        displayinfo.textProperty().bind(task.messageProperty());
+                        task.setOnSucceeded(s -> {
+                            displayinfo.textProperty().unbind();
+                            Category cat = new Category();
+                            cat.setCategoryName(cattextfield.getText());
+                            cat.setUsers(new Users(LoginController.u.getUserid()));
+                            cat.setEntryLog(new Date());
+                            int result = new InsertUpdateBL().insertData(cat);
+                            switch (result) {
+                                case 1:
+                                    save.setDisable(true);
+                                    displayinfo.setText("SUCCESSFULLY SAVED");
+                                    cattextfield.clear();
+                                    spinner.setVisible(false);
+                                    check.setVisible(true);
+                                    TableData();
+                                    break;
+                                default:
+                                    displayinfo.setText("NOTICE! AN ERROR OCCURED");
+                                    spinner.setVisible(false);
+                                    check.setVisible(false);
+                                    break;
+
+                            }
+                        });
+                        Thread d = new Thread(task);
+                        d.setDaemon(true);
+                        d.start();
+
+                    }
+                } else {
+                    displayinfo.setText("!FIELD IS EMPTY");
+                    spinner.setVisible(false);
+                    check.setVisible(false);
+                }
+
+            }
+
         });
 
     }

@@ -38,6 +38,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -62,7 +64,6 @@ public class AddManufacturerController implements Initializable {
 
     ObservableList<ManufacturerTableModel> data;
 
-    @FXML
     public Button closeButton;
     @FXML
     public Label displayinfo;
@@ -75,8 +76,6 @@ public class AddManufacturerController implements Initializable {
     @FXML
     public FontAwesomeIcon duplicatelock;
     @FXML
-    public AnchorPane manupane;
-    @FXML
     private JFXTextField searchbtn;
     @FXML
     private TableView<ManufacturerTableModel> mantableview;
@@ -86,6 +85,8 @@ public class AddManufacturerController implements Initializable {
     private TableColumn<ManufacturerTableModel, Boolean> action;
     @FXML
     private JFXButton save;
+    @FXML
+    private JFXButton closebtn;
 
     /**
      * Initializes the controller class.
@@ -122,16 +123,63 @@ public class AddManufacturerController implements Initializable {
                 TableData();
             }
         });
+
+        manutextfield.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if(!manutextfield.getText().isEmpty()){
+                    if (event.getCode() == KeyCode.ENTER) {
+
+                    save.setDisable(true);
+                    Task<Void> task = new Task<Void>() {
+                        @Override
+                        protected Void call() throws Exception {
+                            spinner.setVisible(true);
+                            updateMessage("PROCESSING PLS WAIT.....");
+                            Thread.sleep(1000);
+                            return null;
+                        }
+                    };
+                    displayinfo.textProperty().bind(task.messageProperty());
+                    task.setOnSucceeded(s -> {
+                        displayinfo.textProperty().unbind();
+                        Manufacturer cat = new Manufacturer();
+                        cat.setManufacturer(manutextfield.getText());
+                        cat.setUsers(new Users(LoginController.u.getUserid()));
+                        cat.setEntryLog(new Date());
+                        int result = new InsertUpdateBL().insertData(cat);
+                        switch (result) {
+                            case 1:
+                                displayinfo.setText("SUCCESSFULLY SAVED");
+                                manutextfield.clear();
+                                spinner.setVisible(false);
+                                check.setVisible(true);
+                                TableData();
+                                break;
+                            default:
+                                displayinfo.setText("NOTICE! AN ERROR OCCURED");
+                                spinner.setVisible(false);
+                                check.setVisible(false);
+                                break;
+
+                        }
+                    });
+                    Thread d = new Thread(task);
+                    d.setDaemon(true);
+                    d.start();
+
+                }
+                }else{
+                    displayinfo.setText("!FIELD IS EMPTY");
+                    spinner.setVisible(false);
+                    check.setVisible(false);
+                }
+                
+            }
+
+        });
     }
 
-    @FXML
-    private void closemtd(ActionEvent event) {
-        Stage s = (Stage) closeButton.getScene().getWindow();
-        s.close();
-
-    }
-
-    @FXML
     private void clearall(ActionEvent event) {
         manutextfield.clear();
     }
@@ -144,7 +192,7 @@ public class AddManufacturerController implements Initializable {
             protected Void call() throws Exception {
                 spinner.setVisible(true);
                 updateMessage("PROCESSING PLS WAIT.....");
-                Thread.sleep(2000);
+                Thread.sleep(1000);
                 return null;
             }
         };
@@ -233,6 +281,12 @@ public class AddManufacturerController implements Initializable {
 //        clientTable.getColumns().add(action);
         mantableview.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+    }
+
+    @FXML
+    private void closefrom(ActionEvent event) {
+        Stage s = (Stage) closebtn.getScene().getWindow();
+        s.close();
     }
 
     public class AddPersonCell extends TableCell<ManufacturerTableModel, Boolean> {

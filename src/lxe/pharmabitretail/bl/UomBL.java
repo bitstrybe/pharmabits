@@ -46,7 +46,7 @@ public class UomBL extends DdsBL{
     }
        public String getUomById(String uom) {
         try {
-            TypedQuery<String> q = em.createQuery("SELECT s.uomDesc FROM Uom s WHERE s.uomDesc = :uomDesc", String.class);
+            TypedQuery<String> q = em.createQuery("SELECT u FROM Uom u WHERE u.uomDesc = :uomDesc", String.class);
             q.setParameter("uomDesc", uom);
             return q.getSingleResult();
         } catch (NoResultException ex) {
