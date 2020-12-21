@@ -10,6 +10,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
@@ -196,4 +197,7 @@
          </children>
       </StackPane>
    </top>
+   <center>
+      <Region prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #00000044;" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>

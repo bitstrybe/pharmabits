@@ -1,4 +1,3 @@
-
 package lxe.pharmabitretail.ui;
 
 import com.jfoenix.controls.JFXButton;
@@ -36,6 +35,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -58,7 +58,6 @@ public class AddCategoryController implements Initializable {
 
     ObservableList<CategoryTableModel> data;
 
-    @FXML
     private Button closeButton;
     @FXML
     public JFXButton save;
@@ -80,13 +79,14 @@ public class AddCategoryController implements Initializable {
     private TableColumn<CategoryTableModel, String> category;
     @FXML
     private TableColumn<CategoryTableModel, Boolean> action;
+    @FXML
+    private JFXButton closebtn;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         // TODO
         CategoryBL ca = new CategoryBL();
         // String value = cattextfield.getText();
@@ -123,13 +123,6 @@ public class AddCategoryController implements Initializable {
 
     }
 
-    @FXML
-    private void closemtd(ActionEvent event) {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
-    }
-
-    @FXML
     public void clearall() {
         cattextfield.clear();
         displayinfo.setText(null);
@@ -187,7 +180,7 @@ public class AddCategoryController implements Initializable {
         });
         category.setCellValueFactory(cell -> cell.getValue().getCategoryNameProperty());
         action.setSortable(false);
-        action.setMaxWidth(480);
+        action.setMaxWidth(120);
 
         action.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CategoryTableModel, Boolean>, ObservableValue<Boolean>>() {
             @Override
@@ -214,7 +207,7 @@ public class AddCategoryController implements Initializable {
         });
         category.setCellValueFactory(cell -> cell.getValue().getCategoryNameProperty());
         action.setSortable(false);
-        action.setMaxWidth(480);
+        action.setMaxWidth(120);
 
         action.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CategoryTableModel, Boolean>, ObservableValue<Boolean>>() {
             @Override
@@ -231,6 +224,12 @@ public class AddCategoryController implements Initializable {
         cattableview.setItems(data);
         cattableview.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+    }
+
+    @FXML
+    private void closefrom(ActionEvent event) {
+        Stage stage = (Stage) closebtn.getScene().getWindow();
+        stage.close();
     }
 
     public class AddPersonCell extends TableCell<CategoryTableModel, Boolean> {

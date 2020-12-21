@@ -20,6 +20,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -60,6 +61,8 @@ public class DashboardController implements Initializable {
     private CategoryAxis xAxis;
     @FXML
     private AnchorPane dashpane;
+    @FXML
+    public Region opaqueLayer;
 
     /**
      * Initializes the controller class.
