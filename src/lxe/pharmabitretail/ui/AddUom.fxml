@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="686.0" style="-fx-background-color: #00000044;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.AddCategoryController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="686.0" style="-fx-background-color: #00000044;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.AddUomController">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="355.0" prefWidth="683.0" styleClass="form_border_color" stylesheets="@style.css">
          <left>
@@ -24,9 +24,9 @@
                <children>
                   <AnchorPane prefHeight="253.0" prefWidth="282.0">
                      <children>
-                        <HBox layoutY="15.0" spacing="5.0">
+                        <HBox layoutY="15.0" prefHeight="17.0" prefWidth="130.0" spacing="5.0">
                            <children>
-                              <Label prefHeight="15.0" prefWidth="89.0" text="Category Name">
+                              <Label prefHeight="17.0" prefWidth="110.0" text="Unit of measurment">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
@@ -38,7 +38,7 @@
                               </Label>
                            </children>
                         </HBox>
-                        <JFXTextField fx:id="cattextfield" focusColor="#f2efef" layoutX="2.0" layoutY="36.0" opacity="0.93" prefHeight="32.0" prefWidth="278.0" styleClass="form_field">
+                        <JFXTextField fx:id="uomtextfield" focusColor="#f2efef" layoutX="2.0" layoutY="36.0" opacity="0.93" prefHeight="32.0" prefWidth="278.0" styleClass="form_field">
                            <font>
                               <Font size="13.0" />
                            </font>
@@ -96,7 +96,7 @@
                <children>
                   <Pane prefHeight="49.0" prefWidth="958.0" style="-fx-background-color: #eee;" stylesheets="@style.css" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label layoutX="14.0" layoutY="11.0" text="ADD CATEGORY" textFill="#544848">
+                        <Label layoutX="14.0" layoutY="11.0" text="ADD UOM" textFill="#544848">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -117,7 +117,7 @@
                   <JFXTextField fx:id="searchbtn" layoutX="148.0" layoutY="14.0" prefHeight="25.0" prefWidth="217.0" promptText="Search Cusomter" />
                   <TableView fx:id="cattableview" layoutX="7.0" layoutY="43.0" prefHeight="251.0" prefWidth="361.0" styleClass="table-cell" stylesheets="@style.css">
                      <columns>
-                        <TableColumn fx:id="category" maxWidth="1.7976931348623157E308" prefWidth="260.0" resizable="false" text="Category Name" />
+                        <TableColumn fx:id="uomtb" maxWidth="1.7976931348623157E308" prefWidth="260.0" resizable="false" text="Unit of measurement (UOM)" />
                         <TableColumn fx:id="action" maxWidth="1.7976931348623157E308" prefWidth="97.0" resizable="false" text="Action" />
                      </columns>
                   </TableView>

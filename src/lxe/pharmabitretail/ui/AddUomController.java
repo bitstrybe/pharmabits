@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package lxe.pharmabitretail.ui;
 
 import com.jfoenix.controls.JFXButton;
@@ -6,7 +11,6 @@ import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -25,7 +29,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
@@ -35,68 +38,65 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-import lxe.pharmabitretail.bl.CategoryBL;
 import lxe.pharmabitretail.bl.InsertUpdateBL;
 import lxe.pharmabitretail.bl.ItemsBL;
-import lxe.pharmabitretail.entity.Category;
-import lxe.pharmabitretail.entity.Items;
+import lxe.pharmabitretail.bl.UomBL;
+import lxe.pharmabitretail.entity.Uom;
 import lxe.pharmabitretail.entity.Users;
-import lxe.pharmabitretail.tablemodel.CategoryTableModel;
+import lxe.pharmabitretail.tablemodel.UomTableModel;
 
 /**
  * FXML Controller class
  *
  * @author JScare
  */
-public class AddCategoryController implements Initializable {
+public class AddUomController implements Initializable {
 
-    ObservableList<CategoryTableModel> data;
-
-    private Button closeButton;
     @FXML
-    public JFXButton save;
+    private JFXButton closebtn;
     @FXML
-    public Label displayinfo;
+    private JFXTextField uomtextfield;
     @FXML
-    public JFXSpinner spinner;
+    private JFXButton save;
     @FXML
-    public JFXTextField cattextfield;
+    private Label displayinfo;
     @FXML
-    public FontAwesomeIcon check;
+    private JFXSpinner spinner;
     @FXML
-    public FontAwesomeIcon duplicatelock;
+    private FontAwesomeIcon check;
+    @FXML
+    private FontAwesomeIcon duplicatelock;
     @FXML
     private JFXTextField searchbtn;
     @FXML
-    private TableView<CategoryTableModel> cattableview;
+    private TableView<UomTableModel> cattableview;
     @FXML
-    private TableColumn<CategoryTableModel, String> category;
+    private TableColumn<UomTableModel, String> uomtb;
     @FXML
-    private TableColumn<CategoryTableModel, Boolean> action;
-    @FXML
-    private JFXButton closebtn;
+    private TableColumn<UomTableModel, Boolean> action;
+    
+     ObservableList<UomTableModel> data;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         // TODO
-        CategoryBL ca = new CategoryBL();
-        // String value = cattextfield.getText();
-//        List<Category> arrayObject = ca.getAllCategory();
-        cattextfield.textProperty().addListener(e -> {
+        UomBL ca = new UomBL();
+
+        uomtextfield.textProperty().addListener(e -> {
             //  System.out.println(cattextfield.getText());
             check.setVisible(false);
-            if (cattextfield.getLength() > 0) {
+            if (uomtextfield.getLength() > 0) {
                 save.setDisable(false);
-                String value = ca.getCategoryById(cattextfield.getText());
+                String value = ca.getUomById(uomtextfield.getText());
                 if (value != null) {
                     save.setDisable(true);
                     displayinfo.setText("DUPLICATE FORUND!!!");
@@ -123,14 +123,15 @@ public class AddCategoryController implements Initializable {
 
     }
 
-    public void clearall() {
-        cattextfield.clear();
-        displayinfo.setText(null);
-        duplicatelock.setVisible(false);
+    @FXML
+    private void closefrom(ActionEvent event) {
+        Stage stage = (Stage) closebtn.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
     private void saveAction(ActionEvent event) {
+
         save.setDisable(true);
         Task<Void> task = new Task<Void>() {
             @Override
@@ -145,16 +146,14 @@ public class AddCategoryController implements Initializable {
         displayinfo.textProperty().bind(task.messageProperty());
         task.setOnSucceeded(s -> {
             displayinfo.textProperty().unbind();
-            Category cat = new Category();
-            cat.setCategoryName(cattextfield.getText());
-            cat.setUsers(new Users(LoginController.u.getUserid()));
-            cat.setEntryLog(new Date());
+            Uom cat = new Uom();
+            cat.setUomDesc(uomtextfield.getText());
             int result = new InsertUpdateBL().insertData(cat);
             switch (result) {
                 case 1:
                     save.setDisable(true);
                     displayinfo.setText("SUCCESSFULLY SAVED");
-                    cattextfield.clear();
+                    uomtextfield.clear();
                     spinner.setVisible(false);
                     check.setVisible(true);
                     TableData();
@@ -170,27 +169,27 @@ public class AddCategoryController implements Initializable {
         Thread d = new Thread(task);
         d.setDaemon(true);
         d.start();
-    }
 
+    }
     public void TableData() {
-        List<Category> c = new CategoryBL().getAllCategory();
+        List<Uom> c = new UomBL().getAllUom();
         data = FXCollections.observableArrayList();
-        c.forEach((category) -> {
-            data.add(new CategoryTableModel(category.getCategoryName()));
+        c.forEach((template) -> {
+            data.add(new UomTableModel(template.getUomDesc()));
         });
-        category.setCellValueFactory(cell -> cell.getValue().getCategoryNameProperty());
+        uomtb.setCellValueFactory(cell -> cell.getValue().getUomNameProperty());
         action.setSortable(false);
         action.setMaxWidth(120);
 
-        action.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CategoryTableModel, Boolean>, ObservableValue<Boolean>>() {
+        action.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<UomTableModel, Boolean>, ObservableValue<Boolean>>() {
             @Override
-            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<CategoryTableModel, Boolean> features) {
+            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<UomTableModel, Boolean> features) {
                 return new SimpleBooleanProperty(features.getValue() != null);
             }
         });
-        action.setCellFactory(new Callback<TableColumn<CategoryTableModel, Boolean>, TableCell<CategoryTableModel, Boolean>>() {
+        action.setCellFactory(new Callback<TableColumn<UomTableModel, Boolean>, TableCell<UomTableModel, Boolean>>() {
             @Override
-            public TableCell<CategoryTableModel, Boolean> call(TableColumn<CategoryTableModel, Boolean> personBooleanTableColumn) {
+            public TableCell<UomTableModel, Boolean> call(TableColumn<UomTableModel, Boolean> personBooleanTableColumn) {
                 return new AddPersonCell();
             }
         });
@@ -198,26 +197,27 @@ public class AddCategoryController implements Initializable {
         cattableview.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     }
-
-    public void TableData(String p) {
-        List<Category> c = new CategoryBL().searchAllCategory(p);
+    
+    
+    public void TableData(String value) {
+        List<Uom> c = new UomBL().searchAllUom(value);
         data = FXCollections.observableArrayList();
-        c.forEach((category) -> {
-            data.add(new CategoryTableModel(category.getCategoryName()));
+        c.forEach((template) -> {
+            data.add(new UomTableModel(template.getUomDesc()));
         });
-        category.setCellValueFactory(cell -> cell.getValue().getCategoryNameProperty());
+        uomtb.setCellValueFactory(cell -> cell.getValue().getUomNameProperty());
         action.setSortable(false);
         action.setMaxWidth(120);
 
-        action.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CategoryTableModel, Boolean>, ObservableValue<Boolean>>() {
+        action.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<UomTableModel, Boolean>, ObservableValue<Boolean>>() {
             @Override
-            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<CategoryTableModel, Boolean> features) {
+            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<UomTableModel, Boolean> features) {
                 return new SimpleBooleanProperty(features.getValue() != null);
             }
         });
-        action.setCellFactory(new Callback<TableColumn<CategoryTableModel, Boolean>, TableCell<CategoryTableModel, Boolean>>() {
+        action.setCellFactory(new Callback<TableColumn<UomTableModel, Boolean>, TableCell<UomTableModel, Boolean>>() {
             @Override
-            public TableCell<CategoryTableModel, Boolean> call(TableColumn<CategoryTableModel, Boolean> personBooleanTableColumn) {
+            public TableCell<UomTableModel, Boolean> call(TableColumn<UomTableModel, Boolean> personBooleanTableColumn) {
                 return new AddPersonCell();
             }
         });
@@ -225,14 +225,9 @@ public class AddCategoryController implements Initializable {
         cattableview.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     }
-
-    @FXML
-    private void closefrom(ActionEvent event) {
-        Stage stage = (Stage) closebtn.getScene().getWindow();
-        stage.close();
-    }
-
-    public class AddPersonCell extends TableCell<CategoryTableModel, Boolean> {
+    
+    
+     public class AddPersonCell extends TableCell<UomTableModel, Boolean> {
 
         //Image img = new Image(getClass().getResourceAsStream("edit.png"));
         Image img2 = new Image(getClass().getResourceAsStream("delete.png"));
@@ -267,7 +262,7 @@ public class AddCategoryController implements Initializable {
 
                         int selectdIndex = getTableRow().getIndex();
                         //Create a new table show details of the selected item
-                        CategoryTableModel selectedRecord = (CategoryTableModel) cattableview.getItems().get(selectdIndex);
+                        UomTableModel selectedRecord = (UomTableModel) cattableview.getItems().get(selectdIndex);
                         Stage stage = new Stage();
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Delete.fxml"));
                         Parent parent = (Parent) fxmlLoader.load();
@@ -286,9 +281,10 @@ public class AddCategoryController implements Initializable {
                             childController.displayinfo.textProperty().bind(task.messageProperty());
                             task.setOnSucceeded(f -> {
                                 childController.displayinfo.textProperty().unbind();
-                                List catname = new ItemsBL().getItemsFromCategory(selectedRecord.getCategoryName());
-                                if (catname.isEmpty()) {
-                                    int result = new CategoryBL().removeData(selectedRecord.getCategoryName());
+//                                List catname = new ItemsBL().getItemsFromCategory(selectedRecord.getUomName());
+//                                if (catname.isEmpty()) {
+                                    int result = new UomBL().removeData(selectedRecord.getUomName());
+                                    System.out.println(result);
                                     switch (result) {
                                         case 1:
                                             childController.displayinfo.setText("SUCCESSFULLY DELETED");
@@ -304,11 +300,11 @@ public class AddCategoryController implements Initializable {
                                             break;
 
                                     }
-                                } else {
+//                                } else {
                                     childController.displayinfo.setText("UNABLE TO DELETE RECORD");
                                     childController.spinner.setVisible(false);
                                     childController.check.setVisible(false);
-                                }
+//                                }
                             });
                             Thread d = new Thread(task);
                             d.setDaemon(true);
@@ -324,7 +320,7 @@ public class AddCategoryController implements Initializable {
                         stage.showAndWait();
 
                     } catch (IOException ex) {
-                        Logger.getLogger(AddCategoryController.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(AddUomController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
 

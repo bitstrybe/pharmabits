@@ -314,4 +314,24 @@ public class MainAppController implements Initializable {
         }
     }
 
+    @FXML
+    private void addUom(ActionEvent event) throws IOException {
+         Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddUom.fxml"));
+        Parent parent = (Parent) fxmlLoader.load();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double width = screenSize.getWidth();
+        double height = screenSize.getHeight();
+        Scene scene = new Scene(parent,width,height);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.initModality(Modality.APPLICATION_MODAL);
+//        stage.initOwner(parent.getScene().getWindow());
+//        stage.setScene(scene);
+//        stage.initStyle(StageStyle.UNDECORATED);
+//        stage.resizableProperty().setValue(false);
+        stage.showAndWait();
+    }
+
 }

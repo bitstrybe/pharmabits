@@ -71,6 +71,7 @@ public class ItemsBL extends DdsBL {
             return null;
         }
     }
+     
       public List getItemsFromManufacturer(String manid){
         try{
         TypedQuery<String> q = em.createQuery("SELECT r.manufacturer.manufacturer FROM Items r WHERE r.manufacturer.manufacturer = :manid", String.class);

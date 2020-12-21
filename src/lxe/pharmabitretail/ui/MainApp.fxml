@@ -10,7 +10,6 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
@@ -143,6 +142,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#addcategory" text="Category" />
                         <MenuItem mnemonicParsing="false" onAction="#addmanufacturer" text="Manufacturer" />
                         <MenuItem mnemonicParsing="false" onAction="#additems" text="Items" />
+                        <MenuItem mnemonicParsing="false" onAction="#addUom" text="Uom" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Report">
@@ -197,7 +197,4 @@
          </children>
       </StackPane>
    </top>
-   <center>
-      <Region prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #00000044;" BorderPane.alignment="CENTER" />
-   </center>
 </BorderPane>
