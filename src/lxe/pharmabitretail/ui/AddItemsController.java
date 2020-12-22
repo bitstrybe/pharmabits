@@ -88,19 +88,21 @@ public class AddItemsController implements Initializable {
     @FXML
     private TableColumn<ItemTableModel, String> manufacturer;
     @FXML
-    private TableColumn<ItemTableModel, String> uom;
+    private TableColumn<ItemTableModel, String> uom; ;
     @FXML
     private TableColumn<ItemTableModel, Number> rol;
     @FXML
     private TableColumn<ItemTableModel, Boolean> action;
     @FXML
-    private ComboBox<?> manufacturercombo1;
-    @FXML
-    private JFXTextField itmtextfield1;
-    @FXML
-    private ComboBox<?> umocombo;
-    @FXML
     private JFXButton closebtn;
+    @FXML
+    private JFXTextField uom_val1;
+    @FXML
+    private JFXTextField uom_val2;
+    @FXML
+    private ComboBox<String> vom;
+    @FXML
+    private ComboBox<?> uomcombo;
 
     public void getManufacturer() {
         List<Manufacturer> list = new ManufacturerBL().getAllManufacturer();
@@ -118,20 +120,16 @@ public class AddItemsController implements Initializable {
         });
     }
 
-//    public void getVolumeValue() {
-//        volumevalue.getItems().add("g");
-//        volumevalue.getItems().add("mg");
-//        volumevalue.getItems().add("l");
-//        volumevalue.getItems().add("ml");
-//        volumevalue.getItems().add("mega");
-//        volumevalue.getItems().add("others");
-//
-//    }
-//    public void getUnitOfMeasurement(){
-//        uomlist.getItems().add("Box");
-//        uomlist.getItems().add("Pack");
-//        uomlist.getItems().add("Strips");
-//    }
+    public void getVolumeValue() {
+        vom.getItems().add("g");
+        vom.getItems().add("mg");
+        vom.getItems().add("l");
+        vom.getItems().add("ml");
+        vom.getItems().add("mega");
+        vom.getItems().add("others");
+
+    }
+
     /**
      * Initializes the controller class.
      */
@@ -140,7 +138,7 @@ public class AddItemsController implements Initializable {
         // TODOg
         getCategory();
         getManufacturer();
-//        getVolumeValue();
+        getVolumeValue();
 //        getUnitOfMeasurement();
         TableData();
         searchbtn.textProperty().addListener(e -> {
