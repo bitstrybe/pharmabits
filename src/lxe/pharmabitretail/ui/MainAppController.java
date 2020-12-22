@@ -174,7 +174,7 @@ public class MainAppController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Backup.fxml"));
                 Parent parent = (Parent) fxmlLoader.load();
                 Scene scene = new Scene(parent);
-                stage.initModality(Modality.APPLICATION_MODAL);
+               // stage.initModality(Modality.APPLICATION_MODAL);
                 stage.initOwner(parent.getScene().getWindow());
                 stage.setScene(scene);
                 stage.initStyle(StageStyle.UNDECORATED);
@@ -243,7 +243,7 @@ public class MainAppController implements Initializable {
         double height = screenSize.getHeight();
         Scene scene = new Scene(parent, width, height);
         scene.setFill(Color.TRANSPARENT);
-        stage.initModality(Modality.APPLICATION_MODAL);
+        //stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(parent.getScene().getWindow());
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
@@ -264,7 +264,7 @@ public class MainAppController implements Initializable {
         double height = screenSize.getHeight();
         Scene scene = new Scene(parent, width, height);
         scene.setFill(Color.TRANSPARENT);
-        stage.initModality(Modality.APPLICATION_MODAL);
+        //stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(parent.getScene().getWindow());
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
@@ -337,7 +337,7 @@ public class MainAppController implements Initializable {
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
-        stage.initModality(Modality.APPLICATION_MODAL);
+        //stage.initModality(Modality.APPLICATION_MODAL);
 //        stage.initOwner(parent.getScene().getWindow());
 //        stage.setScene(scene);
 //        stage.initStyle(StageStyle.UNDECORATED);
