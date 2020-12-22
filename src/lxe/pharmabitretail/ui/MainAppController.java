@@ -226,12 +226,12 @@ public class MainAppController implements Initializable {
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
-        stage.initModality(Modality.APPLICATION_MODAL);
+        //stage.initModality(Modality.APPLICATION_MODAL);
 //        stage.initOwner(parent.getScene().getWindow());
 //        stage.setScene(scene);
 //        stage.initStyle(StageStyle.UNDECORATED);
 //        stage.resizableProperty().setValue(false);
-        stage.showAndWait();
+        stage.show();
     }
 
     @FXML
@@ -247,10 +247,11 @@ public class MainAppController implements Initializable {
         stage.initOwner(parent.getScene().getWindow());
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
-        stage.initModality(Modality.APPLICATION_MODAL);
+        //stage.resizableProperty().setValue(false);
+        //stage.initModality(Modality.APPLICATION_MODAL);
 //        stage.initStyle(StageStyle.UNDECORATED);
-        stage.resizableProperty().setValue(false);
-        stage.showAndWait();
+        
+        stage.show();
 
     }
 
@@ -267,10 +268,10 @@ public class MainAppController implements Initializable {
         stage.initOwner(parent.getScene().getWindow());
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
-        stage.initModality(Modality.APPLICATION_MODAL);
+        //stage.initModality(Modality.APPLICATION_MODAL);
 //        stage.initStyle(StageStyle.UNDECORATED);
-        stage.resizableProperty().setValue(false);
-        stage.showAndWait();
+        //stage.resizableProperty().setValue(false);
+        stage.show();
     }
 
     @FXML
@@ -341,7 +342,7 @@ public class MainAppController implements Initializable {
 //        stage.setScene(scene);
 //        stage.initStyle(StageStyle.UNDECORATED);
 //        stage.resizableProperty().setValue(false);
-        stage.showAndWait();
+        stage.show();
     }
 
 }
