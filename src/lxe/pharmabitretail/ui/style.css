@@ -150,5 +150,5 @@ and open the template in the editor.
 }
 .form_border_color{
     -fx-border-color: #cccccc;
-    -fx-border-width: 2;
+    -fx-border-width: 1;
 }

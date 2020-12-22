@@ -4,8 +4,11 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -29,6 +32,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -39,6 +43,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -56,12 +61,17 @@ import lxe.pharmabitretail.tablemodel.ItemTableModel;
 import lxe.pharmabitretail.utils.FilterComboBox;
 import lxe.pharmabitretail.utils.Utilities;
 
+
+
 /**
  * FXML Controller class
  *
  * @author JScare
  */
 public class AddItemsController implements Initializable {
+    
+    private Desktop desktop = Desktop.getDesktop();
+    final FileChooser fileChooser = new FileChooser();
 
     ObservableList<ItemTableModel> data;
 
@@ -103,6 +113,14 @@ public class AddItemsController implements Initializable {
     private ComboBox<String> vom;
     @FXML
     private ComboBox<?> uomcombo;
+    @FXML
+    private Spinner<?> vom_def;
+    @FXML
+    private JFXTextField roltextfield;
+    @FXML
+    private Button browse;
+    @FXML
+    private JFXTextField roltextfield1;
 
     public void getManufacturer() {
         List<Manufacturer> list = new ManufacturerBL().getAllManufacturer();
@@ -169,6 +187,15 @@ public class AddItemsController implements Initializable {
             }
 
         });
+        browse.setOnAction(new EventHandler<ActionEvent>() {
+            Stage st = new Stage();
+            @Override
+            public void handle(ActionEvent event) { File file = fileChooser.showOpenDialog(st);
+                if (file != null) {
+                    openFile(file);
+                }
+             }
+        });
 //        volumevalue.setOnKeyReleased(new EventHandler<KeyEvent>() {
 //            @Override
 //            public void handle(KeyEvent event) {
@@ -198,44 +225,44 @@ public class AddItemsController implements Initializable {
             }
         };
         displayinfo.textProperty().bind(task.messageProperty());
-//        task.setOnSucceeded(s -> {
-//            displayinfo.textProperty().unbind();
-//            Items cat = new Items();
-//            String itemcode = itmtextfield.getText() + " " + categorycombo.getValue() + " " + volume.getText() + volumevalue.getValue() + " (" + manufacturercombo.getValue() + ")";
-//            try {
-//                cat.setItemDesc(itemcode);
-//                cat.setItemName(itmtextfield.getText());
-//                cat.setCategory(new Category(categorycombo.getValue()));
-//                cat.setManufacturer(new Manufacturer(manufacturercombo.getValue()));
-//                cat.setVomDef(Double.parseDouble(volume.getText()));
-//                cat.setVom(volumevalue.getValue());
-//                cat.setRol(Integer.parseInt(roltextfield.getText()));
-//                cat.setUsers(new Users(LoginController.u.getUserid()));
-//                cat.setEntryLog(new Date());
-//                cat.setLastModified(new Date());
-//
-//                int result = new InsertUpdateBL().insertData(cat);
-//                switch (result) {
-//                    case 1:
-//                        displayinfo.setText("SUCCESSFULLY SAVED");
-//                        Utilities.clearAllField(itemspane);
-//                        spinner.setVisible(false);
-//                        check.setVisible(true);
-//                        TableData();
-//                        break;
-//                    default:
-//                        displayinfo.setText("NOTICE! AN ERROR OCCURED");
-//                        spinner.setVisible(false);
-//                        check.setVisible(false);
-//                        break;
-//
-//                }
-//            } catch (NumberFormatException ex) {
-//                spinner.setVisible(false);
-//                displayinfo.setText("Invalid Input");
-//
-//            }
-//        });
+        task.setOnSucceeded(s -> {
+            displayinfo.textProperty().unbind();
+            Items cat = new Items();
+            String itemcode = itmtextfield.getText() + " " + categorycombo.getValue() + " " + vom.getSelectionModel().getSelectedItem() + vom_def.getValue() + " (" + manufacturercombo.getValue() + ")";
+            try {
+                cat.setItemDesc(itemcode);
+                cat.setItemName(itmtextfield.getText());
+                cat.setCategory(new Category(categorycombo.getValue()));
+                cat.setManufacturer(new Manufacturer(manufacturercombo.getValue()));
+                cat.setVomDef(Double.parseDouble(vom_def.getValue().toString()));
+                cat.setVom(vom.getSelectionModel().getSelectedItem());
+                cat.setRol(Integer.parseInt(roltextfield.getText()));
+                cat.setUsers(new Users(LoginController.u.getUserid()));
+                cat.setEntryLog(new Date());
+                cat.setLastModified(new Date());
+
+                int result = new InsertUpdateBL().insertData(cat);
+                switch (result) {
+                    case 1:
+                        displayinfo.setText("SUCCESSFULLY SAVED");
+                        Utilities.clearAllField(itemspane);
+                        spinner.setVisible(false);
+                        check.setVisible(true);
+                        TableData();
+                        break;
+                    default:
+                        displayinfo.setText("NOTICE! AN ERROR OCCURED");
+                        spinner.setVisible(false);
+                        check.setVisible(false);
+                        break;
+
+                }
+            } catch (NumberFormatException ex) {
+                spinner.setVisible(false);
+                displayinfo.setText("Invalid Input");
+
+            }
+        });
         Thread d = new Thread(task);
         d.setDaemon(true);
         d.start();
@@ -439,6 +466,17 @@ public class AddItemsController implements Initializable {
     public void closefrom() {
         Stage stage = (Stage) closebtn.getScene().getWindow();
         stage.close();
+    }
+    
+    private void openFile(File file) {
+        try {
+            desktop.open(file);
+        } catch (IOException ex) {
+            Logger.getLogger(
+                    AddItemsController.class.getName()).log(
+                    Level.SEVERE, null, ex
+            );
+        }
     }
 
 }
