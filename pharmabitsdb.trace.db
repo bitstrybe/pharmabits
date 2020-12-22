@@ -148,3 +148,41 @@ SELECT uom_item, uom_value, item_code, uom_code FROM uom_def WHERE (uom_code = ?
 	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:384)
 	at com.sun.glass.ui.View.handleMouseEvent(View.java:555)
 	at com.sun.glass.ui.View.notifyMouse(View.java:927)
+2020-12-22 17:14:52 database: close
+org.h2.message.DbException: IO Exception: "Closing" [90028-200]
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.mvstore.db.MVTableEngine$Store.close(MVTableEngine.java:421)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1545)
+	at org.h2.engine.Database.closeImpl(Database.java:1454)
+	at org.h2.engine.Database.close(Database.java:1373)
+	at org.h2.engine.Database.removeSession(Database.java:1307)
+	at org.h2.engine.Session.close(Session.java:963)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:453)
+	at org.netbeans.modules.db.explorer.DatabaseConnection.disconnect(DatabaseConnection.java:1275)
+	at org.netbeans.modules.db.explorer.action.DisconnectAction$1.run(DisconnectAction.java:104)
+	at org.openide.util.RequestProcessor$Task.run(RequestProcessor.java:1443)
+	at org.netbeans.modules.openide.util.GlobalLookup.execute(GlobalLookup.java:68)
+	at org.openide.util.lookup.Lookups.executeWith(Lookups.java:303)
+	at org.openide.util.RequestProcessor$Processor.run(RequestProcessor.java:2058)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: IO Exception: "Closing" [90028-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 14 more
+Caused by: java.lang.IllegalStateException: File corrupt reading chunk at position 49152 [1.4.200/6]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.Chunk.readChunkHeader(Chunk.java:168)
+	at org.h2.mvstore.MVStore.moveChunk(MVStore.java:1916)
+	at org.h2.mvstore.MVStore.compactMoveChunks(MVStore.java:1839)
+	at org.h2.mvstore.MVStore.compactMoveChunks(MVStore.java:1772)
+	at org.h2.mvstore.MVStore.compactMoveChunks(MVStore.java:1753)
+	at org.h2.mvstore.MVStore.compactFile(MVStore.java:1970)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:1170)
+	at org.h2.mvstore.MVStore.close(MVStore.java:1133)
+	at org.h2.mvstore.db.MVTableEngine$Store.close(MVTableEngine.java:404)
+	... 12 more
+Caused by: java.lang.IllegalStateException: Not a map: A636ED6E2A" START WITH 34 BELONGS_TO_TABLE !ICREATE PRIMARY KEY "PUBLIC"."PRIMARY_KEY_32" ON "PUBLIC"."logs"("logsid") %yALTER TABLE "PUBLIC"."logs" ADD CONSTRAINT "PUBLIC"."CONSTRAINT_32" PRIMARY KEY("logsid") INDEX "PUBLIC"."PRIMARY_KEY_32" !JCREATE INDEX "PUBLIC"."CONSTRAINT_INDEX_32" ON "PUBLIC"."logs"("username") %¯ALTER TABLE "PUBLIC"."logs" ADD CONSTRAINT "PUBLIC"."CONSTRAINT_32C" FOREIGN KEY("username") INDEX "PUBLIC"."CONSTRAINT_INDEX_32" REFERENCES "PUBLIC"."users"("userid") NOCHECK  Tá|  !"#$%&'()*+,-./0   ÈCREATE CACHED TABLE "PUBLIC"."manufacturer"( [1.4.200/6]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.DataUtils.parseMap(DataUtils.java:763)
+	at org.h2.mvstore.Chunk.fromString(Chunk.java:214)
+	at org.h2.mvstore.Chunk.readChunkHeader(Chunk.java:163)
+	... 20 more

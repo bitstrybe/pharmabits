@@ -14,6 +14,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -32,7 +33,6 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Items.findAll", query = "SELECT i FROM Items i")
     , @NamedQuery(name = "Items.findByItemDesc", query = "SELECT i FROM Items i WHERE i.itemDesc = :itemDesc")
     , @NamedQuery(name = "Items.findByItemName", query = "SELECT i FROM Items i WHERE i.itemName = :itemName")
-    , @NamedQuery(name = "Items.findByItemImg", query = "SELECT i FROM Items i WHERE i.itemImg = :itemImg")
     , @NamedQuery(name = "Items.findByVom", query = "SELECT i FROM Items i WHERE i.vom = :vom")
     , @NamedQuery(name = "Items.findByVomDef", query = "SELECT i FROM Items i WHERE i.vomDef = :vomDef")
     , @NamedQuery(name = "Items.findByRol", query = "SELECT i FROM Items i WHERE i.rol = :rol")
@@ -48,8 +48,9 @@ public class Items implements Serializable {
     @Basic(optional = false)
     @Column(name = "item_name", nullable = false, length = 245)
     private String itemName;
-    @Column(name = "item_img", length = 545)
-    private String itemImg;
+    @Lob
+    @Column(name = "item_img")
+    private Serializable itemImg;
     @Basic(optional = false)
     @Column(name = "vom", nullable = false, length = 45)
     private String vom;
@@ -114,11 +115,11 @@ public class Items implements Serializable {
         this.itemName = itemName;
     }
 
-    public String getItemImg() {
+    public Serializable getItemImg() {
         return itemImg;
     }
 
-    public void setItemImg(String itemImg) {
+    public void setItemImg(Serializable itemImg) {
         this.itemImg = itemImg;
     }
 

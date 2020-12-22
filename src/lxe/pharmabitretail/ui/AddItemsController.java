@@ -6,7 +6,9 @@ import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.awt.Desktop;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
@@ -40,6 +42,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -56,9 +59,11 @@ import lxe.pharmabitretail.bl.InsertUpdateBL;
 import lxe.pharmabitretail.bl.ItemsBL;
 import lxe.pharmabitretail.bl.ManufacturerBL;
 import lxe.pharmabitretail.bl.StockinBL;
+import lxe.pharmabitretail.bl.UomBL;
 import lxe.pharmabitretail.entity.Category;
 import lxe.pharmabitretail.entity.Items;
 import lxe.pharmabitretail.entity.Manufacturer;
+import lxe.pharmabitretail.entity.Uom;
 import lxe.pharmabitretail.entity.Users;
 import lxe.pharmabitretail.tablemodel.ItemTableModel;
 import lxe.pharmabitretail.utils.FilterComboBox;
@@ -89,6 +94,8 @@ public class AddItemsController implements Initializable {
     @FXML
     private ComboBox<String> manufacturercombo;
     @FXML
+    private ComboBox<String> uomcombo;
+    @FXML
     private JFXTextField searchbtn;
     @FXML
     private TableView<ItemTableModel> itemtableview;
@@ -114,15 +121,15 @@ public class AddItemsController implements Initializable {
     @FXML
     private ComboBox<String> vom;
     @FXML
-    private ComboBox<?> uomcombo;
-    @FXML
-    private Spinner<?> vom_def;
+    private JFXTextField vom_val;
     @FXML
     private JFXTextField roltextfield;
     @FXML
     private Button browse;
     @FXML
     private ImageView itemimages;
+
+    byte[] item_image = null;
 
     public void getManufacturer() {
         List<Manufacturer> list = new ManufacturerBL().getAllManufacturer();
@@ -137,6 +144,14 @@ public class AddItemsController implements Initializable {
         ObservableList<Category> result = FXCollections.observableArrayList(list);
         result.forEach((cat) -> {
             categorycombo.getItems().add(cat.getCategoryName());
+        });
+    }
+
+    public void getUOM() {
+        List<Uom> list = new UomBL().getAllUom();
+        ObservableList<Uom> result = FXCollections.observableArrayList(list);
+        result.forEach((cat) -> {
+            uomcombo.getItems().add(cat.getUomDesc());
         });
     }
 
@@ -155,13 +170,10 @@ public class AddItemsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODOg
-        
-        
         getCategory();
         getManufacturer();
         getVolumeValue();
-//        getUnitOfMeasurement();
+        getUOM();
         TableData();
         searchbtn.textProperty().addListener(e -> {
             if (searchbtn.getText().length() > 1) {
@@ -191,6 +203,17 @@ public class AddItemsController implements Initializable {
             }
 
         });
+
+        uomcombo.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                String s = FilterComboBox.jumpTo(event.getText(), uomcombo.getValue(), uomcombo.getItems());
+                if (s != null) {
+                    uomcombo.setValue(s);
+                }
+            }
+
+        });
         browse.setOnAction(new EventHandler<ActionEvent>() {
             Stage st = new Stage();
 
@@ -205,16 +228,36 @@ public class AddItemsController implements Initializable {
                 fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 
                 //Show open file dialog
-                File file = fileChooser.showOpenDialog(null);
+                File ifile = fileChooser.showOpenDialog(null);
+                //File ofile = new File
 
                 try {
-                    BufferedImage bufferedImage = ImageIO.read(file);
+                    BufferedImage bufferedImage = ImageIO.read(ifile);
                     Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+                    //image.setPreserveRatio(true);
                     itemimages.setImage(image);
+                    itemimages.setFitWidth(200);
+                    itemimages.setFitWidth(200);
+                    itemimages.setPreserveRatio(true);
+                    itemimages.scaleXProperty();
+                    itemimages.scaleYProperty();
+                    itemimages.setSmooth(true);
+                    itemimages.setCache(true);
+                    //WritableImage wimage = SwingFXUtils.toFXImage(bufferedImage, null);
+                    FileInputStream fin = new FileInputStream(ifile);
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    byte[] buf = new byte[1024];
+
+                    for (int readNum; (readNum = fin.read(buf)) != -1;) {
+                        bos.write(buf, 0, readNum);
+                    }
+                    item_image = bos.toByteArray();
+                    
                 } catch (IOException ex) {
                     Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalArgumentException ex) {
+                    Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
             }
         });
 //        volumevalue.setOnKeyReleased(new EventHandler<KeyEvent>() {
@@ -249,18 +292,19 @@ public class AddItemsController implements Initializable {
         task.setOnSucceeded(s -> {
             displayinfo.textProperty().unbind();
             Items cat = new Items();
-            String itemcode = itmtextfield.getText() + " " + categorycombo.getValue() + " " + vom.getSelectionModel().getSelectedItem() + vom_def.getValue() + " (" + manufacturercombo.getValue() + ")";
+            String itemcode = itmtextfield.getText() + " " + categorycombo.getValue() + " " + vom.getSelectionModel().getSelectedItem() + vom_val.getText() + " (" + manufacturercombo.getValue() + ")";
             try {
                 cat.setItemDesc(itemcode);
                 cat.setItemName(itmtextfield.getText());
                 cat.setCategory(new Category(categorycombo.getValue()));
                 cat.setManufacturer(new Manufacturer(manufacturercombo.getValue()));
-                cat.setVomDef(Double.parseDouble(vom_def.getValue().toString()));
+                cat.setVomDef(Double.parseDouble(vom_val.toString()));
                 cat.setVom(vom.getSelectionModel().getSelectedItem());
                 cat.setRol(Integer.parseInt(roltextfield.getText()));
                 cat.setUsers(new Users(LoginController.u.getUserid()));
                 cat.setEntryLog(new Date());
                 cat.setLastModified(new Date());
+                cat.setItemImg(item_image);
 
                 int result = new InsertUpdateBL().insertData(cat);
                 switch (result) {
