@@ -180,20 +180,23 @@
                               </Label>
                            </children>
                         </HBox>
-                        <VBox alignment="CENTER" layoutX="11.0" prefHeight="143.0" prefWidth="223.0">
+                        <VBox alignment="CENTER" layoutX="11.0" prefHeight="143.0" prefWidth="281.0">
                            <children>
                               <Label text="Upload image" />
-                              <HBox alignment="CENTER" prefHeight="127.0" prefWidth="223.0">
+                              <HBox alignment="CENTER" prefHeight="121.0" prefWidth="266.0">
                                  <children>
-                                    <ImageView fx:id="itemimages" fitHeight="125.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="itemimages" fitHeight="123.0" fitWidth="124.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../resources/avater_image.jpg" />
                                        </image>
                                     </ImageView>
-                                    <Button fx:id="browse" mnemonicParsing="false" prefHeight="32.0" prefWidth="72.0" text="BROWSE">
+                                    <Button fx:id="browse" mnemonicParsing="false" prefHeight="32.0" prefWidth="93.0" text="Choose File">
                                        <HBox.margin>
-                                          <Insets left="10.0" />
+                                          <Insets left="30.0" />
                                        </HBox.margin>
+                                       <graphic>
+                                          <FontAwesomeIcon glyphName="FILE" />
+                                       </graphic>
                                     </Button>
                                  </children>
                                  <VBox.margin>
