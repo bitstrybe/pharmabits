@@ -1,8 +1,8 @@
-
 package lxe.pharmabitretail.utils;
 
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,6 +18,8 @@ import javafx.scene.Node;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -68,6 +70,10 @@ public class Utilities {
                 ((DatePicker) (node)).setValue(null);
             } else if (node instanceof ComboBox) {
                 ((ComboBox) (node)).setValue(null);
+            } else if (node instanceof ComboBox) {
+                File file = new File("resources/avater_image.jpg");
+                Image image = new Image(file.toURI().toString());
+                ((ImageView) (node)).setImage(image);
             }
         }
     }

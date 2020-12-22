@@ -135,7 +135,7 @@
                         </JFXTextField>
                         <HBox alignment="CENTER" layoutY="545.0" prefHeight="53.0" prefWidth="298.0">
                            <children>
-                              <JFXButton prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #cccccc;" text="Save" textFill="#323232">
+                              <JFXButton onAction="#saveAction" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #cccccc;" text="Save" textFill="#323232">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
