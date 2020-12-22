@@ -17,14 +17,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <StackPane style="-fx-background-color: #00000044;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.AddItemsController">
    <children>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="934.0" styleClass="form_border_color" stylesheets="@style.css">
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="1001.0" styleClass="form_border_color" stylesheets="@style.css">
          <left>
-            <VBox prefHeight="617.0" prefWidth="294.0" styleClass="form_background" stylesheets="@style.css" BorderPane.alignment="CENTER">
+            <VBox prefHeight="545.0" prefWidth="317.0" styleClass="form_background" stylesheets="@style.css" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane prefHeight="544.0" prefWidth="280.0">
+                  <AnchorPane prefHeight="515.0" prefWidth="321.0">
                      <children>
                         <JFXTextField fx:id="itmtextfield" focusColor="#f2efef" layoutX="2.0" layoutY="36.0" opacity="0.93" prefHeight="32.0" prefWidth="278.0" styleClass="form_field">
                            <font>
@@ -59,7 +58,7 @@
                               </Label>
                            </children>
                         </HBox>
-                        <ComboBox fx:id="manufacturercombo" layoutX="1.0" layoutY="98.0" prefHeight="29.0" prefWidth="277.0" />
+                        <ComboBox fx:id="categorycombo" layoutX="1.0" layoutY="98.0" prefHeight="29.0" prefWidth="277.0" />
                         <HBox layoutX="2.0" layoutY="137.0" spacing="5.0">
                            <children>
                               <Label text="Manufacturer">
@@ -74,14 +73,26 @@
                               </Label>
                            </children>
                         </HBox>
-                        <ComboBox fx:id="categorycombo" layoutX="1.0" layoutY="159.0" prefHeight="29.0" prefWidth="278.0" />
-                        <HBox layoutY="221.0" prefHeight="29.0" prefWidth="276.0" spacing="4.0">
+                        <ComboBox fx:id="manufacturercombo" layoutX="1.0" layoutY="159.0" prefHeight="29.0" prefWidth="278.0" />
+                        <HBox alignment="CENTER" layoutY="221.0" prefHeight="29.0" prefWidth="276.0" spacing="4.0">
                            <children>
-                              <ComboBox fx:id="manufacturercombo1" prefHeight="29.0" prefWidth="253.0" />
-                              <JFXTextField fx:id="itmtextfield1" focusColor="#f2efef" opacity="0.93" prefHeight="27.0" prefWidth="147.0" promptText="value" styleClass="form_field">
+                              <ComboBox fx:id="uomcombo" prefHeight="29.0" prefWidth="253.0" />
+                              <JFXTextField fx:id="uom_val1" focusColor="#f2efef" opacity="0.93" prefHeight="27.0" prefWidth="147.0" promptText="value" styleClass="form_field">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
+                                 <HBox.margin>
+                                    <Insets left="1.0" right="1.0" />
+                                 </HBox.margin>
+                              </JFXTextField>
+                              <Label alignment="CENTER" contentDisplay="CENTER" text="X" />
+                              <JFXTextField fx:id="uom_val2" focusColor="#f2efef" layoutX="203.0" layoutY="10.0" opacity="0.93" prefHeight="27.0" prefWidth="147.0" promptText="value" styleClass="form_field">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="1.0" right="1.0" />
+                                 </HBox.margin>
                               </JFXTextField>
                            </children>
                         </HBox>
@@ -96,10 +107,10 @@
                               </Label>
                            </children>
                         </HBox>
-                        <ComboBox fx:id="umocombo" layoutX="-1.0" layoutY="286.0" prefHeight="29.0" prefWidth="188.0" />
+                        <ComboBox fx:id="vom" layoutX="-1.0" layoutY="286.0" prefHeight="29.0" prefWidth="188.0" />
                         <Label layoutX="1.0" layoutY="264.0" prefHeight="17.0" prefWidth="130.0" text="Volume: value &amp;  unit" />
                         <Spinner layoutX="189.0" layoutY="288.0" prefHeight="27.0" prefWidth="90.0" />
-                        <HBox alignment="CENTER" layoutX="1.0" layoutY="334.0" prefHeight="53.0" prefWidth="281.0">
+                        <HBox alignment="CENTER" layoutX="-2.0" layoutY="367.0" prefHeight="53.0" prefWidth="298.0">
                            <children>
                               <JFXButton prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #cccccc;" text="Save" textFill="#323232">
                                  <HBox.margin>
@@ -147,8 +158,8 @@
          <center>
             <Pane prefHeight="470.0" prefWidth="700.0" styleClass="form_background" BorderPane.alignment="CENTER">
                <children>
-                  <JFXTextField fx:id="searchbtn" layoutX="395.0" layoutY="14.0" prefHeight="25.0" prefWidth="217.0" promptText="Search Item" />
-                  <TableView fx:id="itemtableview" layoutX="19.0" layoutY="47.0" prefHeight="395.0" prefWidth="604.0" styleClass="table-cell" stylesheets="@style.css">
+                  <JFXTextField fx:id="searchbtn" layoutX="462.0" layoutY="14.0" prefHeight="25.0" prefWidth="217.0" promptText="Search Item" />
+                  <TableView fx:id="itemtableview" layoutX="14.0" layoutY="47.0" prefHeight="395.0" prefWidth="665.0" styleClass="table-cell" stylesheets="@style.css">
                      <columns>
                         <TableColumn fx:id="itemname" prefWidth="127.0" text="Item Name" />
                         <TableColumn fx:id="category" prefWidth="112.0" text="Category" />
