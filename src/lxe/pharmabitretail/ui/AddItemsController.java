@@ -158,7 +158,6 @@ public class AddItemsController implements Initializable {
         // TODOg
         
         
-//        itemimages = new ImageView();  
         getCategory();
         getManufacturer();
         getVolumeValue();
