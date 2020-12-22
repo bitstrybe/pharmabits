@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.DashboardController">
+<ScrollPane styleClass="edge-to-edge" fitToHeight="true" fitToWidth="true" focusTraversable="false" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.DashboardController">
    <content>
       <AnchorPane id="homebackground" fx:id="dashpane" prefHeight="740.0" prefWidth="1144.0" stylesheets="@style.css">
          <children>
@@ -26,7 +26,7 @@
                   <Font size="30.0" />
                </font>
             </Label>
-            <HBox layoutX="104.0" layoutY="84.0" prefHeight="175.0" prefWidth="1035.0">
+            <HBox layoutX="53.0" layoutY="84.0" prefHeight="175.0" prefWidth="1086.0">
                <children>
                   <VBox alignment="CENTER" prefHeight="135.0" prefWidth="33.0" style="-fx-background-color: #F4F4F4;" HBox.hgrow="ALWAYS">
                      <children>
@@ -158,9 +158,9 @@
                   </VBox>
                </children>
             </HBox>
-            <Pane layoutX="100.0" layoutY="280.0" prefHeight="484.0" prefWidth="1045.0">
+            <Pane layoutX="31.0" layoutY="280.0" prefHeight="484.0" prefWidth="1114.0">
                <children>
-                  <HBox layoutX="-21.0" layoutY="9.0" prefHeight="452.0" prefWidth="778.0">
+                  <HBox layoutX="1.0" layoutY="9.0" prefHeight="452.0" prefWidth="756.0">
                      <children>
                         <LineChart fx:id="linechart" prefHeight="452.0" prefWidth="757.0" styleClass="chart-series-line" stylesheets="@style.css" title="Sales Chart">
                            <xAxis>
@@ -175,12 +175,12 @@
                         </LineChart>
                      </children>
                   </HBox>
-                  <VBox layoutX="738.0" layoutY="44.0" prefHeight="389.0" prefWidth="293.0" style="-fx-background-color: #eeeeee;">
+                  <VBox layoutX="783.0" layoutY="48.0" prefHeight="389.0" prefWidth="309.0" style="-fx-background-color: #eeeeee;">
                      <effect>
                         <DropShadow color="#a8a7a7" />
                      </effect>
                      <children>
-                        <JFXListView fx:id="expirylist" prefHeight="322.0" prefWidth="255.0" stylesheets="@style.css">
+                        <JFXListView fx:id="expirylist" prefHeight="392.0" prefWidth="293.0" stylesheets="@style.css">
                            <styleClass>
                               <String fx:value="list-view" />
                               <String fx:value="list-cell" />
@@ -188,7 +188,7 @@
                         </JFXListView>
                      </children>
                   </VBox>
-                  <HBox alignment="CENTER" layoutX="738.0" layoutY="9.0" prefHeight="32.0" prefWidth="293.0">
+                  <HBox alignment="CENTER" layoutX="783.0" layoutY="9.0" prefHeight="32.0" prefWidth="293.0">
                      <padding>
                         <Insets bottom="5.0" left="5.0" top="5.0" />
                      </padding>
