@@ -100,10 +100,14 @@ public class DashboardController implements Initializable {
 
     public void getDailySales() {
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(0.5), e -> {
+                new KeyFrame(Duration.seconds(0.3), e -> {
                     DateTime today = new DateTime(System.currentTimeMillis());
                     double val = rc.getDailySalesReceipt(today.toDate());
-                    dailysales.setText(String.valueOf(df.format(val)));
+                    if (val < 1) {
+                        dailysales.setText("0");
+                    } else {
+                        dailysales.setText(String.valueOf(df.format(val)));
+                    }
                     dailysales.setFill(Paint.valueOf("#6ba16f"));
                 })
         );
@@ -118,7 +122,12 @@ public class DashboardController implements Initializable {
                         DateTime today = new DateTime(System.currentTimeMillis());
                         DateTime date = new DateTime().withDayOfWeek(DateTimeConstants.MONDAY);
                         double val = rc.getDurationSalesReceipt(date.toDate(), today.toDate());
-                        weeklysales.setText(String.valueOf(df.format(val)));
+                        if (val < 1) {
+                            weeklysales.setText("0");
+                        } else {
+                            weeklysales.setText(String.valueOf(df.format(val)));
+                        }
+                        //weeklysales.setText(String.valueOf(df.format(val)));
                         weeklysales.setFill(Paint.valueOf("#8d4747"));
 
                     })
@@ -128,7 +137,7 @@ public class DashboardController implements Initializable {
         } else {
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(1), e -> {
-                        weeklysales.setText(df.format(0.00));
+                        weeklysales.setText("0");
                         weeklysales.setFill(Paint.valueOf("#8d4747"));
 
                     })
@@ -146,7 +155,12 @@ public class DashboardController implements Initializable {
                         DateTime today = new DateTime(System.currentTimeMillis());
                         DateTime date = new DateTime().dayOfMonth().withMinimumValue();
                         double val = rc.getDurationSalesReceipt(date.toDate(), today.toDate());
-                        monthlysales.setText(String.valueOf(df.format(val)));
+                        if (val < 1) {
+                            monthlysales.setText("0");
+                        } else {
+                            monthlysales.setText(String.valueOf(df.format(val)));
+                        }
+                        //monthlysales.setText(String.valueOf(df.format(val)));
                         monthlysales.setFill(Paint.valueOf("#5a4c97"));
                     })
             );
@@ -154,7 +168,7 @@ public class DashboardController implements Initializable {
         } else {
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(1.5), e -> {
-                        monthlysales.setText(df.format(0.00));
+                        monthlysales.setText("0");
                         monthlysales.setFill(Paint.valueOf("#5a4c97"));
                     })
             );
@@ -170,7 +184,12 @@ public class DashboardController implements Initializable {
                     new KeyFrame(Duration.seconds(2), e -> {
                         DateTime today = new DateTime(System.currentTimeMillis());
                         double val = rc.getDurationSalesReceipt(getStartOfYear(), today.toDate());
-                        quaterlysales.setText(String.valueOf(df.format(val)));
+                        if (val < 1) {
+                            quaterlysales.setText("0");
+                        } else {
+                            quaterlysales.setText(String.valueOf(df.format(val)));
+                        }
+                        //quaterlysales.setText(String.valueOf(df.format(val)));
                         quaterlysales.setFill(Paint.valueOf("#a1a187"));
                     })
             );
@@ -178,7 +197,7 @@ public class DashboardController implements Initializable {
         } else {
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(2), e -> {
-                        quaterlysales.setText(df.format(0.00));
+                        quaterlysales.setText("0");
                         quaterlysales.setFill(Paint.valueOf("#a1a187"));
                     })
             );
