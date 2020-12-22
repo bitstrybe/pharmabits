@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.awt.Desktop;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +21,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -48,6 +50,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
+import javax.imageio.ImageIO;
 import lxe.pharmabitretail.bl.CategoryBL;
 import lxe.pharmabitretail.bl.InsertUpdateBL;
 import lxe.pharmabitretail.bl.ItemsBL;
@@ -61,15 +64,13 @@ import lxe.pharmabitretail.tablemodel.ItemTableModel;
 import lxe.pharmabitretail.utils.FilterComboBox;
 import lxe.pharmabitretail.utils.Utilities;
 
-
-
 /**
  * FXML Controller class
  *
  * @author JScare
  */
 public class AddItemsController implements Initializable {
-    
+
     private Desktop desktop = Desktop.getDesktop();
     final FileChooser fileChooser = new FileChooser();
 
@@ -98,7 +99,8 @@ public class AddItemsController implements Initializable {
     @FXML
     private TableColumn<ItemTableModel, String> manufacturer;
     @FXML
-    private TableColumn<ItemTableModel, String> uom; ;
+    private TableColumn<ItemTableModel, String> uom;
+    ;
     @FXML
     private TableColumn<ItemTableModel, Number> rol;
     @FXML
@@ -120,7 +122,7 @@ public class AddItemsController implements Initializable {
     @FXML
     private Button browse;
     @FXML
-    private JFXTextField roltextfield1;
+    private ImageView itemimages;
 
     public void getManufacturer() {
         List<Manufacturer> list = new ManufacturerBL().getAllManufacturer();
@@ -154,6 +156,9 @@ public class AddItemsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODOg
+        
+        
+//        itemimages = new ImageView();  
         getCategory();
         getManufacturer();
         getVolumeValue();
@@ -189,12 +194,29 @@ public class AddItemsController implements Initializable {
         });
         browse.setOnAction(new EventHandler<ActionEvent>() {
             Stage st = new Stage();
+
             @Override
-            public void handle(ActionEvent event) { File file = fileChooser.showOpenDialog(st);
-                if (file != null) {
-                    openFile(file);
+            public void handle(ActionEvent event) {
+
+                FileChooser fileChooser = new FileChooser();
+
+                //Set extension filter
+                FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+                FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+                fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+
+                //Show open file dialog
+                File file = fileChooser.showOpenDialog(null);
+
+                try {
+                    BufferedImage bufferedImage = ImageIO.read(file);
+                    Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+                    itemimages.setImage(image);
+                } catch (IOException ex) {
+                    Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-             }
+
+            }
         });
 //        volumevalue.setOnKeyReleased(new EventHandler<KeyEvent>() {
 //            @Override
@@ -467,7 +489,7 @@ public class AddItemsController implements Initializable {
         Stage stage = (Stage) closebtn.getScene().getWindow();
         stage.close();
     }
-    
+
     private void openFile(File file) {
         try {
             desktop.open(file);

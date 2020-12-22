@@ -183,7 +183,7 @@
                         <VBox alignment="CENTER" layoutX="11.0">
                            <children>
                               <Label text="Upload image" />
-                              <ImageView fitHeight="91.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="itemimages" fitHeight="91.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../resources/avater_image.jpg" />
                                  </image>
