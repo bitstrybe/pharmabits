@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -64,6 +65,7 @@ import lxe.pharmabitretail.entity.Category;
 import lxe.pharmabitretail.entity.Items;
 import lxe.pharmabitretail.entity.Manufacturer;
 import lxe.pharmabitretail.entity.Uom;
+import lxe.pharmabitretail.entity.UomDef;
 import lxe.pharmabitretail.entity.Users;
 import lxe.pharmabitretail.tablemodel.ItemTableModel;
 import lxe.pharmabitretail.utils.FilterComboBox;
@@ -298,19 +300,26 @@ public class AddItemsController implements Initializable {
                 cat.setItemName(itmtextfield.getText());
                 cat.setCategory(new Category(categorycombo.getValue()));
                 cat.setManufacturer(new Manufacturer(manufacturercombo.getValue()));
-                cat.setVomDef(Double.parseDouble(vom_val.toString()));
+                cat.setVomDef(Double.parseDouble(vom_val.getText()));
                 cat.setVom(vom.getSelectionModel().getSelectedItem());
                 cat.setRol(Integer.parseInt(roltextfield.getText()));
                 cat.setUsers(new Users(LoginController.u.getUserid()));
                 cat.setEntryLog(new Date());
                 cat.setLastModified(new Date());
                 cat.setItemImg(item_image);
-
+                List<UomDef> udf = new ArrayList<>();
+                UomDef df = new UomDef();
+                df.setItemCode(new Items(cat.getItemDesc()));
+                df.setUomCode(new Uom(uomcombo.getSelectionModel().getSelectedItem()));
+                df.setUomNm(Integer.parseInt(uom_val1.getText()));
+                df.setUomDm(Integer.parseInt(uom_val1.getText()));
+                udf.add(df);
+                cat.setUomDefCollection(udf);
                 int result = new InsertUpdateBL().insertData(cat);
                 switch (result) {
                     case 1:
                         displayinfo.setText("SUCCESSFULLY SAVED");
-                        Utilities.clearAllField(itemspane);
+//                        Utilities.clearAllField(itemspane);
                         spinner.setVisible(false);
                         check.setVisible(true);
                         TableData();
@@ -324,7 +333,7 @@ public class AddItemsController implements Initializable {
                 }
             } catch (NumberFormatException ex) {
                 spinner.setVisible(false);
-                displayinfo.setText("Invalid Input");
+                Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
 
             }
         });
