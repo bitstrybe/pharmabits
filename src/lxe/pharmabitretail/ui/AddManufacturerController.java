@@ -230,7 +230,7 @@ public class AddManufacturerController implements Initializable {
         data = FXCollections.observableArrayList();
 
         c.forEach((manufacturer) -> {
-            data.add(new ManufacturerTableModel(manufacturer.getManufacturer()));
+            data.add(new ManufacturerTableModel(manufacturer.getManufacturer().toUpperCase()));
         });
         manufacturer.setCellValueFactory(cell -> cell.getValue().getManufacturerProperty());
         action.setSortable(false);

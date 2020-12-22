@@ -235,7 +235,7 @@ public class AddCategoryController implements Initializable {
         List<Category> c = new CategoryBL().getAllCategory();
         data = FXCollections.observableArrayList();
         c.forEach((category) -> {
-            data.add(new CategoryTableModel(category.getCategoryName()));
+            data.add(new CategoryTableModel(category.getCategoryName().toUpperCase()));
         });
         category.setCellValueFactory(cell -> cell.getValue().getCategoryNameProperty());
         action.setSortable(false);
