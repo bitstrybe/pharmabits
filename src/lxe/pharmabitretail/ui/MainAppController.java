@@ -97,8 +97,7 @@ public class MainAppController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
-        mainmenu.setText("Welcome, " + LoginController.u.getUsername());
+        mainmenu.setText(LoginController.u.getUsername());
         user.setText(LoginController.u.getFname().toUpperCase() + " " + LoginController.u.getLname().toUpperCase());
         user_role.setText(LoginController.u.getRoles().toString());
         if (LoginController.u.getRoles().equals("Administrator") || LoginController.u.getRoles().equals("Sales Supervisor")) {
