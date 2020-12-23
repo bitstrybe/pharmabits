@@ -10,7 +10,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -70,6 +72,8 @@ import lxe.pharmabitretail.entity.Users;
 import lxe.pharmabitretail.tablemodel.ItemTableModel;
 import lxe.pharmabitretail.utils.FilterComboBox;
 import lxe.pharmabitretail.utils.Utilities;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 
 /**
  * FXML Controller class
@@ -102,6 +106,8 @@ public class AddItemsController implements Initializable {
     @FXML
     private TableView<ItemTableModel> itemtableview;
     @FXML
+    private TableColumn<ItemTableModel, ImageView> itemimage;
+    @FXML
     private TableColumn<ItemTableModel, String> itemname;
     @FXML
     private TableColumn<ItemTableModel, String> category;
@@ -109,7 +115,6 @@ public class AddItemsController implements Initializable {
     private TableColumn<ItemTableModel, String> manufacturer;
     @FXML
     private TableColumn<ItemTableModel, String> uom;
-    ;
     @FXML
     private TableColumn<ItemTableModel, Number> rol;
     @FXML
@@ -132,6 +137,8 @@ public class AddItemsController implements Initializable {
     private ImageView itemimages;
 
     byte[] item_image = null;
+    File ifile;
+    InputStream initialStream;
 
     public void getManufacturer() {
         List<Manufacturer> list = new ManufacturerBL().getAllManufacturer();
@@ -230,9 +237,8 @@ public class AddItemsController implements Initializable {
                 fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 
                 //Show open file dialog
-                File ifile = fileChooser.showOpenDialog(null);
+                ifile = fileChooser.showOpenDialog(null);
                 //File ofile = new File
-
                 try {
                     BufferedImage bufferedImage = ImageIO.read(ifile);
                     Image image = SwingFXUtils.toFXImage(bufferedImage, null);
@@ -246,15 +252,16 @@ public class AddItemsController implements Initializable {
                     itemimages.setSmooth(true);
                     itemimages.setCache(true);
                     //WritableImage wimage = SwingFXUtils.toFXImage(bufferedImage, null);
-                    FileInputStream fin = new FileInputStream(ifile);
-                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                    byte[] buf = new byte[1024];
+                    //FileInputStream fin = new FileInputStream(ifile);
+                    //File fout = new File("./img/");
+//                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+//                    byte[] buf = new byte[1024];
+//
+//                    for (int readNum; (readNum = fin.read(buf)) != -1;) {
+//                        bos.write(buf, 0, readNum);
+//                    }
+                    //item_image = bos.toByteArray();
 
-                    for (int readNum; (readNum = fin.read(buf)) != -1;) {
-                        bos.write(buf, 0, readNum);
-                    }
-                    item_image = bos.toByteArray();
-                    
                 } catch (IOException ex) {
                     Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IllegalArgumentException ex) {
@@ -294,9 +301,9 @@ public class AddItemsController implements Initializable {
         task.setOnSucceeded(s -> {
             displayinfo.textProperty().unbind();
             Items cat = new Items();
-            String itemcode = itmtextfield.getText() + " " + categorycombo.getValue() + " " + vom.getSelectionModel().getSelectedItem() + vom_val.getText() + " (" + manufacturercombo.getValue() + ")";
+            String itemdesc = itmtextfield.getText().toUpperCase() + " " + categorycombo.getValue().toUpperCase() + " " + vom_val.getText() + vom.getSelectionModel().getSelectedItem() + " (" + manufacturercombo.getValue() + ")";
             try {
-                cat.setItemDesc(itemcode);
+                cat.setItemDesc(itemdesc);
                 cat.setItemName(itmtextfield.getText());
                 cat.setCategory(new Category(categorycombo.getValue()));
                 cat.setManufacturer(new Manufacturer(manufacturercombo.getValue()));
@@ -306,10 +313,14 @@ public class AddItemsController implements Initializable {
                 cat.setUsers(new Users(LoginController.u.getUserid()));
                 cat.setEntryLog(new Date());
                 cat.setLastModified(new Date());
-                cat.setItemImg(item_image);
+                //adding image file to directory
+                initialStream = new FileInputStream(ifile);
+                File targetFile = new File("./img/" + itemdesc + "." + FilenameUtils.getExtension(ifile.getName()));
+                cat.setItemImg("./img/" + itemdesc + "." + FilenameUtils.getExtension(ifile.getName()));
+                
                 List<UomDef> udf = new ArrayList<>();
                 UomDef df = new UomDef();
-                df.setItemCode(new Items(cat.getItemDesc()));
+                df.setItemCode(cat);
                 df.setUomCode(new Uom(uomcombo.getSelectionModel().getSelectedItem()));
                 df.setUomNm(Integer.parseInt(uom_val1.getText()));
                 df.setUomDm(Integer.parseInt(uom_val1.getText()));
@@ -318,6 +329,7 @@ public class AddItemsController implements Initializable {
                 int result = new InsertUpdateBL().insertData(cat);
                 switch (result) {
                     case 1:
+                        java.nio.file.Files.copy(initialStream, targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                         displayinfo.setText("SUCCESSFULLY SAVED");
 //                        Utilities.clearAllField(itemspane);
                         spinner.setVisible(false);
@@ -335,6 +347,14 @@ public class AddItemsController implements Initializable {
                 spinner.setVisible(false);
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
 
+            } catch (IOException ex) {
+                Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                try {
+                    IOUtils.close(initialStream);
+                } catch (IOException ex) {
+                    Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         Thread d = new Thread(task);
@@ -348,13 +368,14 @@ public class AddItemsController implements Initializable {
         c.forEach((item) -> {
             String uom_value = String.valueOf(item.getVomDef()) + item.getVom();
             try {
-                data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getCategory().getCategoryName(), item.getManufacturer().getManufacturer(), uom_value, item.getRol()));
+                //data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getCategory().getCategoryName(), item.getManufacturer().getManufacturer(), uom_value, item.getRol()));
 //                System.out.println(item.getItemCodeFullname() + " " + item.getItemName() + " " + item.getCategory().getCategoryName() + "" + item.getManufacturer().getManufacturer() + " " + uom_value + " " + item.getRol());
             } catch (Exception ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
 
             }
         });
+        //itemimage.setCellValueFactory(cell -> cell.getValue().getItemimage());
         itemname.setCellValueFactory(cell -> cell.getValue().getItemNameProperty());
         category.setCellValueFactory(cell -> cell.getValue().getCategoryProperty());
         manufacturer.setCellValueFactory(cell -> cell.getValue().getManufacturerProperty());
@@ -388,7 +409,7 @@ public class AddItemsController implements Initializable {
         c.forEach((item) -> {
             String uom_value = String.valueOf(item.getVomDef()) + item.getVom();
             try {
-                data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getCategory().getCategoryName(), item.getManufacturer().getManufacturer(), uom_value, item.getRol()));
+               // data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getCategory().getCategoryName(), item.getManufacturer().getManufacturer(), uom_value, item.getRol()));
             } catch (Exception ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
 

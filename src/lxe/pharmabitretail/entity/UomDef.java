@@ -43,7 +43,7 @@ public class UomDef implements Serializable {
     @Basic(optional = false)
     @Column(name = "uom_nm", nullable = false)
     private int uomNm;
-    @JoinColumn(name = "item_code", referencedColumnName = "item_desc", nullable = false)
+    @JoinColumn(name = "item_code", referencedColumnName = "item_code", nullable = false)
     @ManyToOne(optional = false)
     private Items itemCode;
     @JoinColumn(name = "uom_code", referencedColumnName = "uom_desc", nullable = false)

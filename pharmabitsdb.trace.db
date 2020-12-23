@@ -1,154 +1,424 @@
-2020-12-21 16:55:55 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "uom_value" not found; SQL statement:
-SELECT uom_item, uom_value, item_code, uom_code FROM uom_def WHERE (uom_code = ?) [42122-200]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+2020-12-22 23:50:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'Paracetamol SYRUP 200mg (PFIZER)' (uom_def: ""item_code"" INT NOT NULL)"; SQL statement:
+INSERT INTO uom_def (uom_dm, uom_nm, item_code, uom_code) VALUES (?, ?, ?, ?) [22018-200]
+2020-12-22 23:52:06 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: Reading from file nio:/Users/scarface/NetBeansProjects/PharmabitRetail/pharmabitsdb.mv.db failed at 139264 (length 77824), read 0, remaining 20480 [1.4.200/1]" [50000-200]
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:2877)
+	at org.h2.mvstore.MVStore.writeInBackground(MVStore.java:2813)
+	at org.h2.mvstore.MVStore$BackgroundWriterThread.run(MVStore.java:3290)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: Reading from file nio:/Users/scarface/NetBeansProjects/PharmabitRetail/pharmabitsdb.mv.db failed at 139264 (length 77824), read 0, remaining 20480 [1.4.200/1]" [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
-	at org.h2.message.DbException.get(DbException.java:205)
-	at org.h2.message.DbException.get(DbException.java:181)
-	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:163)
-	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:145)
-	at org.h2.command.dml.Select.prepare(Select.java:1206)
-	at org.h2.command.Parser.prepareCommand(Parser.java:744)
-	at org.h2.engine.Session.prepareLocal(Session.java:657)
-	at org.h2.engine.Session.prepareCommand(Session.java:595)
-	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
-	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:76)
-	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:352)
-	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.prepareStatement(DatabaseAccessor.java:1556)
-	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.prepareStatement(DatabaseAccessor.java:1505)
-	at org.eclipse.persistence.internal.databaseaccess.DatabaseCall.prepareStatement(DatabaseCall.java:778)
-	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.basicExecuteCall(DatabaseAccessor.java:619)
-	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.executeCall(DatabaseAccessor.java:558)
-	at org.eclipse.persistence.internal.sessions.AbstractSession.basicExecuteCall(AbstractSession.java:2002)
-	at org.eclipse.persistence.sessions.server.ServerSession.executeCall(ServerSession.java:570)
-	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:242)
-	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:228)
-	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeSelectCall(DatasourceCallQueryMechanism.java:299)
-	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.selectAllRows(DatasourceCallQueryMechanism.java:694)
-	at org.eclipse.persistence.internal.queries.ExpressionQueryMechanism.selectAllRowsFromTable(ExpressionQueryMechanism.java:2738)
-	at org.eclipse.persistence.internal.queries.ExpressionQueryMechanism.selectAllRows(ExpressionQueryMechanism.java:2691)
-	at org.eclipse.persistence.queries.ReadAllQuery.executeObjectLevelReadQuery(ReadAllQuery.java:495)
-	at org.eclipse.persistence.queries.ObjectLevelReadQuery.executeDatabaseQuery(ObjectLevelReadQuery.java:1168)
-	at org.eclipse.persistence.queries.DatabaseQuery.execute(DatabaseQuery.java:899)
-	at org.eclipse.persistence.queries.ObjectLevelReadQuery.execute(ObjectLevelReadQuery.java:1127)
-	at org.eclipse.persistence.queries.ReadAllQuery.execute(ReadAllQuery.java:403)
-	at org.eclipse.persistence.internal.sessions.AbstractSession.internalExecuteQuery(AbstractSession.java:3214)
-	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1804)
-	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1786)
-	at org.eclipse.persistence.internal.indirection.QueryBasedValueHolder.instantiate(QueryBasedValueHolder.java:129)
-	at org.eclipse.persistence.internal.indirection.QueryBasedValueHolder.instantiate(QueryBasedValueHolder.java:116)
-	at org.eclipse.persistence.internal.indirection.DatabaseValueHolder.getValue(DatabaseValueHolder.java:89)
-	at org.eclipse.persistence.indirection.IndirectList.buildDelegate(IndirectList.java:252)
-	at org.eclipse.persistence.indirection.IndirectList.getDelegate(IndirectList.java:423)
-	at org.eclipse.persistence.indirection.IndirectList.size(IndirectList.java:761)
-	at org.eclipse.persistence.internal.queries.CollectionContainerPolicy.sizeFor(CollectionContainerPolicy.java:177)
-	at org.eclipse.persistence.mappings.CollectionMapping.mergeIntoObject(CollectionMapping.java:1620)
-	at org.eclipse.persistence.internal.descriptors.ObjectBuilder.mergeIntoObject(ObjectBuilder.java:4132)
-	at org.eclipse.persistence.internal.sessions.MergeManager.mergeChangesOfCloneIntoWorkingCopy(MergeManager.java:594)
-	at org.eclipse.persistence.internal.sessions.MergeManager.mergeChanges(MergeManager.java:313)
-	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.mergeClone(UnitOfWorkImpl.java:3396)
-	at org.eclipse.persistence.queries.ObjectBuildingQuery.postRegisterIndividualResult(ObjectBuildingQuery.java:466)
-	at org.eclipse.persistence.internal.descriptors.ObjectBuilder.buildWorkingCopyCloneNormally(ObjectBuilder.java:929)
-	at org.eclipse.persistence.internal.descriptors.ObjectBuilder.buildObjectInUnitOfWork(ObjectBuilder.java:851)
-	at org.eclipse.persistence.internal.descriptors.ObjectBuilder.buildObject(ObjectBuilder.java:734)
-	at org.eclipse.persistence.internal.descriptors.ObjectBuilder.buildObject(ObjectBuilder.java:688)
-	at org.eclipse.persistence.queries.ObjectLevelReadQuery.buildObject(ObjectLevelReadQuery.java:795)
-	at org.eclipse.persistence.queries.ReadObjectQuery.registerResultInUnitOfWork(ReadObjectQuery.java:885)
-	at org.eclipse.persistence.queries.ReadObjectQuery.executeObjectLevelReadQuery(ReadObjectQuery.java:552)
-	at org.eclipse.persistence.queries.ObjectLevelReadQuery.executeDatabaseQuery(ObjectLevelReadQuery.java:1168)
-	at org.eclipse.persistence.queries.DatabaseQuery.execute(DatabaseQuery.java:899)
-	at org.eclipse.persistence.queries.ObjectLevelReadQuery.execute(ObjectLevelReadQuery.java:1127)
-	at org.eclipse.persistence.queries.ReadObjectQuery.execute(ReadObjectQuery.java:431)
-	at org.eclipse.persistence.queries.ObjectLevelReadQuery.executeInUnitOfWork(ObjectLevelReadQuery.java:1215)
-	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.internalExecuteQuery(UnitOfWorkImpl.java:2896)
-	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1804)
-	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1786)
-	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1737)
-	at org.eclipse.persistence.internal.jpa.EntityManagerImpl.executeQuery(EntityManagerImpl.java:900)
-	at org.eclipse.persistence.internal.jpa.EntityManagerImpl.refresh(EntityManagerImpl.java:1040)
-	at org.eclipse.persistence.internal.jpa.EntityManagerImpl.refresh(EntityManagerImpl.java:929)
-	at lxe.pharmabitretail.bl.InsertUpdateBL.insertData(InsertUpdateBL.java:22)
-	at lxe.pharmabitretail.ui.AddUomController.lambda$saveAction$46(AddUomController.java:148)
-	at lxe.pharmabitretail.ui.AddUomController$$Lambda$462/1302486385.handle(Unknown Source)
-	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
-	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
-	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
-	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
-	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
-	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
-	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49)
-	at javafx.event.Event.fireEvent(Event.java:198)
-	at javafx.concurrent.EventHelper.fireEvent(EventHelper.java:219)
-	at javafx.concurrent.Task.fireEvent(Task.java:1356)
-	at javafx.concurrent.Task.setState(Task.java:723)
-	at javafx.concurrent.Task$TaskCallable.lambda$call$496(Task.java:1434)
-	at javafx.concurrent.Task$TaskCallable$$Lambda$246/564353469.run(Unknown Source)
+	... 6 more
+Caused by: java.lang.IllegalStateException: Reading from file nio:/Users/scarface/NetBeansProjects/PharmabitRetail/pharmabitsdb.mv.db failed at 139264 (length 77824), read 0, remaining 20480 [1.4.200/1]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.DataUtils.readFully(DataUtils.java:456)
+	at org.h2.mvstore.FileStore.readFully(FileStore.java:98)
+	at org.h2.mvstore.MVStore.moveChunk(MVStore.java:1915)
+	at org.h2.mvstore.MVStore.compactMoveChunks(MVStore.java:1839)
+	at org.h2.mvstore.MVStore.compactMoveChunks(MVStore.java:1772)
+	at org.h2.mvstore.MVStore.doMaintenance(MVStore.java:2848)
+	at org.h2.mvstore.MVStore.writeInBackground(MVStore.java:2788)
+	... 1 more
+Caused by: java.io.EOFException
+	at org.h2.mvstore.DataUtils.readFully(DataUtils.java:444)
+	... 7 more
+2020-12-22 23:52:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: General error: "General error: ""java.lang.IllegalStateException: Reading from file nio:/Users/scarface/NetBeansProjects/PharmabitRetail/pharmabitsdb.mv.db failed at 139264 (length 77824), read 0, remaining 20480 [1.4.200/1]"" [50000-200]" [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.engine.Database.throwLastBackgroundException(Database.java:2221)
+	at org.h2.engine.Session.close(Session.java:945)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:453)
+	at org.netbeans.modules.db.explorer.DatabaseConnection.disconnect(DatabaseConnection.java:1275)
+	at org.netbeans.modules.db.explorer.action.DisconnectAction$1.run(DisconnectAction.java:104)
+	at org.openide.util.RequestProcessor$Task.run(RequestProcessor.java:1443)
+	at org.netbeans.modules.openide.util.GlobalLookup.execute(GlobalLookup.java:68)
+	at org.openide.util.lookup.Lookups.executeWith(Lookups.java:303)
+	at org.openide.util.RequestProcessor$Processor.run(RequestProcessor.java:2058)
+Caused by: org.h2.message.DbException: General error: "java.lang.IllegalStateException: Reading from file nio:/Users/scarface/NetBeansProjects/PharmabitRetail/pharmabitsdb.mv.db failed at 139264 (length 77824), read 0, remaining 20480 [1.4.200/1]" [50000-200]
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:2877)
+	at org.h2.mvstore.MVStore.writeInBackground(MVStore.java:2813)
+	at org.h2.mvstore.MVStore$BackgroundWriterThread.run(MVStore.java:3290)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: Reading from file nio:/Users/scarface/NetBeansProjects/PharmabitRetail/pharmabitsdb.mv.db failed at 139264 (length 77824), read 0, remaining 20480 [1.4.200/1]" [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 6 more
+Caused by: java.lang.IllegalStateException: Reading from file nio:/Users/scarface/NetBeansProjects/PharmabitRetail/pharmabitsdb.mv.db failed at 139264 (length 77824), read 0, remaining 20480 [1.4.200/1]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.DataUtils.readFully(DataUtils.java:456)
+	at org.h2.mvstore.FileStore.readFully(FileStore.java:98)
+	at org.h2.mvstore.MVStore.moveChunk(MVStore.java:1915)
+	at org.h2.mvstore.MVStore.compactMoveChunks(MVStore.java:1839)
+	at org.h2.mvstore.MVStore.compactMoveChunks(MVStore.java:1772)
+	at org.h2.mvstore.MVStore.doMaintenance(MVStore.java:2848)
+	at org.h2.mvstore.MVStore.writeInBackground(MVStore.java:2788)
+	... 1 more
+Caused by: java.io.EOFException
+	at org.h2.mvstore.DataUtils.readFully(DataUtils.java:444)
+	... 7 more
+2020-12-22 23:52:58 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:/Users/scarface/NetBeansProjects/PharmabitRetail/pharmabitsdb.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:2877)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:481)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:402)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:3579)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:170)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:103)
+	at org.h2.engine.Database.getPageStore(Database.java:2659)
+	at org.h2.engine.Database.open(Database.java:675)
+	at org.h2.engine.Database.openDatabase(Database.java:307)
+	at org.h2.engine.Database.<init>(Database.java:301)
+	at org.h2.engine.Engine.openSession(Engine.java:74)
+	at org.h2.engine.Engine.openSession(Engine.java:192)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:171)
+	at org.h2.engine.Engine.createSession(Engine.java:166)
+	at org.h2.engine.Engine.createSession(Engine.java:29)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:340)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
+	at org.h2.Driver.connect(Driver.java:69)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:208)
+	at org.eclipse.persistence.sessions.DefaultConnector.connect(DefaultConnector.java:98)
+	at org.eclipse.persistence.sessions.DatasourceLogin.connectToDatasource(DatasourceLogin.java:162)
+	at org.eclipse.persistence.internal.sessions.DatabaseSessionImpl.setOrDetectDatasource(DatabaseSessionImpl.java:204)
+	at org.eclipse.persistence.internal.sessions.DatabaseSessionImpl.loginAndDetectDatasource(DatabaseSessionImpl.java:741)
+	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryProvider.login(EntityManagerFactoryProvider.java:239)
+	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.deploy(EntityManagerSetupImpl.java:685)
+	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryDelegate.getAbstractSession(EntityManagerFactoryDelegate.java:204)
+	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryDelegate.createEntityManagerImpl(EntityManagerFactoryDelegate.java:304)
+	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryImpl.createEntityManagerImpl(EntityManagerFactoryImpl.java:336)
+	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryImpl.createEntityManager(EntityManagerFactoryImpl.java:302)
+	at lxe.pharmabitretail.bl.DdsBL.<init>(DdsBL.java:25)
+	at lxe.pharmabitretail.bl.LoginBL.<init>(LoginBL.java:13)
+	at lxe.pharmabitretail.ui.LoginController.<init>(LoginController.java:46)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+	at java.lang.Class.newInstance(Class.java:442)
+	at sun.reflect.misc.ReflectUtil.newInstance(ReflectUtil.java:51)
+	at javafx.fxml.FXMLLoader$ValueElement.processAttribute(FXMLLoader.java:923)
+	at javafx.fxml.FXMLLoader$InstanceDeclarationElement.processAttribute(FXMLLoader.java:967)
+	at javafx.fxml.FXMLLoader$Element.processStartElement(FXMLLoader.java:216)
+	at javafx.fxml.FXMLLoader$ValueElement.processStartElement(FXMLLoader.java:740)
+	at javafx.fxml.FXMLLoader.processStartElement(FXMLLoader.java:2711)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2531)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2445)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3218)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3179)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3152)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3128)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3108)
+	at javafx.fxml.FXMLLoader.load(FXMLLoader.java:3101)
+	at lxe.pharmabitretail.ui.Login.start(Login.java:29)
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$159(LauncherImpl.java:863)
+	at com.sun.javafx.application.LauncherImpl$$Lambda$54/371548193.run(Unknown Source)
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$172(PlatformImpl.java:326)
+	at com.sun.javafx.application.PlatformImpl$$Lambda$47/355629945.run(Unknown Source)
 	at com.sun.javafx.application.PlatformImpl.lambda$null$170(PlatformImpl.java:295)
-	at com.sun.javafx.application.PlatformImpl$$Lambda$49/499110940.run(Unknown Source)
+	at com.sun.javafx.application.PlatformImpl$$Lambda$49/772369592.run(Unknown Source)
 	at java.security.AccessController.doPrivileged(Native Method)
 	at com.sun.javafx.application.PlatformImpl.lambda$runLater$171(PlatformImpl.java:294)
 	at com.sun.javafx.application.PlatformImpl$$Lambda$48/1915503092.run(Unknown Source)
 	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
-	at com.sun.glass.ui.mac.MacApplication._enterNestedEventLoopImpl(Native Method)
-	at com.sun.glass.ui.mac.MacApplication._enterNestedEventLoop(MacApplication.java:109)
-	at com.sun.glass.ui.Application.enterNestedEventLoop(Application.java:511)
-	at com.sun.glass.ui.EventLoop.enter(EventLoop.java:107)
-	at com.sun.javafx.tk.quantum.QuantumToolkit.enterNestedEventLoop(QuantumToolkit.java:593)
-	at javafx.stage.Stage.showAndWait(Stage.java:463)
-	at lxe.pharmabitretail.ui.MainAppController.addUom(MainAppController.java:334)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:497)
-	at sun.reflect.misc.Trampoline.invoke(MethodUtil.java:71)
-	at sun.reflect.GeneratedMethodAccessor1.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:497)
-	at sun.reflect.misc.MethodUtil.invoke(MethodUtil.java:275)
-	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1765)
-	at javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1653)
-	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
-	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
-	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
-	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
-	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
-	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
-	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49)
-	at javafx.event.Event.fireEvent(Event.java:198)
-	at javafx.scene.control.MenuItem.fire(MenuItem.java:462)
-	at com.sun.javafx.scene.control.skin.ContextMenuContent$MenuItemContainer.doSelect(ContextMenuContent.java:1405)
-	at com.sun.javafx.scene.control.skin.ContextMenuContent$MenuItemContainer.lambda$createChildren$341(ContextMenuContent.java:1358)
-	at com.sun.javafx.scene.control.skin.ContextMenuContent$MenuItemContainer$$Lambda$378/1578175212.handle(Unknown Source)
-	at com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:218)
-	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80)
-	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
-	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
-	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
-	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
-	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
-	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
-	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
-	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
-	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
-	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
-	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
-	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
-	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
-	at javafx.event.Event.fireEvent(Event.java:198)
-	at javafx.scene.Scene$MouseHandler.process(Scene.java:3758)
-	at javafx.scene.Scene$MouseHandler.access$1500(Scene.java:3486)
-	at javafx.scene.Scene.impl_processMouseEvent(Scene.java:1762)
-	at javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2495)
-	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:350)
-	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:275)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:/Users/scarface/NetBeansProjects/PharmabitRetail/pharmabitsdb.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 67 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:/Users/scarface/NetBeansProjects/PharmabitRetail/pharmabitsdb.mv.db [1.4.200/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
+	... 61 more
+2020-12-22 23:52:58 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:/Users/scarface/NetBeansProjects/PharmabitRetail/pharmabitsdb.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:2877)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:481)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:402)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:3579)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:170)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:103)
+	at org.h2.engine.Database.getPageStore(Database.java:2659)
+	at org.h2.engine.Database.open(Database.java:675)
+	at org.h2.engine.Database.openDatabase(Database.java:307)
+	at org.h2.engine.Database.<init>(Database.java:301)
+	at org.h2.engine.Engine.openSession(Engine.java:74)
+	at org.h2.engine.Engine.openSession(Engine.java:192)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:171)
+	at org.h2.engine.Engine.createSession(Engine.java:166)
+	at org.h2.engine.Engine.createSession(Engine.java:29)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:340)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
+	at org.h2.Driver.connect(Driver.java:69)
+	at org.eclipse.persistence.sessions.DefaultConnector.directConnect(DefaultConnector.java:165)
+	at org.eclipse.persistence.sessions.DefaultConnector.connect(DefaultConnector.java:117)
+	at org.eclipse.persistence.sessions.DatasourceLogin.connectToDatasource(DatasourceLogin.java:162)
+	at org.eclipse.persistence.internal.sessions.DatabaseSessionImpl.setOrDetectDatasource(DatabaseSessionImpl.java:204)
+	at org.eclipse.persistence.internal.sessions.DatabaseSessionImpl.loginAndDetectDatasource(DatabaseSessionImpl.java:741)
+	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryProvider.login(EntityManagerFactoryProvider.java:239)
+	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.deploy(EntityManagerSetupImpl.java:685)
+	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryDelegate.getAbstractSession(EntityManagerFactoryDelegate.java:204)
+	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryDelegate.createEntityManagerImpl(EntityManagerFactoryDelegate.java:304)
+	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryImpl.createEntityManagerImpl(EntityManagerFactoryImpl.java:336)
+	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryImpl.createEntityManager(EntityManagerFactoryImpl.java:302)
+	at lxe.pharmabitretail.bl.DdsBL.<init>(DdsBL.java:25)
+	at lxe.pharmabitretail.bl.LoginBL.<init>(LoginBL.java:13)
+	at lxe.pharmabitretail.ui.LoginController.<init>(LoginController.java:46)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+	at java.lang.Class.newInstance(Class.java:442)
+	at sun.reflect.misc.ReflectUtil.newInstance(ReflectUtil.java:51)
+	at javafx.fxml.FXMLLoader$ValueElement.processAttribute(FXMLLoader.java:923)
+	at javafx.fxml.FXMLLoader$InstanceDeclarationElement.processAttribute(FXMLLoader.java:967)
+	at javafx.fxml.FXMLLoader$Element.processStartElement(FXMLLoader.java:216)
+	at javafx.fxml.FXMLLoader$ValueElement.processStartElement(FXMLLoader.java:740)
+	at javafx.fxml.FXMLLoader.processStartElement(FXMLLoader.java:2711)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2531)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2445)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3218)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3179)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3152)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3128)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3108)
+	at javafx.fxml.FXMLLoader.load(FXMLLoader.java:3101)
+	at lxe.pharmabitretail.ui.Login.start(Login.java:29)
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$159(LauncherImpl.java:863)
+	at com.sun.javafx.application.LauncherImpl$$Lambda$54/371548193.run(Unknown Source)
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$172(PlatformImpl.java:326)
+	at com.sun.javafx.application.PlatformImpl$$Lambda$47/355629945.run(Unknown Source)
+	at com.sun.javafx.application.PlatformImpl.lambda$null$170(PlatformImpl.java:295)
+	at com.sun.javafx.application.PlatformImpl$$Lambda$49/772369592.run(Unknown Source)
 	at java.security.AccessController.doPrivileged(Native Method)
-	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$350(GlassViewEventHandler.java:385)
-	at com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$234/1044875170.get(Unknown Source)
-	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:404)
-	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:384)
-	at com.sun.glass.ui.View.handleMouseEvent(View.java:555)
-	at com.sun.glass.ui.View.notifyMouse(View.java:927)
-2020-12-22 17:14:52 database: close
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$171(PlatformImpl.java:294)
+	at com.sun.javafx.application.PlatformImpl$$Lambda$48/1915503092.run(Unknown Source)
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:/Users/scarface/NetBeansProjects/PharmabitRetail/pharmabitsdb.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 66 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:/Users/scarface/NetBeansProjects/PharmabitRetail/pharmabitsdb.mv.db [1.4.200/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
+	... 60 more
+2020-12-23 00:39:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Attempt to define a second primary key; SQL statement:
+CREATE TABLE items (
+  item_code IDENTITY NOT NULL PRIMARY KEY,
+  item_desc varchar(500) NOT NULL,
+  item_name varchar(245) NOT NULL,
+  item_img blob,
+  category varchar(150) NOT NULL,
+  manufacturer varchar(150) NOT NULL,
+  vom varchar(45) NOT NULL,
+  vom_def double NOT NULL,
+  rol int(11) NOT NULL DEFAULT '0',
+  users int(11) NOT NULL,
+  entry_log datetime NOT NULL,
+  last_modified timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (item_desc),
+  FOREIGN KEY (category) REFERENCES category (category_name),
+  FOREIGN KEY (`manufacturer`) REFERENCES manufacturer (manufacturer),
+  FOREIGN KEY (users) REFERENCES users (userid)
+) [90017-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:576)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.message.DbException.get(DbException.java:170)
+	at org.h2.command.ddl.CommandWithColumns.setPrimaryKey(CommandWithColumns.java:148)
+	at org.h2.command.ddl.CommandWithColumns.addConstraintCommand(CommandWithColumns.java:49)
+	at org.h2.command.Parser.parseTableColumnDefinition(Parser.java:8435)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:8379)
+	at org.h2.command.Parser.parseCreate(Parser.java:6276)
+	at org.h2.command.Parser.parsePrepared(Parser.java:903)
+	at org.h2.command.Parser.parse(Parser.java:843)
+	at org.h2.command.Parser.parse(Parser.java:815)
+	at org.h2.command.Parser.prepareCommand(Parser.java:738)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:212)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper.executeSQLStatementForExtraction(SQLExecutionHelper.java:856)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper.access$500(SQLExecutionHelper.java:86)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper$1Loader.run(SQLExecutionHelper.java:149)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.openide.util.RequestProcessor$Task.run(RequestProcessor.java:1443)
+	at org.netbeans.modules.openide.util.GlobalLookup.execute(GlobalLookup.java:68)
+	at org.openide.util.lookup.Lookups.executeWith(Lookups.java:303)
+	at org.openide.util.RequestProcessor$Processor.run(RequestProcessor.java:2058)
+2020-12-23 00:39:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "items" not found; SQL statement:
+CREATE TABLE uom_def (
+  uom_item int(11) NOT NULL AUTO_INCREMENT,
+  item_code int(11) NOT NULL,
+  uom_code varchar(145) NOT NULL,
+  uom_dm int(11) NOT NULL,
+  uom_nm int(11) NOT NULL,
+  PRIMARY KEY (uom_item),
+  FOREIGN KEY (`item_code`) REFERENCES `items` (`item_code`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  FOREIGN KEY (`uom_code`) REFERENCES `uom` (`uom_desc`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) [42102-200]
+2020-12-23 00:39:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "items" not found; SQL statement:
+CREATE TABLE stockin (
+  stockin_id int(11) NOT NULL,
+  batch_no varchar(250) NOT NULL,
+  items varchar(500) NOT NULL,
+  quantity int(11) NOT NULL,
+  cost_price double NOT NULL,
+  sales_price double NOT NULL,
+  nhis_price double DEFAULT NULL,
+  stockin_date date NOT NULL,
+  expiry_date date NOT NULL,
+  users int(11) NOT NULL,
+  entry_log datetime NOT NULL,
+  last_modified timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (stockin_id),
+  FOREIGN KEY (users) REFERENCES users (userid),
+  FOREIGN KEY (items) REFERENCES items (item_desc)
+) [42102-200]
+2020-12-23 00:42:56 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: File corrupt reading chunk at position 57344 [1.4.200/6]" [50000-200]
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:2877)
+	at org.h2.mvstore.MVStore.writeInBackground(MVStore.java:2813)
+	at org.h2.mvstore.MVStore$BackgroundWriterThread.run(MVStore.java:3290)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: File corrupt reading chunk at position 57344 [1.4.200/6]" [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 6 more
+Caused by: java.lang.IllegalStateException: File corrupt reading chunk at position 57344 [1.4.200/6]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.Chunk.readChunkHeader(Chunk.java:168)
+	at org.h2.mvstore.MVStore.moveChunk(MVStore.java:1916)
+	at org.h2.mvstore.MVStore.compactMoveChunks(MVStore.java:1839)
+	at org.h2.mvstore.MVStore.compactMoveChunks(MVStore.java:1772)
+	at org.h2.mvstore.MVStore.doMaintenance(MVStore.java:2848)
+	at org.h2.mvstore.MVStore.writeInBackground(MVStore.java:2788)
+	... 1 more
+Caused by: java.lang.IllegalStateException: Not a map: ."PRIMARY_KEY_32" ON "PUBLIC"."logs"("logsid") %yALTER TABLE "PUBLIC"."logs" ADD CONSTRAINT "PUBLIC"."CONSTRAINT_32" PRIMARY KEY("logsid") INDEX "PUBLIC"."PRIMARY_KEY_32" !JCREATE INDEX "PUBLIC"."CONSTRAINT_INDEX_32" ON "PUBLIC"."logs"("username") %¯ALTER TABLE "PUBLIC"."logs" ADD CONSTRAINT "PUBLIC"."CONSTRAINT_32C" FOREIGN KEY("username") INDEX "PUBLIC"."CONSTRAINT_INDEX_32" REFERENCES "PUBLIC"."users"("userid") NOCHECK  9|  !"#$%&'()*+,-./0   ÈCREATE CACHED TABLE "PUBLIC"."manufacturer"( [1.4.200/6]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.DataUtils.parseMap(DataUtils.java:763)
+	at org.h2.mvstore.Chunk.fromString(Chunk.java:214)
+	at org.h2.mvstore.Chunk.readChunkHeader(Chunk.java:163)
+	... 6 more
+2020-12-23 00:43:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO ""manufacturer"" VALUES 
+('ACULIFE HEALTHCARE PVT LTD',1,'2020-05-06 12:36:21',NULL),
+('AMANTA HEALTHCARE',1,'2020-05-06 12:42:10',NULL),
+('ASPAR PHARMACEUTICALS',1,'2020-05-06 08:59:24',NULL),
+('AXA PARENTERALS',1,'2020-05-06 11:00:24',NULL),
+('AYRTON',1,'2020-05-06 11:23:04',NULL),
+('B OVERGREENS',1,'2020-05-06 11:00:05',NULL),
+('BICON PHARMACEUTICALS',1,'2020-05-06 11:00:50',NULL),
+('BLISS GVS PHARMA',1,'2020-05-06 11:58:53',NULL),
+('CHANGSHA SINOCARE',1,'2020-05-11 16:20:47',NULL),
+('Ciron Drugs',1,'2020-05-04 23:02:09',NULL),
+('CO-PHARMA',1,'2020-05-05 17:01:49',NULL),
+('DANNEX',1,'2020-05-05 11:00:26',NULL),
+('DOD',1,'2020-05-11 10:24:52',NULL),
+('ERNEST CHEMISTS',1,'2020-05-05 16:35:46',NULL),
+('GB PHARMA LIMITED',1,'2020-05-04 23:02:35',NULL),
+('GENERAL CONSUMABLES',1,'2020-05-11 10:20:22',NULL),
+('GENESIS PHARMACEUTICALS',1,'2020-05-05 16:45:46',NULL),
+('Golden Tower',1,'2020-05-05 11:53:21',NULL),
+('GOPALDAS VISRAM & CO',1,'2020-05-05 17:43:44',NULL),
+('GUILIN PHARMACEUTICAL',1,'2020-05-06 12:37:12',NULL)
+,('INNOCIA LIFESCIENCES PVT LTD',1,'2020-05-08 14:08:37',NULL),
+('JORAMAY PHARMACY',1,'2020-05-06 12:41:33',NULL),
+('KAMA INDUSTRIES',1,'2020-05-06 10:39:21',NULL),
+('KINAPHARMA',1,'2020-05-05 14:21:30',NULL),
+('Letap',1,'2020-05-05 12:13:06',NULL),
+('MEYER',1,'2020-05-06 09:27:32',NULL),
+('MGP',1,'2020-05-05 13:18:01',NULL),
+('MIKADO LABORATORIES',1,'2020-05-06 12:40:30',NULL),
+('MVC PHARMACEUTICALS',1,'2020-05-06 09:02:25',NULL),
+('NIRLIFE (ACULIFE)',1,'2020-05-14 16:26:08',NULL),
+('OA & J  PHARMACEUTICALS',1,'2020-05-05 15:39:47',NULL),
+('OMER INVESTMENT LIMITED',1,'2020-05-06 10:39:41',NULL),
+('Oson\'s',1,'2020-05-05 14:08:37',NULL),('OTHERS',6,'2020-05-11 10:24:34',NULL),
+('PHARM-INTER',1,'2020-05-12 14:47:42',NULL),
+('Pharmanova',1,'2020-05-04 23:02:56',NULL),
+('PHYTO-RIKER PHARMACEUTICALS LTD',1,'2020-05-12 16:02:22',NULL),
+('RONAK EXIM PVT. LTD',1,'2020-05-06 10:59:31',NULL),
+('SHALINA',1,'2020-05-05 16:50:37',NULL),
+('SHANDONG XIER KANGTAI PHARMACEUTICALS',1,'2020-05-06 12:01:06',NULL),
+('STEDMAN PHARMACEUTICALS',1,'2020-05-06 12:42:43',NULL),
+('SWISS PARENTERALS',1,'2020-05-05 17:18:14',NULL),
+('Teva',1,'2020-05-05 15:50:07',NULL),
+('TROGE',1,'2020-05-06 11:59:42',NULL),
+('UNICHEM INDUSTRIES',1,'2020-05-06 11:27:04',NULL),
+('XL LABORATORIES',1,'2020-05-05 15:45:39[*]',NULL);"; SQL statement:
+INSERT INTO "manufacturer" VALUES 
+('ACULIFE HEALTHCARE PVT LTD',1,'2020-05-06 12:36:21',NULL),
+('AMANTA HEALTHCARE',1,'2020-05-06 12:42:10',NULL),
+('ASPAR PHARMACEUTICALS',1,'2020-05-06 08:59:24',NULL),
+('AXA PARENTERALS',1,'2020-05-06 11:00:24',NULL),
+('AYRTON',1,'2020-05-06 11:23:04',NULL),
+('B OVERGREENS',1,'2020-05-06 11:00:05',NULL),
+('BICON PHARMACEUTICALS',1,'2020-05-06 11:00:50',NULL),
+('BLISS GVS PHARMA',1,'2020-05-06 11:58:53',NULL),
+('CHANGSHA SINOCARE',1,'2020-05-11 16:20:47',NULL),
+('Ciron Drugs',1,'2020-05-04 23:02:09',NULL),
+('CO-PHARMA',1,'2020-05-05 17:01:49',NULL),
+('DANNEX',1,'2020-05-05 11:00:26',NULL),
+('DOD',1,'2020-05-11 10:24:52',NULL),
+('ERNEST CHEMISTS',1,'2020-05-05 16:35:46',NULL),
+('GB PHARMA LIMITED',1,'2020-05-04 23:02:35',NULL),
+('GENERAL CONSUMABLES',1,'2020-05-11 10:20:22',NULL),
+('GENESIS PHARMACEUTICALS',1,'2020-05-05 16:45:46',NULL),
+('Golden Tower',1,'2020-05-05 11:53:21',NULL),
+('GOPALDAS VISRAM & CO',1,'2020-05-05 17:43:44',NULL),
+('GUILIN PHARMACEUTICAL',1,'2020-05-06 12:37:12',NULL)
+,('INNOCIA LIFESCIENCES PVT LTD',1,'2020-05-08 14:08:37',NULL),
+('JORAMAY PHARMACY',1,'2020-05-06 12:41:33',NULL),
+('KAMA INDUSTRIES',1,'2020-05-06 10:39:21',NULL),
+('KINAPHARMA',1,'2020-05-05 14:21:30',NULL),
+('Letap',1,'2020-05-05 12:13:06',NULL),
+('MEYER',1,'2020-05-06 09:27:32',NULL),
+('MGP',1,'2020-05-05 13:18:01',NULL),
+('MIKADO LABORATORIES',1,'2020-05-06 12:40:30',NULL),
+('MVC PHARMACEUTICALS',1,'2020-05-06 09:02:25',NULL),
+('NIRLIFE (ACULIFE)',1,'2020-05-14 16:26:08',NULL),
+('OA & J  PHARMACEUTICALS',1,'2020-05-05 15:39:47',NULL),
+('OMER INVESTMENT LIMITED',1,'2020-05-06 10:39:41',NULL),
+('Oson\'s',1,'2020-05-05 14:08:37',NULL),('OTHERS',6,'2020-05-11 10:24:34',NULL),
+('PHARM-INTER',1,'2020-05-12 14:47:42',NULL),
+('Pharmanova',1,'2020-05-04 23:02:56',NULL),
+('PHYTO-RIKER PHARMACEUTICALS LTD',1,'2020-05-12 16:02:22',NULL),
+('RONAK EXIM PVT. LTD',1,'2020-05-06 10:59:31',NULL),
+('SHALINA',1,'2020-05-05 16:50:37',NULL),
+('SHANDONG XIER KANGTAI PHARMACEUTICALS',1,'2020-05-06 12:01:06',NULL),
+('STEDMAN PHARMACEUTICALS',1,'2020-05-06 12:42:43',NULL),
+('SWISS PARENTERALS',1,'2020-05-05 17:18:14',NULL),
+('Teva',1,'2020-05-05 15:50:07',NULL),
+('TROGE',1,'2020-05-06 11:59:42',NULL),
+('UNICHEM INDUSTRIES',1,'2020-05-06 11:27:04',NULL),
+('XL LABORATORIES',1,'2020-05-05 15:45:39',NULL); [42000-200]
+2020-12-23 00:56:14 database: close
 org.h2.message.DbException: IO Exception: "Closing" [90028-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.mvstore.db.MVTableEngine$Store.close(MVTableEngine.java:421)
@@ -168,9 +438,9 @@ Caused by: org.h2.jdbc.JdbcSQLNonTransientException: IO Exception: "Closing" [90
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 14 more
-Caused by: java.lang.IllegalStateException: File corrupt reading chunk at position 49152 [1.4.200/6]
+Caused by: java.lang.IllegalStateException: File corrupt reading chunk at position 53248 [1.4.200/6]
 	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
-	at org.h2.mvstore.Chunk.readChunkHeader(Chunk.java:168)
+	at org.h2.mvstore.Chunk.readChunkHeader(Chunk.java:172)
 	at org.h2.mvstore.MVStore.moveChunk(MVStore.java:1916)
 	at org.h2.mvstore.MVStore.compactMoveChunks(MVStore.java:1839)
 	at org.h2.mvstore.MVStore.compactMoveChunks(MVStore.java:1772)
@@ -180,9 +450,75 @@ Caused by: java.lang.IllegalStateException: File corrupt reading chunk at positi
 	at org.h2.mvstore.MVStore.close(MVStore.java:1133)
 	at org.h2.mvstore.db.MVTableEngine$Store.close(MVTableEngine.java:404)
 	... 12 more
-Caused by: java.lang.IllegalStateException: Not a map: A636ED6E2A" START WITH 34 BELONGS_TO_TABLE !ICREATE PRIMARY KEY "PUBLIC"."PRIMARY_KEY_32" ON "PUBLIC"."logs"("logsid") %yALTER TABLE "PUBLIC"."logs" ADD CONSTRAINT "PUBLIC"."CONSTRAINT_32" PRIMARY KEY("logsid") INDEX "PUBLIC"."PRIMARY_KEY_32" !JCREATE INDEX "PUBLIC"."CONSTRAINT_INDEX_32" ON "PUBLIC"."logs"("username") %¯ALTER TABLE "PUBLIC"."logs" ADD CONSTRAINT "PUBLIC"."CONSTRAINT_32C" FOREIGN KEY("username") INDEX "PUBLIC"."CONSTRAINT_INDEX_32" REFERENCES "PUBLIC"."users"("userid") NOCHECK  Tá|  !"#$%&'()*+,-./0   ÈCREATE CACHED TABLE "PUBLIC"."manufacturer"( [1.4.200/6]
+2020-12-23 00:56:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: General error: "General error: ""java.lang.IllegalStateException: File corrupt reading chunk at position 57344 [1.4.200/6]"" [50000-200]" [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.engine.Database.throwLastBackgroundException(Database.java:2221)
+	at org.h2.engine.Session.close(Session.java:945)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:453)
+	at org.netbeans.modules.db.explorer.DatabaseConnection.disconnect(DatabaseConnection.java:1275)
+	at org.netbeans.modules.db.explorer.action.DisconnectAction$1.run(DisconnectAction.java:104)
+	at org.openide.util.RequestProcessor$Task.run(RequestProcessor.java:1443)
+	at org.netbeans.modules.openide.util.GlobalLookup.execute(GlobalLookup.java:68)
+	at org.openide.util.lookup.Lookups.executeWith(Lookups.java:303)
+	at org.openide.util.RequestProcessor$Processor.run(RequestProcessor.java:2058)
+Caused by: org.h2.message.DbException: General error: "java.lang.IllegalStateException: File corrupt reading chunk at position 57344 [1.4.200/6]" [50000-200]
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:2877)
+	at org.h2.mvstore.MVStore.writeInBackground(MVStore.java:2813)
+	at org.h2.mvstore.MVStore$BackgroundWriterThread.run(MVStore.java:3290)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: File corrupt reading chunk at position 57344 [1.4.200/6]" [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 6 more
+Caused by: java.lang.IllegalStateException: File corrupt reading chunk at position 57344 [1.4.200/6]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.Chunk.readChunkHeader(Chunk.java:168)
+	at org.h2.mvstore.MVStore.moveChunk(MVStore.java:1916)
+	at org.h2.mvstore.MVStore.compactMoveChunks(MVStore.java:1839)
+	at org.h2.mvstore.MVStore.compactMoveChunks(MVStore.java:1772)
+	at org.h2.mvstore.MVStore.doMaintenance(MVStore.java:2848)
+	at org.h2.mvstore.MVStore.writeInBackground(MVStore.java:2788)
+	... 1 more
+Caused by: java.lang.IllegalStateException: Not a map: ."PRIMARY_KEY_32" ON "PUBLIC"."logs"("logsid") %yALTER TABLE "PUBLIC"."logs" ADD CONSTRAINT "PUBLIC"."CONSTRAINT_32" PRIMARY KEY("logsid") INDEX "PUBLIC"."PRIMARY_KEY_32" !JCREATE INDEX "PUBLIC"."CONSTRAINT_INDEX_32" ON "PUBLIC"."logs"("username") %¯ALTER TABLE "PUBLIC"."logs" ADD CONSTRAINT "PUBLIC"."CONSTRAINT_32C" FOREIGN KEY("username") INDEX "PUBLIC"."CONSTRAINT_INDEX_32" REFERENCES "PUBLIC"."users"("userid") NOCHECK  9|  !"#$%&'()*+,-./0   ÈCREATE CACHED TABLE "PUBLIC"."manufacturer"( [1.4.200/6]
 	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
 	at org.h2.mvstore.DataUtils.parseMap(DataUtils.java:763)
 	at org.h2.mvstore.Chunk.fromString(Chunk.java:214)
 	at org.h2.mvstore.Chunk.readChunkHeader(Chunk.java:163)
-	... 20 more
+	... 6 more
+2020-12-23 01:17:15 database: close
+org.h2.message.DbException: IO Exception: "Closing" [90028-200]
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.mvstore.db.MVTableEngine$Store.close(MVTableEngine.java:421)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1545)
+	at org.h2.engine.Database.closeImpl(Database.java:1454)
+	at org.h2.engine.Database.close(Database.java:1373)
+	at org.h2.engine.Database.removeSession(Database.java:1307)
+	at org.h2.engine.Session.close(Session.java:963)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:453)
+	at org.netbeans.modules.db.explorer.DatabaseConnection.disconnect(DatabaseConnection.java:1275)
+	at org.netbeans.modules.db.explorer.action.DisconnectAction$1.run(DisconnectAction.java:104)
+	at org.openide.util.RequestProcessor$Task.run(RequestProcessor.java:1443)
+	at org.netbeans.modules.openide.util.GlobalLookup.execute(GlobalLookup.java:68)
+	at org.openide.util.lookup.Lookups.executeWith(Lookups.java:303)
+	at org.openide.util.RequestProcessor$Processor.run(RequestProcessor.java:2058)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: IO Exception: "Closing" [90028-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 14 more
+Caused by: java.lang.IllegalStateException: File corrupt reading chunk at position 57344 [1.4.200/6]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.Chunk.readChunkHeader(Chunk.java:172)
+	at org.h2.mvstore.MVStore.moveChunk(MVStore.java:1916)
+	at org.h2.mvstore.MVStore.compactMoveChunks(MVStore.java:1839)
+	at org.h2.mvstore.MVStore.compactMoveChunks(MVStore.java:1772)
+	at org.h2.mvstore.MVStore.compactMoveChunks(MVStore.java:1753)
+	at org.h2.mvstore.MVStore.compactFile(MVStore.java:1970)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:1170)
+	at org.h2.mvstore.MVStore.close(MVStore.java:1133)
+	at org.h2.mvstore.db.MVTableEngine$Store.close(MVTableEngine.java:404)
+	... 12 more

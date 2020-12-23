@@ -4,6 +4,7 @@ import com.sun.deploy.util.FXLoader;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -97,6 +98,11 @@ public class MainAppController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        //init image directory
+        File directory = new File("./img/");
+        if(!directory.exists()){
+            directory.mkdir();
+        }
         mainmenu.setText(LoginController.u.getUsername());
         user.setText(LoginController.u.getFname().toUpperCase() + " " + LoginController.u.getLname().toUpperCase());
         user_role.setText(LoginController.u.getRoles().toString());

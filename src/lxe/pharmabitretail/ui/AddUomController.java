@@ -161,7 +161,6 @@ public class AddUomController implements Initializable {
                         Thread d = new Thread(task);
                         d.setDaemon(true);
                         d.start();
-
                     }
                 } else {
                     displayinfo.setText("!FIELD IS EMPTY");

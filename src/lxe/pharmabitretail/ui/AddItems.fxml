@@ -241,6 +241,7 @@
                   <JFXTextField fx:id="searchbtn" layoutX="497.0" layoutY="14.0" prefHeight="25.0" prefWidth="217.0" promptText="Search Item" />
                   <TableView fx:id="itemtableview" layoutX="14.0" layoutY="47.0" prefHeight="601.0" prefWidth="700.0" styleClass="table-cell" stylesheets="@style.css">
                      <columns>
+                        <TableColumn fx:id="itemimage" prefWidth="75.0" text="Item Image" />
                         <TableColumn fx:id="itemname" prefWidth="127.0" text="Item Name" />
                         <TableColumn fx:id="category" prefWidth="112.0" text="Category" />
                         <TableColumn fx:id="manufacturer" prefWidth="161.0" text="Manufacturer" />

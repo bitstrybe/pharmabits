@@ -12,9 +12,10 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -22,17 +23,21 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
  * @author scarface
  */
 @Entity
-@Table(name = "items")
+@Table(name = "items", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"item_desc"})})
 @NamedQueries({
     @NamedQuery(name = "Items.findAll", query = "SELECT i FROM Items i")
+    , @NamedQuery(name = "Items.findByItemCode", query = "SELECT i FROM Items i WHERE i.itemCode = :itemCode")
     , @NamedQuery(name = "Items.findByItemDesc", query = "SELECT i FROM Items i WHERE i.itemDesc = :itemDesc")
     , @NamedQuery(name = "Items.findByItemName", query = "SELECT i FROM Items i WHERE i.itemName = :itemName")
+    , @NamedQuery(name = "Items.findByItemImg", query = "SELECT i FROM Items i WHERE i.itemImg = :itemImg")
     , @NamedQuery(name = "Items.findByVom", query = "SELECT i FROM Items i WHERE i.vom = :vom")
     , @NamedQuery(name = "Items.findByVomDef", query = "SELECT i FROM Items i WHERE i.vomDef = :vomDef")
     , @NamedQuery(name = "Items.findByRol", query = "SELECT i FROM Items i WHERE i.rol = :rol")
@@ -42,15 +47,19 @@ public class Items implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "item_code", nullable = false)
+    private Integer itemCode;
     @Basic(optional = false)
     @Column(name = "item_desc", nullable = false, length = 500)
     private String itemDesc;
     @Basic(optional = false)
     @Column(name = "item_name", nullable = false, length = 245)
     private String itemName;
-    @Lob
-    @Column(name = "item_img")
-    private Serializable itemImg;
+    @Basic(optional = false)
+    @Column(name = "item_img", nullable = false, length = 245)
+    private String itemImg;
     @Basic(optional = false)
     @Column(name = "vom", nullable = false, length = 45)
     private String vom;
@@ -85,18 +94,28 @@ public class Items implements Serializable {
     public Items() {
     }
 
-    public Items(String itemDesc) {
-        this.itemDesc = itemDesc;
+    public Items(Integer itemCode) {
+        this.itemCode = itemCode;
     }
 
-    public Items(String itemDesc, String itemName, String vom, double vomDef, int rol, Date entryLog, Date lastModified) {
+    public Items(Integer itemCode, String itemDesc, String itemName, String itemImg, String vom, double vomDef, int rol, Date entryLog, Date lastModified) {
+        this.itemCode = itemCode;
         this.itemDesc = itemDesc;
         this.itemName = itemName;
+        this.itemImg = itemImg;
         this.vom = vom;
         this.vomDef = vomDef;
         this.rol = rol;
         this.entryLog = entryLog;
         this.lastModified = lastModified;
+    }
+
+    public Integer getItemCode() {
+        return itemCode;
+    }
+
+    public void setItemCode(Integer itemCode) {
+        this.itemCode = itemCode;
     }
 
     public String getItemDesc() {
@@ -115,11 +134,11 @@ public class Items implements Serializable {
         this.itemName = itemName;
     }
 
-    public Serializable getItemImg() {
+    public String getItemImg() {
         return itemImg;
     }
 
-    public void setItemImg(Serializable itemImg) {
+    public void setItemImg(String itemImg) {
         this.itemImg = itemImg;
     }
 
@@ -206,7 +225,7 @@ public class Items implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (itemDesc != null ? itemDesc.hashCode() : 0);
+        hash += (itemCode != null ? itemCode.hashCode() : 0);
         return hash;
     }
 
@@ -217,7 +236,7 @@ public class Items implements Serializable {
             return false;
         }
         Items other = (Items) object;
-        if ((this.itemDesc == null && other.itemDesc != null) || (this.itemDesc != null && !this.itemDesc.equals(other.itemDesc))) {
+        if ((this.itemCode == null && other.itemCode != null) || (this.itemCode != null && !this.itemCode.equals(other.itemCode))) {
             return false;
         }
         return true;
@@ -225,7 +244,7 @@ public class Items implements Serializable {
 
     @Override
     public String toString() {
-        return "lxe.pharmabitretail.entity.Items[ itemDesc=" + itemDesc + " ]";
+        return "lxe.pharmabitretail.entity.Items[ itemCode=" + itemCode + " ]";
     }
     
 }

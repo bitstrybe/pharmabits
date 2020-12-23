@@ -374,7 +374,7 @@ public class StockController implements Initializable {
               
                 
                 cat.setBatchNo(childController.batchtextfield.getText());
-                cat.setItems(new Items(childController.itemlist.getSelectionModel().getSelectedItem()));
+                //cat.setItems(new Items(childController.itemlist.getSelectionModel().getSelectedItem()));
                 cat.setQuantity(Integer.parseInt(childController.qnttextfield.getText()));
                 cat.setCostPrice(Utilities.roundToTwoDecimalPlace(Double.parseDouble(childController.costtextfield.getText()), 2));
                 cat.setSalesPrice(Utilities.roundToTwoDecimalPlace(Double.parseDouble(childController.salestextfield.getText()), 2));
@@ -653,7 +653,7 @@ public class StockController implements Initializable {
                                 Stockin st = new Stockin();
                                 st.setStockinId(selectedRecord.getStockinCode());
                                 st.setBatchNo(childController.batchtextfield.getText());
-                                st.setItems(new Items(childController.itemname.getText()));
+                                //st.setItems(new Items(childController.itemname.getText()));
                                 st.setExpiryDate(Utilities.convertToDateViaSqlDate(childController.expirydate.getValue()));
                                 st.setCostPrice(Double.parseDouble(childController.costtextfield.getText()));
                                 st.setSalesPrice(Double.parseDouble(childController.salestextfield.getText()));

@@ -8,6 +8,8 @@ package lxe.pharmabitretail.tablemodel;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -21,11 +23,13 @@ public class ItemTableModel {
     private SimpleStringProperty manufacturer;
     private SimpleStringProperty uom_val;
     private SimpleLongProperty rol;
+    private ImageView itemimage;
 
     public ItemTableModel() {
     }
 
-    public ItemTableModel(String itemcodename, String itemName, String category, String manufacturer, String uom_val, long rol) {
+    public ItemTableModel(String img, String itemcodename, String itemName, String category, String manufacturer, String uom_val, long rol) {
+        this.itemimage = new ImageView(img);
         this.itemCodeName = new SimpleStringProperty(itemcodename);
         this.itemName = new SimpleStringProperty(itemName);
         this.category = new SimpleStringProperty(category);
@@ -104,6 +108,20 @@ public class ItemTableModel {
 
     public void setRolProperty(Long uom) {
         this.rol = new SimpleLongProperty(uom);
+    }
+
+    /**
+     * @return the itemimage
+     */
+    public ImageView getItemimage() {
+        return itemimage;
+    }
+
+    /**
+     * @param itemimage the itemimage to set
+     */
+    public void setItemimage(ImageView itemimage) {
+        this.itemimage = itemimage;
     }
 
 }
