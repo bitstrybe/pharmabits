@@ -187,7 +187,7 @@ public class AddItemsController implements Initializable {
         getUOM();
         TableData();
         searchbtn.textProperty().addListener(e -> {
-            if (searchbtn.getText().length() > 1) {
+            if (searchbtn.getText().length() > 3) {
                 TableData(searchbtn.getText());
             } else {
                 TableData();

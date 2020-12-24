@@ -44,18 +44,20 @@ public class ItemsBL extends DdsBL {
     }
     
     public List<String> getAllItemsName(){
-        TypedQuery<String> q = em.createQuery("SELECT i.itemCodeFullname FROM Items i", String.class);
+        TypedQuery<String> q = em.createQuery("SELECT i.itemDesc FROM Items i", String.class);
         return q.getResultList();
     }
+    
     public List<Items> searchAllItems(String p) {
-        TypedQuery<Items> q = em.createQuery("SELECT s FROM Items s WHERE s.itemCodeFullname LIKE :p OR s.itemName LIKE :p1", Items.class);
+        TypedQuery<Items> q = em.createQuery("SELECT s FROM Items s WHERE s.itemDesc LIKE :p OR s.itemName LIKE :p1 OR s.category.categoryName LIKE :p2", Items.class);
         q.setParameter("p", "%"+p+"%");
         q.setParameter("p1", "%"+p+"%");
+        q.setParameter("p2", "%"+p+"%");
         return q.getResultList();
     }
     
     public List<String> searchItemsNames(String param){
-        TypedQuery<String> q = em.createQuery("SELECT i.itemCodeFullname FROM Items i WHERE i.itemName LIKE :p1 OR i.itemCodeFullname LIKE :p2", String.class);
+        TypedQuery<String> q = em.createQuery("SELECT i.itemDesc FROM Items i WHERE i.itemName LIKE :p1 OR i.itemDesc LIKE :p2", String.class);
         q.setParameter("p1", "%"+param+"%");
         q.setParameter("p2", "%"+param+"%");
         return q.getResultList();

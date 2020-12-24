@@ -144,8 +144,8 @@
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#addcategory" text="Category" />
                         <MenuItem mnemonicParsing="false" onAction="#addmanufacturer" text="Manufacturer" />
-                        <MenuItem mnemonicParsing="false" onAction="#addUom" text="Uom" />
-                        <MenuItem mnemonicParsing="false" onAction="#additems" text="Items" />
+                        <MenuItem mnemonicParsing="false" onAction="#addUom" text="Manage UOM" />
+                        <MenuItem mnemonicParsing="false" onAction="#additems" text="Catalog" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Report">
