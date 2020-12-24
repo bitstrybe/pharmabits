@@ -27,7 +27,7 @@ import javax.persistence.UniqueConstraint;
 
 /**
  *
- * @author scarface
+ * @author JScare
  */
 @Entity
 @Table(name = "items", uniqueConstraints = {

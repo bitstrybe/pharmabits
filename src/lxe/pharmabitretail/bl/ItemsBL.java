@@ -83,6 +83,11 @@ public class ItemsBL extends DdsBL {
             return null;
         }
     }
+      public String getImageItembyId(int val){
+          TypedQuery<String> q = em.createQuery("SELECT i.itemImg FROM Items i WHERE i.itemCode = :itemCode", String.class);
+          q.setParameter("itemCode", val);
+          return q.getSingleResult();
+      }
     
 }
 

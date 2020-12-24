@@ -42,7 +42,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import lxe.pharmabitretail.bl.InsertUpdateBL;
 import lxe.pharmabitretail.bl.ItemsBL;
-import lxe.pharmabitretail.bl.UomBL;
+import lxe.pharmabitretail.bl.VomBL;
 import lxe.pharmabitretail.entity.Uom;
 import lxe.pharmabitretail.entity.Users;
 import lxe.pharmabitretail.tablemodel.UomTableModel;
@@ -86,7 +86,7 @@ public class AddUomController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         // TODO
-        UomBL ca = new UomBL();
+        VomBL ca = new VomBL();
 
         uomtextfield.textProperty().addListener(e -> {
             //  System.out.println(cattextfield.getText());
@@ -223,7 +223,7 @@ public class AddUomController implements Initializable {
     }
 
     public void TableData() {
-        List<Uom> c = new UomBL().getAllUom();
+        List<Uom> c = new VomBL().getAllUom();
         data = FXCollections.observableArrayList();
         c.forEach((template) -> {
             data.add(new UomTableModel(template.getUomDesc()));
@@ -250,7 +250,7 @@ public class AddUomController implements Initializable {
     }
 
     public void TableData(String value) {
-        List<Uom> c = new UomBL().searchAllUom(value);
+        List<Uom> c = new VomBL().searchAllUom(value);
         data = FXCollections.observableArrayList();
         c.forEach((template) -> {
             data.add(new UomTableModel(template.getUomDesc()));
@@ -332,7 +332,7 @@ public class AddUomController implements Initializable {
                                 childController.displayinfo.textProperty().unbind();
 //                                List catname = new ItemsBL().getItemsFromCategory(selectedRecord.getUomName());
 //                                if (catname.isEmpty()) {
-                                int result = new UomBL().removeData(selectedRecord.getUomName());
+                                int result = new VomBL().removeData(selectedRecord.getUomName());
                                 System.out.println(result);
                                 switch (result) {
                                     case 1:

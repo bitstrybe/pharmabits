@@ -7,6 +7,7 @@ package lxe.pharmabitretail.tablemodel;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,25 +18,44 @@ import javafx.scene.image.ImageView;
  */
 public class ItemTableModel {
 
+    private SimpleIntegerProperty itemCode;
     private SimpleStringProperty itemCodeName;
     private SimpleStringProperty itemName;
     private SimpleStringProperty category;
     private SimpleStringProperty manufacturer;
-    private SimpleStringProperty uom_val;
+    private SimpleStringProperty uom;
+    private SimpleIntegerProperty uomitem;
+    private SimpleStringProperty vom_val;
     private SimpleLongProperty rol;
-    private ImageView itemimage;
+    private ImageView image;
 
     public ItemTableModel() {
     }
 
-    public ItemTableModel(String img, String itemcodename, String itemName, String category, String manufacturer, String uom_val, long rol) {
-        this.itemimage = new ImageView(img);
+    public ItemTableModel(Integer itemCode, String itemcodename, String itemName, String category, String manufacturer,String uom, int uomitem, String vom_val, long rol, ImageView img) {
+        this.itemCode = new SimpleIntegerProperty(itemCode);
         this.itemCodeName = new SimpleStringProperty(itemcodename);
         this.itemName = new SimpleStringProperty(itemName);
         this.category = new SimpleStringProperty(category);
         this.manufacturer = new SimpleStringProperty(manufacturer);
-        this.uom_val = new SimpleStringProperty(uom_val);
+        this.uom = new SimpleStringProperty(uom);
+        this.uomitem = new SimpleIntegerProperty(uomitem);
+        this.vom_val = new SimpleStringProperty(vom_val);
         this.rol = new SimpleLongProperty(rol);
+        this.image = img;
+
+    }
+
+    public Integer getItemCode() {
+        return itemCode.get();
+    }
+
+    public SimpleIntegerProperty getItemCodeProperty() {
+        return itemCode;
+    }
+
+    public void setItemCodeProperty(Integer itemCode) {
+        this.itemCode = new SimpleIntegerProperty(itemCode);
     }
 
     public String getItemCodeName() {
@@ -87,15 +107,40 @@ public class ItemTableModel {
     }
 
     public String getUmo() {
-        return uom_val.get();
+        return uom.get();
     }
 
     public SimpleStringProperty getUomProperty() {
-        return uom_val;
+        return uom;
     }
 
     public void setUomProperty(String uom) {
-        this.uom_val = new SimpleStringProperty(uom);
+        this.uom = new SimpleStringProperty(uom);
+    }
+    
+    public Integer getUomItem() {
+        return uomitem.get();
+    }
+
+    public SimpleIntegerProperty getUomItemProperty() {
+        return uomitem;
+    }
+
+    public void setUomItemProperty(Integer uomitem) {
+        this.uomitem = new SimpleIntegerProperty(uomitem);
+    }
+
+
+    public String getVmo() {
+        return vom_val.get();
+    }
+
+    public SimpleStringProperty getVomProperty() {
+        return vom_val;
+    }
+
+    public void setVomProperty(String vom) {
+        this.vom_val = new SimpleStringProperty(vom);
     }
 
     public Long getRol() {
@@ -110,18 +155,11 @@ public class ItemTableModel {
         this.rol = new SimpleLongProperty(uom);
     }
 
-    /**
-     * @return the itemimage
-     */
-    public ImageView getItemimage() {
-        return itemimage;
+    public void setImage(ImageView value) {
+        image = value;
     }
 
-    /**
-     * @param itemimage the itemimage to set
-     */
-    public void setItemimage(ImageView itemimage) {
-        this.itemimage = itemimage;
+    public ImageView getImage() {
+        return image;
     }
-
 }

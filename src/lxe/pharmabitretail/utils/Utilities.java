@@ -11,7 +11,6 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.scene.Node;
@@ -20,7 +19,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 /**
  *
@@ -60,7 +59,7 @@ public class Utilities {
         return java.sql.Date.valueOf(dateToConvert);
     }
 
-    public static void clearAllField(AnchorPane pane) {
+    public static void clearAllField(Pane pane) {
         for (Node node : pane.getChildren()) {
             if (node instanceof JFXTextField) {
                 ((JFXTextField) (node)).setText("");

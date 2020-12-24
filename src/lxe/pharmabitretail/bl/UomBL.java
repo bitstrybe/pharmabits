@@ -5,16 +5,14 @@
  */
 package lxe.pharmabitretail.bl;
 
-import java.util.List;
-import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
-import lxe.pharmabitretail.entity.Uom;
+import lxe.pharmabitretail.entity.UomDef;
 
 /**
  *
  * @author JScare
  */
-public class UomBL extends DdsBL{
+public class UomBL extends  DdsBL{
 
     @Override
     public int insertData(Object object) {
@@ -28,36 +26,23 @@ public class UomBL extends DdsBL{
 
     @Override
     public int removeData(Object id) {
-         try {
-            em.getTransaction().begin();
-            Uom c = em.find(Uom.class, id);
-            em.remove(c);
-            em.getTransaction().commit();
-            return 1;
-        } catch (IllegalArgumentException ex) {
-            return 0;
-        }
+        em.getTransaction().begin();
+        UomDef i = em.find(UomDef.class, id);
+        em.remove(i);
+        em.getTransaction().commit();
+        return 1;
     }
     
+    public UomDef getUombyItemId(int val){
+        TypedQuery<UomDef> q = em.createQuery("SELECT u FROM UomDef u WHERE u.itemCode.itemCode = :itemCode", UomDef.class);
+        q.setParameter("itemCode", val);
+        return q.getSingleResult();
+    }
+//    public Integer getUomIdbyUom(String val){
+//        TypedQuery<Integer> q = em.createQuery("SELECT u.uomItem FROM UomDef u WHERE u.uomCode.uomDesc = :uomCode", Integer.class);
+//        q.setParameter("uomCode", val);
+//        System.out.println(q.getSingleResult());
+//        return q.getSingleResult();
+//    }
     
-      public List<Uom> getAllUom() {
-        TypedQuery<Uom> q = em.createNamedQuery("Uom.findAll", Uom.class);
-        return q.getResultList();
-    }
-       public String getUomById(String uom) {
-        try {
-            TypedQuery<String> q = em.createQuery("SELECT u FROM Uom u WHERE u.uomDesc = :uomDesc", String.class);
-            q.setParameter("uomDesc", uom);
-            return q.getSingleResult();
-        } catch (NoResultException ex) {
-            return null;
-        }
-    }
-       
-
-  public List<Uom> searchAllUom(String p) {
-        TypedQuery<Uom> q = em.createQuery("SELECT s FROM Uom s WHERE s.uomDesc LIKE :p", Uom.class);
-        q.setParameter("p", "%" + p + "%");
-        return q.getResultList();
-    }  
 }

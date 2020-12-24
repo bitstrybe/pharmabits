@@ -35,21 +35,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -63,6 +62,7 @@ import lxe.pharmabitretail.bl.ItemsBL;
 import lxe.pharmabitretail.bl.ManufacturerBL;
 import lxe.pharmabitretail.bl.StockinBL;
 import lxe.pharmabitretail.bl.UomBL;
+import lxe.pharmabitretail.bl.VomBL;
 import lxe.pharmabitretail.entity.Category;
 import lxe.pharmabitretail.entity.Items;
 import lxe.pharmabitretail.entity.Manufacturer;
@@ -87,14 +87,13 @@ public class AddItemsController implements Initializable {
 
     ObservableList<ItemTableModel> data;
 
-    @FXML
     public JFXTextField itmtextfield;
     private Button closeButton;
     public Label displayinfo;
     public JFXSpinner spinner;
     public FontAwesomeIcon check;
     public FontAwesomeIcon duplicatelock;
-    public AnchorPane itemspane;
+    public Pane itemspane;
     @FXML
     private ComboBox<String> categorycombo;
     @FXML
@@ -114,13 +113,16 @@ public class AddItemsController implements Initializable {
     @FXML
     private TableColumn<ItemTableModel, String> manufacturer;
     @FXML
-    private TableColumn<ItemTableModel, String> uom;
+    private TableColumn<ItemTableModel, String> uomtb;
+    @FXML
+    private TableColumn<ItemTableModel, String> vomtb;
+
     @FXML
     private TableColumn<ItemTableModel, Number> rol;
     @FXML
     private TableColumn<ItemTableModel, Boolean> action;
     @FXML
-    private JFXButton closebtn;
+    private Button closebtn;
     @FXML
     private JFXTextField uom_val1;
     @FXML
@@ -157,7 +159,7 @@ public class AddItemsController implements Initializable {
     }
 
     public void getUOM() {
-        List<Uom> list = new UomBL().getAllUom();
+        List<Uom> list = new VomBL().getAllUom();
         ObservableList<Uom> result = FXCollections.observableArrayList(list);
         result.forEach((cat) -> {
             uomcombo.getItems().add(cat.getUomDesc());
@@ -286,6 +288,7 @@ public class AddItemsController implements Initializable {
         stage.close();
     }
 
+    @FXML
     public void saveAction() {
         Task<Void> task = new Task<Void>() {
             @Override
@@ -293,7 +296,7 @@ public class AddItemsController implements Initializable {
                 spinner.setVisible(true);
                 check.setVisible(false);
                 updateMessage("PROCESSING PLS WAIT.....");
-                Thread.sleep(2000);
+                Thread.sleep(1000);
                 return null;
             }
         };
@@ -317,13 +320,13 @@ public class AddItemsController implements Initializable {
                 initialStream = new FileInputStream(ifile);
                 File targetFile = new File("./img/" + itemdesc + "." + FilenameUtils.getExtension(ifile.getName()));
                 cat.setItemImg("./img/" + itemdesc + "." + FilenameUtils.getExtension(ifile.getName()));
-                
+
                 List<UomDef> udf = new ArrayList<>();
                 UomDef df = new UomDef();
                 df.setItemCode(cat);
                 df.setUomCode(new Uom(uomcombo.getSelectionModel().getSelectedItem()));
                 df.setUomNm(Integer.parseInt(uom_val1.getText()));
-                df.setUomDm(Integer.parseInt(uom_val1.getText()));
+                df.setUomDm(Integer.parseInt(uom_val2.getText()));
                 udf.add(df);
                 cat.setUomDefCollection(udf);
                 int result = new InsertUpdateBL().insertData(cat);
@@ -331,7 +334,7 @@ public class AddItemsController implements Initializable {
                     case 1:
                         java.nio.file.Files.copy(initialStream, targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                         displayinfo.setText("SUCCESSFULLY SAVED");
-//                        Utilities.clearAllField(itemspane);
+                        Utilities.clearAllField(itemspane);
                         spinner.setVisible(false);
                         check.setVisible(true);
                         TableData();
@@ -349,7 +352,7 @@ public class AddItemsController implements Initializable {
 
             } catch (IOException ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
-            }finally{
+            } finally {
                 try {
                     IOUtils.close(initialStream);
                 } catch (IOException ex) {
@@ -366,21 +369,38 @@ public class AddItemsController implements Initializable {
         List<Items> c = new ItemsBL().getAllItems();
         data = FXCollections.observableArrayList();
         c.forEach((item) -> {
-            String uom_value = String.valueOf(item.getVomDef()) + item.getVom();
+            UomDef domf = new UomBL().getUombyItemId(item.getItemCode());
+            int uomitem = domf.getUomItem();
+            String uom_val = String.valueOf(domf.getUomCode().getUomDesc() + " " + domf.getUomNm() + " X " + domf.getUomDm());
+            String vom_value = String.valueOf(item.getVomDef()) + item.getVom();
             try {
-                //data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getCategory().getCategoryName(), item.getManufacturer().getManufacturer(), uom_value, item.getRol()));
+                ImageView itemimage = new ImageView();
+                File file = new File(item.getItemImg());
+                Image image = new Image(file.toURI().toString());
+                itemimage.setImage(image);
+                itemimage.setFitWidth(70);
+                itemimage.setFitWidth(70);
+                itemimage.setPreserveRatio(true);
+                itemimage.scaleXProperty();
+                itemimage.scaleYProperty();
+                itemimage.setSmooth(true);
+                itemimage.setCache(true);
+                data.add(new ItemTableModel(item.getItemCode(), item.getItemDesc(), item.getItemName(), item.getCategory().getCategoryName(), item.getManufacturer().getManufacturer(),uom_val , uomitem, vom_value, item.getRol(), itemimage));
 //                System.out.println(item.getItemCodeFullname() + " " + item.getItemName() + " " + item.getCategory().getCategoryName() + "" + item.getManufacturer().getManufacturer() + " " + uom_value + " " + item.getRol());
             } catch (Exception ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
 
             }
         });
-        //itemimage.setCellValueFactory(cell -> cell.getValue().getItemimage());
+
         itemname.setCellValueFactory(cell -> cell.getValue().getItemNameProperty());
         category.setCellValueFactory(cell -> cell.getValue().getCategoryProperty());
         manufacturer.setCellValueFactory(cell -> cell.getValue().getManufacturerProperty());
-        uom.setCellValueFactory(cell -> cell.getValue().getUomProperty());
+        uomtb.setCellValueFactory(cell -> cell.getValue().getUomProperty());
+        vomtb.setCellValueFactory(cell -> cell.getValue().getVomProperty());
         rol.setCellValueFactory(cell -> cell.getValue().getRolProperty());
+        itemimage.setCellValueFactory(new PropertyValueFactory<ItemTableModel, ImageView>("image"));
+        itemimage.setPrefWidth(90);
         action.setSortable(false);
         action.setMaxWidth(480);
 
@@ -407,9 +427,24 @@ public class AddItemsController implements Initializable {
         data = FXCollections.observableArrayList();
 
         c.forEach((item) -> {
-            String uom_value = String.valueOf(item.getVomDef()) + item.getVom();
+            UomDef domf = new UomBL().getUombyItemId(item.getItemCode());
+            int uomitem = domf.getUomItem();
+            String uom_val = String.valueOf(domf.getUomCode().getUomDesc() + " " + domf.getUomNm() + " X " + domf.getUomDm());
+            String vom_value = String.valueOf(item.getVomDef()) + item.getVom();
             try {
-               // data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getCategory().getCategoryName(), item.getManufacturer().getManufacturer(), uom_value, item.getRol()));
+
+                ImageView itemimage = new ImageView();
+                File file = new File(item.getItemImg());
+                Image image = new Image(file.toURI().toString());
+                itemimage.setImage(image);
+                itemimage.setFitWidth(70);
+                itemimage.setFitWidth(70);
+                itemimage.setPreserveRatio(true);
+                itemimage.scaleXProperty();
+                itemimage.scaleYProperty();
+                itemimage.setSmooth(true);
+                itemimage.setCache(true);
+                data.add(new ItemTableModel(item.getItemCode(), item.getItemDesc(), item.getItemName(), item.getCategory().getCategoryName(), item.getManufacturer().getManufacturer(),uom_val , uomitem, vom_value, item.getRol(), itemimage));
             } catch (Exception ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
 
@@ -418,7 +453,7 @@ public class AddItemsController implements Initializable {
         itemname.setCellValueFactory(cell -> cell.getValue().getItemNameProperty());
         category.setCellValueFactory(cell -> cell.getValue().getCategoryProperty());
         manufacturer.setCellValueFactory(cell -> cell.getValue().getManufacturerProperty());
-        uom.setCellValueFactory(cell -> cell.getValue().getUomProperty());
+        vomtb.setCellValueFactory(cell -> cell.getValue().getUomProperty());
         rol.setCellValueFactory(cell -> cell.getValue().getRolProperty());
         action.setSortable(false);
         action.setMaxWidth(480);
@@ -494,9 +529,12 @@ public class AddItemsController implements Initializable {
                             childController.displayinfo.textProperty().bind(task.messageProperty());
                             task.setOnSucceeded(f -> {
                                 childController.displayinfo.textProperty().unbind();
-                                List ls = new StockinBL().getStockinFromItems(selectedRecord.getItemCodeName());
-                                if (ls.isEmpty()) {
-                                    int result = new ItemsBL().removeData(selectedRecord.getItemCodeName());
+//                                List ls = new StockinBL().getStockinFromItems(selectedRecord.getItemCodeName());
+//                                if (ls.isEmpty()) {
+                                int uom_result = new UomBL().removeData(selectedRecord.getUomItem());
+
+                                if (uom_result == 1) {
+                                    int result = new ItemsBL().removeData(selectedRecord.getItemCode());
                                     switch (result) {
                                         case 1:
                                             childController.displayinfo.setText("SUCCESSFULLY DELETED");
@@ -512,12 +550,13 @@ public class AddItemsController implements Initializable {
                                             break;
 
                                     }
-                                } else {
-                                    childController.displayinfo.setText("UNABLE TO DELETE RECORD");
-                                    childController.spinner.setVisible(false);
-                                    childController.check.setVisible(false);
                                 }
 
+//                                } else {
+//                                    childController.displayinfo.setText("UNABLE TO DELETE RECORD");
+//                                    childController.spinner.setVisible(false);
+//                                    childController.check.setVisible(false);
+//                                }
                             });
                             Thread d = new Thread(task);
                             d.setDaemon(true);
@@ -561,17 +600,6 @@ public class AddItemsController implements Initializable {
     public void closefrom() {
         Stage stage = (Stage) closebtn.getScene().getWindow();
         stage.close();
-    }
-
-    private void openFile(File file) {
-        try {
-            desktop.open(file);
-        } catch (IOException ex) {
-            Logger.getLogger(
-                    AddItemsController.class.getName()).log(
-                    Level.SEVERE, null, ex
-            );
-        }
     }
 
 }

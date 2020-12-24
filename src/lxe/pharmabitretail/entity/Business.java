@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author scarface
+ * @author JScare
  */
 @Entity
 @Table(name = "business")
