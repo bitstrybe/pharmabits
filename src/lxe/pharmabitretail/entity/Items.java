@@ -12,8 +12,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,18 +21,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
 
 /**
  *
- * @author JScare
+ * @author scarface
  */
 @Entity
-@Table(name = "items", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"item_desc"})})
+@Table(name = "items")
 @NamedQueries({
     @NamedQuery(name = "Items.findAll", query = "SELECT i FROM Items i")
-    , @NamedQuery(name = "Items.findByItemCode", query = "SELECT i FROM Items i WHERE i.itemCode = :itemCode")
     , @NamedQuery(name = "Items.findByItemDesc", query = "SELECT i FROM Items i WHERE i.itemDesc = :itemDesc")
     , @NamedQuery(name = "Items.findByItemName", query = "SELECT i FROM Items i WHERE i.itemName = :itemName")
     , @NamedQuery(name = "Items.findByItemImg", query = "SELECT i FROM Items i WHERE i.itemImg = :itemImg")
@@ -47,10 +42,6 @@ public class Items implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "item_code", nullable = false)
-    private Integer itemCode;
     @Basic(optional = false)
     @Column(name = "item_desc", nullable = false, length = 500)
     private String itemDesc;
@@ -79,7 +70,7 @@ public class Items implements Serializable {
     private Date lastModified;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "items")
     private Collection<Stockin> stockinCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "itemCode")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
     private Collection<UomDef> uomDefCollection;
     @JoinColumn(name = "category", referencedColumnName = "category_name", nullable = false)
     @ManyToOne(optional = false)
@@ -94,12 +85,11 @@ public class Items implements Serializable {
     public Items() {
     }
 
-    public Items(Integer itemCode) {
-        this.itemCode = itemCode;
+    public Items(String itemDesc) {
+        this.itemDesc = itemDesc;
     }
 
-    public Items(Integer itemCode, String itemDesc, String itemName, String itemImg, String vom, double vomDef, int rol, Date entryLog, Date lastModified) {
-        this.itemCode = itemCode;
+    public Items(String itemDesc, String itemName, String itemImg, String vom, double vomDef, int rol, Date entryLog, Date lastModified) {
         this.itemDesc = itemDesc;
         this.itemName = itemName;
         this.itemImg = itemImg;
@@ -108,14 +98,6 @@ public class Items implements Serializable {
         this.rol = rol;
         this.entryLog = entryLog;
         this.lastModified = lastModified;
-    }
-
-    public Integer getItemCode() {
-        return itemCode;
-    }
-
-    public void setItemCode(Integer itemCode) {
-        this.itemCode = itemCode;
     }
 
     public String getItemDesc() {
@@ -225,7 +207,7 @@ public class Items implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (itemCode != null ? itemCode.hashCode() : 0);
+        hash += (itemDesc != null ? itemDesc.hashCode() : 0);
         return hash;
     }
 
@@ -236,7 +218,7 @@ public class Items implements Serializable {
             return false;
         }
         Items other = (Items) object;
-        if ((this.itemCode == null && other.itemCode != null) || (this.itemCode != null && !this.itemCode.equals(other.itemCode))) {
+        if ((this.itemDesc == null && other.itemDesc != null) || (this.itemDesc != null && !this.itemDesc.equals(other.itemDesc))) {
             return false;
         }
         return true;
@@ -244,7 +226,7 @@ public class Items implements Serializable {
 
     @Override
     public String toString() {
-        return "lxe.pharmabitretail.entity.Items[ itemCode=" + itemCode + " ]";
+        return "lxe.pharmabitretail.entity.Items[ itemDesc=" + itemDesc + " ]";
     }
     
 }

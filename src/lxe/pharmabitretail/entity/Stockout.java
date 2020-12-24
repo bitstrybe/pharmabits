@@ -23,7 +23,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author JScare
+ * @author scarface
  */
 @Entity
 @Table(name = "stockout")

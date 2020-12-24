@@ -86,7 +86,7 @@ public class ItemsBL extends DdsBL {
         }
     }
       public String getImageItembyId(int val){
-          TypedQuery<String> q = em.createQuery("SELECT i.itemImg FROM Items i WHERE i.itemCode = :itemCode", String.class);
+          TypedQuery<String> q = em.createQuery("SELECT i.itemImg FROM Items i WHERE i.itemDesc = :itemCode", String.class);
           q.setParameter("itemCode", val);
           return q.getSingleResult();
       }

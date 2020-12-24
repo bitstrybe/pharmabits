@@ -522,3 +522,44 @@ Caused by: java.lang.IllegalStateException: File corrupt reading chunk at positi
 	at org.h2.mvstore.MVStore.close(MVStore.java:1133)
 	at org.h2.mvstore.db.MVTableEngine$Store.close(MVTableEngine.java:404)
 	... 12 more
+2020-12-24 02:44:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO ""pharmabitsdb"".""PUBLIC"".""items"" (""item_desc"", ""item_name"", ""item_img"", ""category"", ""manufacturer"", ""vom"", ""vom_def"", ""rol"", ""users"", ""entry_log"", ""last_modified"")[*]"; expected "DIRECT, SORTED, DEFAULT, VALUES, SET, (, WITH, SELECT, TABLE, VALUES"; SQL statement:
+INSERT INTO "pharmabitsdb"."PUBLIC"."items" ("item_desc", "item_name", "item_img", "category", "manufacturer", "vom", "vom_def", "rol", "users", "entry_log", "last_modified") [42001-200]
+2020-12-24 02:45:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO ""pharmabitsdb"".""PUBLIC"".""items"" (""item_desc"", ""item_name"", ""item_img"", ""category"", ""manufacturer"", ""vom"", ""vom_def"", ""rol"", ""users"", ""entry_log"", ""last_modified"")[*]"; expected "DIRECT, SORTED, DEFAULT, VALUES, SET, (, WITH, SELECT, TABLE, VALUES"; SQL statement:
+INSERT INTO "pharmabitsdb"."PUBLIC"."items" ("item_desc", "item_name", "item_img", "category", "manufacturer", "vom", "vom_def", "rol", "users", "entry_log", "last_modified") [42001-200]
+2020-12-24 02:50:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "item_code" not found; SQL statement:
+CREATE TABLE uom_def (
+  uom_item int(11) NOT NULL AUTO_INCREMENT,
+  item_code int(11) NOT NULL,
+  uom_code varchar(145) NOT NULL,
+  uom_dm int(11) NOT NULL,
+  uom_nm int(11) NOT NULL,
+  PRIMARY KEY (uom_item),
+  FOREIGN KEY (`item_code`) REFERENCES `items` (`item_code`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  FOREIGN KEY (`uom_code`) REFERENCES `uom` (`uom_desc`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) [42122-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.table.Table.getColumn(Table.java:703)
+	at org.h2.table.IndexColumn.mapColumns(IndexColumn.java:115)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:231)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:78)
+	at org.h2.command.ddl.CommandWithColumns.createConstraints(CommandWithColumns.java:83)
+	at org.h2.command.ddl.CreateTable.update(CreateTable.java:133)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:198)
+	at org.h2.command.Command.executeUpdate(Command.java:251)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:228)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper.executeSQLStatementForExtraction(SQLExecutionHelper.java:856)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper.access$500(SQLExecutionHelper.java:86)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper$1Loader.run(SQLExecutionHelper.java:149)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.openide.util.RequestProcessor$Task.run(RequestProcessor.java:1443)
+	at org.netbeans.modules.openide.util.GlobalLookup.execute(GlobalLookup.java:68)
+	at org.openide.util.lookup.Lookups.executeWith(Lookups.java:303)
+	at org.openide.util.RequestProcessor$Processor.run(RequestProcessor.java:2058)

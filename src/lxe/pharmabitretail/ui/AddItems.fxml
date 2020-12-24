@@ -21,7 +21,7 @@
 
 <StackPane prefHeight="601.0" prefWidth="905.0" style="-fx-background-color: #00000044;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.AddItemsController">
    <children>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="628.0" prefWidth="905.0" styleClass="form_border_color" stylesheets="@style.css">
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="628.0" prefWidth="985.0" styleClass="form_border_color" stylesheets="@style.css">
          <top>
             <HBox prefHeight="49.0" prefWidth="361.0" BorderPane.alignment="CENTER">
                <children>
@@ -32,7 +32,7 @@
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
-                        <Button fx:id="closebtn" layoutX="854.0" layoutY="13.0" mnemonicParsing="false" onAction="#closefrom" styleClass="closeform">
+                        <Button fx:id="closebtn" layoutX="940.0" layoutY="12.0" mnemonicParsing="false" onAction="#closefrom" styleClass="closeform">
                            <graphic>
                               <FontAwesomeIcon glyphName="CLOSE" />
                            </graphic>
@@ -295,19 +295,19 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <VBox layoutX="14.0" layoutY="234.0" prefHeight="311.0" prefWidth="876.0">
+                  <VBox layoutX="19.0" layoutY="234.0" prefHeight="311.0" prefWidth="950.0">
                      <children>
                         <JFXTextField fx:id="searchbtn" prefHeight="25.0" prefWidth="217.0" promptText="Search Item" />
-                        <TableView fx:id="itemtableview" prefHeight="282.0" prefWidth="876.0" styleClass="table-cell" stylesheets="@style.css">
+                        <TableView fx:id="itemtableview" prefHeight="282.0" prefWidth="919.0" styleClass="table-cell" stylesheets="@style.css">
                            <columns>
-                              <TableColumn fx:id="itemimage" prefWidth="150.0" resizable="false" text="Item Image" />
-                              <TableColumn fx:id="itemname" prefWidth="120.0" text="Item Name" />
-                              <TableColumn fx:id="category" prefWidth="114.0" text="Category" />
-                              <TableColumn fx:id="manufacturer" prefWidth="190.0" text="Manufacturer" />
-                              <TableColumn fx:id="uomtb" prefWidth="99.0" text="UOM" />
-                              <TableColumn fx:id="vomtb" prefWidth="73.0" text="VOM" />
-                              <TableColumn fx:id="rol" prefWidth="107.0" text="Re-Order Level" />
-                              <TableColumn fx:id="action" prefWidth="75.0" resizable="false" text="Action" />
+                              <TableColumn fx:id="itemimage" prefWidth="125.0" resizable="false" text="Item Image" />
+                              <TableColumn fx:id="itemname" prefWidth="228.0" text="Item Name" />
+                              <TableColumn fx:id="category" prefWidth="81.0" text="Category" />
+                              <TableColumn fx:id="manufacturer" prefWidth="220.0" text="Manufacturer" />
+                              <TableColumn fx:id="uomtb" prefWidth="96.0" text="UOM" />
+                              <TableColumn fx:id="vomtb" prefWidth="79.0" text="VOM" />
+                              <TableColumn fx:id="rol" prefWidth="62.0" text="ROL" />
+                              <TableColumn fx:id="action" prefWidth="55.0" resizable="false" text="Action" />
                            </columns>
                         </TableView>
                      </children>

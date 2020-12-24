@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package lxe.pharmabitretail.tablemodel;
 
 import javafx.beans.property.SimpleIntegerProperty;
@@ -18,7 +14,7 @@ import javafx.scene.image.ImageView;
  */
 public class ItemTableModel {
 
-    private SimpleIntegerProperty itemCode;
+    //private SimpleIntegerProperty itemCode;
     private SimpleStringProperty itemCodeName;
     private SimpleStringProperty itemName;
     private SimpleStringProperty category;
@@ -32,8 +28,8 @@ public class ItemTableModel {
     public ItemTableModel() {
     }
 
-    public ItemTableModel(Integer itemCode, String itemcodename, String itemName, String category, String manufacturer,String uom, int uomitem, String vom_val, long rol, ImageView img) {
-        this.itemCode = new SimpleIntegerProperty(itemCode);
+    public ItemTableModel(String itemcodename, String itemName, String category, String manufacturer,String uom, int uomitem, String vom_val, long rol, ImageView img) {
+       // this.itemCode = new SimpleIntegerProperty(itemCode);
         this.itemCodeName = new SimpleStringProperty(itemcodename);
         this.itemName = new SimpleStringProperty(itemName);
         this.category = new SimpleStringProperty(category);
@@ -46,17 +42,17 @@ public class ItemTableModel {
 
     }
 
-    public Integer getItemCode() {
-        return itemCode.get();
-    }
-
-    public SimpleIntegerProperty getItemCodeProperty() {
-        return itemCode;
-    }
-
-    public void setItemCodeProperty(Integer itemCode) {
-        this.itemCode = new SimpleIntegerProperty(itemCode);
-    }
+//    public Integer getItemCode() {
+//        return itemCode.get();
+//    }
+//
+//    public SimpleIntegerProperty getItemCodeProperty() {
+//        return itemCode;
+//    }
+//
+//    public void setItemCodeProperty(Integer itemCode) {
+//        this.itemCode = new SimpleIntegerProperty(itemCode);
+//    }
 
     public String getItemCodeName() {
         return itemCodeName.get();

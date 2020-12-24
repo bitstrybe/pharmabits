@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package lxe.pharmabitretail.bl;
 
 import javax.persistence.TypedQuery;
@@ -33,8 +29,8 @@ public class UomBL extends  DdsBL{
         return 1;
     }
     
-    public UomDef getUombyItemId(int val){
-        TypedQuery<UomDef> q = em.createQuery("SELECT u FROM UomDef u WHERE u.itemCode.itemCode = :itemCode", UomDef.class);
+    public UomDef getUombyItemId(String val){
+        TypedQuery<UomDef> q = em.createQuery("SELECT u FROM UomDef u WHERE u.item.itemDesc = :itemCode", UomDef.class);
         q.setParameter("itemCode", val);
         return q.getSingleResult();
     }

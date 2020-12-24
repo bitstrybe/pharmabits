@@ -20,7 +20,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author JScare
+ * @author scarface
  */
 @Entity
 @Table(name = "uom_def")
@@ -43,9 +43,9 @@ public class UomDef implements Serializable {
     @Basic(optional = false)
     @Column(name = "uom_nm", nullable = false)
     private int uomNm;
-    @JoinColumn(name = "item_code", referencedColumnName = "item_code", nullable = false)
+    @JoinColumn(name = "item", referencedColumnName = "item_desc", nullable = false)
     @ManyToOne(optional = false)
-    private Items itemCode;
+    private Items item;
     @JoinColumn(name = "uom_code", referencedColumnName = "uom_desc", nullable = false)
     @ManyToOne(optional = false)
     private Uom uomCode;
@@ -87,12 +87,12 @@ public class UomDef implements Serializable {
         this.uomNm = uomNm;
     }
 
-    public Items getItemCode() {
-        return itemCode;
+    public Items getItem() {
+        return item;
     }
 
-    public void setItemCode(Items itemCode) {
-        this.itemCode = itemCode;
+    public void setItem(Items item) {
+        this.item = item;
     }
 
     public Uom getUomCode() {

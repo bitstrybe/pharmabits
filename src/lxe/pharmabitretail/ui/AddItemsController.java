@@ -141,6 +141,8 @@ public class AddItemsController implements Initializable {
     byte[] item_image = null;
     File ifile;
     InputStream initialStream;
+    ItemsBL itembl = new ItemsBL();
+    UomBL uombl = new UomBL();
 
     public void getManufacturer() {
         List<Manufacturer> list = new ManufacturerBL().getAllManufacturer();
@@ -186,7 +188,8 @@ public class AddItemsController implements Initializable {
         getVolumeValue();
         getUOM();
         TableData();
-        searchbtn.textProperty().addListener(e -> {
+        searchbtn.textProperty().addListener((e, oldValue, newValue) -> {
+            searchbtn.setText(newValue.toUpperCase());
             if (searchbtn.getText().length() > 3) {
                 TableData(searchbtn.getText());
             } else {
@@ -307,7 +310,7 @@ public class AddItemsController implements Initializable {
             String itemdesc = itmtextfield.getText().toUpperCase() + " " + categorycombo.getValue().toUpperCase() + " " + vom_val.getText() + vom.getSelectionModel().getSelectedItem() + " (" + manufacturercombo.getValue() + ")";
             try {
                 cat.setItemDesc(itemdesc);
-                cat.setItemName(itmtextfield.getText());
+                cat.setItemName(itmtextfield.getText().toUpperCase());
                 cat.setCategory(new Category(categorycombo.getValue()));
                 cat.setManufacturer(new Manufacturer(manufacturercombo.getValue()));
                 cat.setVomDef(Double.parseDouble(vom_val.getText()));
@@ -323,7 +326,7 @@ public class AddItemsController implements Initializable {
 
                 List<UomDef> udf = new ArrayList<>();
                 UomDef df = new UomDef();
-                df.setItemCode(cat);
+                df.setItem(cat);
                 df.setUomCode(new Uom(uomcombo.getSelectionModel().getSelectedItem()));
                 df.setUomNm(Integer.parseInt(uom_val1.getText()));
                 df.setUomDm(Integer.parseInt(uom_val2.getText()));
@@ -366,10 +369,10 @@ public class AddItemsController implements Initializable {
     }
 
     public void TableData() {
-        List<Items> c = new ItemsBL().getAllItems();
+        List<Items> c = itembl.getAllItems();
         data = FXCollections.observableArrayList();
         c.forEach((item) -> {
-            UomDef domf = new UomBL().getUombyItemId(item.getItemCode());
+            UomDef domf = new UomBL().getUombyItemId(item.getItemDesc());
             int uomitem = domf.getUomItem();
             String uom_val = String.valueOf(domf.getUomCode().getUomDesc() + " " + domf.getUomNm() + " X " + domf.getUomDm());
             String vom_value = String.valueOf(item.getVomDef()) + item.getVom();
@@ -379,13 +382,13 @@ public class AddItemsController implements Initializable {
                 Image image = new Image(file.toURI().toString());
                 itemimage.setImage(image);
                 itemimage.setFitWidth(70);
-                itemimage.setFitWidth(70);
+                itemimage.setFitHeight(70);
                 itemimage.setPreserveRatio(true);
                 itemimage.scaleXProperty();
                 itemimage.scaleYProperty();
                 itemimage.setSmooth(true);
                 itemimage.setCache(true);
-                data.add(new ItemTableModel(item.getItemCode(), item.getItemDesc(), item.getItemName(), item.getCategory().getCategoryName(), item.getManufacturer().getManufacturer(),uom_val , uomitem, vom_value, item.getRol(), itemimage));
+                data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getCategory().getCategoryName(), item.getManufacturer().getManufacturer(),uom_val , uomitem, vom_value, item.getRol(), itemimage));
 //                System.out.println(item.getItemCodeFullname() + " " + item.getItemName() + " " + item.getCategory().getCategoryName() + "" + item.getManufacturer().getManufacturer() + " " + uom_value + " " + item.getRol());
             } catch (Exception ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -400,9 +403,9 @@ public class AddItemsController implements Initializable {
         vomtb.setCellValueFactory(cell -> cell.getValue().getVomProperty());
         rol.setCellValueFactory(cell -> cell.getValue().getRolProperty());
         itemimage.setCellValueFactory(new PropertyValueFactory<ItemTableModel, ImageView>("image"));
-        itemimage.setPrefWidth(90);
+        itemimage.setPrefWidth(85);
         action.setSortable(false);
-        action.setMaxWidth(480);
+        //action.setMaxWidth(480);
 
         action.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ItemTableModel, Boolean>, ObservableValue<Boolean>>() {
             @Override
@@ -423,11 +426,11 @@ public class AddItemsController implements Initializable {
     }
 
     public void TableData(String p) {
-        List<Items> c = new ItemsBL().searchAllItems(p);
+        List<Items> c = itembl.searchAllItems(p);
         data = FXCollections.observableArrayList();
-
+        //UomDef domf = new UomDef();
         c.forEach((item) -> {
-            UomDef domf = new UomBL().getUombyItemId(item.getItemCode());
+            UomDef domf = uombl.getUombyItemId(item.getItemDesc());
             int uomitem = domf.getUomItem();
             String uom_val = String.valueOf(domf.getUomCode().getUomDesc() + " " + domf.getUomNm() + " X " + domf.getUomDm());
             String vom_value = String.valueOf(item.getVomDef()) + item.getVom();
@@ -444,7 +447,7 @@ public class AddItemsController implements Initializable {
                 itemimage.scaleYProperty();
                 itemimage.setSmooth(true);
                 itemimage.setCache(true);
-                data.add(new ItemTableModel(item.getItemCode(), item.getItemDesc(), item.getItemName(), item.getCategory().getCategoryName(), item.getManufacturer().getManufacturer(),uom_val , uomitem, vom_value, item.getRol(), itemimage));
+                data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getCategory().getCategoryName(), item.getManufacturer().getManufacturer(),uom_val , uomitem, vom_value, item.getRol(), itemimage));
             } catch (Exception ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
 
@@ -534,7 +537,7 @@ public class AddItemsController implements Initializable {
                                 int uom_result = new UomBL().removeData(selectedRecord.getUomItem());
 
                                 if (uom_result == 1) {
-                                    int result = new ItemsBL().removeData(selectedRecord.getItemCode());
+                                    int result = new ItemsBL().removeData(selectedRecord.getItemCodeName());
                                     switch (result) {
                                         case 1:
                                             childController.displayinfo.setText("SUCCESSFULLY DELETED");
