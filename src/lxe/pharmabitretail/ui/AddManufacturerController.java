@@ -64,7 +64,6 @@ public class AddManufacturerController implements Initializable {
 
     ObservableList<ManufacturerTableModel> data;
 
-    public Button closeButton;
     @FXML
     public Label displayinfo;
     @FXML
@@ -86,7 +85,7 @@ public class AddManufacturerController implements Initializable {
     @FXML
     private JFXButton save;
     @FXML
-    private JFXButton closebtn;
+    private Button closebtn;
 
     /**
      * Initializes the controller class.

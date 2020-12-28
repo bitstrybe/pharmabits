@@ -24,6 +24,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
@@ -55,7 +56,7 @@ import lxe.pharmabitretail.tablemodel.UomTableModel;
 public class AddUomController implements Initializable {
 
     @FXML
-    private JFXButton closebtn;
+    private Button closebtn;
     @FXML
     private JFXTextField uomtextfield;
     @FXML

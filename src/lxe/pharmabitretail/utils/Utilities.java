@@ -19,6 +19,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 /**
@@ -59,18 +61,18 @@ public class Utilities {
         return java.sql.Date.valueOf(dateToConvert);
     }
 
-    public static void clearAllField(Pane pane) {
+    public static void clearAllField(AnchorPane pane) {
         for (Node node : pane.getChildren()) {
             if (node instanceof JFXTextField) {
-                ((JFXTextField) (node)).setText("");
+                ((JFXTextField) (node)).clear();
             } else if (node instanceof ChoiceBox) {
-                ((ChoiceBox) (node)).setValue(null);
+                ((ChoiceBox) (node)).getSelectionModel().clearSelection();
             } else if (node instanceof DatePicker) {
                 ((DatePicker) (node)).setValue(null);
             } else if (node instanceof ComboBox) {
                 ((ComboBox) (node)).setValue(null);
             } else if (node instanceof ComboBox) {
-                File file = new File("resources/avater_image.jpg");
+                File file = new File("resources/drugspack.png");
                 Image image = new Image(file.toURI().toString());
                 ((ImageView) (node)).setImage(image);
             }

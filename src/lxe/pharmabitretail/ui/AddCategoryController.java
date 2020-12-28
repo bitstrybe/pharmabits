@@ -82,7 +82,7 @@ public class AddCategoryController implements Initializable {
     @FXML
     private TableColumn<CategoryTableModel, Boolean> action;
     @FXML
-    private JFXButton closebtn;
+    private Button closebtn;
 
     /**
      * Initializes the controller class.

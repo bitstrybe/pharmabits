@@ -45,9 +45,9 @@
          <center>
             <Pane fx:id="itemspane" prefHeight="599.0" prefWidth="903.0" styleClass="form_background" BorderPane.alignment="CENTER">
                <children>
-                  <HBox prefHeight="246.0" prefWidth="896.0">
+                  <HBox layoutX="-1.0" layoutY="7.0" prefHeight="245.0" prefWidth="985.0">
                      <children>
-                        <VBox prefHeight="241.0" prefWidth="281.0">
+                        <VBox prefHeight="222.0" prefWidth="328.3">
                            <children>
                               <HBox prefHeight="17.0" prefWidth="245.0">
                                  <children>
@@ -62,7 +62,7 @@
                                  <children>
                                     <ImageView fx:id="itemimages" fitHeight="123.0" fitWidth="217.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../../resources/avater_image.jpg" />
+                                          <Image url="@../../../resources/drugspack.png" />
                                        </image>
                                     </ImageView>
                                     <Button fx:id="browse" mnemonicParsing="false" prefHeight="32.0" prefWidth="33.0">
@@ -95,20 +95,27 @@
                                     <Insets />
                                  </opaqueInsets>
                               </HBox>
-                              <JFXTextField fx:id="itmtextfield" focusColor="#f2efef" opacity="0.93" prefHeight="30.0" prefWidth="290.0" styleClass="form_field">
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
+                              <HBox prefHeight="30.0" prefWidth="312.0">
                                  <VBox.margin>
                                     <Insets top="5.0" />
                                  </VBox.margin>
-                              </JFXTextField>
+                                 <children>
+                                    <JFXTextField fx:id="itmtextfield" focusColor="#f2efef" opacity="0.93" prefHeight="30.0" prefWidth="324.0" styleClass="form_field">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </JFXTextField>
+                                 </children>
+                              </HBox>
                            </children>
                            <HBox.margin>
-                              <Insets left="20.0" top="10.0" />
+                              <Insets left="20.0" />
                            </HBox.margin>
+                           <padding>
+                              <Insets right="10.0" top="5.0" />
+                           </padding>
                         </VBox>
-                        <VBox prefHeight="245.0" prefWidth="282.0">
+                        <VBox prefHeight="245.0" prefWidth="328.3">
                            <children>
                               <HBox layoutX="10.0" layoutY="10.0">
                                  <children>
@@ -124,14 +131,17 @@
                                     </Label>
                                  </children>
                                  <VBox.margin>
-                                    <Insets top="20.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </HBox>
-                              <ComboBox fx:id="categorycombo" prefHeight="30.0" prefWidth="290.0">
+                              <HBox>
                                  <VBox.margin>
                                     <Insets top="5.0" />
                                  </VBox.margin>
-                              </ComboBox>
+                                 <children>
+                                    <ComboBox fx:id="categorycombo" prefHeight="30.0" prefWidth="326.0" />
+                                 </children>
+                              </HBox>
                               <HBox layoutX="10.0" layoutY="57.0">
                                  <children>
                                     <Label prefHeight="17.0" prefWidth="78.0" text="Manufacturer">
@@ -149,11 +159,14 @@
                                     <Insets top="20.0" />
                                  </VBox.margin>
                               </HBox>
-                              <ComboBox fx:id="manufacturercombo" layoutX="10.0" layoutY="74.0" prefHeight="30.0" prefWidth="290.0">
+                              <HBox>
                                  <VBox.margin>
                                     <Insets top="5.0" />
                                  </VBox.margin>
-                              </ComboBox>
+                                 <children>
+                                    <ComboBox fx:id="manufacturercombo" prefHeight="30.0" prefWidth="324.0" />
+                                 </children>
+                              </HBox>
                               <HBox>
                                  <children>
                                     <Label prefHeight="17.0" prefWidth="130.0" text="Unit of Measurement" />
@@ -167,7 +180,7 @@
                                     <Insets top="20.0" />
                                  </VBox.margin>
                               </HBox>
-                              <HBox alignment="CENTER" prefHeight="29.0" prefWidth="290.0" spacing="4.0">
+                              <HBox alignment="CENTER" prefHeight="29.0" prefWidth="300.0" spacing="4.0">
                                  <children>
                                     <ComboBox fx:id="uomcombo" prefHeight="30.0" prefWidth="250.0" />
                                     <JFXTextField fx:id="uom_val1" focusColor="#f2efef" opacity="0.93" prefHeight="27.0" prefWidth="147.0" promptText="value" styleClass="form_field">
@@ -194,12 +207,15 @@
                               </HBox>
                            </children>
                            <HBox.margin>
-                              <Insets left="20.0" />
+                              <Insets />
                            </HBox.margin>
+                           <padding>
+                              <Insets left="10.0" right="10.0" top="15.0" />
+                           </padding>
                         </VBox>
-                        <VBox layoutX="291.0" layoutY="10.0" prefHeight="241.0" prefWidth="292.0">
+                        <VBox layoutX="291.0" layoutY="10.0" prefHeight="241.0" prefWidth="328.3">
                            <HBox.margin>
-                              <Insets left="20.0" />
+                              <Insets right="20.0" />
                            </HBox.margin>
                            <children>
                               <HBox prefHeight="17.0" prefWidth="127.0">
@@ -212,10 +228,10 @@
                                     </Label>
                                  </children>
                                  <VBox.margin>
-                                    <Insets top="20.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </HBox>
-                              <HBox prefHeight="30.0" prefWidth="290.0">
+                              <HBox prefHeight="30.0" prefWidth="300.0">
                                  <children>
                                     <JFXTextField fx:id="vom_val" focusColor="#f2efef" opacity="0.93" prefHeight="27.0" prefWidth="147.0" promptText="value" styleClass="form_field">
                                        <font>
@@ -241,14 +257,18 @@
                                     <Insets top="20.0" />
                                  </VBox.margin>
                               </HBox>
-                              <JFXTextField fx:id="roltextfield" focusColor="#f2efef" opacity="0.93" prefHeight="32.0" prefWidth="290.0" styleClass="form_field">
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
+                              <HBox>
                                  <VBox.margin>
                                     <Insets top="5.0" />
                                  </VBox.margin>
-                              </JFXTextField>
+                                 <children>
+                                    <JFXTextField fx:id="roltextfield" focusColor="#f2efef" opacity="0.93" prefHeight="32.0" prefWidth="300.0" styleClass="form_field">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </JFXTextField>
+                                 </children>
+                              </HBox>
                               <HBox alignment="CENTER" prefHeight="47.0" prefWidth="286.0">
                                  <children>
                                     <JFXButton onAction="#saveAction" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #cccccc;" text="Save" textFill="#323232">
@@ -292,13 +312,16 @@
                                  </VBox.margin>
                               </HBox>
                            </children>
+                           <padding>
+                              <Insets left="10.0" top="15.0" />
+                           </padding>
                         </VBox>
                      </children>
                   </HBox>
-                  <VBox layoutX="19.0" layoutY="234.0" prefHeight="311.0" prefWidth="950.0">
+                  <VBox layoutX="19.0" layoutY="234.0" prefHeight="337.0" prefWidth="950.0">
                      <children>
                         <JFXTextField fx:id="searchbtn" prefHeight="25.0" prefWidth="217.0" promptText="Search Item" />
-                        <TableView fx:id="itemtableview" prefHeight="282.0" prefWidth="919.0" styleClass="table-cell" stylesheets="@style.css">
+                        <TableView fx:id="itemtableview" prefHeight="305.0" prefWidth="950.0" styleClass="table-cell" stylesheets="@style.css">
                            <columns>
                               <TableColumn fx:id="itemimage" prefWidth="125.0" resizable="false" text="Item Image" />
                               <TableColumn fx:id="itemname" prefWidth="228.0" text="Item Name" />

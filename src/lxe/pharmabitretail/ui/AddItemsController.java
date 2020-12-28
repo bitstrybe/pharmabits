@@ -4,9 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
-import java.awt.Desktop;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -22,7 +20,6 @@ import java.util.logging.Logger;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -46,7 +43,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
@@ -54,13 +50,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Callback;
 import javax.imageio.ImageIO;
 import lxe.pharmabitretail.bl.CategoryBL;
 import lxe.pharmabitretail.bl.InsertUpdateBL;
 import lxe.pharmabitretail.bl.ItemsBL;
 import lxe.pharmabitretail.bl.ManufacturerBL;
-import lxe.pharmabitretail.bl.StockinBL;
 import lxe.pharmabitretail.bl.UomBL;
 import lxe.pharmabitretail.bl.VomBL;
 import lxe.pharmabitretail.entity.Category;
@@ -71,7 +65,6 @@ import lxe.pharmabitretail.entity.UomDef;
 import lxe.pharmabitretail.entity.Users;
 import lxe.pharmabitretail.tablemodel.ItemTableModel;
 import lxe.pharmabitretail.utils.FilterComboBox;
-import lxe.pharmabitretail.utils.Utilities;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 
@@ -82,7 +75,6 @@ import org.apache.commons.io.IOUtils;
  */
 public class AddItemsController implements Initializable {
 
-    private Desktop desktop = Desktop.getDesktop();
     final FileChooser fileChooser = new FileChooser();
 
     ObservableList<ItemTableModel> data;
@@ -148,7 +140,7 @@ public class AddItemsController implements Initializable {
         List<Manufacturer> list = new ManufacturerBL().getAllManufacturer();
         ObservableList<Manufacturer> result = FXCollections.observableArrayList(list);
         result.forEach((man) -> {
-            manufacturercombo.getItems().add(man.getManufacturer());
+            manufacturercombo.getItems().add(man.getManufacturer().toUpperCase());
         });
     }
 
@@ -156,7 +148,7 @@ public class AddItemsController implements Initializable {
         List<Category> list = new CategoryBL().getAllCategory();
         ObservableList<Category> result = FXCollections.observableArrayList(list);
         result.forEach((cat) -> {
-            categorycombo.getItems().add(cat.getCategoryName());
+            categorycombo.getItems().add(cat.getCategoryName().toUpperCase());
         });
     }
 
@@ -164,7 +156,7 @@ public class AddItemsController implements Initializable {
         List<Uom> list = new VomBL().getAllUom();
         ObservableList<Uom> result = FXCollections.observableArrayList(list);
         result.forEach((cat) -> {
-            uomcombo.getItems().add(cat.getUomDesc());
+            uomcombo.getItems().add(cat.getUomDesc().toUpperCase());
         });
     }
 
@@ -180,6 +172,8 @@ public class AddItemsController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -196,58 +190,41 @@ public class AddItemsController implements Initializable {
                 TableData();
             }
         });
-        manufacturercombo.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                String s = FilterComboBox.jumpTo(event.getText(), manufacturercombo.getValue(), manufacturercombo.getItems());
-                if (s != null) {
-                    manufacturercombo.setValue(s);
-                }
+        manufacturercombo.setOnKeyReleased((KeyEvent event) -> {
+            String s = FilterComboBox.jumpTo(event.getText(), manufacturercombo.getValue(), manufacturercombo.getItems());
+            if (s != null) {
+                manufacturercombo.setValue(s);
             }
-
         });
 
-        categorycombo.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                String s = FilterComboBox.jumpTo(event.getText(), categorycombo.getValue(), categorycombo.getItems());
-                if (s != null) {
-                    categorycombo.setValue(s);
-                }
+        categorycombo.setOnKeyReleased((KeyEvent event) -> {
+            String s = FilterComboBox.jumpTo(event.getText(), categorycombo.getValue(), categorycombo.getItems());
+            if (s != null) {
+                categorycombo.setValue(s);
             }
-
         });
 
-        uomcombo.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                String s = FilterComboBox.jumpTo(event.getText(), uomcombo.getValue(), uomcombo.getItems());
-                if (s != null) {
-                    uomcombo.setValue(s);
-                }
+        uomcombo.setOnKeyReleased((KeyEvent event) -> {
+            String s = FilterComboBox.jumpTo(event.getText(), uomcombo.getValue(), uomcombo.getItems());
+            if (s != null) {
+                uomcombo.setValue(s);
             }
-
         });
         browse.setOnAction(new EventHandler<ActionEvent>() {
             Stage st = new Stage();
-
             @Override
             public void handle(ActionEvent event) {
-
                 FileChooser fileChooser = new FileChooser();
-
                 //Set extension filter
                 FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
                 FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
                 fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
-
                 //Show open file dialog
                 ifile = fileChooser.showOpenDialog(null);
                 //File ofile = new File
                 try {
                     BufferedImage bufferedImage = ImageIO.read(ifile);
                     Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-                    //image.setPreserveRatio(true);
                     itemimages.setImage(image);
                     itemimages.setFitWidth(200);
                     itemimages.setFitWidth(200);
@@ -256,39 +233,36 @@ public class AddItemsController implements Initializable {
                     itemimages.scaleYProperty();
                     itemimages.setSmooth(true);
                     itemimages.setCache(true);
-                    //WritableImage wimage = SwingFXUtils.toFXImage(bufferedImage, null);
-                    //FileInputStream fin = new FileInputStream(ifile);
-                    //File fout = new File("./img/");
-//                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
-//                    byte[] buf = new byte[1024];
-//
-//                    for (int readNum; (readNum = fin.read(buf)) != -1;) {
-//                        bos.write(buf, 0, readNum);
-//                    }
-                    //item_image = bos.toByteArray();
-
-                } catch (IOException ex) {
-                    Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IllegalArgumentException ex) {
+                } catch (IOException | IllegalArgumentException ex) {
                     Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
-//        volumevalue.setOnKeyReleased(new EventHandler<KeyEvent>() {
-//            @Override
-//            public void handle(KeyEvent event) {
-//                String s = FilterComboBox.jumpTo(event.getText(), volumevalue.getValue(), volumevalue.getItems());
-//                if (s != null) {
-//                    volumevalue.setValue(s);
-//                }
-//            }
-//
-//        });
+        vom.setOnKeyReleased((KeyEvent event) -> {
+            String s = FilterComboBox.jumpTo(event.getText(), vom.getValue(), vom.getItems());
+            if (s != null) {
+                vom.setValue(s);
+            }
+        });
     }
 
     private void closemtd(ActionEvent event) {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
+    }
+    
+    private void clearAllfield(){
+        itmtextfield.clear();
+        categorycombo.getSelectionModel().clearSelection();
+        manufacturercombo.getSelectionModel().clearSelection();
+        vom_val.clear();
+        vom.getSelectionModel().clearSelection();
+        roltextfield.clear();
+        uomcombo.getSelectionModel().clearSelection();
+        uom_val1.clear();
+        uom_val2.clear();
+        
+        
     }
 
     @FXML
@@ -310,10 +284,10 @@ public class AddItemsController implements Initializable {
             String itemdesc = itmtextfield.getText().toUpperCase() + " " + categorycombo.getValue().toUpperCase() + " " + vom_val.getText() + vom.getSelectionModel().getSelectedItem() + " (" + manufacturercombo.getValue() + ")";
             try {
                 cat.setItemDesc(itemdesc);
-                cat.setItemName(itmtextfield.getText().toUpperCase());
+                cat.setItemName(itmtextfield.getText().toUpperCase().trim());
                 cat.setCategory(new Category(categorycombo.getValue()));
                 cat.setManufacturer(new Manufacturer(manufacturercombo.getValue()));
-                cat.setVomDef(Double.parseDouble(vom_val.getText()));
+                cat.setVomDef(Double.parseDouble(vom_val.getText().trim()));
                 cat.setVom(vom.getSelectionModel().getSelectedItem());
                 cat.setRol(Integer.parseInt(roltextfield.getText()));
                 cat.setUsers(new Users(LoginController.u.getUserid()));
@@ -328,8 +302,8 @@ public class AddItemsController implements Initializable {
                 UomDef df = new UomDef();
                 df.setItem(cat);
                 df.setUomCode(new Uom(uomcombo.getSelectionModel().getSelectedItem()));
-                df.setUomNm(Integer.parseInt(uom_val1.getText()));
-                df.setUomDm(Integer.parseInt(uom_val2.getText()));
+                df.setUomNm(Integer.parseInt(uom_val1.getText().trim()));
+                df.setUomDm(Integer.parseInt(uom_val2.getText().trim()));
                 udf.add(df);
                 cat.setUomDefCollection(udf);
                 int result = new InsertUpdateBL().insertData(cat);
@@ -337,7 +311,7 @@ public class AddItemsController implements Initializable {
                     case 1:
                         java.nio.file.Files.copy(initialStream, targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                         displayinfo.setText("SUCCESSFULLY SAVED");
-                        Utilities.clearAllField(itemspane);
+//                        Utilities.clearAllField(itemspane);
                         spinner.setVisible(false);
                         check.setVisible(true);
                         TableData();
@@ -377,18 +351,18 @@ public class AddItemsController implements Initializable {
             String uom_val = String.valueOf(domf.getUomCode().getUomDesc() + " " + domf.getUomNm() + " X " + domf.getUomDm());
             String vom_value = String.valueOf(item.getVomDef()) + item.getVom();
             try {
-                ImageView itemimage = new ImageView();
+                ImageView imageitems = new ImageView();
                 File file = new File(item.getItemImg());
                 Image image = new Image(file.toURI().toString());
-                itemimage.setImage(image);
-                itemimage.setFitWidth(70);
-                itemimage.setFitHeight(70);
-                itemimage.setPreserveRatio(true);
-                itemimage.scaleXProperty();
-                itemimage.scaleYProperty();
-                itemimage.setSmooth(true);
-                itemimage.setCache(true);
-                data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getCategory().getCategoryName(), item.getManufacturer().getManufacturer(),uom_val , uomitem, vom_value, item.getRol(), itemimage));
+                imageitems.setImage(image);
+                imageitems.setFitWidth(70);
+                imageitems.setFitHeight(70);
+                imageitems.setPreserveRatio(true);
+                imageitems.scaleXProperty();
+                imageitems.scaleYProperty();
+                imageitems.setSmooth(true);
+                imageitems.setCache(true);
+                data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getCategory().getCategoryName(), item.getManufacturer().getManufacturer(),uom_val , uomitem, vom_value, item.getRol(), imageitems));
 //                System.out.println(item.getItemCodeFullname() + " " + item.getItemName() + " " + item.getCategory().getCategoryName() + "" + item.getManufacturer().getManufacturer() + " " + uom_value + " " + item.getRol());
             } catch (Exception ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -402,23 +376,13 @@ public class AddItemsController implements Initializable {
         uomtb.setCellValueFactory(cell -> cell.getValue().getUomProperty());
         vomtb.setCellValueFactory(cell -> cell.getValue().getVomProperty());
         rol.setCellValueFactory(cell -> cell.getValue().getRolProperty());
-        itemimage.setCellValueFactory(new PropertyValueFactory<ItemTableModel, ImageView>("image"));
+        itemimage.setCellValueFactory(new PropertyValueFactory<>("image"));
         itemimage.setPrefWidth(85);
         action.setSortable(false);
         //action.setMaxWidth(480);
 
-        action.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ItemTableModel, Boolean>, ObservableValue<Boolean>>() {
-            @Override
-            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<ItemTableModel, Boolean> features) {
-                return new SimpleBooleanProperty(features.getValue() != null);
-            }
-        });
-        action.setCellFactory(new Callback<TableColumn<ItemTableModel, Boolean>, TableCell<ItemTableModel, Boolean>>() {
-            @Override
-            public TableCell<ItemTableModel, Boolean> call(TableColumn<ItemTableModel, Boolean> personBooleanTableColumn) {
-                return new AddPersonCell();
-            }
-        });
+        action.setCellValueFactory((TableColumn.CellDataFeatures<ItemTableModel, Boolean> features) -> new SimpleBooleanProperty(features.getValue() != null));
+        action.setCellFactory((TableColumn<ItemTableModel, Boolean> personBooleanTableColumn) -> new AddPersonCell());
         itemtableview.setItems(data);
 //        clientTable.getColumns().add(action);
         itemtableview.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
@@ -436,18 +400,18 @@ public class AddItemsController implements Initializable {
             String vom_value = String.valueOf(item.getVomDef()) + item.getVom();
             try {
 
-                ImageView itemimage = new ImageView();
+                ImageView itemimageview = new ImageView();
                 File file = new File(item.getItemImg());
                 Image image = new Image(file.toURI().toString());
-                itemimage.setImage(image);
-                itemimage.setFitWidth(70);
-                itemimage.setFitWidth(70);
-                itemimage.setPreserveRatio(true);
-                itemimage.scaleXProperty();
-                itemimage.scaleYProperty();
-                itemimage.setSmooth(true);
-                itemimage.setCache(true);
-                data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getCategory().getCategoryName(), item.getManufacturer().getManufacturer(),uom_val , uomitem, vom_value, item.getRol(), itemimage));
+                itemimageview.setImage(image);
+                itemimageview.setFitWidth(70);
+                itemimageview.setFitWidth(70);
+                itemimageview.setPreserveRatio(true);
+                itemimageview.scaleXProperty();
+                itemimageview.scaleYProperty();
+                itemimageview.setSmooth(true);
+                itemimageview.setCache(true);
+                data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getCategory().getCategoryName(), item.getManufacturer().getManufacturer(),uom_val , uomitem, vom_value, item.getRol(), itemimageview));
             } catch (Exception ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
 
@@ -461,18 +425,8 @@ public class AddItemsController implements Initializable {
         action.setSortable(false);
         action.setMaxWidth(480);
 
-        action.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ItemTableModel, Boolean>, ObservableValue<Boolean>>() {
-            @Override
-            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<ItemTableModel, Boolean> features) {
-                return new SimpleBooleanProperty(features.getValue() != null);
-            }
-        });
-        action.setCellFactory(new Callback<TableColumn<ItemTableModel, Boolean>, TableCell<ItemTableModel, Boolean>>() {
-            @Override
-            public TableCell<ItemTableModel, Boolean> call(TableColumn<ItemTableModel, Boolean> personBooleanTableColumn) {
-                return new AddPersonCell();
-            }
-        });
+        action.setCellValueFactory((TableColumn.CellDataFeatures<ItemTableModel, Boolean> features) -> new SimpleBooleanProperty(features.getValue() != null));
+        action.setCellFactory((TableColumn<ItemTableModel, Boolean> personBooleanTableColumn) -> new AddPersonCell());
         itemtableview.setItems(data);
 //        clientTable.getColumns().add(action);
         itemtableview.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
@@ -505,80 +459,72 @@ public class AddItemsController implements Initializable {
             paddedButton.getChildren().add(delButton);
             delButton.setGraphic(new ImageView(img2));
             delButton.setRipplerFill(Paint.valueOf("#D8E1DC"));
-            delButton.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-
-                public void handle(ActionEvent event) {
-                    int selectdIndex = getTableRow().getIndex();
-                    //Create a new table show details of the selected item
-                    ItemTableModel selectedRecord = (ItemTableModel) itemtableview.getItems().get(selectdIndex);
-
-                    try {
-
-                        Stage stage = new Stage();
-                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Delete.fxml"));
-                        Parent parent = (Parent) fxmlLoader.load();
-                        DeleteController childController = fxmlLoader.getController();
-                        childController.delete.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-                            Task<Void> task = new Task<Void>() {
-                                @Override
-                                protected Void call() throws Exception {
-                                    childController.spinner.setVisible(true);
-                                    updateMessage("PROCESSING PLS WAIT.....");
-                                    Thread.sleep(1000);
-                                    return null;
-                                }
-                            };
-                            childController.displayinfo.textProperty().bind(task.messageProperty());
-                            task.setOnSucceeded(f -> {
-                                childController.displayinfo.textProperty().unbind();
+            delButton.setOnAction((ActionEvent event) -> {
+                int selectdIndex = getTableRow().getIndex();
+                //Create a new table show details of the selected item
+                ItemTableModel selectedRecord = (ItemTableModel) itemtableview.getItems().get(selectdIndex);
+                try {
+                    Stage stage = new Stage();
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Delete.fxml"));
+                    Parent parent1 = (Parent) fxmlLoader.load();
+                    DeleteController childController = fxmlLoader.getController();
+                    childController.delete.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+                        Task<Void> task = new Task<Void>() {
+                            @Override
+                            protected Void call() throws Exception {
+                                childController.spinner.setVisible(true);
+                                updateMessage("PROCESSING PLS WAIT.....");
+                                Thread.sleep(1000);
+                                return null;
+                            }
+                        };
+                        childController.displayinfo.textProperty().bind(task.messageProperty());
+                        task.setOnSucceeded(f -> {
+                            childController.displayinfo.textProperty().unbind();
 //                                List ls = new StockinBL().getStockinFromItems(selectedRecord.getItemCodeName());
 //                                if (ls.isEmpty()) {
-                                int uom_result = new UomBL().removeData(selectedRecord.getUomItem());
+int uom_result = new UomBL().removeData(selectedRecord.getUomItem());
 
-                                if (uom_result == 1) {
-                                    int result = new ItemsBL().removeData(selectedRecord.getItemCodeName());
-                                    switch (result) {
-                                        case 1:
-                                            childController.displayinfo.setText("SUCCESSFULLY DELETED");
-                                            childController.spinner.setVisible(false);
-                                            childController.check.setVisible(true);
-                                            TableData();
-                                            stage.close();
-                                            break;
-                                        default:
-                                            childController.displayinfo.setText("NOTICE! AN ERROR OCCURED");
-                                            childController.spinner.setVisible(false);
-                                            childController.check.setVisible(false);
-                                            break;
-
-                                    }
-                                }
+if (uom_result == 1) {
+    int result = new ItemsBL().removeData(selectedRecord.getItemCodeName());
+    switch (result) {
+        case 1:
+            childController.displayinfo.setText("SUCCESSFULLY DELETED");
+            childController.spinner.setVisible(false);
+            childController.check.setVisible(true);
+            TableData();
+            stage.close();
+            break;
+        default:
+            childController.displayinfo.setText("NOTICE! AN ERROR OCCURED");
+            childController.spinner.setVisible(false);
+            childController.check.setVisible(false);
+            break;
+            
+    }
+}
 
 //                                } else {
 //                                    childController.displayinfo.setText("UNABLE TO DELETE RECORD");
 //                                    childController.spinner.setVisible(false);
 //                                    childController.check.setVisible(false);
 //                                }
-                            });
-                            Thread d = new Thread(task);
-                            d.setDaemon(true);
-                            d.start();
-
                         });
-                        Scene scene = new Scene(parent);
-                        stage.initModality(Modality.APPLICATION_MODAL);
-                        stage.initOwner(parent.getScene().getWindow());
-                        stage.setScene(scene);
-                        stage.initStyle(StageStyle.UNDECORATED);
-                        stage.resizableProperty().setValue(false);
-                        stage.showAndWait();
-
-                    } catch (IOException ex) {
-                        Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                        Thread d = new Thread(task);
+                        d.setDaemon(true);
+                        d.start();
+                        
+                    });
+                    Scene scene1 = new Scene(parent1);
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.initOwner(parent1.getScene().getWindow());
+                    stage.setScene(scene1);
+                    stage.initStyle(StageStyle.UNDECORATED);
+                    stage.resizableProperty().setValue(false);
+                    stage.showAndWait();
+                }catch (IOException ex) {
+                    Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
             });
 
         }
