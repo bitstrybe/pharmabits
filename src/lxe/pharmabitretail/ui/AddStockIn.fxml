@@ -41,19 +41,22 @@
             </HBox>
          </top>
          <left>
-            <VBox prefHeight="388.0" prefWidth="291.0">
+            <VBox prefHeight="414.0" prefWidth="284.0" styleClass="form_background">
                <children>
                   <JFXTextField fx:id="search" prefHeight="25.0" prefWidth="263.0" promptText="Search Items" />
                   <JFXListView fx:id="itemlist" prefHeight="207.0" prefWidth="291.0" />
                   <ImageView fitHeight="163.0" fitWidth="291.0" pickOnBounds="true" preserveRatio="true" />
                </children>
                <BorderPane.margin>
-                  <Insets left="5.0" />
+                  <Insets />
                </BorderPane.margin>
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
             </VBox>
          </left>
          <right>
-            <VBox prefHeight="401.0" prefWidth="452.0">
+            <VBox prefHeight="414.0" prefWidth="498.0" styleClass="form_background">
                <children>
                   <Label text="ITEM NAME">
                      <VBox.margin>
@@ -271,7 +274,7 @@
                   <Insets />
                </BorderPane.margin>
                <padding>
-                  <Insets right="10.0" />
+                  <Insets left="5.0" />
                </padding>
             </VBox>
          </right>

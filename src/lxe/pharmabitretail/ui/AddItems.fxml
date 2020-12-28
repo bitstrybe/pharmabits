@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="601.0" prefWidth="905.0" style="-fx-background-color: #00000044;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.AddItemsController">
+<StackPane prefHeight="601.0" prefWidth="905.0" style="-fx-background-color: #00000045;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.AddItemsController">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="628.0" prefWidth="985.0" styleClass="form_border_color" stylesheets="@style.css">
          <top>

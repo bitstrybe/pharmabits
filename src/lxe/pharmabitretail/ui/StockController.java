@@ -34,6 +34,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -413,12 +414,11 @@ public class StockController implements Initializable {
         });
 
         Scene scene = new Scene(parent);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initOwner(parent.getScene().getWindow());
+        stage.setMaximized(true);
+        scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.resizableProperty().setValue(false);
-        stage.showAndWait();
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.show();
     }
 
     @FXML
