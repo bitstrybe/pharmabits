@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXSpinner?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -19,82 +17,66 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="707.0" prefWidth="880.0" style="-fx-background-color: #00000044;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane prefHeight="455.0" prefWidth="755.0" style="-fx-background-color: #00000044;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="707.0" prefWidth="905.0" styleClass="form_border_color" stylesheets="@style.css">
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="755.0" styleClass="form_border_color" stylesheets="@style.css">
          <top>
-            <HBox BorderPane.alignment="CENTER">
+            <HBox prefHeight="49.0" prefWidth="842.0" BorderPane.alignment="CENTER">
                <children>
-                  <Pane prefHeight="49.0" prefWidth="958.0" style="-fx-background-color: #eee;" stylesheets="@style.css" HBox.hgrow="ALWAYS">
+                  <Pane prefHeight="49.0" prefWidth="832.0" style="-fx-background-color: #eee;" stylesheets="@style.css" HBox.hgrow="ALWAYS">
                      <children>
                         <Label layoutX="14.0" layoutY="11.0" text="ADD ITEMS" textFill="#544848">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
-                        <JFXButton fx:id="closebtn" layoutX="868.0" layoutY="12.0" prefHeight="25.0" prefWidth="17.0">
+                        <Button layoutX="713.0" layoutY="10.0" mnemonicParsing="false" styleClass="closeform">
                            <graphic>
-                              <FontAwesomeIcon glyphName="CLOSE" wrappingWidth="1.0" />
+                              <FontAwesomeIcon glyphName="CLOSE" />
                            </graphic>
-                        </JFXButton>
+                        </Button>
                      </children>
                   </Pane>
                </children>
             </HBox>
          </top>
-         <center>
-            <Pane prefHeight="656.0" prefWidth="938.0" styleClass="form_background" BorderPane.alignment="CENTER">
+         <left>
+            <VBox prefHeight="388.0" prefWidth="291.0">
                <children>
-                  <HBox prefHeight="308.0" prefWidth="896.0">
+                  <JFXTextField fx:id="search" prefHeight="25.0" prefWidth="263.0" promptText="Search Items" />
+                  <JFXListView fx:id="itemlist" prefHeight="207.0" prefWidth="291.0" />
+                  <ImageView fitHeight="163.0" fitWidth="291.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+               <BorderPane.margin>
+                  <Insets left="5.0" />
+               </BorderPane.margin>
+            </VBox>
+         </left>
+         <right>
+            <VBox prefHeight="401.0" prefWidth="452.0">
+               <children>
+                  <Label text="ITEM NAME">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="itemname" prefHeight="36.0" prefWidth="460.0" styleClass="form_field">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox prefHeight="72.0" prefWidth="462.0">
                      <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="241.0" prefWidth="281.0">
+                        <VBox prefHeight="72.0" prefWidth="144.0">
                            <children>
-                              <Label text="Upload image" />
-                              <HBox alignment="CENTER" prefHeight="142.0" prefWidth="281.0">
-                                 <children>
-                                    <ImageView fx:id="itemimages1" fitHeight="123.0" fitWidth="217.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../resources/avater_image.jpg" />
-                                       </image>
-                                    </ImageView>
-                                    <Button fx:id="browse1" mnemonicParsing="false" prefHeight="32.0" prefWidth="33.0">
-                                       <HBox.margin>
-                                          <Insets left="30.0" />
-                                       </HBox.margin>
-                                       <graphic>
-                                          <FontAwesomeIcon glyphName="FILE" />
-                                       </graphic>
-                                    </Button>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets top="5.0" />
-                                 </VBox.margin>
-                              </HBox>
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="241.0" prefWidth="292.0">
-                           <children>
-                              <HBox>
-                                 <children>
-                                    <Label prefHeight="15.0" prefWidth="89.0" text="Item Description">
-                                       <font>
-                                          <Font size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="*" textFill="#f20303">
-                                       <font>
-                                          <Font size="12.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <JFXTextField fx:id="itmtextfield1" focusColor="#f2efef" opacity="0.93" prefHeight="30.0" prefWidth="290.0" styleClass="form_field">
+                              <Label text="BATCH NO" />
+                              <JFXTextField fx:id="batchtextfield" focusColor="#cccccc" prefHeight="36.0" prefWidth="111.0" styleClass="form_field">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
@@ -102,88 +84,48 @@
                                     <Insets top="5.0" />
                                  </VBox.margin>
                               </JFXTextField>
-                              <HBox layoutX="10.0" layoutY="10.0">
-                                 <children>
-                                    <Label prefHeight="15.0" prefWidth="89.0" text="Item Description">
-                                       <font>
-                                          <Font size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="*" textFill="#f20303">
-                                       <font>
-                                          <Font size="12.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets top="20.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <ComboBox fx:id="categorycombo1" prefHeight="30.0" prefWidth="290.0">
-                                 <VBox.margin>
-                                    <Insets top="5.0" />
-                                 </VBox.margin>
-                              </ComboBox>
-                              <HBox layoutX="10.0" layoutY="57.0">
-                                 <children>
-                                    <Label prefHeight="15.0" prefWidth="89.0" text="Item Description">
-                                       <font>
-                                          <Font size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="*" textFill="#f20303">
-                                       <font>
-                                          <Font size="12.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets top="20.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <ComboBox fx:id="categorycombo11" layoutX="10.0" layoutY="74.0" prefHeight="30.0" prefWidth="290.0">
-                                 <VBox.margin>
-                                    <Insets top="5.0" />
-                                 </VBox.margin>
-                              </ComboBox>
                            </children>
-                        </VBox>
-                        <VBox layoutX="291.0" layoutY="10.0" prefHeight="241.0" prefWidth="292.0">
                            <HBox.margin>
-                              <Insets left="20.0" />
+                              <Insets />
                            </HBox.margin>
+                        </VBox>
+                        <VBox prefHeight="72.0" prefWidth="144.0">
                            <children>
-                              <HBox>
+                              <Label text="EXPIRY DATE" />
+                              <DatePicker fx:id="expirydate" prefHeight="36.0" prefWidth="159.0">
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
+                              </DatePicker>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox prefHeight="72.0" prefWidth="144.0">
+                           <children>
+                              <HBox prefHeight="3.0" prefWidth="170.0">
                                  <children>
-                                    <Label prefHeight="17.0" prefWidth="130.0" text="Unit of Measurement" />
-                                    <Label prefHeight="15.0" prefWidth="3.0" text="*" textFill="#f20303">
-                                       <font>
-                                          <Font size="12.0" />
-                                       </font>
+                                    <Label text="COST UNIT PRICE (GHC)">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
                                     </Label>
                                  </children>
-                                 <padding>
-                                    <Insets top="10.0" />
-                                 </padding>
                               </HBox>
-                              <HBox alignment="CENTER" prefHeight="29.0" prefWidth="290.0" spacing="4.0">
+                              <HBox prefHeight="61.0" prefWidth="170.0">
                                  <children>
-                                    <ComboBox fx:id="uomcombo" prefHeight="30.0" prefWidth="250.0" />
-                                    <JFXTextField fx:id="uom_val1" focusColor="#f2efef" opacity="0.93" prefHeight="27.0" prefWidth="147.0" promptText="value" styleClass="form_field">
+                                    <JFXTextField fx:id="costtextfield" focusColor="#cccccc" prefHeight="36.0" prefWidth="85.0" styleClass="form_field">
                                        <font>
                                           <Font size="13.0" />
                                        </font>
-                                       <HBox.margin>
-                                          <Insets left="1.0" right="1.0" />
-                                       </HBox.margin>
                                     </JFXTextField>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" text="X" />
-                                    <JFXTextField fx:id="uom_val2" focusColor="#f2efef" layoutX="203.0" layoutY="10.0" opacity="0.93" prefHeight="27.0" prefWidth="147.0" promptText="value" styleClass="form_field">
+                                    <JFXTextField fx:id="costpiecestextfield" editable="false" focusColor="#cccccc" prefHeight="36.0" prefWidth="85.0" styleClass="form_field">
                                        <font>
                                           <Font size="13.0" />
                                        </font>
                                        <HBox.margin>
-                                          <Insets left="1.0" right="1.0" />
+                                          <Insets left="1.0" />
                                        </HBox.margin>
                                     </JFXTextField>
                                  </children>
@@ -191,46 +133,86 @@
                                     <Insets top="5.0" />
                                  </VBox.margin>
                               </HBox>
-                              <HBox prefHeight="17.0" prefWidth="127.0">
+                           </children>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="80.0" prefWidth="442.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="144.0">
+                           <children>
+                              <HBox prefHeight="0.0" prefWidth="144.0">
                                  <children>
-                                    <Label prefHeight="17.0" prefWidth="130.0" text="Volume: unit &amp;  value" />
-                                    <Label prefHeight="17.0" prefWidth="0.0" text="*" textFill="#f20303">
-                                       <font>
-                                          <Font size="12.0" />
-                                       </font>
-                                    </Label>
+                                    <Label text="SALES UNIT PRICE (GHC)" />
                                  </children>
-                                 <VBox.margin>
-                                    <Insets top="20.0" />
-                                 </VBox.margin>
                               </HBox>
-                              <HBox prefHeight="30.0" prefWidth="290.0">
+                              <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <JFXTextField fx:id="vom_val" focusColor="#f2efef" opacity="0.93" prefHeight="27.0" prefWidth="147.0" promptText="value" styleClass="form_field">
+                                    <JFXTextField fx:id="salestextfield" focusColor="#cccccc" prefHeight="36.0" prefWidth="70.0" styleClass="form_field">
                                        <font>
                                           <Font size="13.0" />
                                        </font>
                                     </JFXTextField>
-                                    <ComboBox fx:id="vom" prefHeight="29.0" prefWidth="196.0" />
+                                    <JFXTextField fx:id="salespiecetextfield" editable="false" focusColor="#cccccc" prefHeight="36.0" prefWidth="77.0" styleClass="form_field">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="1.0" />
+                                       </HBox.margin>
+                                    </JFXTextField>
                                  </children>
                                  <VBox.margin>
                                     <Insets top="5.0" />
                                  </VBox.margin>
                               </HBox>
-                              <HBox prefHeight="17.0" prefWidth="89.0">
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="144.0">
+                           <children>
+                              <HBox prefHeight="0.0" prefWidth="144.0">
                                  <children>
-                                    <Label prefHeight="17.0" prefWidth="130.0" text="Re-order level" />
-                                    <Label prefHeight="17.0" prefWidth="0.0" text="*" textFill="#f20303">
+                                    <Label text="NHIS UNIT PRICE (GHC)" />
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXTextField fx:id="nhistextfield" focusColor="#cccccc" prefHeight="36.0" prefWidth="70.0" styleClass="form_field">
                                        <font>
-                                          <Font size="12.0" />
+                                          <Font size="13.0" />
                                        </font>
-                                    </Label>
+                                    </JFXTextField>
+                                    <JFXTextField fx:id="nhispiecetextfield" editable="false" focusColor="#cccccc" prefHeight="36.0" prefWidth="70.0" styleClass="form_field">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="1.0" />
+                                       </HBox.margin>
+                                    </JFXTextField>
                                  </children>
                                  <VBox.margin>
-                                    <Insets top="20.0" />
+                                    <Insets top="5.0" />
                                  </VBox.margin>
                               </HBox>
-                              <JFXTextField fx:id="roltextfield" focusColor="#f2efef" opacity="0.93" prefHeight="32.0" prefWidth="290.0" styleClass="form_field">
+                           </children>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox layoutX="154.0" layoutY="10.0" prefHeight="200.0" prefWidth="144.0">
+                           <children>
+                              <Label text="QUANTITY" />
+                              <JFXTextField fx:id="qnttextfield" focusColor="#cccccc" prefHeight="36.0" prefWidth="144.0" styleClass="form_field">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
@@ -238,71 +220,61 @@
                                     <Insets top="5.0" />
                                  </VBox.margin>
                               </JFXTextField>
-                              <HBox alignment="CENTER" prefHeight="53.0" prefWidth="298.0">
-                                 <children>
-                                    <JFXButton prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #cccccc;" text="Save" textFill="#323232">
-                                       <HBox.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </HBox.margin>
-                                    </JFXButton>
-                                    <JFXButton contentDisplay="CENTER" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #cccccc;" text="Clear">
-                                       <HBox.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </HBox.margin>
-                                    </JFXButton>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox>
-                                 <children>
-                                    <Label fx:id="displayinfo" prefHeight="26.0" prefWidth="266.0">
-                                       <graphic>
-                                          <StackPane>
-                                             <children>
-                                                <JFXSpinner fx:id="spinner" prefHeight="20.0" visible="false" />
-                                                <FontAwesomeIcon fx:id="check" fill="#11cd33" glyphName="CHECK" size="2em" visible="false">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </FontAwesomeIcon>
-                                                <FontAwesomeIcon fx:id="duplicatelock" glyphName="LOCK" size="2em" visible="false" />
-                                             </children>
-                                          </StackPane>
-                                       </graphic>
-                                       <font>
-                                          <Font size="13.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets top="5.0" />
-                                 </VBox.margin>
-                              </HBox>
                            </children>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
                         </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="51.0" prefWidth="442.0">
+                     <children>
+                        <JFXButton fx:id="save" onAction="#saveAction" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #cccccc;" text="Save" textFill="#323232">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                        <JFXButton contentDisplay="CENTER" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #cccccc;" text="Clear">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </JFXButton>
                      </children>
                   </HBox>
-                  <VBox layoutX="14.0" layoutY="303.0" prefHeight="333.0" prefWidth="876.0">
+                  <HBox>
                      <children>
-                        <JFXTextField fx:id="searchbtn" prefHeight="25.0" prefWidth="217.0" promptText="Search Item" />
-                        <TableView fx:id="itemtableview" prefHeight="360.0" prefWidth="700.0" styleClass="table-cell" stylesheets="@style.css">
-                           <columns>
-                              <TableColumn fx:id="itemimage" prefWidth="75.0" text="Item Image" />
-                              <TableColumn fx:id="itemname" prefWidth="127.0" text="Item Name" />
-                              <TableColumn fx:id="category" prefWidth="112.0" text="Category" />
-                              <TableColumn fx:id="manufacturer" prefWidth="161.0" text="Manufacturer" />
-                              <TableColumn fx:id="uom" prefWidth="59.0" text="Uom" />
-                              <TableColumn fx:id="rol" prefWidth="94.0" text="Re-Order Level" />
-                              <TableColumn fx:id="action" prefWidth="44.0" resizable="false" text="Action" />
-                           </columns>
-                        </TableView>
+                        <Label fx:id="displayinfo" prefHeight="26.0" prefWidth="266.0">
+                           <graphic>
+                              <StackPane>
+                                 <children>
+                                    <JFXSpinner fx:id="spinner" prefHeight="20.0" visible="false" />
+                                    <FontAwesomeIcon fx:id="check" fill="#11cd33" glyphName="CHECK" size="2em" visible="false">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </FontAwesomeIcon>
+                                    <FontAwesomeIcon fx:id="duplicatelock" glyphName="LOCK" size="2em" visible="false" />
+                                 </children>
+                              </StackPane>
+                           </graphic>
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
                      </children>
-                  </VBox>
+                  </HBox>
                </children>
-            </Pane>
-         </center>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </VBox>
+         </right>
       </BorderPane>
    </children>
 </StackPane>

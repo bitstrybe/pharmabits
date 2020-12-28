@@ -50,7 +50,6 @@ public class AddStockInController implements Initializable {
     public DatePicker expirydate;
     @FXML
     public JFXButton save;
-    @FXML
     private Button closeButton;
     @FXML
     public Label displayinfo;
@@ -64,7 +63,6 @@ public class AddStockInController implements Initializable {
     public JFXTextField costpiecestextfield;
     @FXML
     public JFXTextField salespiecetextfield;
-    @FXML
     public AnchorPane stockpane;
     @FXML
     public Label itemname;
@@ -206,14 +204,14 @@ public class AddStockInController implements Initializable {
         });
     }
 
-    @FXML
-    private void clearall(ActionEvent event) {
-    }
 
-    @FXML
     private void closemtd(ActionEvent event) {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    private void saveAction(ActionEvent event) {
     }
 
 }
