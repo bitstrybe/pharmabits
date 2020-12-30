@@ -37,7 +37,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -47,7 +46,6 @@ import lxe.pharmabitretail.bl.CategoryBL;
 import lxe.pharmabitretail.bl.InsertUpdateBL;
 import lxe.pharmabitretail.bl.ItemsBL;
 import lxe.pharmabitretail.entity.Category;
-import lxe.pharmabitretail.entity.Items;
 import lxe.pharmabitretail.entity.Users;
 import lxe.pharmabitretail.tablemodel.CategoryTableModel;
 
@@ -60,7 +58,6 @@ public class AddCategoryController implements Initializable {
 
     ObservableList<CategoryTableModel> data;
 
-    private Button closeButton;
     @FXML
     public JFXButton save;
     @FXML

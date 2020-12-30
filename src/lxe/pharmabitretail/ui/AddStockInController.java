@@ -10,11 +10,15 @@ import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -25,11 +29,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import lxe.pharmabitretail.bl.ItemsBL;
+import lxe.pharmabitretail.bl.UomBL;
+import lxe.pharmabitretail.entity.Items;
+import lxe.pharmabitretail.entity.UomDef;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  * FXML Controller class
@@ -50,7 +60,6 @@ public class AddStockInController implements Initializable {
     public DatePicker expirydate;
     @FXML
     public JFXButton save;
-    private Button closeButton;
     @FXML
     public Label displayinfo;
     @FXML
@@ -59,11 +68,8 @@ public class AddStockInController implements Initializable {
     public FontAwesomeIcon check;
     @FXML
     private FontAwesomeIcon duplicatelock;
-    @FXML
     public JFXTextField costpiecestextfield;
-    @FXML
     public JFXTextField salespiecetextfield;
-    public AnchorPane stockpane;
     @FXML
     public Label itemname;
     @FXML
@@ -72,8 +78,13 @@ public class AddStockInController implements Initializable {
     private JFXTextField search;
     @FXML
     public JFXTextField nhistextfield;
-    @FXML
     public JFXTextField nhispiecetextfield;
+    @FXML
+    private Button closebtn;
+    @FXML
+    private ImageView itemimage;
+    @FXML
+    private Label uomitem;
 
     public void getItemList() {
         List<String> item = new ItemsBL().getAllItemsName();
@@ -108,7 +119,18 @@ public class AddStockInController implements Initializable {
 
         itemlist.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             itemname.setText(itemlist.getSelectionModel().getSelectedItem());
-            save.setDisable(false);
+            UomDef ud = new UomBL().getUombyItemId(itemlist.getSelectionModel().getSelectedItem());
+            Items its = new ItemsBL().getImageItembyCode(itemlist.getSelectionModel().getSelectedItem());
+            uomitem.setText(ud.getUomCode().getUomDesc() + " " + ud.getUomNm() + " X " + ud.getUomDm());
+            FileInputStream input;
+            try {
+                input = new FileInputStream(its.getItemImg());
+                Image image = new Image(input);
+                itemimage.setImage(image);
+                save.setDisable(false);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(AddStockInController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
 
         costtextfield.textProperty().addListener(new ChangeListener<String>() {
@@ -204,9 +226,9 @@ public class AddStockInController implements Initializable {
         });
     }
 
-
-    private void closemtd(ActionEvent event) {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
+    @FXML
+    private void closefrom(ActionEvent event) {
+        Stage stage = (Stage) closebtn.getScene().getWindow();
         stage.close();
     }
 

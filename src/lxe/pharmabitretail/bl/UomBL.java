@@ -33,12 +33,5 @@ public class UomBL extends  DdsBL{
         TypedQuery<UomDef> q = em.createQuery("SELECT u FROM UomDef u WHERE u.item.itemDesc = :itemCode", UomDef.class);
         q.setParameter("itemCode", val);
         return q.getSingleResult();
-    }
-//    public Integer getUomIdbyUom(String val){
-//        TypedQuery<Integer> q = em.createQuery("SELECT u.uomItem FROM UomDef u WHERE u.uomCode.uomDesc = :uomCode", Integer.class);
-//        q.setParameter("uomCode", val);
-//        System.out.println(q.getSingleResult());
-//        return q.getSingleResult();
-//    }
-    
+    } 
 }

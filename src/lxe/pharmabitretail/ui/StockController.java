@@ -26,7 +26,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -191,7 +193,47 @@ public class StockController implements Initializable {
             data.add(new StockTableModel(e.getBatchNo(), e.getItems().getItemDesc().toUpperCase(), stockinqty, stockoutqty, salesqty, balance, Utilities.roundToTwoDecimalPlace(e.getCostPrice(), 2), Utilities.roundToTwoDecimalPlace(e.getSalesPrice(), 2), Utilities.roundToTwoDecimalPlace(e.getNhisPrice(), 2)));
         });
         stkbatchno.setCellValueFactory(cell -> cell.getValue().getBatchNoProperty());
-        stkitem.setCellValueFactory(cell -> cell.getValue().getItemsProperty());
+//        stkitem.setCellValueFactory(cell -> cell.getValue().getItemsProperty());
+        Callback<TableColumn<StockTableModel, String>, TableCell<StockTableModel, String>> cellFactory = new Callback<TableColumn<StockTableModel, String>, TableCell<StockTableModel, String>>() {
+            @Override
+            public TableCell call(final TableColumn<StockTableModel, String> param) {
+                final TableCell<StockTableModel, String> cell = new TableCell<StockTableModel, String>() {
+
+//                   StockTableModel person = getTableView().getItems().get(getIndex()); 
+                    
+                  
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                            setText(null);
+                        } else {
+                           
+                             StockTableModel person = getTableView().getItems().get(getIndex());
+                              final Label lab = new Label(person.getItems());
+                                final Button btn = new Button("More info");
+                              
+                             lab.setGraphic(btn);
+//                            btn.setOnAction(event -> {
+//                                StockTableModel person = getTableView().getItems().get(getIndex());
+////                                lab.setText(person.getBatchNo());
+//                                System.out.println(person.getBatchNo()
+//                                        + "   " + person.getItems());
+//                            });
+                            setGraphic(lab);
+//                            setGraphic(btn);
+                            setText(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+        
+        stkitem.setCellFactory(cellFactory);
+        
         stkinqty.setCellValueFactory(cell -> cell.getValue().getStockinQtyProperty());
         stkoutqty.setCellValueFactory(cell -> cell.getValue().getStockoutQtyProperty());
         salesqty.setCellValueFactory(cell -> cell.getValue().getSalesQtyProperty());
@@ -375,7 +417,7 @@ public class StockController implements Initializable {
               
                 
                 cat.setBatchNo(childController.batchtextfield.getText());
-                //cat.setItems(new Items(childController.itemlist.getSelectionModel().getSelectedItem()));
+                cat.setItems(new Items(childController.itemname.getText()));
                 cat.setQuantity(Integer.parseInt(childController.qnttextfield.getText()));
                 cat.setCostPrice(Utilities.roundToTwoDecimalPlace(Double.parseDouble(childController.costtextfield.getText()), 2));
                 cat.setSalesPrice(Utilities.roundToTwoDecimalPlace(Double.parseDouble(childController.salestextfield.getText()), 2));
@@ -389,9 +431,7 @@ public class StockController implements Initializable {
                 switch (result) {
                     case 1:
                         childController.displayinfo.setText("SUCCESSFULLY SAVED");
-                        Utilities.clearAllField(childController.stockpane);
                         childController.itemname.setText(null);
-                        System.out.println(childController.stockpane.getChildren());
                         childController.spinner.setVisible(false);
                         childController.check.setVisible(true);
                         list = stock.getSelectionModel().getSelectedItem();
