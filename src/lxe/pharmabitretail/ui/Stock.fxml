@@ -10,91 +10,96 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane id="homebackground " maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1144.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.StockController">
-   <top>
-      <Pane prefHeight="381.0" prefWidth="1144.0">
-         <children>
-            <VBox prefHeight="393.0" prefWidth="1144.0">
+
+<Pane id="homebackground" prefHeight="700.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.StockController">
+   <children>
+      <BorderPane layoutX="37.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1135.0">
+         <top>
+            <Pane prefHeight="381.0" prefWidth="1144.0">
                <children>
-                  <JFXTextField fx:id="stocksearch" promptText="Search Stock" />
-                  <TableView fx:id="stock" prefHeight="366.0" prefWidth="1144.0" styleClass="table-cell" stylesheets="@style.css">
-                     <columns>
-                        <TableColumn fx:id="stkbatchno" prefWidth="86.0" resizable="false" text="Batch No" />
-                        <TableColumn fx:id="stkitem" minWidth="0.0" prefWidth="420.0" resizable="false" text="Items" />
-                        <TableColumn fx:id="stkinqty" prefWidth="79.0" resizable="false" text="Stockin Qty" />
-                        <TableColumn fx:id="stkoutqty" prefWidth="89.0" resizable="false" text="Stockout Qty" />
-                        <TableColumn fx:id="salesqty" prefWidth="69.0" resizable="false" text="Sales Qty" />
-                        <TableColumn fx:id="stkbal" prefWidth="88.0" resizable="false" text="Stock Balance" />
-                        <TableColumn fx:id="cstprice" resizable="false" text="Cost Price" />
-                        <TableColumn fx:id="salesprice" prefWidth="94.0" resizable="false" text="Sales Price" />
-                        <TableColumn fx:id="nhisprice" prefWidth="78.0" resizable="false" text="NHIS Price" />
-                     </columns>
-                  </TableView>
-               </children>
-               <padding>
-                  <Insets top="30.0" />
-               </padding>
-            </VBox>
-         </children>
-      </Pane>
-   </top>
-   <bottom>
-      <Pane prefHeight="317.0" prefWidth="1144.0">
-         <children>
-            <VBox prefHeight="290.0" prefWidth="572.0">
-               <children>
-                  <HBox>
+                  <VBox prefHeight="393.0" prefWidth="1144.0">
                      <children>
-                        <JFXTextField fx:id="stockinsearch" prefHeight="25.0" prefWidth="474.0" promptText="Search Stockin">
-                           <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
-                        </JFXTextField>
-                        <JFXButton fx:id="stockinbtn" onAction="#addstockinpopup" prefHeight="25.0" prefWidth="71.0" text="Stock In" />
+                        <JFXTextField fx:id="stocksearch" promptText="Search Stock" />
+                        <TableView fx:id="stock" prefHeight="366.0" prefWidth="1144.0" styleClass="table-cell" stylesheets="@style.css">
+                           <columns>
+                              <TableColumn fx:id="stkbatchno" prefWidth="86.0" resizable="false" text="Batch No" />
+                              <TableColumn fx:id="stkitem" minWidth="0.0" prefWidth="420.0" resizable="false" text="Items" />
+                              <TableColumn fx:id="stkinqty" prefWidth="79.0" resizable="false" text="Stockin Qty" />
+                              <TableColumn fx:id="stkoutqty" prefWidth="89.0" resizable="false" text="Stockout Qty" />
+                              <TableColumn fx:id="salesqty" prefWidth="69.0" resizable="false" text="Sales Qty" />
+                              <TableColumn fx:id="stkbal" prefWidth="88.0" resizable="false" text="Stock Balance" />
+                              <TableColumn fx:id="cstprice" resizable="false" text="Cost Price" />
+                              <TableColumn fx:id="salesprice" prefWidth="94.0" resizable="false" text="Sales Price" />
+                              <TableColumn fx:id="nhisprice" prefWidth="78.0" resizable="false" text="NHIS Price" />
+                           </columns>
+                        </TableView>
                      </children>
-                  </HBox>
-                  <TableView fx:id="stockin" prefHeight="355.0" prefWidth="562.0" styleClass="table-cell" stylesheets="@style.css">
-                     <columns>
-                        <TableColumn fx:id="stkinbatchno" prefWidth="78.0" resizable="false" text="Batch No" />
-                        <TableColumn fx:id="stkinitems" minWidth="50.0" prefWidth="190.0" resizable="false" text="Items" />
-                        <TableColumn fx:id="stkqty" minWidth="30.0" prefWidth="50.0" resizable="false" text="Qty" />
-                        <TableColumn fx:id="stkindate" minWidth="5.0" prefWidth="91.0" resizable="false" text="Stockin date" />
-                        <TableColumn fx:id="expirydate" minWidth="5.0" prefWidth="91.0" resizable="false" text="Expiry date" />
-                        <TableColumn fx:id="stkaction" maxWidth="99.0" minWidth="0.0" prefWidth="100.0" resizable="false" text="Actions" />
-                     </columns>
-                  </TableView>
+                     <padding>
+                        <Insets top="30.0" />
+                     </padding>
+                  </VBox>
                </children>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-            </VBox>
-            <VBox layoutX="572.0" prefHeight="290.0" prefWidth="572.0">
+            </Pane>
+         </top>
+         <bottom>
+            <Pane prefHeight="317.0" prefWidth="1144.0">
                <children>
-                  <HBox>
+                  <VBox prefHeight="290.0" prefWidth="572.0">
                      <children>
-                        <JFXTextField fx:id="search11" prefHeight="25.0" prefWidth="471.0" promptText="Search Stockout">
-                           <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
-                        </JFXTextField>
-                        <JFXButton fx:id="stockoutbtn" onAction="#addstockoutpopup" text="Stock Out" />
+                        <HBox>
+                           <children>
+                              <JFXTextField fx:id="stockinsearch" prefHeight="25.0" prefWidth="474.0" promptText="Search Stockin">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </JFXTextField>
+                              <JFXButton fx:id="stockinbtn" onAction="#addstockinpopup" prefHeight="25.0" prefWidth="71.0" text="Stock In" />
+                           </children>
+                        </HBox>
+                        <TableView fx:id="stockin" prefHeight="355.0" prefWidth="562.0" styleClass="table-cell" stylesheets="@style.css">
+                           <columns>
+                              <TableColumn fx:id="stkinbatchno" prefWidth="78.0" resizable="false" text="Batch No" />
+                              <TableColumn fx:id="stkinitems" minWidth="50.0" prefWidth="190.0" resizable="false" text="Items" />
+                              <TableColumn fx:id="stkqty" minWidth="30.0" prefWidth="50.0" resizable="false" text="Qty" />
+                              <TableColumn fx:id="stkindate" minWidth="5.0" prefWidth="91.0" resizable="false" text="Stockin date" />
+                              <TableColumn fx:id="expirydate" minWidth="5.0" prefWidth="91.0" resizable="false" text="Expiry date" />
+                              <TableColumn fx:id="stkaction" maxWidth="99.0" minWidth="0.0" prefWidth="100.0" resizable="false" text="Actions" />
+                           </columns>
+                        </TableView>
                      </children>
-                  </HBox>
-                  <TableView fx:id="stockout" prefHeight="253.0" prefWidth="552.0" styleClass="table-cell" stylesheets="@style.css">
-                     <columns>
-                        <TableColumn fx:id="stkoutbatchno" prefWidth="78.0" resizable="false" text="Batch No" />
-                        <TableColumn fx:id="stkoutitems" prefWidth="262.0" resizable="false" text="Items" />
-                        <TableColumn fx:id="stkoutqtytb" prefWidth="55.0" resizable="false" text="Qty" />
-                        <TableColumn fx:id="stkoutdate" minWidth="5.0" prefWidth="100.0" resizable="false" text="Stockout date" />
-                        <TableColumn fx:id="stkoutaction" maxWidth="99.0" minWidth="0.0" prefWidth="53.0" resizable="false" text="Action" />
-                     </columns>
-                  </TableView>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+                  <VBox layoutX="572.0" prefHeight="290.0" prefWidth="572.0">
+                     <children>
+                        <HBox>
+                           <children>
+                              <JFXTextField fx:id="search11" prefHeight="25.0" prefWidth="471.0" promptText="Search Stockout">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </JFXTextField>
+                              <JFXButton fx:id="stockoutbtn" onAction="#addstockoutpopup" text="Stock Out" />
+                           </children>
+                        </HBox>
+                        <TableView fx:id="stockout" prefHeight="253.0" prefWidth="552.0" styleClass="table-cell" stylesheets="@style.css">
+                           <columns>
+                              <TableColumn fx:id="stkoutbatchno" prefWidth="78.0" resizable="false" text="Batch No" />
+                              <TableColumn fx:id="stkoutitems" prefWidth="262.0" resizable="false" text="Items" />
+                              <TableColumn fx:id="stkoutqtytb" prefWidth="55.0" resizable="false" text="Qty" />
+                              <TableColumn fx:id="stkoutdate" minWidth="5.0" prefWidth="100.0" resizable="false" text="Stockout date" />
+                              <TableColumn fx:id="stkoutaction" maxWidth="99.0" minWidth="0.0" prefWidth="53.0" resizable="false" text="Action" />
+                           </columns>
+                        </TableView>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
                </children>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-            </VBox>
-         </children>
-      </Pane>
-   </bottom>
-</BorderPane>
+            </Pane>
+         </bottom>
+      </BorderPane>
+   </children>
+</Pane>

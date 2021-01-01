@@ -1,8 +1,9 @@
-
 package lxe.pharmabitretail.ui;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
@@ -24,6 +25,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -36,6 +38,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
@@ -43,12 +46,15 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import lxe.pharmabitretail.bl.InsertUpdateBL;
+import lxe.pharmabitretail.bl.ItemsBL;
 import lxe.pharmabitretail.bl.SalesDetailsBL;
 import lxe.pharmabitretail.bl.StockinBL;
 import lxe.pharmabitretail.bl.StockoutBL;
+import lxe.pharmabitretail.bl.UomBL;
 import lxe.pharmabitretail.entity.Items;
 import lxe.pharmabitretail.entity.Stockin;
 import lxe.pharmabitretail.entity.Stockout;
+import lxe.pharmabitretail.entity.UomDef;
 import lxe.pharmabitretail.entity.Users;
 import lxe.pharmabitretail.tablemodel.StockTableModel;
 import lxe.pharmabitretail.tablemodel.StockinTableModel;
@@ -190,50 +196,79 @@ public class StockController implements Initializable {
 //            long stkbal = stockinqty - (salesqty + stockoutqty);
             long balance = new StockinBL().getStockBalance(e.getBatchNo());
 
-            data.add(new StockTableModel(e.getBatchNo(), e.getItems().getItemDesc().toUpperCase(), stockinqty, stockoutqty, salesqty, balance, Utilities.roundToTwoDecimalPlace(e.getCostPrice(), 2), Utilities.roundToTwoDecimalPlace(e.getSalesPrice(), 2), Utilities.roundToTwoDecimalPlace(e.getNhisPrice(), 2)));
+            data.add(new StockTableModel(e.getBatchNo(), e.getItems().getItemDesc(), stockinqty, stockoutqty, salesqty, balance, Utilities.roundToTwoDecimalPlace(e.getCostPrice(), 2), Utilities.roundToTwoDecimalPlace(e.getSalesPrice(), 2), Utilities.roundToTwoDecimalPlace(e.getNhisPrice(), 2)));
         });
         stkbatchno.setCellValueFactory(cell -> cell.getValue().getBatchNoProperty());
+//        Items its = new ItemsBL().getImageItembyCode(stkitem.getText());
 //        stkitem.setCellValueFactory(cell -> cell.getValue().getItemsProperty());
-        Callback<TableColumn<StockTableModel, String>, TableCell<StockTableModel, String>> cellFactory = new Callback<TableColumn<StockTableModel, String>, TableCell<StockTableModel, String>>() {
-            @Override
-            public TableCell call(final TableColumn<StockTableModel, String> param) {
-                final TableCell<StockTableModel, String> cell = new TableCell<StockTableModel, String>() {
+        Callback<TableColumn<StockTableModel, String>, TableCell<StockTableModel, String>> cellFactory = (final TableColumn<StockTableModel, String> param) -> {
+            final TableCell<StockTableModel, String> cell = new TableCell<StockTableModel, String>() {
 
-//                   StockTableModel person = getTableView().getItems().get(getIndex()); 
-                    
-                  
+                final HBox hb = new HBox();
+                final Button btn = new Button();
+                final FontAwesomeIcon fa = new FontAwesomeIcon();
 
-                    @Override
-                    public void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                            setText(null);
-                        } else {
-                           
-                             StockTableModel person = getTableView().getItems().get(getIndex());
-                              final Label lab = new Label(person.getItems());
-                                final Button btn = new Button("More info");
-                              
-                             lab.setGraphic(btn);
-//                            btn.setOnAction(event -> {
-//                                StockTableModel person = getTableView().getItems().get(getIndex());
-////                                lab.setText(person.getBatchNo());
-//                                System.out.println(person.getBatchNo()
-//                                        + "   " + person.getItems());
-//                            });
-                            setGraphic(lab);
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        StockTableModel person = getTableView().getItems().get(getIndex());
+                        final Label lab = new Label(person.getItems());
+                        this.getStyleClass().add("table-row-cell");
+                        hb.setAlignment(Pos.CENTER);
+                        fa.setGlyphName("INFO_CIRCLE");
+                        btn.getStyleClass().add("closeform");
+                        btn.setGraphic(fa);
+                        hb.getChildren().addAll(lab, btn);
+                        btn.setOnAction(event -> {
+                            try {
+                                Stage stage = new Stage();
+                                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ItemInfo.fxml"));
+                                Parent parent = (Parent) fxmlLoader.load();
+                                ItemInfoController childController = fxmlLoader.getController();
+                                childController.iteminfoname.setText(person.getItems());
+                                UomDef udf = new UomBL().getUombyItemId(person.getItems());
+                                Items its = new ItemsBL().getImageItembyCode(person.getItems());
+                                childController.iteminfouom.setText(udf.getUomNm() + " X " + udf.getUomDm());
+                                FileInputStream input;
+                                input = new FileInputStream(its.getItemImg());
+                                Image image = new Image(input);
+                                childController.itemimagename.setImage(image);
+
+
+//                                UomDef udf = new UomBL().getUombyItemId(person.getItems());
+//                                childController.iteminfouom.setText(udf.getUomNm()+" X "+udf.getUomDm());
+//                                System.out.println(i.getItemImg());
+//                                FileInputStream input;
+//                                input = new FileInputStream(i.getItemImg());
+//                                Image image = new Image(input);
+//                                childController.itemimagename.setImage(image);
+                                Scene scene = new Scene(parent);
+                                scene.setFill(Color.TRANSPARENT);
+                                stage.setMaximized(true);
+                                //stage.initModality(Modality.APPLICATION_MODAL);
+                                stage.initOwner(parent.getScene().getWindow());
+                                stage.setScene(scene);
+                                stage.initStyle(StageStyle.TRANSPARENT);
+                                stage.show();
+                            } catch (IOException ex) {
+                                Logger.getLogger(StockController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        });
+                        setGraphic(hb);
 //                            setGraphic(btn);
-                            setText(null);
-                        }
+//                            setText(null);
                     }
-                };
-                return cell;
-            }
+                }
+            };
+
+            return cell;
         };
-        
+
         stkitem.setCellFactory(cellFactory);
-        
         stkinqty.setCellValueFactory(cell -> cell.getValue().getStockinQtyProperty());
         stkoutqty.setCellValueFactory(cell -> cell.getValue().getStockoutQtyProperty());
         salesqty.setCellValueFactory(cell -> cell.getValue().getSalesQtyProperty());
@@ -406,16 +441,14 @@ public class StockController implements Initializable {
                 childController.displayinfo.textProperty().unbind();
                 Stockin cat = new Stockin();
                 List<Integer> stcinid = new StockinBL().getStockinCount();
-                  if(stcinid.isEmpty()){
-                       int stkval = 1;
-                       cat.setStockinId(stkval);
-                  }else{
-                       int stkval = stcinid.get(0);
-                       cat.setStockinId(++stkval);
-                  }
-               
-              
-                
+                if (stcinid.isEmpty()) {
+                    int stkval = 1;
+                    cat.setStockinId(stkval);
+                } else {
+                    int stkval = stcinid.get(0);
+                    cat.setStockinId(++stkval);
+                }
+
                 cat.setBatchNo(childController.batchtextfield.getText());
                 cat.setItems(new Items(childController.itemname.getText()));
                 cat.setQuantity(Integer.parseInt(childController.qnttextfield.getText()));

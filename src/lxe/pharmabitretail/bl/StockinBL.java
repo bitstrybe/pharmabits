@@ -165,8 +165,8 @@ public class StockinBL extends DdsBL {
     }
 
     public String getBachnobyItemname(String itemname) {
-        TypedQuery<String> q = em.createQuery("SELECT s.batchNo FROM Stockin s WHERE s.items.itemCodeFullname = :itemname", String.class);
-        q.setParameter("itemname", itemname);
+        TypedQuery<String> q = em.createQuery("SELECT s.batchNo FROM Stockin s WHERE s.items.itemDesc = :itemDesc", String.class);
+        q.setParameter("itemDesc", itemname);
         return q.getSingleResult();
     }
 
