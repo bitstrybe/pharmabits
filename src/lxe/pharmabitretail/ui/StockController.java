@@ -232,7 +232,7 @@ public class StockController implements Initializable {
                                 childController.iteminfoname.setText(person.getItems());
                                 UomDef udf = new UomBL().getUombyItemId(person.getItems());
                                 Items its = new ItemsBL().getImageItembyCode(person.getItems());
-                                childController.iteminfouom.setText(udf.getUomNm() + " X " + udf.getUomDm());
+                                childController.iteminfouom.setText(udf.getUomCode().getUomDesc()+" "+udf.getUomNm() + " X " + udf.getUomDm());
                                 FileInputStream input;
                                 input = new FileInputStream(its.getItemImg());
                                 Image image = new Image(input);
