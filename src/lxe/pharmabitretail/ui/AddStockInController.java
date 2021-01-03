@@ -107,7 +107,7 @@ public class AddStockInController implements Initializable {
         getItemList();
         search.textProperty().addListener(e -> {
             if (search.getText().length() > 4) {
-                searchItemList(search.getText().toUpperCase());
+                searchItemList(search.getText());
             } else {
                 getItemList();
             }
