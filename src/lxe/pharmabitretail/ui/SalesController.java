@@ -49,7 +49,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -63,10 +65,12 @@ import lxe.pharmabitretail.bl.ReceiptBL;
 import lxe.pharmabitretail.bl.SalesBL;
 import lxe.pharmabitretail.bl.SalesDetailsBL;
 import lxe.pharmabitretail.bl.StockinBL;
+import lxe.pharmabitretail.bl.UomBL;
 import lxe.pharmabitretail.entity.Receipt;
 import lxe.pharmabitretail.entity.Sales;
 import lxe.pharmabitretail.entity.SalesDetails;
 import lxe.pharmabitretail.entity.Stockin;
+import lxe.pharmabitretail.entity.UomDef;
 import lxe.pharmabitretail.entity.Users;
 import lxe.pharmabitretail.tablemodel.ReceiptTableModel;
 import lxe.pharmabitretail.tablemodel.SalesDetailsTableModel;
@@ -90,7 +94,6 @@ public class SalesController implements Initializable {
 //    private final ObservableList<Person> data
 //            = FXCollections.observableArrayList();
 
-    @FXML
     private JFXListView<String> listviewsales;
     @FXML
     private JFXTextField itemsearch;
@@ -140,74 +143,98 @@ public class SalesController implements Initializable {
     static int qntval1 = 0;
     static int stockbal = 0;
     String lsv;
+    @FXML
+    private FlowPane displaypane;
 
     public void getStockingItemList() {
+
         StockinBL sk = new StockinBL();
         List<Stockin> list = sk.getAllStockinGroup();
         ObservableList<Stockin> result = FXCollections.observableArrayList(list);
-        listviewsales.getItems().clear();
-        listviewsales.setOrientation(Orientation.HORIZONTAL);
-        result.forEach((man) -> {
-            long balance = sk.getStockBalance(man.getBatchNo());
-            if (balance != 0) {
-                listviewsales.getItems().add(man.getBatchNo() + ": " + man.getItems().getItemDesc());
-                System.out.println(man.getBatchNo() + ": " + man.getItems().getItemDesc());
-                listviewsales.setCellFactory(value -> new ListCell<String>() {
-                    private VBox vb = new VBox();
-                    private ImageView imageView = new ImageView();
-                    private Label lb = new Label();
-                    private Label lb1 = new Label();
-
-                    @Override
-                    public void updateItem(String name, boolean empty) {
-                        super.updateItem(name, empty);
-                        if (empty) {
-                            setText(null);
-                            setGraphic(null);
-                        } else {
-                            try {
-                                if (name.equals(man.getBatchNo() + ": " + man.getItems().getItemDesc())) {
-                                    imageView.setFitWidth(200);
-                                    imageView.setPreserveRatio(true);
-                                    imageView.setSmooth(true);
-                                    imageView.setCache(true);
-                                    vb.setAlignment(Pos.TOP_CENTER);
-                                    FileInputStream input;
-                                    input = new FileInputStream(man.getItems().getItemImg());
-                                    Image image = new Image(input);
-                                    imageView.setImage(image);
-                                    lb.setText(man.getBatchNo() + ": " + man.getItems().getItemDesc());
-                                    lb1.setText(balance + " Remaining");
-                                    vb.getChildren().addAll(imageView, lb, lb1);
-                                    setGraphic(vb);
-                                }
-
-                            } catch (FileNotFoundException ex) {
-                                Logger.getLogger(SalesController.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
-                    }
-                });
-
+        result.forEach((stock) -> {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ItemsDisplay.fxml"));
+                Parent parent = (Parent) fxmlLoader.load();
+                ItemsDisplayController childController = fxmlLoader.getController();
+                childController.medsname.setText(stock.getItems().getItemName());
+                UomDef domf = new UomBL().getUombyItemId(stock.getItems().getItemDesc());
+                int uomitem = domf.getUomItem();
+                String uom_val = String.valueOf(domf.getUomCode().getUomDesc() + " " + domf.getUomNm() + " X " + domf.getUomDm());
+                childController.uom.setText(uom_val);
+                childController.cat.setText(stock.getItems().getCategory().getCategoryName());
+                childController.man.setText(stock.getItems().getManufacturer().getManufacturer());
+                childController.exp.setText(String.valueOf(stock.getExpiryDate()));
+                FileInputStream ifile = new FileInputStream(stock.getItems().getItemImg());
+                Image image = new Image(ifile);
+                childController.itemsimage.setImage(image);
+                displaypane.getChildren().add(parent);
+            } catch (IOException ex) {
+                Logger.getLogger(SalesController.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         });
+//        listviewsales.getItems().clear();
+//        listviewsales.setOrientation(Orientation.HORIZONTAL);
+//        result.forEach((man) -> {
+//            long balance = sk.getStockBalance(man.getBatchNo());
+//            if (balance != 0) {
+//                listviewsales.getItems().add(man.getBatchNo() + ": " + man.getItems().getItemDesc());
+//                System.out.println(man.getBatchNo() + ": " + man.getItems().getItemDesc());
+//                listviewsales.setCellFactory(value -> new ListCell<String>() {
+//                    private VBox vb = new VBox();
+//                    private ImageView imageView = new ImageView();
+//                    private Label lb = new Label();
+//                    private Label lb1 = new Label();
+//
+//                    @Override
+//                    public void updateItem(String name, boolean empty) {
+//                        super.updateItem(name, empty);
+//                        if (empty) {
+//                            setText(null);
+//                            setGraphic(null);
+//                        } else {
+//                            try {
+//                                if (name.equals(man.getBatchNo() + ": " + man.getItems().getItemDesc())) {
+//                                    imageView.setFitWidth(200);
+//                                    imageView.setPreserveRatio(true);
+//                                    imageView.setSmooth(true);
+//                                    imageView.setCache(true);
+//                                    vb.setAlignment(Pos.TOP_CENTER);
+//                                    FileInputStream input;
+//                                    input = new FileInputStream(man.getItems().getItemImg());
+//                                    Image image = new Image(input);
+//                                    imageView.setImage(image);
+//                                    lb.setText(man.getBatchNo() + ": " + man.getItems().getItemDesc());
+//                                    lb1.setText(balance + " Remaining");
+//                                    vb.getChildren().addAll(imageView, lb, lb1);
+//                                    setGraphic(vb);
+//                                }
+//
+//                            } catch (FileNotFoundException ex) {
+//                                Logger.getLogger(SalesController.class.getName()).log(Level.SEVERE, null, ex);
+//                            }
+//                        }
+//                    }
+//                });
+//
+//            }
+//        });
     }
 
-    public void SearchStockingItemList(String p) {
-        StockinBL sb = new StockinBL();
-        List<Stockin> list = sb.searchAllStockinGroup(p);
-        ObservableList<Stockin> result = FXCollections.observableArrayList(list);
-        listviewsales.getItems().clear();
-        listviewsales.setOrientation(Orientation.HORIZONTAL);
-        result.forEach((man) -> {
-            long balance = sb.getStockBalance(man.getBatchNo());
-            if (balance != 0) {
-                listviewsales.getItems().add(man.getBatchNo() + ": " + man.getItems().getItemDesc().toUpperCase() + " -> " + balance + " Remaining");
-            }
-        });
-
-    }
-
+//    public void SearchStockingItemList(String p) {
+//        StockinBL sb = new StockinBL();
+//        List<Stockin> list = sb.searchAllStockinGroup(p);
+//        ObservableList<Stockin> result = FXCollections.observableArrayList(list);
+//        listviewsales.getItems().clear();
+//        listviewsales.setOrientation(Orientation.HORIZONTAL);
+//        result.forEach((man) -> {
+//            long balance = sb.getStockBalance(man.getBatchNo());
+//            if (balance != 0) {
+//                listviewsales.getItems().add(man.getBatchNo() + ": " + man.getItems().getItemDesc().toUpperCase() + " -> " + balance + " Remaining");
+//            }
+//        });
+//
+//    }
     public List getBatchNo() {
         List<String> columnData = new ArrayList<>();
         for (SelectItemSaleTableModel item : seleteditemtableview.getItems()) {
@@ -261,14 +288,13 @@ public class SalesController implements Initializable {
 //        getTodaysDate();
         getStockingItemList();
 
-        itemsearch.textProperty().addListener(e -> {
-            if (itemsearch.getText().length() > 1) {
-                SearchStockingItemList(itemsearch.getText());
-            } else {
-                getStockingItemList();
-            }
-        });
-
+//        itemsearch.textProperty().addListener(e -> {
+//            if (itemsearch.getText().length() > 1) {
+//                SearchStockingItemList(itemsearch.getText());
+//            } else {
+//                getStockingItemList();
+//            }
+//        });
 //        listviewsales.setOnMouseClicked(r -> {
 //            if (r.getClickCount() == 2) {
 //                try {

@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.SalesController">
-   <center>
-      <Pane>
-         <children>
-            <JFXTextField fx:id="itemsearch" layoutX="50.0" layoutY="50.0" prefHeight="25.0" prefWidth="299.0" promptText="Item Search" />
-            <JFXListView fx:id="listviewsales" layoutX="50.0" layoutY="89.0" prefHeight="559.0" prefWidth="1044.0" />
-            <JFXButton layoutX="372.0" layoutY="50.0" prefHeight="30.0" prefWidth="88.0" text="Customer" />
-         </children>
-      </Pane>
-   </center>
-</BorderPane>
+
+<Pane id="homebackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.SalesController">
+   <children>
+      <BorderPane>
+         <center>
+            <Pane prefHeight="740.0" prefWidth="1144.0">
+               <children>
+                  <JFXButton id="action-btn" layoutX="793.0" layoutY="44.0" prefHeight="30.0" prefWidth="88.0" text="Search" />
+                  <JFXTextField fx:id="itemsearch" layoutX="326.0" layoutY="44.0" prefHeight="32.0" prefWidth="464.0" />
+                  <VBox layoutX="50.0" layoutY="95.0" prefHeight="614.0" prefWidth="1074.0">
+                     <children>
+                        <FlowPane fx:id="displaypane" prefHeight="620.0" prefWidth="1074.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+         </center>
+      </BorderPane>
+   </children>
+</Pane>

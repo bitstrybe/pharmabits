@@ -207,6 +207,7 @@ public class StockController implements Initializable {
                 final HBox hb = new HBox();
                 final Button btn = new Button();
                 final FontAwesomeIcon fa = new FontAwesomeIcon();
+                final Label lab = new Label();
 
                 @Override
                 public void updateItem(String item, boolean empty) {
@@ -216,12 +217,13 @@ public class StockController implements Initializable {
                         setText(null);
                     } else {
                         StockTableModel person = getTableView().getItems().get(getIndex());
-                        final Label lab = new Label(person.getItems());
+                        
                         this.getStyleClass().add("table-row-cell");
                         hb.setAlignment(Pos.CENTER);
                         fa.setGlyphName("INFO_CIRCLE");
                         btn.getStyleClass().add("closeform");
                         btn.setGraphic(fa);
+                        lab.setText(person.getItems());
                         hb.getChildren().addAll(lab, btn);
                         btn.setOnAction(event -> {
                             try {

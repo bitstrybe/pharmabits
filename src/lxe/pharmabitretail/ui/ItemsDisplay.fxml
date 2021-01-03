@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox alignment="CENTER" prefWidth="358.0" styleClass="modal-dialog" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.ItemsDisplayController">
+   <children>
+      <ImageView fx:id="itemsimage" fitHeight="150.0" fitWidth="253.0" pickOnBounds="true" preserveRatio="true" />
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox prefHeight="100.0" prefWidth="124.0">
+               <children>
+                  <Label text="Medicine Name" />
+                  <Label layoutX="10.0" layoutY="10.0" text="Unit of measurement" />
+                  <Label layoutX="10.0" layoutY="10.0" text="Category" />
+                  <Label layoutX="10.0" layoutY="44.0" text="Manufacturer" />
+                  <Label layoutX="10.0" layoutY="61.0" text="Expiry Date" />
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="124.0">
+               <children>
+                  <Label fx:id="medsname" text="Label" />
+                  <Label fx:id="uom" layoutX="10.0" layoutY="10.0" text="Label" />
+                  <Label fx:id="cat" layoutX="10.0" layoutY="10.0" text="Label" />
+                  <Label fx:id="man" layoutX="10.0" layoutY="44.0" text="Label" />
+                  <Label fx:id="exp" layoutX="10.0" layoutY="61.0" text="Label" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>

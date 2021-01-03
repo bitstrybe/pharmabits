@@ -10,7 +10,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -60,11 +59,7 @@
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="136.0" prefWidth="270.0">
                                  <children>
-                                    <ImageView fx:id="itemimages" fitHeight="123.0" fitWidth="217.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../img/DEFAULT.png" />
-                                       </image>
-                                    </ImageView>
+                                    <ImageView fx:id="itemimages" fitHeight="123.0" fitWidth="217.0" pickOnBounds="true" preserveRatio="true" />
                                     <Button fx:id="browse" mnemonicParsing="false" prefHeight="32.0" prefWidth="33.0">
                                        <HBox.margin>
                                           <Insets left="30.0" />

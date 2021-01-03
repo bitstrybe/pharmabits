@@ -185,6 +185,8 @@ public class AddItemsController implements Initializable {
         getUOM();
         TableData();
         ifile = new File("./img/DEFAULT.png");
+//        Image itim = new Image(ifile);
+//        itemimages.setImage(itim);
 
         searchbtn.textProperty().addListener((e, oldValue, newValue) -> {
             //searchbtn.setText(newValue.toUpperCase());
