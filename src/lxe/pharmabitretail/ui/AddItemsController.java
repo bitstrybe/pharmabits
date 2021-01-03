@@ -131,10 +131,11 @@ public class AddItemsController implements Initializable {
     private ImageView itemimages;
 
     byte[] item_image = null;
-    File ifile;
+
     InputStream initialStream;
     ItemsBL itembl = new ItemsBL();
     UomBL uombl = new UomBL();
+    File ifile;
 
     public void getManufacturer() {
         List<Manufacturer> list = new ManufacturerBL().getAllManufacturer();
@@ -172,6 +173,7 @@ public class AddItemsController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
@@ -182,10 +184,12 @@ public class AddItemsController implements Initializable {
         getVolumeValue();
         getUOM();
         TableData();
+        ifile = new File("./img/DEFAULT.png");
+
         searchbtn.textProperty().addListener((e, oldValue, newValue) -> {
-            searchbtn.setText(newValue.toUpperCase());
-            if (searchbtn.getText().length() > 3) {
-                TableData(searchbtn.getText());
+            //searchbtn.setText(newValue.toUpperCase());
+            if (searchbtn.getText().length() > 4) {
+                TableData(searchbtn.getText().toUpperCase());
             } else {
                 TableData();
             }
@@ -212,6 +216,7 @@ public class AddItemsController implements Initializable {
         });
         browse.setOnAction(new EventHandler<ActionEvent>() {
             Stage st = new Stage();
+
             @Override
             public void handle(ActionEvent event) {
                 FileChooser fileChooser = new FileChooser();
@@ -250,8 +255,8 @@ public class AddItemsController implements Initializable {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
-    
-    private void clearAllfield(){
+
+    private void clearAllfield() {
         itmtextfield.clear();
         categorycombo.getSelectionModel().clearSelection();
         manufacturercombo.getSelectionModel().clearSelection();
@@ -261,8 +266,7 @@ public class AddItemsController implements Initializable {
         uomcombo.getSelectionModel().clearSelection();
         uom_val1.clear();
         uom_val2.clear();
-        
-        
+
     }
 
     @FXML
@@ -294,9 +298,23 @@ public class AddItemsController implements Initializable {
                 cat.setEntryLog(new Date());
                 cat.setLastModified(new Date());
                 //adding image file to directory
+                //if(ifile.exists()){
                 initialStream = new FileInputStream(ifile);
+//                }else{
+//                    itemimages.
+//                    initialStream = new FileInputStream(ifile);
+//                }
+                System.out.println("FILE 1: " + ifile.getName());
+                // System.out.println("FILE 2: " + ifile.getName());
+
+                //if (!ifile.getName().equals("DEFAULT.png")) {
                 File targetFile = new File("./img/" + itemdesc + "." + FilenameUtils.getExtension(ifile.getName()));
-                cat.setItemImg("./img/" + itemdesc + "." + FilenameUtils.getExtension(ifile.getName()));
+                if (!ifile.getName().equals("DEFAULT.png")) {
+                    cat.setItemImg("./img/" + itemdesc + "." + FilenameUtils.getExtension(ifile.getName()));
+                } else {
+                    cat.setItemImg("./img/DEFAULT.png");
+                }
+                // }
 
                 List<UomDef> udf = new ArrayList<>();
                 UomDef df = new UomDef();
@@ -307,9 +325,13 @@ public class AddItemsController implements Initializable {
                 udf.add(df);
                 cat.setUomDefCollection(udf);
                 int result = new InsertUpdateBL().insertData(cat);
+                System.out.println("result: " + result);
                 switch (result) {
                     case 1:
-                        java.nio.file.Files.copy(initialStream, targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                        if (!ifile.getName().equals("DEFAULT.png")) {
+                            java.nio.file.Files.copy(initialStream, targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+                        }
                         displayinfo.setText("SUCCESSFULLY SAVED");
 //                        Utilities.clearAllField(itemspane);
                         spinner.setVisible(false);
@@ -326,8 +348,11 @@ public class AddItemsController implements Initializable {
             } catch (NumberFormatException ex) {
                 spinner.setVisible(false);
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
-
-            } catch (IOException ex) {
+            } //            catch (java.lang.NullPointerException ex) {
+            //                spinner.setVisible(false);
+            //                Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
+            //            } 
+            catch (IOException ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
                 try {
@@ -362,7 +387,7 @@ public class AddItemsController implements Initializable {
                 imageitems.scaleYProperty();
                 imageitems.setSmooth(true);
                 imageitems.setCache(true);
-                data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getCategory().getCategoryName(), item.getManufacturer().getManufacturer(),uom_val , uomitem, vom_value, item.getRol(), imageitems));
+                data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getCategory().getCategoryName(), item.getManufacturer().getManufacturer(), uom_val, uomitem, vom_value, item.getRol(), imageitems));
 //                System.out.println(item.getItemCodeFullname() + " " + item.getItemName() + " " + item.getCategory().getCategoryName() + "" + item.getManufacturer().getManufacturer() + " " + uom_value + " " + item.getRol());
             } catch (Exception ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -411,7 +436,7 @@ public class AddItemsController implements Initializable {
                 itemimageview.scaleYProperty();
                 itemimageview.setSmooth(true);
                 itemimageview.setCache(true);
-                data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getCategory().getCategoryName(), item.getManufacturer().getManufacturer(),uom_val , uomitem, vom_value, item.getRol(), itemimageview));
+                data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getCategory().getCategoryName(), item.getManufacturer().getManufacturer(), uom_val, uomitem, vom_value, item.getRol(), itemimageview));
             } catch (Exception ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
 
@@ -483,26 +508,26 @@ public class AddItemsController implements Initializable {
                             childController.displayinfo.textProperty().unbind();
 //                                List ls = new StockinBL().getStockinFromItems(selectedRecord.getItemCodeName());
 //                                if (ls.isEmpty()) {
-int uom_result = new UomBL().removeData(selectedRecord.getUomItem());
+                            int uom_result = new UomBL().removeData(selectedRecord.getUomItem());
 
-if (uom_result == 1) {
-    int result = new ItemsBL().removeData(selectedRecord.getItemCodeName());
-    switch (result) {
-        case 1:
-            childController.displayinfo.setText("SUCCESSFULLY DELETED");
-            childController.spinner.setVisible(false);
-            childController.check.setVisible(true);
-            TableData();
-            stage.close();
-            break;
-        default:
-            childController.displayinfo.setText("NOTICE! AN ERROR OCCURED");
-            childController.spinner.setVisible(false);
-            childController.check.setVisible(false);
-            break;
-            
-    }
-}
+                            if (uom_result == 1) {
+                                int result = new ItemsBL().removeData(selectedRecord.getItemCodeName());
+                                switch (result) {
+                                    case 1:
+                                        childController.displayinfo.setText("SUCCESSFULLY DELETED");
+                                        childController.spinner.setVisible(false);
+                                        childController.check.setVisible(true);
+                                        TableData();
+                                        stage.close();
+                                        break;
+                                    default:
+                                        childController.displayinfo.setText("NOTICE! AN ERROR OCCURED");
+                                        childController.spinner.setVisible(false);
+                                        childController.check.setVisible(false);
+                                        break;
+
+                                }
+                            }
 
 //                                } else {
 //                                    childController.displayinfo.setText("UNABLE TO DELETE RECORD");
@@ -513,7 +538,7 @@ if (uom_result == 1) {
                         Thread d = new Thread(task);
                         d.setDaemon(true);
                         d.start();
-                        
+
                     });
                     Scene scene1 = new Scene(parent1);
                     stage.initModality(Modality.APPLICATION_MODAL);
@@ -522,7 +547,7 @@ if (uom_result == 1) {
                     stage.initStyle(StageStyle.UNDECORATED);
                     stage.resizableProperty().setValue(false);
                     stage.showAndWait();
-                }catch (IOException ex) {
+                } catch (IOException ex) {
                     Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });

@@ -271,7 +271,7 @@
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="47.0" prefWidth="286.0">
                                  <children>
-                                    <JFXButton onAction="#saveAction" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #cccccc;" text="Save" textFill="#323232">
+                                    <JFXButton id="action-btn" onAction="#saveAction" prefHeight="30.0" prefWidth="110.0" stylesheets="@style.css" text="Save" textFill="#323232">
                                        <HBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </HBox.margin>

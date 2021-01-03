@@ -25,7 +25,7 @@
                <children>
                   <Pane prefHeight="49.0" prefWidth="832.0" style="-fx-background-color: #eee;" stylesheets="@style.css" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label layoutX="14.0" layoutY="11.0" text="ADD ITEMS" textFill="#544848">
+                        <Label layoutX="14.0" layoutY="11.0" text="STOCK IN" textFill="#544848">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -245,7 +245,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="51.0" prefWidth="442.0">
                      <children>
-                        <JFXButton fx:id="save" onAction="#saveAction" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #cccccc;" text="Save" textFill="#323232">
+                        <JFXButton id="action-btn" fx:id="save" onAction="#saveAction" prefHeight="30.0" prefWidth="110.0" stylesheets="@style.css" text="Save" textFill="#323232">
                            <HBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </HBox.margin>
