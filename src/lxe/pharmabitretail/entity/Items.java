@@ -35,6 +35,8 @@ import javax.persistence.TemporalType;
     , @NamedQuery(name = "Items.findByItemImg", query = "SELECT i FROM Items i WHERE i.itemImg = :itemImg")
     , @NamedQuery(name = "Items.findByVom", query = "SELECT i FROM Items i WHERE i.vom = :vom")
     , @NamedQuery(name = "Items.findByVomDef", query = "SELECT i FROM Items i WHERE i.vomDef = :vomDef")
+    , @NamedQuery(name = "Items.findByDosage", query = "SELECT i FROM Items i WHERE i.dosage = :dosage")
+    , @NamedQuery(name = "Items.findByDosageDef", query = "SELECT i FROM Items i WHERE i.dosageDef = :dosageDef")
     , @NamedQuery(name = "Items.findByRol", query = "SELECT i FROM Items i WHERE i.rol = :rol")
     , @NamedQuery(name = "Items.findByEntryLog", query = "SELECT i FROM Items i WHERE i.entryLog = :entryLog")
     , @NamedQuery(name = "Items.findByLastModified", query = "SELECT i FROM Items i WHERE i.lastModified = :lastModified")})
@@ -51,12 +53,16 @@ public class Items implements Serializable {
     @Basic(optional = false)
     @Column(name = "item_img", nullable = false, length = 245)
     private String itemImg;
-    @Basic(optional = false)
-    @Column(name = "vom", nullable = false, length = 45)
+    @Column(name = "vom", length = 45)
     private String vom;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "vom_def", precision = 17, scale = 0)
+    private Double vomDef;
     @Basic(optional = false)
-    @Column(name = "vom_def", nullable = false)
-    private double vomDef;
+    @Column(name = "dosage", nullable = false, length = 45)
+    private String dosage;
+    @Column(name = "dosage_def", precision = 17, scale = 0)
+    private Double dosageDef;
     @Basic(optional = false)
     @Column(name = "rol", nullable = false)
     private int rol;
@@ -92,12 +98,11 @@ public class Items implements Serializable {
         this.itemDesc = itemDesc;
     }
 
-    public Items(String itemDesc, String itemName, String itemImg, String vom, double vomDef, int rol, Date entryLog, Date lastModified) {
+    public Items(String itemDesc, String itemName, String itemImg, String dosage, int rol, Date entryLog, Date lastModified) {
         this.itemDesc = itemDesc;
         this.itemName = itemName;
         this.itemImg = itemImg;
-        this.vom = vom;
-        this.vomDef = vomDef;
+        this.dosage = dosage;
         this.rol = rol;
         this.entryLog = entryLog;
         this.lastModified = lastModified;
@@ -135,12 +140,28 @@ public class Items implements Serializable {
         this.vom = vom;
     }
 
-    public double getVomDef() {
+    public Double getVomDef() {
         return vomDef;
     }
 
-    public void setVomDef(double vomDef) {
+    public void setVomDef(Double vomDef) {
         this.vomDef = vomDef;
+    }
+
+    public String getDosage() {
+        return dosage;
+    }
+
+    public void setDosage(String dosage) {
+        this.dosage = dosage;
+    }
+
+    public Double getDosageDef() {
+        return dosageDef;
+    }
+
+    public void setDosageDef(Double dosageDef) {
+        this.dosageDef = dosageDef;
     }
 
     public int getRol() {

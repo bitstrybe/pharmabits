@@ -17,6 +17,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <StackPane prefHeight="601.0" prefWidth="905.0" style="-fx-background-color: #00000045;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.AddItemsController">
@@ -219,11 +220,16 @@
                            <children>
                               <HBox prefHeight="17.0" prefWidth="127.0">
                                  <children>
-                                    <Label prefHeight="17.0" prefWidth="181.0" text="Dosage/Strength:   e.g 500 mg" />
-                                    <Label prefHeight="17.0" prefWidth="0.0" text="*" textFill="#f20303">
+                                    <Label prefHeight="17.0" prefWidth="105.0" text="Dosage/Strength: " />
+                                    <Label contentDisplay="CENTER" prefHeight="17.0" prefWidth="30.0" text="*" textFill="#f20303">
                                        <font>
                                           <Font size="12.0" />
                                        </font>
+                                    </Label>
+                                    <Label prefHeight="17.0" prefWidth="123.0" text="Volume">
+                                       <HBox.margin>
+                                          <Insets left="2.0" />
+                                       </HBox.margin>
                                     </Label>
                                  </children>
                                  <VBox.margin>
@@ -232,12 +238,19 @@
                               </HBox>
                               <HBox prefHeight="30.0" prefWidth="300.0">
                                  <children>
-                                    <JFXTextField fx:id="vom_val" focusColor="#f2efef" opacity="0.93" prefHeight="27.0" prefWidth="174.0" promptText="value" styleClass="form_field">
+                                    <JFXTextField fx:id="vom_val" focusColor="#f2efef" opacity="0.93" prefHeight="27.0" prefWidth="56.0" promptText="value" styleClass="form_field">
                                        <font>
                                           <Font size="13.0" />
                                        </font>
                                     </JFXTextField>
-                                    <ComboBox fx:id="vom" prefHeight="29.0" prefWidth="89.0" />
+                                    <ComboBox fx:id="vom" prefHeight="29.0" prefWidth="69.0" />
+                                    <Line endX="100.0" startX="87.63603210449219" startY="29.292892456054688" stroke="#5e5d5d" />
+                                    <JFXTextField fx:id="vom_val1" focusColor="#f2efef" opacity="0.93" prefHeight="27.0" prefWidth="59.0" promptText="value" styleClass="form_field">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </JFXTextField>
+                                    <ComboBox fx:id="vom1" prefHeight="29.0" prefWidth="69.0" />
                                  </children>
                                  <VBox.margin>
                                     <Insets top="5.0" />
