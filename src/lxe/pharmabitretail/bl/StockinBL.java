@@ -65,7 +65,7 @@ public class StockinBL extends DdsBL {
     }
 
     public List<Stockin> searchAllStockinGroup(String p) {
-        TypedQuery<Stockin> q = em.createQuery("SELECT s FROM Stockin s WHERE s.batchNo LIKE :p OR s.items.itemCodeFullname LIKE :p1 OR s.items.itemName LIKE :p2  GROUP BY s.batchNo", Stockin.class);
+        TypedQuery<Stockin> q = em.createQuery("SELECT s FROM Stockin s WHERE s.batchNo LIKE :p OR s.items.itemDesc LIKE :p1 OR s.items.itemName LIKE :p2  GROUP BY s.batchNo", Stockin.class);
         q.setParameter("p", "%" + p + "%");
         q.setParameter("p1", "%" + p + "%");
         q.setParameter("p2", "%" + p + "%");

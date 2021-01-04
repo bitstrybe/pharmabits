@@ -140,7 +140,7 @@ public class StockController implements Initializable {
 
         AllStockTableData();
         stocksearch.textProperty().addListener(e -> {
-            if (stocksearch.getText().length() > 1) {
+            if (stocksearch.getText().length() > 4) {
                 searchAllStockTableData(stocksearch.getText());
             } else {
                 AllStockTableData();
@@ -297,38 +297,118 @@ public class StockController implements Initializable {
         data = FXCollections.observableArrayList();
         stk.forEach(e -> {
             long stockoutqty;
-            long salesqty;
+
             try {
                 stockoutqty = new StockoutBL().getStockoutqty(e.getBatchNo());
             } catch (Exception ex) {
                 stockoutqty = 0;
             }
-
+            long salesqty;
             try {
                 salesqty = new StockinBL().getSalesTotal(e.getBatchNo());
             } catch (Exception ex) {
                 salesqty = 0;
             }
             long stockinqty = new StockinBL().getStockInTotal(e.getBatchNo());
-            long stkbal = stockinqty - (salesqty + stockoutqty);
+//            long stkbal = stockinqty - (salesqty + stockoutqty);
+            long balance = new StockinBL().getStockBalance(e.getBatchNo());
 
-            data.add(new StockTableModel(e.getBatchNo(), e.getItems().getItemDesc().toUpperCase(), stockinqty, stockoutqty, salesqty, stkbal, Utilities.roundToTwoDecimalPlace(e.getCostPrice(), 2), Utilities.roundToTwoDecimalPlace(e.getSalesPrice(), 2), Utilities.roundToTwoDecimalPlace(e.getNhisPrice(), 2)));
+            data.add(new StockTableModel(e.getBatchNo(), e.getItems().getItemDesc(), stockinqty, stockoutqty, salesqty, balance, Utilities.roundToTwoDecimalPlace(e.getCostPrice(), 2), Utilities.roundToTwoDecimalPlace(e.getSalesPrice(), 2), Utilities.roundToTwoDecimalPlace(e.getNhisPrice(), 2)));
         });
         stkbatchno.setCellValueFactory(cell -> cell.getValue().getBatchNoProperty());
-        stkitem.setCellValueFactory(cell -> cell.getValue().getItemsProperty());
+//        Items its = new ItemsBL().getImageItembyCode(stkitem.getText());
+//        stkitem.setCellValueFactory(cell -> cell.getValue().getItemsProperty());
+
+        Callback<TableColumn<StockTableModel, String>, TableCell<StockTableModel, String>> cellFactory = (final TableColumn<StockTableModel, String> param) -> {
+            final TableCell<StockTableModel, String> cell = new TableCell<StockTableModel, String>() {
+
+                @Override
+                public void updateItem(String item, boolean empty) {
+
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        HBox hb = new HBox();
+                        Button btn = new Button();
+                        FontAwesomeIcon fa = new FontAwesomeIcon();
+                        Label lab = new Label();
+                        StockTableModel person = getTableView().getItems().get(getIndex());
+                        this.getStyleClass().add("table-row-cell");
+                        hb.setAlignment(Pos.CENTER);
+                        fa.setGlyphName("INFO_CIRCLE");
+                        btn.getStyleClass().add("closeform");
+                        btn.setGraphic(fa);
+                        lab.setText(person.getItems());
+                        hb.setAlignment(Pos.CENTER_LEFT);
+                        hb.getChildren().addAll(lab, btn);
+                        btn.setOnAction(event -> {
+                            try {
+                                Stage stage = new Stage();
+                                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ItemInfo.fxml"));
+                                Parent parent = (Parent) fxmlLoader.load();
+                                ItemInfoController childController = fxmlLoader.getController();
+                                childController.iteminfoname.setText(person.getItems());
+                                UomDef udf = new UomBL().getUombyItemId(person.getItems());
+                                Items its = new ItemsBL().getImageItembyCode(person.getItems());
+                                childController.iteminfouom.setText(udf.getUomCode().getUomDesc() + " " + udf.getUomNm() + " X " + udf.getUomDm());
+                                FileInputStream input;
+                                input = new FileInputStream(its.getItemImg());
+                                Image image = new Image(input);
+                                childController.itemimagename.setImage(image);
+
+//                                UomDef udf = new UomBL().getUombyItemId(person.getItems());
+//                                childController.iteminfouom.setText(udf.getUomNm()+" X "+udf.getUomDm());
+//                                System.out.println(i.getItemImg());
+//                                FileInputStream input;
+//                                input = new FileInputStream(i.getItemImg());
+//                                Image image = new Image(input);
+//                                childController.itemimagename.setImage(image);
+                                Scene scene = new Scene(parent);
+                                scene.setFill(Color.TRANSPARENT);
+                                stage.setMaximized(true);
+                                //stage.initModality(Modality.APPLICATION_MODAL);
+                                stage.initOwner(parent.getScene().getWindow());
+                                stage.setScene(scene);
+                                stage.initStyle(StageStyle.TRANSPARENT);
+                                stage.show();
+                            } catch (IOException ex) {
+                                Logger.getLogger(StockController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        });
+                        setGraphic(hb);
+//                            setGraphic(btn);
+//                            setText(null);
+                    }
+                }
+            };
+
+            return cell;
+        };
+
+        stkitem.setCellFactory(cellFactory);
         stkinqty.setCellValueFactory(cell -> cell.getValue().getStockinQtyProperty());
+        stkinqty.getStyleClass().add("align_table_center");
         stkoutqty.setCellValueFactory(cell -> cell.getValue().getStockoutQtyProperty());
+        stkoutqty.getStyleClass().add("align_table_center");
         salesqty.setCellValueFactory(cell -> cell.getValue().getSalesQtyProperty());
+        salesqty.getStyleClass().add("align_table_center");
         stkbal.setCellValueFactory(cell -> cell.getValue().getStockbalProperty());
+        stkbal.getStyleClass().add("align_table_center");
         cstprice.setCellValueFactory(cell -> cell.getValue().getStockCostPriceProperty());
+        cstprice.getStyleClass().add("align_table_right");
         salesprice.setCellValueFactory(cell -> cell.getValue().getStockSalesPriceProperty());
+        salesprice.getStyleClass().add("align_table_right");
         nhisprice.setCellValueFactory(cell -> cell.getValue().getNhisPriceProperty());
+        nhisprice.getStyleClass().add("align_table_right");
 
         stock.setItems(data);
 //        clientTable.getColumns().add(action);
         stock.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-    }
+    
+       }
 
     public void StockinTableData(String batchno) {
         List<Stockin> v = new StockinBL().getAllStockinBatchNo(batchno);
