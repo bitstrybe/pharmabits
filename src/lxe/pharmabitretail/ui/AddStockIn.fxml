@@ -133,7 +133,7 @@
                               </HBox>
                               <HBox prefHeight="61.0" prefWidth="170.0">
                                  <children>
-                                    <JFXTextField fx:id="costtextfield" focusColor="#cccccc" prefHeight="36.0" prefWidth="262.0" styleClass="form_field">
+                                    <JFXTextField fx:id="nhistextfield" focusColor="#cccccc" prefHeight="36.0" prefWidth="262.0" styleClass="form_field">
                                        <font>
                                           <Font size="13.0" />
                                        </font>
@@ -169,7 +169,7 @@
                               </HBox>
                               <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <JFXTextField fx:id="salestextfield" focusColor="#cccccc" prefHeight="36.0" prefWidth="193.0" styleClass="form_field">
+                                    <JFXTextField fx:id="costtextfield" focusColor="#cccccc" prefHeight="36.0" prefWidth="193.0" styleClass="form_field">
                                        <font>
                                           <Font size="13.0" />
                                        </font>
@@ -198,7 +198,7 @@
                               </HBox>
                               <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <JFXTextField fx:id="nhistextfield" focusColor="#cccccc" prefHeight="36.0" prefWidth="196.0" styleClass="form_field">
+                                    <JFXTextField fx:id="salestextfield" focusColor="#cccccc" prefHeight="36.0" prefWidth="196.0" styleClass="form_field">
                                        <font>
                                           <Font size="13.0" />
                                        </font>

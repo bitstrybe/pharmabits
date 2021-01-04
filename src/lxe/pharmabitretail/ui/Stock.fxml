@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <Pane id="homebackground" prefHeight="700.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.StockController">
    <children>
       <BorderPane layoutX="37.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1135.0">
@@ -28,9 +27,9 @@
                               <TableColumn fx:id="stkoutqty" prefWidth="89.0" resizable="false" text="Stockout Qty" />
                               <TableColumn fx:id="salesqty" prefWidth="69.0" resizable="false" text="Sales Qty" />
                               <TableColumn fx:id="stkbal" prefWidth="88.0" resizable="false" text="Stock Balance" />
-                              <TableColumn fx:id="cstprice" resizable="false" text="Cost Price" />
-                              <TableColumn fx:id="salesprice" prefWidth="94.0" resizable="false" text="Sales Price" />
-                              <TableColumn fx:id="nhisprice" prefWidth="78.0" resizable="false" text="NHIS Price" />
+                              <TableColumn fx:id="nhisprice" prefWidth="100.0" resizable="false" text="NHIS Price" />
+                              <TableColumn fx:id="cstprice" prefWidth="96.0" resizable="false" text="Cost Price" />
+                              <TableColumn fx:id="salesprice" prefWidth="114.0" resizable="false" text="Sales Price" />
                            </columns>
                         </TableView>
                      </children>

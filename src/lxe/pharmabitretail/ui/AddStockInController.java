@@ -64,8 +64,6 @@ public class AddStockInController implements Initializable {
     public FontAwesomeIcon check;
     @FXML
     private FontAwesomeIcon duplicatelock;
-    public JFXTextField costpiecestextfield;
-    public JFXTextField salespiecetextfield;
     @FXML
     public Label itemname;
     @FXML
@@ -74,7 +72,6 @@ public class AddStockInController implements Initializable {
     private JFXTextField search;
     @FXML
     public JFXTextField nhistextfield;
-    public JFXTextField nhispiecetextfield;
     @FXML
     private Button closebtn;
     @FXML
@@ -190,10 +187,7 @@ public class AddStockInController implements Initializable {
                     float valcost = Float.parseFloat(costtextfield.getText()) * Float.parseFloat(qnttextfield.getText());
                     float valsales = Float.parseFloat(salestextfield.getText()) * Float.parseFloat(qnttextfield.getText());
                     float valnhis = Float.parseFloat(nhistextfield.getText()) * Float.parseFloat(qnttextfield.getText());
-                    costpiecestextfield.setText(String.valueOf(valcost));
-                    salespiecetextfield.setText(String.valueOf(valsales));
-                    nhispiecetextfield.setText(String.valueOf(valnhis));
-                }
+               }
             } catch (Exception ex) {
                 System.out.println("formatting error");
             }

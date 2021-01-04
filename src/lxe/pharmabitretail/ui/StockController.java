@@ -201,23 +201,23 @@ public class StockController implements Initializable {
         stkbatchno.setCellValueFactory(cell -> cell.getValue().getBatchNoProperty());
 //        Items its = new ItemsBL().getImageItembyCode(stkitem.getText());
 //        stkitem.setCellValueFactory(cell -> cell.getValue().getItemsProperty());
+
         Callback<TableColumn<StockTableModel, String>, TableCell<StockTableModel, String>> cellFactory = (final TableColumn<StockTableModel, String> param) -> {
             final TableCell<StockTableModel, String> cell = new TableCell<StockTableModel, String>() {
 
-                final HBox hb = new HBox();
-                final Button btn = new Button();
-                final FontAwesomeIcon fa = new FontAwesomeIcon();
-                final Label lab = new Label();
-
                 @Override
                 public void updateItem(String item, boolean empty) {
+
                     super.updateItem(item, empty);
                     if (empty) {
                         setGraphic(null);
                         setText(null);
                     } else {
+                        HBox hb = new HBox();
+                        Button btn = new Button();
+                        FontAwesomeIcon fa = new FontAwesomeIcon();
+                        Label lab = new Label();
                         StockTableModel person = getTableView().getItems().get(getIndex());
-                        
                         this.getStyleClass().add("table-row-cell");
                         hb.setAlignment(Pos.CENTER);
                         fa.setGlyphName("INFO_CIRCLE");
@@ -234,12 +234,11 @@ public class StockController implements Initializable {
                                 childController.iteminfoname.setText(person.getItems());
                                 UomDef udf = new UomBL().getUombyItemId(person.getItems());
                                 Items its = new ItemsBL().getImageItembyCode(person.getItems());
-                                childController.iteminfouom.setText(udf.getUomCode().getUomDesc()+" "+udf.getUomNm() + " X " + udf.getUomDm());
+                                childController.iteminfouom.setText(udf.getUomCode().getUomDesc() + " " + udf.getUomNm() + " X " + udf.getUomDm());
                                 FileInputStream input;
                                 input = new FileInputStream(its.getItemImg());
                                 Image image = new Image(input);
                                 childController.itemimagename.setImage(image);
-
 
 //                                UomDef udf = new UomBL().getUombyItemId(person.getItems());
 //                                childController.iteminfouom.setText(udf.getUomNm()+" X "+udf.getUomDm());

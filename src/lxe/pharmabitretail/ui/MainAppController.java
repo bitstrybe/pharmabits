@@ -22,6 +22,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -78,6 +79,8 @@ public class MainAppController implements Initializable {
     private Text catalogtext;
 
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    @FXML
+    private ImageView addtocartbtn;
 
     public void setScene(String scenechange) throws IOException {
         Parent root;
@@ -91,6 +94,9 @@ public class MainAppController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        addtocartbtn.addEventHandler(MouseEvent.MOUSE_CLICKED, e->{
+            System.out.println("I was clicked");
+        });
         // TODO
         //init image directory
         File directory = new File("./img/");

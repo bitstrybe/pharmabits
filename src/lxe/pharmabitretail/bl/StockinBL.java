@@ -54,7 +54,7 @@ public class StockinBL extends DdsBL {
     }
 
     public List<Stockin> getAllStockinGroup() {
-        TypedQuery<Stockin> q = em.createQuery("SELECT s FROM Stockin s GROUP BY s.batchNo", Stockin.class);
+        TypedQuery<Stockin> q = em.createQuery("SELECT s FROM Stockin s GROUP BY s.batchNo ORDER BY s.stockinId DESC", Stockin.class);
         q.setMaxResults(20);
         return q.getResultList();
     }
