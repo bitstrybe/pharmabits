@@ -81,6 +81,12 @@ public class MainAppController implements Initializable {
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     @FXML
     private ImageView addtocartbtn;
+    @FXML
+    private HBox catalog;
+    @FXML
+    private FontAwesomeIcon salesawesome;
+    @FXML
+    private Text salestext;
 
     public void setScene(String scenechange) throws IOException {
         Parent root;
@@ -94,13 +100,13 @@ public class MainAppController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        addtocartbtn.addEventHandler(MouseEvent.MOUSE_CLICKED, e->{
+        addtocartbtn.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             System.out.println("I was clicked");
         });
         // TODO
         //init image directory
         File directory = new File("./img/");
-        if(!directory.exists()){
+        if (!directory.exists()) {
             directory.mkdir();
         }
         mainmenu.setText(LoginController.u.getUsername());
@@ -133,8 +139,11 @@ public class MainAppController implements Initializable {
                 stocktext.setFill(Color.valueOf("#dddee0"));
                 catalogawesome.setFill(Color.valueOf("#dddee0"));
                 catalogtext.setFill(Color.valueOf("#dddee0"));
+                salesawesome.setFill(Color.valueOf("#dddee0"));
+                salestext.setFill(Color.valueOf("#dddee0"));
                 stocks.setStyle("-fx-background-color: transparent");
                 sales.setStyle("-fx-background-color: transparent");
+                catalog.setStyle("-fx-background-color: transparent");
             } catch (IOException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -150,26 +159,50 @@ public class MainAppController implements Initializable {
                 dashtext.setFill(Color.valueOf("#dddee0"));
                 catalogawesome.setFill(Color.valueOf("#dddee0"));
                 catalogtext.setFill(Color.valueOf("#dddee0"));
-
+                salesawesome.setFill(Color.valueOf("#dddee0"));
+                salestext.setFill(Color.valueOf("#dddee0"));
                 sales.setStyle("-fx-background-color:  transparent");
                 dashboard.setStyle("-fx-background-color: transparent");
+                catalog.setStyle("-fx-background-color: transparent");
             } catch (IOException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
 
-        sales.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+        catalog.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             try {
-                setScene("Sales.fxml");
-                sales.setStyle("-fx-background-color:#dddee0");
+                setScene("Catalog.fxml");
+                catalog.setStyle("-fx-background-color:#dddee0");
                 catalogawesome.setFill(Color.BLACK);
                 catalogtext.setFill(Color.BLACK);
                 dashawesome.setFill(Color.valueOf("#dddee0"));
                 dashtext.setFill(Color.valueOf("#dddee0"));
                 stockawesome.setFill(Color.valueOf("#dddee0"));
                 stocktext.setFill(Color.valueOf("#dddee0"));
+                salesawesome.setFill(Color.valueOf("#dddee0"));
+                salestext.setFill(Color.valueOf("#dddee0"));
                 stocks.setStyle("-fx-background-color:  transparent");
                 dashboard.setStyle("-fx-background-color: transparent");
+                sales.setStyle("-fx-background-color: transparent");
+            } catch (IOException ex) {
+                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        sales.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            try {
+                setScene("Sales.fxml");
+                sales.setStyle("-fx-background-color:#dddee0");
+                salesawesome.setFill(Color.BLACK);
+                salestext.setFill(Color.BLACK);
+                dashawesome.setFill(Color.valueOf("#dddee0"));
+                dashtext.setFill(Color.valueOf("#dddee0"));
+                stockawesome.setFill(Color.valueOf("#dddee0"));
+                stocktext.setFill(Color.valueOf("#dddee0"));
+                catalogawesome.setFill(Color.valueOf("#dddee0"));
+                catalogtext.setFill(Color.valueOf("#dddee0"));
+                stocks.setStyle("-fx-background-color:  transparent");
+                dashboard.setStyle("-fx-background-color: transparent");
+                catalog.setStyle("-fx-background-color: transparent");
             } catch (IOException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -180,7 +213,7 @@ public class MainAppController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Backup.fxml"));
                 Parent parent = (Parent) fxmlLoader.load();
                 Scene scene = new Scene(parent);
-               // stage.initModality(Modality.APPLICATION_MODAL);
+                // stage.initModality(Modality.APPLICATION_MODAL);
                 stage.initOwner(parent.getScene().getWindow());
                 stage.setScene(scene);
                 stage.initStyle(StageStyle.UNDECORATED);
@@ -256,7 +289,7 @@ public class MainAppController implements Initializable {
         //stage.resizableProperty().setValue(false);
         //stage.initModality(Modality.APPLICATION_MODAL);
 //        stage.initStyle(StageStyle.UNDECORATED);
-        
+
         stage.show();
 
     }

@@ -23,13 +23,13 @@
                            <columns>
                               <TableColumn fx:id="stkbatchno" prefWidth="86.0" resizable="false" text="Batch No" />
                               <TableColumn fx:id="stkitem" minWidth="0.0" prefWidth="420.0" resizable="false" text="Items" />
-                              <TableColumn fx:id="stkinqty" prefWidth="79.0" resizable="false" text="Stockin Qty" />
-                              <TableColumn fx:id="stkoutqty" prefWidth="89.0" resizable="false" text="Stockout Qty" />
+                              <TableColumn fx:id="stkinqty" prefWidth="79.0" resizable="false" styleClass="align-table" text="Stockin Qty" />
+                              <TableColumn fx:id="stkoutqty" prefWidth="89.0" resizable="false" styleClass="align-table" text="Stockout Qty" />
                               <TableColumn fx:id="salesqty" prefWidth="69.0" resizable="false" text="Sales Qty" />
                               <TableColumn fx:id="stkbal" prefWidth="88.0" resizable="false" text="Stock Balance" />
                               <TableColumn fx:id="nhisprice" prefWidth="100.0" resizable="false" text="NHIS Price" />
                               <TableColumn fx:id="cstprice" prefWidth="96.0" resizable="false" text="Cost Price" />
-                              <TableColumn fx:id="salesprice" prefWidth="114.0" resizable="false" text="Sales Price" />
+                              <TableColumn fx:id="salesprice" prefWidth="107.0" resizable="false" text="Sales Price" />
                            </columns>
                         </TableView>
                      </children>

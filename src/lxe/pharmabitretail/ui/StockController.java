@@ -224,6 +224,7 @@ public class StockController implements Initializable {
                         btn.getStyleClass().add("closeform");
                         btn.setGraphic(fa);
                         lab.setText(person.getItems());
+                        hb.setAlignment(Pos.CENTER_LEFT);
                         hb.getChildren().addAll(lab, btn);
                         btn.setOnAction(event -> {
                             try {
@@ -271,12 +272,19 @@ public class StockController implements Initializable {
 
         stkitem.setCellFactory(cellFactory);
         stkinqty.setCellValueFactory(cell -> cell.getValue().getStockinQtyProperty());
+        stkinqty.getStyleClass().add("align_table_center");
         stkoutqty.setCellValueFactory(cell -> cell.getValue().getStockoutQtyProperty());
+        stkoutqty.getStyleClass().add("align_table_center");
         salesqty.setCellValueFactory(cell -> cell.getValue().getSalesQtyProperty());
+        salesqty.getStyleClass().add("align_table_center");
         stkbal.setCellValueFactory(cell -> cell.getValue().getStockbalProperty());
+        stkbal.getStyleClass().add("align_table_center");
         cstprice.setCellValueFactory(cell -> cell.getValue().getStockCostPriceProperty());
+        cstprice.getStyleClass().add("align_table_right");
         salesprice.setCellValueFactory(cell -> cell.getValue().getStockSalesPriceProperty());
+        salesprice.getStyleClass().add("align_table_right");
         nhisprice.setCellValueFactory(cell -> cell.getValue().getNhisPriceProperty());
+        nhisprice.getStyleClass().add("align_table_right");
 
         stock.setItems(data);
 //        clientTable.getColumns().add(action);

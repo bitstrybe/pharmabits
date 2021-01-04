@@ -72,9 +72,9 @@
                </VBox.margin>
             </HBox>
             <Line endX="70.0" opacity="0.45" startX="-100.0" stroke="#3f3f3f" />
-            <HBox fx:id="sales" prefHeight="88.0" prefWidth="207.0" styleClass="menu-btn" stylesheets="@style.css">
+            <HBox fx:id="catalog" prefHeight="88.0" prefWidth="207.0" styleClass="menu-btn" stylesheets="@style.css">
                <children>
-                  <HBox alignment="CENTER" prefHeight="88.0" prefWidth="179.0" styleClass="menu-btn">
+                  <HBox fx:id="catalog" alignment="CENTER" prefHeight="88.0" prefWidth="179.0" styleClass="menu-btn">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -84,7 +84,7 @@
                               <Insets />
                            </HBox.margin>
                            <children>
-                              <FontAwesomeIcon fx:id="catalogawesome" fill="#dddee0" glyphName="ALIGN_LEFT" size="2.9em" wrappingWidth="39.62142753601074" />
+                              <FontAwesomeIcon fx:id="catalogawesome" fill="#dddee0" glyphName="LEANPUB" size="2.9em" wrappingWidth="39.62142753601074" />
                               <Text fx:id="catalogtext" fill="#dddee0" strokeType="OUTSIDE" strokeWidth="0.0" text="Catalog" textAlignment="CENTER" wrappingWidth="51.580078125" />
                            </children>
                         </VBox>
@@ -93,7 +93,28 @@
                </children>
             </HBox>
             <Line endX="70.0" opacity="0.45" startX="-100.0" stroke="#3f3f3f" />
-            <HBox fx:id="stocks" prefHeight="88.0" prefWidth="207.0" styleClass="menu-btn" stylesheets="@style.css">
+            <HBox fx:id="sales" prefHeight="88.0" prefWidth="207.0" styleClass="menu-btn" stylesheets="@style.css">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="88.0" prefWidth="179.0" styleClass="menu-btn">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <children>
+                        <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <children>
+                              <FontAwesomeIcon fx:id="salesawesome" fill="#dddee0" glyphName="ALIGN_LEFT" size="2.9em" wrappingWidth="39.62142753601074" />
+                              <Text fx:id="salestext" fill="#dddee0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sales" textAlignment="CENTER" wrappingWidth="44.35107421875" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <Line endX="70.0" opacity="0.45" startX="-100.0" stroke="#3f3f3f" />
+            <HBox fx:id="stocks" layoutX="10.0" layoutY="343.0" prefHeight="88.0" prefWidth="207.0" styleClass="menu-btn" stylesheets="@style.css">
                <children>
                   <HBox alignment="CENTER" prefHeight="88.0" prefWidth="179.0" styleClass="menu-btn">
                      <HBox.margin>
@@ -106,7 +127,7 @@
                            </HBox.margin>
                            <children>
                               <FontAwesomeIcon fx:id="stockawesome" fill="#dddee0" glyphName="CUBE" size="2.9em" wrappingWidth="39.62142753601074" />
-                              <Text fx:id="stocktext" fill="#dddee0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stock" textAlignment="CENTER" wrappingWidth="44.35107421875" />
+                              <Text fx:id="stocktext" fill="#dddee0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stocks" textAlignment="CENTER" wrappingWidth="44.35107421875" />
                            </children>
                         </VBox>
                      </children>

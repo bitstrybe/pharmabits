@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.CatalogController">
-    
-</AnchorPane>
+<BorderPane id="homebackground" prefHeight="740.0" prefWidth="1204.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.CatalogController">
+   <center>
+      <Pane prefHeight="740.0" prefWidth="1198.0">
+         <children>
+            <JFXButton id="action-btn" layoutX="793.0" layoutY="44.0" prefHeight="30.0" prefWidth="88.0" text="Search" />
+            <JFXTextField fx:id="itemsearch" layoutX="326.0" layoutY="44.0" prefHeight="32.0" prefWidth="464.0" />
+            <VBox layoutX="50.0" layoutY="95.0" prefHeight="614.0" prefWidth="1119.0">
+               <children>
+                  <ScrollPane prefHeight="614.0" prefWidth="1085.0" style="-fx-background-color: transparent;">
+                     <content>
+                        <FlowPane fx:id="displaypane" columnHalignment="CENTER" prefHeight="620.0" prefWidth="1108.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>
