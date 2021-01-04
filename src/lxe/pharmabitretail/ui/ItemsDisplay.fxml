@@ -7,13 +7,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="367.0" prefWidth="232.0" styleClass="modal-dialog" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.ItemsDisplayController">
+<VBox alignment="CENTER" prefHeight="336.0" prefWidth="268.0" styleClass="modal-dialog" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.ItemsDisplayController">
    <children>
       <HBox alignment="CENTER" prefHeight="157.0" prefWidth="172.0">
          <VBox.margin>
-            <Insets left="5.0" right="5.0" top="5.0" />
+            <Insets top="5.0" />
          </VBox.margin>
          <children>
             <ImageView fx:id="itemsimage" fitHeight="150.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
@@ -23,66 +24,93 @@
             </ImageView>
          </children>
       </HBox>
-      <VBox alignment="CENTER" prefHeight="97.0" prefWidth="234.0">
+      <VBox style="-fx-background-color: #f6f4f1#f6f4f1;">
          <children>
-            <Label fx:id="medsname" text="Label" VBox.vgrow="ALWAYS">
-               <font>
-                  <Font name="Arial Bold" size="13.0" />
-               </font>
+            <VBox alignment="CENTER" prefHeight="97.0" prefWidth="234.0">
+               <children>
+                  <Label fx:id="medsname" text="Label" wrapText="true" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="Arial Bold" size="15.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="3.0" />
+                     </padding>
+                  </Label>
+                  <HBox alignment="CENTER" spacing="1.0">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <children>
+                        <Label text="By:">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="man" prefHeight="6.0" prefWidth="32.0" text="Label" wrapText="true">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" top="5.0" />
+                     </padding>
+                  </HBox>
+                  <Label fx:id="uom" text="Label" wrapText="true">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="2.0" top="2.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="exp" text="Label" textFill="#d31111">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Arial Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </VBox>
+            <HBox>
+               <children>
+                  <Line endX="143.2928924560547" endY="0.2928932309150696" fill="#e1dcdc" opacity="0.13" startX="-100.0" stroke="#4a4848" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="17.0" prefWidth="318.0">
+               <children>
+                  <FontAwesomeIcon glyphName="ARCHIVE" size="1.5em" />
+                  <JFXButton buttonType="RAISED" prefHeight="27.0" prefWidth="36.0">
+                     <graphic>
+                        <FontAwesomeIcon fill="#09b20f" glyphName="SHOPPING_CART" size="1.5em" />
+                     </graphic>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
                <padding>
-                  <Insets bottom="3.0" />
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </padding>
-            </Label>
-            <Label fx:id="uom" text="Label">
-               <VBox.margin>
-                  <Insets bottom="3.0" top="3.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="Arial" size="11.0" />
-               </font>
-            </Label>
-            <Label fx:id="man" text="Label">
-               <VBox.margin>
-                  <Insets bottom="3.0" top="3.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Label>
-            <Label fx:id="exp" text="Label" textFill="#d31111">
-               <VBox.margin>
-                  <Insets bottom="5.0" top="10.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="Arial Bold" size="15.0" />
-               </font>
-            </Label>
+            </HBox>
          </children>
-      </VBox>
-      <HBox alignment="CENTER" prefHeight="17.0" prefWidth="318.0">
-         <children>
-            <JFXButton id="cart-btn" prefHeight="35.0" prefWidth="122.0" text="Add to Cart">
-               <graphic>
-                  <FontAwesomeIcon glyphName="SHOPPING-CART" />
-               </graphic>
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin></JFXButton>
-            <JFXButton id="cart-btn" style="-fx-background-color: red;" text="Sell">
-               <padding>
-                  <Insets bottom="5.0" top="5.0" />
-               </padding>
-            </JFXButton>
-         </children>
-         <padding>
-            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-         </padding>
          <VBox.margin>
-            <Insets bottom="5.0" />
+            <Insets />
          </VBox.margin>
-      </HBox>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+      </VBox>
    </children>
    <padding>
-      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+      <Insets bottom="12.0" left="12.0" right="12.0" top="5.0" />
    </padding>
 </VBox>
