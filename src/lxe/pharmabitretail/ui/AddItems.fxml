@@ -10,6 +10,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -59,7 +60,10 @@
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="136.0" prefWidth="270.0">
                                  <children>
-                                    <ImageView fx:id="itemimages" fitHeight="123.0" fitWidth="217.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="itemimages" fitHeight="123.0" fitWidth="217.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../resources/DEFAULT.png" />
+                                       </image></ImageView>
                                     <Button fx:id="browse" mnemonicParsing="false" prefHeight="32.0" prefWidth="33.0">
                                        <HBox.margin>
                                           <Insets left="30.0" />
@@ -114,7 +118,7 @@
                            <children>
                               <HBox layoutX="10.0" layoutY="10.0">
                                  <children>
-                                    <Label prefHeight="17.0" prefWidth="56.0" text="Category">
+                                    <Label prefHeight="17.0" prefWidth="56.0" text="Forms">
                                        <font>
                                           <Font size="12.0" />
                                        </font>
@@ -164,7 +168,7 @@
                               </HBox>
                               <HBox>
                                  <children>
-                                    <Label prefHeight="17.0" prefWidth="130.0" text="Unit of Measurement" />
+                                    <Label prefHeight="17.0" prefWidth="130.0" text="Unit of Pricing:" />
                                     <Label prefHeight="15.0" prefWidth="3.0" text="*" textFill="#f20303">
                                        <font>
                                           <Font size="12.0" />
@@ -215,7 +219,7 @@
                            <children>
                               <HBox prefHeight="17.0" prefWidth="127.0">
                                  <children>
-                                    <Label prefHeight="17.0" prefWidth="120.0" text="Volume:   e.g 500 mg" />
+                                    <Label prefHeight="17.0" prefWidth="181.0" text="Dosage/Strength:   e.g 500 mg" />
                                     <Label prefHeight="17.0" prefWidth="0.0" text="*" textFill="#f20303">
                                        <font>
                                           <Font size="12.0" />
@@ -228,12 +232,12 @@
                               </HBox>
                               <HBox prefHeight="30.0" prefWidth="300.0">
                                  <children>
-                                    <JFXTextField fx:id="vom_val" focusColor="#f2efef" opacity="0.93" prefHeight="27.0" prefWidth="147.0" promptText="value" styleClass="form_field">
+                                    <JFXTextField fx:id="vom_val" focusColor="#f2efef" opacity="0.93" prefHeight="27.0" prefWidth="174.0" promptText="value" styleClass="form_field">
                                        <font>
                                           <Font size="13.0" />
                                        </font>
                                     </JFXTextField>
-                                    <ComboBox fx:id="vom" prefHeight="29.0" prefWidth="196.0" />
+                                    <ComboBox fx:id="vom" prefHeight="29.0" prefWidth="89.0" />
                                  </children>
                                  <VBox.margin>
                                     <Insets top="5.0" />
@@ -257,7 +261,7 @@
                                     <Insets top="5.0" />
                                  </VBox.margin>
                                  <children>
-                                    <JFXTextField fx:id="roltextfield" focusColor="#f2efef" opacity="0.93" prefHeight="32.0" prefWidth="300.0" styleClass="form_field">
+                                    <JFXTextField fx:id="roltextfield" focusColor="#f2efef" opacity="0.93" prefHeight="32.0" prefWidth="266.0" styleClass="form_field">
                                        <font>
                                           <Font size="13.0" />
                                        </font>

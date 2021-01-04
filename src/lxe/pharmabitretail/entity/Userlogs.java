@@ -26,13 +26,13 @@ import javax.persistence.TemporalType;
  * @author scarface
  */
 @Entity
-@Table(name = "logs")
+@Table(name = "userlogs")
 @NamedQueries({
-    @NamedQuery(name = "Logs.findAll", query = "SELECT l FROM Logs l")
-    , @NamedQuery(name = "Logs.findByLogsid", query = "SELECT l FROM Logs l WHERE l.logsid = :logsid")
-    , @NamedQuery(name = "Logs.findByLoginDatetime", query = "SELECT l FROM Logs l WHERE l.loginDatetime = :loginDatetime")
-    , @NamedQuery(name = "Logs.findByLogoutDatetime", query = "SELECT l FROM Logs l WHERE l.logoutDatetime = :logoutDatetime")})
-public class Logs implements Serializable {
+    @NamedQuery(name = "Userlogs.findAll", query = "SELECT u FROM Userlogs u")
+    , @NamedQuery(name = "Userlogs.findByLogsid", query = "SELECT u FROM Userlogs u WHERE u.logsid = :logsid")
+    , @NamedQuery(name = "Userlogs.findByLoginDatetime", query = "SELECT u FROM Userlogs u WHERE u.loginDatetime = :loginDatetime")
+    , @NamedQuery(name = "Userlogs.findByLogoutDatetime", query = "SELECT u FROM Userlogs u WHERE u.logoutDatetime = :logoutDatetime")})
+public class Userlogs implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -50,10 +50,10 @@ public class Logs implements Serializable {
     @ManyToOne(optional = false)
     private Users username;
 
-    public Logs() {
+    public Userlogs() {
     }
 
-    public Logs(Integer logsid) {
+    public Userlogs(Integer logsid) {
         this.logsid = logsid;
     }
 
@@ -99,10 +99,10 @@ public class Logs implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Logs)) {
+        if (!(object instanceof Userlogs)) {
             return false;
         }
-        Logs other = (Logs) object;
+        Userlogs other = (Userlogs) object;
         if ((this.logsid == null && other.logsid != null) || (this.logsid != null && !this.logsid.equals(other.logsid))) {
             return false;
         }
@@ -111,7 +111,7 @@ public class Logs implements Serializable {
 
     @Override
     public String toString() {
-        return "lxe.pharmabitretail.entity.Logs[ logsid=" + logsid + " ]";
+        return "lxe.pharmabitretail.entity.Userlogs[ logsid=" + logsid + " ]";
     }
     
 }

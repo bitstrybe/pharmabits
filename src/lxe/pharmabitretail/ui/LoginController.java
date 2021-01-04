@@ -26,7 +26,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lxe.pharmabitretail.bl.LoginBL;
-import lxe.pharmabitretail.entity.Logs;
+import lxe.pharmabitretail.entity.Userlogs;
 import lxe.pharmabitretail.entity.Users;
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -42,7 +42,7 @@ public class LoginController implements Initializable {
     private JFXPasswordField password;
 
     static Users u;
-    static Logs log;
+    static Userlogs log;
     LoginBL loginbl = new LoginBL();
 
     @FXML
@@ -124,7 +124,7 @@ public class LoginController implements Initializable {
     }
 
     public int userLog() {
-        log = new Logs();
+        log = new Userlogs();
         log.setUsername(new Users(u.getUserid()));
         log.setLoginDatetime(new Date(System.currentTimeMillis()));
         int result = loginbl.insertData(log);

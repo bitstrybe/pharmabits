@@ -22,33 +22,33 @@ import javax.persistence.Table;
  * @author scarface
  */
 @Entity
-@Table(name = "manufacturer")
+@Table(name = "forms")
 @NamedQueries({
-    @NamedQuery(name = "Manufacturer.findAll", query = "SELECT m FROM Manufacturer m")
-    , @NamedQuery(name = "Manufacturer.findByManufacturer", query = "SELECT m FROM Manufacturer m WHERE m.manufacturer = :manufacturer")})
-public class Manufacturer implements Serializable {
+    @NamedQuery(name = "Forms.findAll", query = "SELECT f FROM Forms f")
+    , @NamedQuery(name = "Forms.findByFormName", query = "SELECT f FROM Forms f WHERE f.formName = :formName")})
+public class Forms implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "manufacturer", nullable = false, length = 245)
-    private String manufacturer;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "manufacturer")
+    @Column(name = "form_name", nullable = false, length = 250)
+    private String formName;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "form")
     private Collection<Items> itemsCollection;
 
-    public Manufacturer() {
+    public Forms() {
     }
 
-    public Manufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
+    public Forms(String formName) {
+        this.formName = formName;
     }
 
-    public String getManufacturer() {
-        return manufacturer;
+    public String getFormName() {
+        return formName;
     }
 
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
+    public void setFormName(String formName) {
+        this.formName = formName;
     }
 
     public Collection<Items> getItemsCollection() {
@@ -62,18 +62,18 @@ public class Manufacturer implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (manufacturer != null ? manufacturer.hashCode() : 0);
+        hash += (formName != null ? formName.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Manufacturer)) {
+        if (!(object instanceof Forms)) {
             return false;
         }
-        Manufacturer other = (Manufacturer) object;
-        if ((this.manufacturer == null && other.manufacturer != null) || (this.manufacturer != null && !this.manufacturer.equals(other.manufacturer))) {
+        Forms other = (Forms) object;
+        if ((this.formName == null && other.formName != null) || (this.formName != null && !this.formName.equals(other.formName))) {
             return false;
         }
         return true;
@@ -81,7 +81,7 @@ public class Manufacturer implements Serializable {
 
     @Override
     public String toString() {
-        return "lxe.pharmabitretail.entity.Manufacturer[ manufacturer=" + manufacturer + " ]";
+        return "lxe.pharmabitretail.entity.Forms[ formName=" + formName + " ]";
     }
     
 }

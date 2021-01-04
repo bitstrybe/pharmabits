@@ -604,3 +604,229 @@ Caused by: java.lang.IllegalStateException: The file is locked: nio:/Users/scarf
 	at org.h2.mvstore.FileStore.open(FileStore.java:172)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
 	... 24 more
+2021-01-04 11:37:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "gen_name" not found; SQL statement:
+CREATE TABLE generic (
+  gene_name varchar(250) NOT NULL,
+  PRIMARY KEY (gen_name)
+) [42122-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.table.Table.getColumn(Table.java:703)
+	at org.h2.table.IndexColumn.mapColumns(IndexColumn.java:115)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:123)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:78)
+	at org.h2.command.ddl.CommandWithColumns.createConstraints(CommandWithColumns.java:83)
+	at org.h2.command.ddl.CreateTable.update(CreateTable.java:133)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:198)
+	at org.h2.command.Command.executeUpdate(Command.java:251)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:228)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper.executeSQLStatementForExtraction(SQLExecutionHelper.java:856)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper.access$500(SQLExecutionHelper.java:86)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper$1Loader.run(SQLExecutionHelper.java:149)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.openide.util.RequestProcessor$Task.run(RequestProcessor.java:1443)
+	at org.netbeans.modules.openide.util.GlobalLookup.execute(GlobalLookup.java:68)
+	at org.openide.util.lookup.Lookups.executeWith(Lookups.java:303)
+	at org.openide.util.RequestProcessor$Processor.run(RequestProcessor.java:2058)
+2021-01-04 11:37:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "generic" not found; SQL statement:
+CREATE TABLE items (
+  item_desc varchar(500) NOT NULL,
+  item_name varchar(245) NOT NULL,
+  item_img varchar(245) NOT NULL,
+  generic varchar(150) NOT NULL,
+  form varchar(150) NOT NULL,
+  manufacturer varchar(150) NOT NULL,
+  vom varchar(45) NOT NULL,
+  vom_def double NOT NULL,
+  rol int(11) NOT NULL DEFAULT '0',
+  users int(11) NOT NULL,
+  entry_log datetime NOT NULL,
+  last_modified timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (item_desc),
+  FOREIGN KEY (form) REFERENCES forms (form_name),
+  FOREIGN KEY (manufacturer) REFERENCES manufacturer (manufacturer),
+  FOREIGN KEY (generic) REFERENCES generic (gene_name),
+  FOREIGN KEY (users) REFERENCES users (userid)
+) [42102-200]
+2021-01-04 11:37:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "items" not found; SQL statement:
+CREATE TABLE uom_def (
+  uom_item int(11) NOT NULL AUTO_INCREMENT,
+  item varchar(245) NOT NULL,
+  uom_code varchar(145) NOT NULL,
+  uom_dm int(11) NOT NULL,
+  uom_nm int(11) NOT NULL,
+  PRIMARY KEY (uom_item),
+  FOREIGN KEY (`item`) REFERENCES `items` (`item_desc`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  FOREIGN KEY (`uom_code`) REFERENCES `uom` (`uom_desc`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) [42102-200]
+2021-01-04 11:37:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "items" not found; SQL statement:
+CREATE TABLE stockin (
+  stockin_id int(11) NOT NULL,
+  batch_no varchar(250) NOT NULL,
+  items varchar(500) NOT NULL,
+  quantity int(11) NOT NULL,
+  cost_price double NOT NULL,
+  sales_price double NOT NULL,
+  nhis_price double DEFAULT NULL,
+  stockin_date date NOT NULL,
+  expiry_date date NOT NULL,
+  users int(11) NOT NULL,
+  entry_log datetime NOT NULL,
+  last_modified timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (stockin_id),
+  FOREIGN KEY (users) REFERENCES users (userid),
+  FOREIGN KEY (items) REFERENCES items (item_desc)
+) [42102-200]
+2021-01-04 11:37:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "category" not found; SQL statement:
+INSERT INTO "category" VALUES
+('Capsule'),
+('Consumables'),
+('Cream'),
+('drops'),
+('Elixir'),
+('Gaseous'),
+('Gel'),
+('Injection'),
+('Intravenous fluid'),
+('Lozenges'),
+('Mixture'),
+('Ointment'),
+('Others'),
+('Powder'),
+('Solutions'),
+('Suppositories'),
+('Suspension'),
+('Syrup'),
+('Spray'),
+('Tablet'),
+('Dispersible Tablet'),
+('Test Strips'),
+('Pessaries') [42102-200]
+2021-01-04 11:37:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "gen_name" not found; SQL statement:
+CREATE TABLE generic (
+  gene_name varchar(250) NOT NULL,
+  PRIMARY KEY (gen_name)
+) [42122-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.table.Table.getColumn(Table.java:703)
+	at org.h2.table.IndexColumn.mapColumns(IndexColumn.java:115)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:123)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:78)
+	at org.h2.command.ddl.CommandWithColumns.createConstraints(CommandWithColumns.java:83)
+	at org.h2.command.ddl.CreateTable.update(CreateTable.java:133)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:198)
+	at org.h2.command.Command.executeUpdate(Command.java:251)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:228)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper.executeSQLStatementForExtraction(SQLExecutionHelper.java:856)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper.access$500(SQLExecutionHelper.java:86)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper$1Loader.run(SQLExecutionHelper.java:149)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.openide.util.RequestProcessor$Task.run(RequestProcessor.java:1443)
+	at org.netbeans.modules.openide.util.GlobalLookup.execute(GlobalLookup.java:68)
+	at org.openide.util.lookup.Lookups.executeWith(Lookups.java:303)
+	at org.openide.util.RequestProcessor$Processor.run(RequestProcessor.java:2058)
+2021-01-04 11:37:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "generic" not found; SQL statement:
+CREATE TABLE items (
+  item_desc varchar(500) NOT NULL,
+  item_name varchar(245) NOT NULL,
+  item_img varchar(245) NOT NULL,
+  generic varchar(150) NOT NULL,
+  form varchar(150) NOT NULL,
+  manufacturer varchar(150) NOT NULL,
+  vom varchar(45) NOT NULL,
+  vom_def double NOT NULL,
+  rol int(11) NOT NULL DEFAULT '0',
+  users int(11) NOT NULL,
+  entry_log datetime NOT NULL,
+  last_modified timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (item_desc),
+  FOREIGN KEY (form) REFERENCES forms (form_name),
+  FOREIGN KEY (manufacturer) REFERENCES manufacturer (manufacturer),
+  FOREIGN KEY (generic) REFERENCES generic (gene_name),
+  FOREIGN KEY (users) REFERENCES users (userid)
+) [42102-200]
+2021-01-04 11:37:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "items" not found; SQL statement:
+CREATE TABLE uom_def (
+  uom_item int(11) NOT NULL AUTO_INCREMENT,
+  item varchar(245) NOT NULL,
+  uom_code varchar(145) NOT NULL,
+  uom_dm int(11) NOT NULL,
+  uom_nm int(11) NOT NULL,
+  PRIMARY KEY (uom_item),
+  FOREIGN KEY (`item`) REFERENCES `items` (`item_desc`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  FOREIGN KEY (`uom_code`) REFERENCES `uom` (`uom_desc`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) [42102-200]
+2021-01-04 11:37:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "items" not found; SQL statement:
+CREATE TABLE stockin (
+  stockin_id int(11) NOT NULL,
+  batch_no varchar(250) NOT NULL,
+  items varchar(500) NOT NULL,
+  quantity int(11) NOT NULL,
+  cost_price double NOT NULL,
+  sales_price double NOT NULL,
+  nhis_price double DEFAULT NULL,
+  stockin_date date NOT NULL,
+  expiry_date date NOT NULL,
+  users int(11) NOT NULL,
+  entry_log datetime NOT NULL,
+  last_modified timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (stockin_id),
+  FOREIGN KEY (users) REFERENCES users (userid),
+  FOREIGN KEY (items) REFERENCES items (item_desc)
+) [42102-200]
+2021-01-04 13:56:00 database: close
+org.h2.message.DbException: IO Exception: "Closing" [90028-200]
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.mvstore.db.MVTableEngine$Store.close(MVTableEngine.java:421)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1545)
+	at org.h2.engine.Database.closeImpl(Database.java:1454)
+	at org.h2.engine.Database.close(Database.java:1373)
+	at org.h2.engine.Database.removeSession(Database.java:1307)
+	at org.h2.engine.Session.close(Session.java:963)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:453)
+	at org.netbeans.modules.db.explorer.DatabaseConnection.disconnect(DatabaseConnection.java:1275)
+	at org.netbeans.modules.db.explorer.action.DisconnectAction$1.run(DisconnectAction.java:104)
+	at org.openide.util.RequestProcessor$Task.run(RequestProcessor.java:1443)
+	at org.netbeans.modules.openide.util.GlobalLookup.execute(GlobalLookup.java:68)
+	at org.openide.util.lookup.Lookups.executeWith(Lookups.java:303)
+	at org.openide.util.RequestProcessor$Processor.run(RequestProcessor.java:2058)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: IO Exception: "Closing" [90028-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 14 more
+Caused by: java.lang.IllegalStateException: File corrupt reading chunk at position 53248 [1.4.200/6]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.Chunk.readChunkHeader(Chunk.java:168)
+	at org.h2.mvstore.MVStore.moveChunk(MVStore.java:1916)
+	at org.h2.mvstore.MVStore.compactMoveChunks(MVStore.java:1839)
+	at org.h2.mvstore.MVStore.compactMoveChunks(MVStore.java:1772)
+	at org.h2.mvstore.MVStore.compactMoveChunks(MVStore.java:1753)
+	at org.h2.mvstore.MVStore.compactFile(MVStore.java:1970)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:1170)
+	at org.h2.mvstore.MVStore.close(MVStore.java:1133)
+	at org.h2.mvstore.db.MVTableEngine$Store.close(MVTableEngine.java:404)
+	... 12 more
+Caused by: java.lang.IllegalStateException: Not a map: DEFGHIJKLMNOPQRSTUVWXYZ[\ 1 !NCREATE INDEX "PUBLIC"."CONSTRAINT_INDEX_F0C" ON "PUBLIC"."uom_def"("uom_code")2 %µALTER TABLE "PUBLIC"."uom_def" ADD CONSTRAINT "PUBLIC"."CONSTRAINT_F0CFB" FOREIGN KEY("uom_code") INDEX "PUBLIC"."CONSTRAINT_INDEX_F0C" REFERENCES "PUBLIC"."uom"("uom_desc") NOCHECK3  ÚCREATE CACHED TABLE "PUBLIC"."customers"( [1.4.200/6]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.DataUtils.parseMap(DataUtils.java:763)
+	at org.h2.mvstore.Chunk.fromString(Chunk.java:214)
+	at org.h2.mvstore.Chunk.readChunkHeader(Chunk.java:163)
+	... 20 more

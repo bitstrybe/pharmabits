@@ -17,6 +17,9 @@
     <class>lxe.pharmabitretail.entity.Uom</class>
     <class>lxe.pharmabitretail.entity.Category</class>
     <class>lxe.pharmabitretail.entity.Stockout</class>
+    <class>lxe.pharmabitretail.entity.Forms</class>
+    <class>lxe.pharmabitretail.entity.Generic</class>
+    <class>lxe.pharmabitretail.entity.Userlogs</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:file:./pharmabitsdb;DATABASE_TO_UPPER=false;IGNORECASE=TRUE"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

@@ -26,7 +26,7 @@ public class ItemListReportModel extends AbstractTableModel {
         for (int x = 0; x < s.size(); x++) {
             Items c = s.get(x);
             data[x][0] = c.getItemName();
-            data[x][1] = c.getCategory().getCategoryName();
+            data[x][1] = c.getForm().getFormName();
             String umo = c.getVomDef()+ " " + c.getVom();
             data[x][2] = umo;
             data[x][3] = c.getManufacturer().getManufacturer();

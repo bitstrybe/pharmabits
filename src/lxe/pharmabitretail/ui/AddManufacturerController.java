@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package lxe.pharmabitretail.ui;
 
 import com.jfoenix.controls.JFXButton;
@@ -11,7 +7,6 @@ import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -41,7 +36,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
@@ -52,8 +46,8 @@ import lxe.pharmabitretail.bl.InsertUpdateBL;
 import lxe.pharmabitretail.bl.ItemsBL;
 import lxe.pharmabitretail.bl.ManufacturerBL;
 import lxe.pharmabitretail.entity.Manufacturer;
-import lxe.pharmabitretail.entity.Users;
 import lxe.pharmabitretail.tablemodel.ManufacturerTableModel;
+import org.apache.commons.text.WordUtils;
 
 /**
  * FXML Controller class
@@ -143,9 +137,9 @@ public class AddManufacturerController implements Initializable {
                     task.setOnSucceeded(s -> {
                         displayinfo.textProperty().unbind();
                         Manufacturer cat = new Manufacturer();
-                        cat.setManufacturer(manutextfield.getText());
-                        cat.setUsers(new Users(LoginController.u.getUserid()));
-                        cat.setEntryLog(new Date());
+                        cat.setManufacturer(WordUtils.capitalizeFully(manutextfield.getText()));
+                        //cat.setUsers(new Users(LoginController.u.getUserid()));
+                        //cat.setEntryLog(new Date());
                         int result = new InsertUpdateBL().insertData(cat);
                         switch (result) {
                             case 1:
@@ -199,9 +193,9 @@ public class AddManufacturerController implements Initializable {
         task.setOnSucceeded(s -> {
             displayinfo.textProperty().unbind();
             Manufacturer cat = new Manufacturer();
-            cat.setManufacturer(manutextfield.getText());
-            cat.setUsers(new Users(LoginController.u.getUserid()));
-            cat.setEntryLog(new Date());
+            cat.setManufacturer(WordUtils.capitalizeFully(manutextfield.getText()));
+            //cat.setUsers(new Users(LoginController.u.getUserid()));
+            //cat.setEntryLog(new Date());
             int result = new InsertUpdateBL().insertData(cat);
             switch (result) {
                 case 1:
@@ -229,7 +223,7 @@ public class AddManufacturerController implements Initializable {
         data = FXCollections.observableArrayList();
 
         c.forEach((manufacturer) -> {
-            data.add(new ManufacturerTableModel(manufacturer.getManufacturer().toUpperCase()));
+            data.add(new ManufacturerTableModel(manufacturer.getManufacturer()));
         });
         manufacturer.setCellValueFactory(cell -> cell.getValue().getManufacturerProperty());
         action.setSortable(false);

@@ -174,12 +174,28 @@
     -fx-font-size: 12px;
     -fx-padding: 10 20 10 20;
 }
+
+#cart-btn {
+    -fx-background-color:#4CBB17;
+    -fx-text-fill: #fff;
+    -fx-font-family: "Arial";
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    -fx-font-size: 12px;
+    -fx-padding: 10 20 10 20;
+}
 #action-btn Text {
     -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
 }
-.modal-dialog {
-  -fx-effect: dropshadow(three-pass-box, derive(#cccccc, -20%), 20, 0, 4, 4); 
-  -fx-background-color: derive(white, -10%); 
-  -fx-background-insets: 12; 
-  -fx-background-radius: 6;
+
+#acart-btn Text {
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
 }
+
+
+.modal-dialog {
+  -fx-effect: dropshadow(three-pass-box, derive(#cccccc, -20%), 7, 0, 1, 1); 
+  -fx-background-color: derive(white, 0%); 
+  -fx-background-insets: 12; 
+  -fx-background-radius: 0;
+}
+

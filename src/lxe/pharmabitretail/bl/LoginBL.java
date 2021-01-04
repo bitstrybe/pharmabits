@@ -2,7 +2,7 @@ package lxe.pharmabitretail.bl;
 
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
-import lxe.pharmabitretail.entity.Logs;
+import lxe.pharmabitretail.entity.Userlogs;
 import lxe.pharmabitretail.entity.Users;
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -46,8 +46,8 @@ public class LoginBL extends DdsBL {
         }
     }
 
-    public Logs getLogById(int id) {
-        Logs l = em.find(Logs.class, id);
+    public Userlogs getLogById(int id) {
+        Userlogs l = em.find(Userlogs.class, id);
         return l;
     }
 }

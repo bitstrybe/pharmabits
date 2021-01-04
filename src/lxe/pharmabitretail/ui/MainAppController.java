@@ -31,7 +31,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lxe.pharmabitretail.bl.LoginBL;
-import lxe.pharmabitretail.entity.Logs;
+import lxe.pharmabitretail.entity.Userlogs;
 import lxe.pharmabitretail.utils.PrintReport;
 import net.sf.jasperreports.engine.JRException;
 
@@ -190,7 +190,7 @@ public class MainAppController implements Initializable {
     @FXML
     public void signOut() {
         LoginBL mtd = new LoginBL();
-        Logs l = mtd.getLogById(LoginController.log.getLogsid());
+        Userlogs l = mtd.getLogById(LoginController.log.getLogsid());
         l.setLogoutDatetime(new Date(System.currentTimeMillis()));
         //System.out.println(new Date(System.currentTimeMillis()));
         int result = mtd.updateData(l);

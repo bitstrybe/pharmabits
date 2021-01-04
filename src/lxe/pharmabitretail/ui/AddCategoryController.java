@@ -6,7 +6,6 @@ import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -42,12 +41,12 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-import lxe.pharmabitretail.bl.CategoryBL;
+import lxe.pharmabitretail.bl.FormsBL;
 import lxe.pharmabitretail.bl.InsertUpdateBL;
 import lxe.pharmabitretail.bl.ItemsBL;
-import lxe.pharmabitretail.entity.Category;
-import lxe.pharmabitretail.entity.Users;
+import lxe.pharmabitretail.entity.Forms;
 import lxe.pharmabitretail.tablemodel.CategoryTableModel;
+import org.apache.commons.text.WordUtils;
 
 /**
  * FXML Controller class
@@ -87,7 +86,7 @@ public class AddCategoryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        CategoryBL ca = new CategoryBL();
+        FormsBL ca = new FormsBL();
         // String value = cattextfield.getText();
 //        List<Category> arrayObject = ca.getAllCategory();
         cattextfield.textProperty().addListener(e -> {
@@ -140,10 +139,10 @@ public class AddCategoryController implements Initializable {
                         displayinfo.textProperty().bind(task.messageProperty());
                         task.setOnSucceeded(s -> {
                             displayinfo.textProperty().unbind();
-                            Category cat = new Category();
-                            cat.setCategoryName(cattextfield.getText());
-                            cat.setUsers(new Users(LoginController.u.getUserid()));
-                            cat.setEntryLog(new Date());
+                            Forms cat = new Forms();
+                            cat.setFormName(WordUtils.capitalizeFully(cattextfield.getText()));
+                            //cat.setUsers(new Users(LoginController.u.getUserid()));
+                            //cat.setEntryLog(new Date());
                             int result = new InsertUpdateBL().insertData(cat);
                             switch (result) {
                                 case 1:
@@ -201,10 +200,10 @@ public class AddCategoryController implements Initializable {
         displayinfo.textProperty().bind(task.messageProperty());
         task.setOnSucceeded(s -> {
             displayinfo.textProperty().unbind();
-            Category cat = new Category();
-            cat.setCategoryName(cattextfield.getText());
-            cat.setUsers(new Users(LoginController.u.getUserid()));
-            cat.setEntryLog(new Date());
+            Forms cat = new Forms();
+            cat.setFormName(cattextfield.getText());
+            //cat.setUsers(new Users(LoginController.u.getUserid()));
+            //cat.setEntryLog(new Date());
             int result = new InsertUpdateBL().insertData(cat);
             switch (result) {
                 case 1:
@@ -229,10 +228,10 @@ public class AddCategoryController implements Initializable {
     }
 
     public void TableData() {
-        List<Category> c = new CategoryBL().getAllCategory();
+        List<Forms> c = new FormsBL().getAllCategory();
         data = FXCollections.observableArrayList();
         c.forEach((category) -> {
-            data.add(new CategoryTableModel(category.getCategoryName().toUpperCase()));
+            data.add(new CategoryTableModel(category.getFormName()));
         });
         category.setCellValueFactory(cell -> cell.getValue().getCategoryNameProperty());
         action.setSortable(false);
@@ -256,10 +255,10 @@ public class AddCategoryController implements Initializable {
     }
 
     public void TableData(String p) {
-        List<Category> c = new CategoryBL().searchAllCategory(p);
+        List<Forms> c = new FormsBL().searchAllCategory(p);
         data = FXCollections.observableArrayList();
         c.forEach((category) -> {
-            data.add(new CategoryTableModel(category.getCategoryName()));
+            data.add(new CategoryTableModel(category.getFormName()));
         });
         category.setCellValueFactory(cell -> cell.getValue().getCategoryNameProperty());
         action.setSortable(false);
@@ -344,7 +343,7 @@ public class AddCategoryController implements Initializable {
                                 childController.displayinfo.textProperty().unbind();
                                 List catname = new ItemsBL().getItemsFromCategory(selectedRecord.getCategoryName());
                                 if (catname.isEmpty()) {
-                                    int result = new CategoryBL().removeData(selectedRecord.getCategoryName());
+                                    int result = new FormsBL().removeData(selectedRecord.getCategoryName());
                                     switch (result) {
                                         case 1:
                                             childController.displayinfo.setText("SUCCESSFULLY DELETED");

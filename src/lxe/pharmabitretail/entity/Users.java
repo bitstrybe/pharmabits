@@ -90,20 +90,16 @@ public class Users implements Serializable {
     private Collection<SalesDetails> salesDetailsCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
     private Collection<Sales> salesCollection;
-    @OneToMany(mappedBy = "users")
-    private Collection<Manufacturer> manufacturerCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
     private Collection<Stockout> stockoutCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
     private Collection<Stockin> stockinCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
+    private Collection<Userlogs> userlogsCollection;
     @OneToMany(mappedBy = "users")
     private Collection<Receipt> receiptCollection;
-    @OneToMany(mappedBy = "users")
-    private Collection<Category> categoryCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
     private Collection<Items> itemsCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
-    private Collection<Logs> logsCollection;
 
     public Users() {
     }
@@ -245,14 +241,6 @@ public class Users implements Serializable {
         this.salesCollection = salesCollection;
     }
 
-    public Collection<Manufacturer> getManufacturerCollection() {
-        return manufacturerCollection;
-    }
-
-    public void setManufacturerCollection(Collection<Manufacturer> manufacturerCollection) {
-        this.manufacturerCollection = manufacturerCollection;
-    }
-
     public Collection<Stockout> getStockoutCollection() {
         return stockoutCollection;
     }
@@ -269,6 +257,14 @@ public class Users implements Serializable {
         this.stockinCollection = stockinCollection;
     }
 
+    public Collection<Userlogs> getUserlogsCollection() {
+        return userlogsCollection;
+    }
+
+    public void setUserlogsCollection(Collection<Userlogs> userlogsCollection) {
+        this.userlogsCollection = userlogsCollection;
+    }
+
     public Collection<Receipt> getReceiptCollection() {
         return receiptCollection;
     }
@@ -277,28 +273,12 @@ public class Users implements Serializable {
         this.receiptCollection = receiptCollection;
     }
 
-    public Collection<Category> getCategoryCollection() {
-        return categoryCollection;
-    }
-
-    public void setCategoryCollection(Collection<Category> categoryCollection) {
-        this.categoryCollection = categoryCollection;
-    }
-
     public Collection<Items> getItemsCollection() {
         return itemsCollection;
     }
 
     public void setItemsCollection(Collection<Items> itemsCollection) {
         this.itemsCollection = itemsCollection;
-    }
-
-    public Collection<Logs> getLogsCollection() {
-        return logsCollection;
-    }
-
-    public void setLogsCollection(Collection<Logs> logsCollection) {
-        this.logsCollection = logsCollection;
     }
 
     @Override

@@ -51,13 +51,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javax.imageio.ImageIO;
-import lxe.pharmabitretail.bl.CategoryBL;
+import lxe.pharmabitretail.bl.FormsBL;
 import lxe.pharmabitretail.bl.InsertUpdateBL;
 import lxe.pharmabitretail.bl.ItemsBL;
 import lxe.pharmabitretail.bl.ManufacturerBL;
 import lxe.pharmabitretail.bl.UomBL;
 import lxe.pharmabitretail.bl.VomBL;
-import lxe.pharmabitretail.entity.Category;
+import lxe.pharmabitretail.entity.Forms;
 import lxe.pharmabitretail.entity.Items;
 import lxe.pharmabitretail.entity.Manufacturer;
 import lxe.pharmabitretail.entity.Uom;
@@ -67,6 +67,7 @@ import lxe.pharmabitretail.tablemodel.ItemTableModel;
 import lxe.pharmabitretail.utils.FilterComboBox;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.text.WordUtils;
 
 /**
  * FXML Controller class
@@ -141,15 +142,15 @@ public class AddItemsController implements Initializable {
         List<Manufacturer> list = new ManufacturerBL().getAllManufacturer();
         ObservableList<Manufacturer> result = FXCollections.observableArrayList(list);
         result.forEach((man) -> {
-            manufacturercombo.getItems().add(man.getManufacturer().toUpperCase());
+            manufacturercombo.getItems().add(WordUtils.capitalizeFully(man.getManufacturer()));
         });
     }
 
     public void getCategory() {
-        List<Category> list = new CategoryBL().getAllCategory();
-        ObservableList<Category> result = FXCollections.observableArrayList(list);
+        List<Forms> list = new FormsBL().getAllCategory();
+        ObservableList<Forms> result = FXCollections.observableArrayList(list);
         result.forEach((cat) -> {
-            categorycombo.getItems().add(cat.getCategoryName().toUpperCase());
+            categorycombo.getItems().add(WordUtils.capitalizeFully(cat.getFormName()));
         });
     }
 
@@ -157,7 +158,7 @@ public class AddItemsController implements Initializable {
         List<Uom> list = new VomBL().getAllUom();
         ObservableList<Uom> result = FXCollections.observableArrayList(list);
         result.forEach((cat) -> {
-            uomcombo.getItems().add(cat.getUomDesc().toUpperCase());
+            uomcombo.getItems().add(WordUtils.capitalizeFully(cat.getUomDesc()));
         });
     }
 
@@ -167,6 +168,7 @@ public class AddItemsController implements Initializable {
         vom.getItems().add("l");
         vom.getItems().add("ml");
         vom.getItems().add("mega");
+        vom.getItems().add("%");
         vom.getItems().add("others");
 
     }
@@ -287,11 +289,11 @@ public class AddItemsController implements Initializable {
         task.setOnSucceeded(s -> {
             displayinfo.textProperty().unbind();
             Items cat = new Items();
-            String itemdesc = itmtextfield.getText().toUpperCase() + " " + categorycombo.getValue().toUpperCase() + " " + vom_val.getText() + vom.getSelectionModel().getSelectedItem() + " (" + manufacturercombo.getValue() + ")";
+            String itemdesc = itmtextfield.getText()+ " " + categorycombo.getValue() + " " + vom_val.getText() + vom.getSelectionModel().getSelectedItem() + " (" + manufacturercombo.getValue() + ")";
             try {
-                cat.setItemDesc(itemdesc);
-                cat.setItemName(itmtextfield.getText().toUpperCase().trim());
-                cat.setCategory(new Category(categorycombo.getValue()));
+                cat.setItemDesc(WordUtils.capitalizeFully(itemdesc));
+                cat.setItemName(WordUtils.capitalizeFully(itmtextfield.getText()));
+                cat.setForm(new Forms(categorycombo.getValue()));
                 cat.setManufacturer(new Manufacturer(manufacturercombo.getValue()));
                 cat.setVomDef(Double.parseDouble(vom_val.getText().trim()));
                 cat.setVom(vom.getSelectionModel().getSelectedItem());
@@ -300,16 +302,8 @@ public class AddItemsController implements Initializable {
                 cat.setEntryLog(new Date());
                 cat.setLastModified(new Date());
                 //adding image file to directory
-                //if(ifile.exists()){
                 initialStream = new FileInputStream(ifile);
-//                }else{
-//                    itemimages.
-//                    initialStream = new FileInputStream(ifile);
-//                }
-                System.out.println("FILE 1: " + ifile.getName());
-                // System.out.println("FILE 2: " + ifile.getName());
-
-                //if (!ifile.getName().equals("DEFAULT.png")) {
+               // System.out.println("FILE 1: " + ifile.getName());
                 File targetFile = new File("./img/" + itemdesc + "." + FilenameUtils.getExtension(ifile.getName()));
                 if (!ifile.getName().equals("DEFAULT.png")) {
                     cat.setItemImg("./img/" + itemdesc + "." + FilenameUtils.getExtension(ifile.getName()));
@@ -350,10 +344,7 @@ public class AddItemsController implements Initializable {
             } catch (NumberFormatException ex) {
                 spinner.setVisible(false);
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
-            } //            catch (java.lang.NullPointerException ex) {
-            //                spinner.setVisible(false);
-            //                Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
-            //            } 
+            }
             catch (IOException ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
@@ -389,7 +380,7 @@ public class AddItemsController implements Initializable {
                 imageitems.scaleYProperty();
                 imageitems.setSmooth(true);
                 imageitems.setCache(true);
-                data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getCategory().getCategoryName(), item.getManufacturer().getManufacturer(), uom_val, uomitem, vom_value, item.getRol(), imageitems));
+                data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getForm().getFormName(), item.getManufacturer().getManufacturer(), uom_val, uomitem, vom_value, item.getRol(), imageitems));
 //                System.out.println(item.getItemCodeFullname() + " " + item.getItemName() + " " + item.getCategory().getCategoryName() + "" + item.getManufacturer().getManufacturer() + " " + uom_value + " " + item.getRol());
             } catch (Exception ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -438,7 +429,7 @@ public class AddItemsController implements Initializable {
                 itemimageview.scaleYProperty();
                 itemimageview.setSmooth(true);
                 itemimageview.setCache(true);
-                data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getCategory().getCategoryName(), item.getManufacturer().getManufacturer(), uom_val, uomitem, vom_value, item.getRol(), itemimageview));
+                data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getForm().getFormName(), item.getManufacturer().getManufacturer(), uom_val, uomitem, vom_value, item.getRol(), itemimageview));
             } catch (Exception ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
 

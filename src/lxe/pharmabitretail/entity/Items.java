@@ -72,9 +72,12 @@ public class Items implements Serializable {
     private Collection<Stockin> stockinCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
     private Collection<UomDef> uomDefCollection;
-    @JoinColumn(name = "category", referencedColumnName = "category_name", nullable = false)
+    @JoinColumn(name = "form", referencedColumnName = "form_name", nullable = false)
     @ManyToOne(optional = false)
-    private Category category;
+    private Forms form;
+    @JoinColumn(name = "generic", referencedColumnName = "gene_name")
+    @ManyToOne
+    private Generic generic;
     @JoinColumn(name = "manufacturer", referencedColumnName = "manufacturer", nullable = false)
     @ManyToOne(optional = false)
     private Manufacturer manufacturer;
@@ -180,12 +183,20 @@ public class Items implements Serializable {
         this.uomDefCollection = uomDefCollection;
     }
 
-    public Category getCategory() {
-        return category;
+    public Forms getForm() {
+        return form;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setForm(Forms form) {
+        this.form = form;
+    }
+
+    public Generic getGeneric() {
+        return generic;
+    }
+
+    public void setGeneric(Generic generic) {
+        this.generic = generic;
     }
 
     public Manufacturer getManufacturer() {

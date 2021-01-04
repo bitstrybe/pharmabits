@@ -8,7 +8,6 @@ package lxe.pharmabitretail.entity;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -22,33 +21,33 @@ import javax.persistence.Table;
  * @author scarface
  */
 @Entity
-@Table(name = "manufacturer")
+@Table(name = "generic")
 @NamedQueries({
-    @NamedQuery(name = "Manufacturer.findAll", query = "SELECT m FROM Manufacturer m")
-    , @NamedQuery(name = "Manufacturer.findByManufacturer", query = "SELECT m FROM Manufacturer m WHERE m.manufacturer = :manufacturer")})
-public class Manufacturer implements Serializable {
+    @NamedQuery(name = "Generic.findAll", query = "SELECT g FROM Generic g")
+    , @NamedQuery(name = "Generic.findByGeneName", query = "SELECT g FROM Generic g WHERE g.geneName = :geneName")})
+public class Generic implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "manufacturer", nullable = false, length = 245)
-    private String manufacturer;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "manufacturer")
+    @Column(name = "gene_name", nullable = false, length = 250)
+    private String geneName;
+    @OneToMany(mappedBy = "generic")
     private Collection<Items> itemsCollection;
 
-    public Manufacturer() {
+    public Generic() {
     }
 
-    public Manufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
+    public Generic(String geneName) {
+        this.geneName = geneName;
     }
 
-    public String getManufacturer() {
-        return manufacturer;
+    public String getGeneName() {
+        return geneName;
     }
 
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
+    public void setGeneName(String geneName) {
+        this.geneName = geneName;
     }
 
     public Collection<Items> getItemsCollection() {
@@ -62,18 +61,18 @@ public class Manufacturer implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (manufacturer != null ? manufacturer.hashCode() : 0);
+        hash += (geneName != null ? geneName.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Manufacturer)) {
+        if (!(object instanceof Generic)) {
             return false;
         }
-        Manufacturer other = (Manufacturer) object;
-        if ((this.manufacturer == null && other.manufacturer != null) || (this.manufacturer != null && !this.manufacturer.equals(other.manufacturer))) {
+        Generic other = (Generic) object;
+        if ((this.geneName == null && other.geneName != null) || (this.geneName != null && !this.geneName.equals(other.geneName))) {
             return false;
         }
         return true;
@@ -81,7 +80,7 @@ public class Manufacturer implements Serializable {
 
     @Override
     public String toString() {
-        return "lxe.pharmabitretail.entity.Manufacturer[ manufacturer=" + manufacturer + " ]";
+        return "lxe.pharmabitretail.entity.Generic[ geneName=" + geneName + " ]";
     }
     
 }
