@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
@@ -22,11 +23,11 @@ public class ItemsDisplayController implements Initializable {
     @FXML
     public Label uom;
     @FXML
-    public Label cat;
-    @FXML
     public Label man;
     @FXML
     public Label exp;
+    @FXML
+    public Button addtocart;
 
     /**
      * Initializes the controller class.

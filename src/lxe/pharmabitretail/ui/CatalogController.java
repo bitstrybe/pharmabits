@@ -18,12 +18,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import lxe.pharmabitretail.bl.ReceiptBL;
 import lxe.pharmabitretail.bl.SalesBL;
 import lxe.pharmabitretail.bl.StockinBL;
@@ -110,24 +115,44 @@ public class CatalogController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ItemsDisplay.fxml"));
                 Parent parent = (Parent) fxmlLoader.load();
                 ItemsDisplayController childController = fxmlLoader.getController();
-                childController.medsname.setText(stock.getItems().getItemName()+" "+stock.getItems().getForm().getFormName()+", "+stock.getItems().getVomDef()+stock.getItems().getVom());
+                childController.medsname.setText(stock.getItems().getItemName() + " " + stock.getItems().getForm().getFormName() + ", " + stock.getItems().getVomDef() + stock.getItems().getVom());
                 UomDef domf = new UomBL().getUombyItemId(stock.getItems().getItemDesc());
                 int uomitem = domf.getUomItem();
                 String uom_val = String.valueOf(domf.getUomCode().getUomDesc() + " " + domf.getUomNm() + " X " + domf.getUomDm());
                 childController.uom.setText(uom_val);
                 //childController.cat.setText(stock.getItems().getForm().getFormName());
                 childController.man.setText(stock.getItems().getManufacturer().getManufacturer());
-                childController.exp.setText("GHC "+String.valueOf(stock.getSalesPrice()));
-               // childController.exp.setText(String.valueOf(stock.getExpiryDate()));
+                childController.exp.setText("GHC " + String.valueOf(stock.getSalesPrice()));
+                // childController.exp.setText(String.valueOf(stock.getExpiryDate()));
                 FileInputStream ifile = new FileInputStream(stock.getItems().getItemImg());
                 Image image = new Image(ifile);
                 childController.itemsimage.setImage(image);
                 displaypane.getChildren().add(parent);
+                childController.addtocart.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                    try {
+                        Stage stage = new Stage();
+                        FXMLLoader fxmlLoaderQnt = new FXMLLoader(getClass().getResource("AddSalesQuantity.fxml"));
+                        Parent parentQtn = (Parent) fxmlLoaderQnt.load();
+                        AddSalesQuantityController childControllerQnt = fxmlLoaderQnt.getController();
+                        childControllerQnt.addtocartbtn.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+                            
+
+                        });
+                        Scene scene = new Scene(parentQtn);
+                        scene.setFill(Color.TRANSPARENT);
+                        stage.setScene(scene);
+                        stage.initStyle(StageStyle.TRANSPARENT);
+                        stage.setMaximized(true);
+                        stage.show();
+                    } catch (IOException ex) {
+                        Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
             } catch (IOException ex) {
                 Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         });
+
 //        listviewsales.getItems().clear();
 //        listviewsales.setOrientation(Orientation.HORIZONTAL);
 //        result.forEach((man) -> {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -81,19 +81,16 @@
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="17.0" prefWidth="318.0">
-               <children>
-                  <JFXButton buttonType="RAISED" prefHeight="27.0" prefWidth="36.0">
-                     <graphic>
-                        <FontAwesomeIcon fill="#09b20f" glyphName="SHOPPING_CART" size="1.7em" />
-                     </graphic>
-                     <HBox.margin>
-                        <Insets right="5.0" />
-                     </HBox.margin>
-                  </JFXButton>
-               </children>
                <padding>
                   <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
                </padding>
+               <children>
+                  <Button fx:id="addtocart" mnemonicParsing="false" styleClass="closeform">
+                     <graphic>
+                        <FontAwesomeIcon fill="#299725" glyphName="SHOPPING_CART" size="1.5em" />
+                     </graphic>
+                  </Button>
+               </children>
             </HBox>
          </children>
          <VBox.margin>

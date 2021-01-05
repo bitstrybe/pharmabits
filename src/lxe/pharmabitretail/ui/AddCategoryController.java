@@ -341,7 +341,7 @@ public class AddCategoryController implements Initializable {
                             childController.displayinfo.textProperty().bind(task.messageProperty());
                             task.setOnSucceeded(f -> {
                                 childController.displayinfo.textProperty().unbind();
-                                List catname = new ItemsBL().getItemsFromCategory(selectedRecord.getCategoryName());
+                                List catname = new ItemsBL().getItemsFromForm(selectedRecord.getCategoryName());
                                 if (catname.isEmpty()) {
                                     int result = new FormsBL().removeData(selectedRecord.getCategoryName());
                                     switch (result) {

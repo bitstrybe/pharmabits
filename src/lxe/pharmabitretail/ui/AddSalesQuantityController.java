@@ -8,6 +8,7 @@ package lxe.pharmabitretail.ui;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicInteger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -26,31 +27,39 @@ import javafx.stage.Stage;
  */
 public class AddSalesQuantityController implements Initializable {
 
-    @FXML
     public Label itemname;
-    @FXML
     public Label stockval;
-    @FXML
     public TextField qnttextfield;
     @FXML
-    public Button closeButton;
-    @FXML
+    public Button closebtn;
     public JFXButton additem;
+    @FXML
+    private Button plusButton;
+    @FXML
+    private Button minusButton;
+    AtomicInteger rowCounter = new AtomicInteger(0);
+    @FXML
+    public Button addtocartbtn;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         // TODO
-        
-    }    
+        plusButton.setOnAction(e -> {
+            qnttextfield.setText(Integer.toString(rowCounter.incrementAndGet()));
+        });
+        minusButton.setOnAction(e -> {
+            qnttextfield.setText(Integer.toString(rowCounter.decrementAndGet()));
+        });
+    }
 
     @FXML
-    private void closemtd(ActionEvent event) {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
+    private void closeForm(ActionEvent event) {
+        Stage stage = (Stage) closebtn.getScene().getWindow();
         stage.close();
     }
 
-    
 }

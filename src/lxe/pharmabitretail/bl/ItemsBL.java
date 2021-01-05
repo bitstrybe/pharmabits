@@ -62,9 +62,9 @@ public class ItemsBL extends DdsBL {
         return q.getResultList();
     }
 
-    public List getItemsFromCategory(String catid) {
+    public List getItemsFromForm(String catid) {
         try {
-            TypedQuery<String> q = em.createQuery("SELECT r.category.categoryName FROM Items r WHERE r.category.categoryName = :catid", String.class);
+            TypedQuery<String> q = em.createQuery("SELECT r.form.formName FROM Items r WHERE r.form.formName = :catid", String.class);
             q.setParameter("catid", catid);
 //        System.out.println(q.getResultList());
             q.setMaxResults(1);
