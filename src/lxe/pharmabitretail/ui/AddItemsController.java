@@ -65,6 +65,7 @@ import lxe.pharmabitretail.entity.UomDef;
 import lxe.pharmabitretail.entity.Users;
 import lxe.pharmabitretail.tablemodel.ItemTableModel;
 import lxe.pharmabitretail.utils.FilterComboBox;
+import lxe.pharmabitretail.utils.Utilities;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.text.WordUtils;
@@ -121,9 +122,13 @@ public class AddItemsController implements Initializable {
     @FXML
     private JFXTextField uom_val2;
     @FXML
+    private ComboBox<String> dose;
+    @FXML
     private ComboBox<String> vom;
     @FXML
     private JFXTextField vom_val;
+    @FXML
+    private JFXTextField dose_val;
     @FXML
     private JFXTextField roltextfield;
     @FXML
@@ -137,6 +142,10 @@ public class AddItemsController implements Initializable {
     ItemsBL itembl = new ItemsBL();
     UomBL uombl = new UomBL();
     File ifile;
+    BufferedImage resizeImage;
+    
+    @FXML
+    private TableColumn<ItemTableModel, String> dose_value;
 
     public void getManufacturer() {
         List<Manufacturer> list = new ManufacturerBL().getAllManufacturer();
@@ -163,13 +172,16 @@ public class AddItemsController implements Initializable {
     }
 
     public void getVolumeValue() {
+        dose.getItems().add("g");
+        dose.getItems().add("mg");
+        dose.getItems().add("l");
+        dose.getItems().add("ml");
+        dose.getItems().add("mega");
+        dose.getItems().add("%");
+        dose.getItems().add("others");
+
         vom.getItems().add("g");
-        vom.getItems().add("mg");
-        vom.getItems().add("l");
         vom.getItems().add("ml");
-        vom.getItems().add("mega");
-        vom.getItems().add("%");
-        vom.getItems().add("others");
 
     }
 
@@ -233,10 +245,13 @@ public class AddItemsController implements Initializable {
                 //File ofile = new File
                 try {
                     BufferedImage bufferedImage = ImageIO.read(ifile);
-                    Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+                    int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
+                    resizeImage = Utilities.resizeImage(bufferedImage, type, 450, 340);
+
+                    Image image = SwingFXUtils.toFXImage(resizeImage, null);
                     itemimages.setImage(image);
-                    itemimages.setFitWidth(200);
-                    itemimages.setFitWidth(200);
+                    //itemimages.setFitWidth(200);
+                    //itemimages.setFitWidth(200);
                     itemimages.setPreserveRatio(true);
                     itemimages.scaleXProperty();
                     itemimages.scaleYProperty();
@@ -289,24 +304,49 @@ public class AddItemsController implements Initializable {
         task.setOnSucceeded(s -> {
             displayinfo.textProperty().unbind();
             Items cat = new Items();
-            String itemdesc = itmtextfield.getText()+ " " + categorycombo.getValue() + " " + vom_val.getText() + vom.getSelectionModel().getSelectedItem() + " (" + manufacturercombo.getValue() + ")";
+            String itemdesc = "";
+            itemdesc += itmtextfield.getText() + " " + categorycombo.getValue();
+
+            if (!dose_val.getText().isEmpty()) {
+                itemdesc += ", " + dose_val.getText() + dose.getSelectionModel().getSelectedItem();
+            }
+
+            if (dose_val.getText().isEmpty() && !vom_val.getText().isEmpty()) {
+                itemdesc += ", " + vom_val.getText() + vom.getSelectionModel().getSelectedItem();
+            } else if (!dose_val.getText().isEmpty() && !vom_val.getText().isEmpty()) {
+                itemdesc += "/" + vom_val.getText() + vom.getSelectionModel().getSelectedItem();
+            }
+            itemdesc += " (" + manufacturercombo.getValue() + ")";
+
             try {
                 cat.setItemDesc(WordUtils.capitalizeFully(itemdesc));
                 cat.setItemName(WordUtils.capitalizeFully(itmtextfield.getText()));
                 cat.setForm(new Forms(categorycombo.getValue()));
                 cat.setManufacturer(new Manufacturer(manufacturercombo.getValue()));
-                cat.setVomDef(Double.parseDouble(vom_val.getText().trim()));
-                cat.setVom(vom.getSelectionModel().getSelectedItem());
+                if (!vom_val.getText().isEmpty()) {
+                    cat.setVomDef(Double.parseDouble(vom_val.getText().trim()));
+                    cat.setVom(vom.getSelectionModel().getSelectedItem());
+                }
+                if (!dose_val.getText().isEmpty()) {
+                    cat.setDosageDef(Double.parseDouble(dose_val.getText()));
+                    cat.setDosage(dose.getSelectionModel().getSelectedItem());
+                }
+
                 cat.setRol(Integer.parseInt(roltextfield.getText()));
                 cat.setUsers(new Users(LoginController.u.getUserid()));
                 cat.setEntryLog(new Date());
                 cat.setLastModified(new Date());
                 //adding image file to directory
                 initialStream = new FileInputStream(ifile);
-               // System.out.println("FILE 1: " + ifile.getName());
-                File targetFile = new File("./img/" + itemdesc + "." + FilenameUtils.getExtension(ifile.getName()));
+                // System.out.println("FILE 1: " + ifile.getName());
+                //BufferedImage originalImage = ImageIO.read(new File("./img/" + itemdesc.replace("/", "-") + "." + FilenameUtils.getExtension(ifile.getName())));//change path to where file is located
+                //int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
+
+                //BufferedImage resizeImageJpg = resizeImage(originalImage, type, 100, 100);
+                
+                //File targetFile = new File("./img/" + itemdesc.replace("/", "-") + "." + FilenameUtils.getExtension(ifile.getName()));
                 if (!ifile.getName().equals("DEFAULT.png")) {
-                    cat.setItemImg("./img/" + itemdesc + "." + FilenameUtils.getExtension(ifile.getName()));
+                    cat.setItemImg("./img/" + itemdesc.replace("/", "-") + "." + FilenameUtils.getExtension(ifile.getName()));
                 } else {
                     cat.setItemImg("./img/DEFAULT.png");
                 }
@@ -325,8 +365,8 @@ public class AddItemsController implements Initializable {
                 switch (result) {
                     case 1:
                         if (!ifile.getName().equals("DEFAULT.png")) {
-                            java.nio.file.Files.copy(initialStream, targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
+                            ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File("./img/" + itemdesc.replace("/", "-") + "." + FilenameUtils.getExtension(ifile.getName())));
+                            //java.nio.file.Files.copy(initialStream, targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                         }
                         displayinfo.setText("SUCCESSFULLY SAVED");
 //                        Utilities.clearAllField(itemspane);
@@ -339,13 +379,13 @@ public class AddItemsController implements Initializable {
                         spinner.setVisible(false);
                         check.setVisible(false);
                         break;
-
                 }
             } catch (NumberFormatException ex) {
                 spinner.setVisible(false);
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            catch (IOException ex) {
+            } catch (IOException ex) {
+                Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalArgumentException ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
                 try {
@@ -368,6 +408,7 @@ public class AddItemsController implements Initializable {
             int uomitem = domf.getUomItem();
             String uom_val = String.valueOf(domf.getUomCode().getUomDesc() + " " + domf.getUomNm() + " X " + domf.getUomDm());
             String vom_value = String.valueOf(item.getVomDef()) + item.getVom();
+            String dose_value = String.valueOf(item.getDosageDef()) + item.getDosage();
             try {
                 ImageView imageitems = new ImageView();
                 File file = new File(item.getItemImg());
@@ -380,7 +421,7 @@ public class AddItemsController implements Initializable {
                 imageitems.scaleYProperty();
                 imageitems.setSmooth(true);
                 imageitems.setCache(true);
-                data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getForm().getFormName(), item.getManufacturer().getManufacturer(), uom_val, uomitem, vom_value, item.getRol(), imageitems));
+                data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getForm().getFormName(), item.getManufacturer().getManufacturer(), uom_val, uomitem, vom_value, dose_value, item.getRol(), imageitems));
 //                System.out.println(item.getItemCodeFullname() + " " + item.getItemName() + " " + item.getCategory().getCategoryName() + "" + item.getManufacturer().getManufacturer() + " " + uom_value + " " + item.getRol());
             } catch (Exception ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -393,6 +434,7 @@ public class AddItemsController implements Initializable {
         manufacturer.setCellValueFactory(cell -> cell.getValue().getManufacturerProperty());
         uomtb.setCellValueFactory(cell -> cell.getValue().getUomProperty());
         vomtb.setCellValueFactory(cell -> cell.getValue().getVomProperty());
+        dose_value.setCellValueFactory(cell -> cell.getValue().getDoseProperty());
         rol.setCellValueFactory(cell -> cell.getValue().getRolProperty());
         itemimage.setCellValueFactory(new PropertyValueFactory<>("image"));
         itemimage.setPrefWidth(85);
@@ -416,6 +458,7 @@ public class AddItemsController implements Initializable {
             int uomitem = domf.getUomItem();
             String uom_val = String.valueOf(domf.getUomCode().getUomDesc() + " " + domf.getUomNm() + " X " + domf.getUomDm());
             String vom_value = String.valueOf(item.getVomDef()) + item.getVom();
+            String dose_value = String.valueOf(item.getDosageDef()) + item.getDosage();
             try {
 
                 ImageView itemimageview = new ImageView();
@@ -429,7 +472,7 @@ public class AddItemsController implements Initializable {
                 itemimageview.scaleYProperty();
                 itemimageview.setSmooth(true);
                 itemimageview.setCache(true);
-                data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getForm().getFormName(), item.getManufacturer().getManufacturer(), uom_val, uomitem, vom_value, item.getRol(), itemimageview));
+                data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getForm().getFormName(), item.getManufacturer().getManufacturer(), uom_val, uomitem, vom_value, dose_value, item.getRol(), itemimageview));
             } catch (Exception ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
 
@@ -439,6 +482,7 @@ public class AddItemsController implements Initializable {
         category.setCellValueFactory(cell -> cell.getValue().getCategoryProperty());
         manufacturer.setCellValueFactory(cell -> cell.getValue().getManufacturerProperty());
         vomtb.setCellValueFactory(cell -> cell.getValue().getUomProperty());
+        dose_value.setCellValueFactory(cell -> cell.getValue().getDoseProperty());
         rol.setCellValueFactory(cell -> cell.getValue().getRolProperty());
         action.setSortable(false);
         action.setMaxWidth(480);

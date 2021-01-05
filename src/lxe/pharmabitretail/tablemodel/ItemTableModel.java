@@ -20,13 +20,14 @@ public class ItemTableModel {
     private SimpleStringProperty uom;
     private SimpleIntegerProperty uomitem;
     private SimpleStringProperty vom_val;
+    private SimpleStringProperty dose_val;
     private SimpleLongProperty rol;
     private ImageView image;
 
     public ItemTableModel() {
     }
 
-    public ItemTableModel(String itemcodename, String itemName, String category, String manufacturer,String uom, int uomitem, String vom_val, long rol, ImageView img) {
+    public ItemTableModel(String itemcodename, String itemName, String category, String manufacturer,String uom, int uomitem, String vom_val, String dose_val, long rol, ImageView img) {
        // this.itemCode = new SimpleIntegerProperty(itemCode);
         this.itemCodeName = new SimpleStringProperty(itemcodename);
         this.itemName = new SimpleStringProperty(itemName);
@@ -35,6 +36,7 @@ public class ItemTableModel {
         this.uom = new SimpleStringProperty(uom);
         this.uomitem = new SimpleIntegerProperty(uomitem);
         this.vom_val = new SimpleStringProperty(vom_val);
+        this.dose_val = new SimpleStringProperty(dose_val);
         this.rol = new SimpleLongProperty(rol);
         this.image = img;
 
@@ -135,6 +137,18 @@ public class ItemTableModel {
 
     public void setVomProperty(String vom) {
         this.vom_val = new SimpleStringProperty(vom);
+    }
+    
+    public String getDose() {
+        return dose_val.get();
+    }
+
+    public SimpleStringProperty getDoseProperty() {
+        return dose_val;
+    }
+
+    public void setDoseProperty(String dose) {
+        this.dose_val = new SimpleStringProperty(dose);
     }
 
     public Long getRol() {

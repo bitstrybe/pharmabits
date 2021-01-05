@@ -58,8 +58,7 @@ public class Items implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "vom_def", precision = 17, scale = 0)
     private Double vomDef;
-    @Basic(optional = false)
-    @Column(name = "dosage", nullable = false, length = 45)
+    @Column(name = "dosage", length = 45)
     private String dosage;
     @Column(name = "dosage_def", precision = 17, scale = 0)
     private Double dosageDef;
@@ -98,11 +97,10 @@ public class Items implements Serializable {
         this.itemDesc = itemDesc;
     }
 
-    public Items(String itemDesc, String itemName, String itemImg, String dosage, int rol, Date entryLog, Date lastModified) {
+    public Items(String itemDesc, String itemName, String itemImg, int rol, Date entryLog, Date lastModified) {
         this.itemDesc = itemDesc;
         this.itemName = itemName;
         this.itemImg = itemImg;
-        this.dosage = dosage;
         this.rol = rol;
         this.entryLog = entryLog;
         this.lastModified = lastModified;

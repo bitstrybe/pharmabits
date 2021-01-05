@@ -220,7 +220,7 @@
                            <children>
                               <HBox prefHeight="17.0" prefWidth="127.0">
                                  <children>
-                                    <Label prefHeight="17.0" prefWidth="105.0" text="Dosage/Strength: " />
+                                    <Label prefHeight="17.0" prefWidth="105.0" text="Dose/Strength: " />
                                     <Label contentDisplay="CENTER" prefHeight="17.0" prefWidth="30.0" text="*" textFill="#f20303">
                                        <font>
                                           <Font size="12.0" />
@@ -238,19 +238,19 @@
                               </HBox>
                               <HBox prefHeight="30.0" prefWidth="300.0">
                                  <children>
-                                    <JFXTextField fx:id="vom_val" focusColor="#f2efef" opacity="0.93" prefHeight="27.0" prefWidth="56.0" promptText="value" styleClass="form_field">
+                                    <JFXTextField fx:id="dose_val" focusColor="#f2efef" opacity="0.93" prefHeight="27.0" prefWidth="56.0" promptText="value" styleClass="form_field">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </JFXTextField>
+                                    <ComboBox fx:id="dose" prefHeight="29.0" prefWidth="69.0" />
+                                    <Line endX="100.0" startX="87.63603210449219" startY="29.292892456054688" stroke="#5e5d5d" />
+                                    <JFXTextField fx:id="vom_val" focusColor="#f2efef" opacity="0.93" prefHeight="27.0" prefWidth="59.0" promptText="value" styleClass="form_field">
                                        <font>
                                           <Font size="13.0" />
                                        </font>
                                     </JFXTextField>
                                     <ComboBox fx:id="vom" prefHeight="29.0" prefWidth="69.0" />
-                                    <Line endX="100.0" startX="87.63603210449219" startY="29.292892456054688" stroke="#5e5d5d" />
-                                    <JFXTextField fx:id="vom_val1" focusColor="#f2efef" opacity="0.93" prefHeight="27.0" prefWidth="59.0" promptText="value" styleClass="form_field">
-                                       <font>
-                                          <Font size="13.0" />
-                                       </font>
-                                    </JFXTextField>
-                                    <ComboBox fx:id="vom1" prefHeight="29.0" prefWidth="69.0" />
                                  </children>
                                  <VBox.margin>
                                     <Insets top="5.0" />
@@ -340,7 +340,8 @@
                               <TableColumn fx:id="category" prefWidth="81.0" text="Category" />
                               <TableColumn fx:id="manufacturer" prefWidth="220.0" text="Manufacturer" />
                               <TableColumn fx:id="uomtb" prefWidth="96.0" text="UOM" />
-                              <TableColumn fx:id="vomtb" prefWidth="79.0" text="VOM" />
+                              <TableColumn fx:id="dose_value" prefWidth="79.0" text="Dose" />
+                              <TableColumn fx:id="vomtb" prefWidth="79.0" text="Volume" />
                               <TableColumn fx:id="rol" prefWidth="62.0" text="ROL" />
                               <TableColumn fx:id="action" prefWidth="55.0" resizable="false" text="Action" />
                            </columns>

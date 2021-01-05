@@ -39,7 +39,7 @@
     -fx-background-color: ;
 }*/
 
-.table-row-cell .table-cell{
+.table-row-cell .table-cell {
     -fx-padding: 2 0 2 10; 
     -fx-background-color: transparent;
     -fx-border-color:  #cccccc -fx-table-cell-border-color  #cccccc  #cccccc;
@@ -48,6 +48,7 @@
     -fx-text-fill: -fx-text-inner-color;
     -fx-font-size: 14px;
     -fx-background-color: #FFFFFF;
+    -fx-alignment: CENTER_LEFT;
 
 }
 .align_table_center{

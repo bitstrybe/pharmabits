@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4878c760-466e-47da-a970-5839a57c75c7">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="104"/>
+	<property name="ireport.x" value="13"/>
 	<property name="ireport.y" value="0"/>
 	<style name="TableHeader" mode="Opaque" backcolor="#CCCCCC"/>
 	<style name="linecolorlight"/>
@@ -124,7 +124,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<text><![CDATA[Dosage/Strength]]></text>
+				<text><![CDATA[Dose/Strength]]></text>
 			</staticText>
 			<line>
 				<reportElement x="353" y="1" width="1" height="20" uuid="b6b98890-fc50-4439-bcec-f95e052be62b"/>
@@ -225,7 +225,7 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
 					<font size="6"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Generated from Pharambits | www.bitstrybe.com/pharamits "			]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Generated from Pharambits | www.bitstrybe.com/pharamits "]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="402" y="37" width="152" height="13" uuid="e62e95fd-4bdb-48ef-8f33-867ddebafdbe"/>
