@@ -13,7 +13,7 @@ import lxe.pharmabitretail.entity.Items;
 public class ItemListReportModel extends AbstractTableModel {
 
     private Object data[][];
-    String[] colnames = {"0", "1", "2", "3"};
+    String[] colnames = {"0", "1", "2", "3", "4"};
     List<Items> s;
 
     public ItemListReportModel() {
@@ -27,9 +27,11 @@ public class ItemListReportModel extends AbstractTableModel {
             Items c = s.get(x);
             data[x][0] = c.getItemName();
             data[x][1] = c.getForm().getFormName();
-            String umo = c.getVomDef()+ " " + c.getVom();
-            data[x][2] = umo;
-            data[x][3] = c.getManufacturer().getManufacturer();
+            String dose = c.getDosageDef() != null ? c.getDosageDef()+ " " + c.getDosage() : "";
+            String vom = c.getVomDef() != null ? c.getVomDef()+ " " + c.getVom() : "";
+            data[x][2] = dose;
+            data[x][3] = vom;
+            data[x][4] = c.getManufacturer().getManufacturer();
         }
     }
 

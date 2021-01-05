@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package lxe.pharmabitretail.ui;
 
 import com.jfoenix.controls.JFXButton;
@@ -191,44 +187,44 @@ public class SalesController implements Initializable {
         StockinBL sk = new StockinBL();
         List<Stockin> list = sk.getAllStockinGroup();
         ObservableList<Stockin> result = FXCollections.observableArrayList(list);
-        listviewsales.getItems().clear();
+        //listviewsales.getItems().clear();
 //        listviewsales.setOrientation(Orientation.HORIZONTAL);
         result.forEach((man) -> {
             long balance = sk.getStockBalance(man.getBatchNo());
             if (balance != 0) {
-                listviewsales.getItems().add(man.getBatchNo() + ": " + man.getItems().getItemDesc().toUpperCase() + " -> " + balance + " Remaining");
-                listviewsales.setCellFactory(value -> new ListCell<String>() {
-                    private VBox vb = new VBox();
-                    private ImageView imageView = new ImageView();
-                    private Label lb = new Label();
-
-                    @Override
-                    public void updateItem(String name, boolean empty) {
-                        super.updateItem(name, empty);
-                        if (empty) {
-                            setText(null);
-                            setGraphic(null);
-                        } else {
-                            try {
-                                imageView.setFitWidth(200);
-                                imageView.setPreserveRatio(true);
-                                imageView.setSmooth(true);
-                                imageView.setCache(true);
-                                vb.setAlignment(Pos.CENTER);
-                                FileInputStream input;
-                                input = new FileInputStream(man.getItems().getItemImg());
-                                Image image = new Image(input);
-                                imageView.setImage(image);
-                                lb.setText(man.getBatchNo() + ": " + man.getItems().getItemDesc().toUpperCase() + " -> " + balance + " Remaining");
-                                vb.getChildren().addAll(imageView, lb);
-                                setGraphic(vb);
-
-                            } catch (FileNotFoundException ex) {
-                                Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
-                    }
-                });
+                //listviewsales.getItems().add(man.getBatchNo() + ": " + man.getItems().getItemDesc().toUpperCase() + " -> " + balance + " Remaining");
+//                listviewsales.setCellFactory(value -> new ListCell<String>() {
+//                    private VBox vb = new VBox();
+//                    private ImageView imageView = new ImageView();
+//                    private Label lb = new Label();
+//
+//                    @Override
+//                    public void updateItem(String name, boolean empty) {
+//                        super.updateItem(name, empty);
+//                        if (empty) {
+//                            setText(null);
+//                            setGraphic(null);
+//                        } else {
+//                            try {
+//                                imageView.setFitWidth(200);
+//                                imageView.setPreserveRatio(true);
+//                                imageView.setSmooth(true);
+//                                imageView.setCache(true);
+//                                vb.setAlignment(Pos.CENTER);
+//                                FileInputStream input;
+//                                input = new FileInputStream(man.getItems().getItemImg());
+//                                Image image = new Image(input);
+//                                imageView.setImage(image);
+//                                lb.setText(man.getBatchNo() + ": " + man.getItems().getItemDesc().toUpperCase() + " -> " + balance + " Remaining");
+//                                vb.getChildren().addAll(imageView, lb);
+//                                setGraphic(vb);
+//
+//                            } catch (FileNotFoundException ex) {
+//                                Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
+//                            }
+//                        }
+//                    }
+//                });
 
             }
         });
@@ -238,13 +234,13 @@ public class SalesController implements Initializable {
         StockinBL sb = new StockinBL();
         List<Stockin> list = sb.searchAllStockinGroup(p);
         ObservableList<Stockin> result = FXCollections.observableArrayList(list);
-        listviewsales.getItems().clear();
-        listviewsales.setOrientation(Orientation.HORIZONTAL);
+        //listviewsales.getItems().clear();
+        //listviewsales.setOrientation(Orientation.HORIZONTAL);
         result.forEach((man) -> {
             long balance = sb.getStockBalance(man.getBatchNo());
-            if (balance != 0) {
-                listviewsales.getItems().add(man.getBatchNo() + ": " + man.getItems().getItemDesc().toUpperCase() + " -> " + balance + " Remaining");
-            }
+//            if (balance != 0) {
+//                listviewsales.getItems().add(man.getBatchNo() + ": " + man.getItems().getItemDesc().toUpperCase() + " -> " + balance + " Remaining");
+//            }
         });
 
     }
@@ -302,28 +298,28 @@ public class SalesController implements Initializable {
         getTodaysDate();
         getStockingItemList();
 
-        itemsearch.textProperty().addListener(e -> {
-            if (itemsearch.getText().length() > 1) {
-                SearchStockingItemList(itemsearch.getText());
-            } else {
-                getStockingItemList();
-            }
-        });
+//        itemsearch.textProperty().addListener(e -> {
+//            if (itemsearch.getText().length() > 1) {
+//                SearchStockingItemList(itemsearch.getText());
+//            } else {
+//                getStockingItemList();
+//            }
+//        });
 
-        listviewsales.setOnMouseClicked(r -> {
-            if (r.getClickCount() == 2) {
-                try {
-                    addtoitemtable();
-                } catch (IOException ex) {
-                    Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        seleteditemtableview.setOnMouseClicked(a -> {
-            if (a.getClickCount() == 2) {
-                removeItemsFromTable();
-            }
-        });
+//        listviewsales.setOnMouseClicked(r -> {
+//            if (r.getClickCount() == 2) {
+//                try {
+//                    addtoitemtable();
+//                } catch (IOException ex) {
+//                    Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        });
+//        seleteditemtableview.setOnMouseClicked(a -> {
+//            if (a.getClickCount() == 2) {
+//                removeItemsFromTable();
+//            }
+//        });
 
     }
 
@@ -334,221 +330,221 @@ public class SalesController implements Initializable {
         enddate.setValue(Utilities.convertDateToLocalDate(new Date(System.currentTimeMillis())));
     }
 
-    @FXML
-    private void addtoitemtable() throws IOException {
-        try {
-            Stage stage = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddSalesQuantity.fxml"));
-            Parent parent = (Parent) fxmlLoader.load();
-            AddSalesQuantityController childController = fxmlLoader.getController();
-            String[] listval = listviewsales.getSelectionModel().getSelectedItem().split("[:>]");
-            List<String> spiltedval = Arrays.asList(listval);
-            List<Stockin> s = new StockinBL().getItemStockinBatchNo(spiltedval.get(0));
-            childController.itemname.setText(spiltedval.get(1));
-            String qntval = spiltedval.get(2);
-            String qnttrim = qntval.trim();
-            String[] qntlist = qnttrim.split("\\s+");
-            List<String> splitqnt = Arrays.asList(qntlist);
-//        System.out.println(splitqnt.get(0));
-            childController.stockval.setText(splitqnt.get(0));
-
-            childController.qnttextfield.textProperty().addListener(e -> {
-                try {
-                    qntval1 = Integer.parseInt(childController.qnttextfield.getText());
-                    stockbal = Integer.parseInt(splitqnt.get(0));
-                    bal = stockbal - qntval1;
-                    childController.stockval.setText(String.valueOf(bal));
-
-                    if (childController.qnttextfield.getLength() >= 1 && qntval1 != 0) {
-                        childController.additem.setDisable(false);
-
-                        System.out.println("QTY : " + qntval1);
-//                        double balval = Double.parseDouble(childController.stockval.getText());
-                        if (bal < 0) {
-
-                            childController.stockval.setText(String.valueOf(bal));
-                            childController.additem.setDisable(true);
-                            System.out.println(childController.stockval.getText());
-                        } else {
-                            childController.qnttextfield.setOnKeyPressed(new EventHandler<KeyEvent>() {
-                                @Override
-                                public void handle(KeyEvent event) {
-                                    if (bal >= 0) {
-                                        if (event.getCode() == KeyCode.ENTER) {
-                                            try {
-                                                double totalval = Double.parseDouble(childController.qnttextfield.getText()) * s.get(0).getSalesPrice();
-                                                double formatprice = Double.parseDouble(df.format(s.get(0).getSalesPrice()));
-                                                double formatcost = Double.parseDouble(df.format(s.get(0).getCostPrice()));
-                                                double formatotal = Double.parseDouble(df.format(totalval));
-                                                double nhisprice = Double.parseDouble(df.format(s.get(0).getNhisPrice()));
-
-                                                ObservableList<SelectItemSaleTableModel> ls = seleteditemtableview.getItems();
-                                                if (ls.isEmpty()) {
-                                                    data.add(new SelectItemSaleTableModel(s.get(0).getItems().getItemDesc().toUpperCase(), s.get(0).getBatchNo(), Integer.parseInt(childController.qnttextfield.getText()), formatcost, formatprice, formatotal, nhisprice, "INACTIVE", 0.00));
-                                                    stage.close();
-                                                } else {
-                                                    if (getBatchNo().contains(spiltedval.get(0))) {
-                                                        System.out.println("True");
-                                                        childController.stockval.setFont(Font.font(12));
-                                                        childController.stockval.setText("Already Added");
-                                                    } else {
-                                                        data.add(new SelectItemSaleTableModel(s.get(0).getItems().getItemDesc().toUpperCase(), s.get(0).getBatchNo(), Integer.parseInt(childController.qnttextfield.getText()), formatcost, formatprice, formatotal, nhisprice, "INACTIVE", 0.00));
-                                                        stage.close();
-                                                    }
-                                                }
-                                                itemname.setCellValueFactory(cell -> cell.getValue().getItemNameProperty());
-                                                batchcode.setCellValueFactory(cell -> cell.getValue().getBatchCodeProperty());
-                                                qnt.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
-                                                price.setCellValueFactory(cell -> cell.getValue().getPriceProperty());
-                                                total.setCellValueFactory(cell -> cell.getValue().getTotalProperty());
-                                                nhisvalprice.setCellValueFactory(cell -> cell.getValue().getNHISPriceProperty());
-                                                nhis.setCellValueFactory(cell -> cell.getValue().getNHISProperty());
-                                                discountval.setCellValueFactory(cell -> cell.getValue().getDiscountValueProperty());
-                                                discount.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SelectItemSaleTableModel, Boolean>, ObservableValue<Boolean>>() {
-                                                    @Override
-                                                    public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<SelectItemSaleTableModel, Boolean> features) {
-                                                        return new SimpleBooleanProperty(features.getValue() != null);
-                                                    }
-                                                });
-
-                                                discount.setCellFactory(new Callback<TableColumn<SelectItemSaleTableModel, Boolean>, TableCell<SelectItemSaleTableModel, Boolean>>() {
-                                                    @Override
-                                                    public TableCell<SelectItemSaleTableModel, Boolean> call(TableColumn<SelectItemSaleTableModel, Boolean> personBooleanTableColumn) {
-                                                        return new AddPersonDiscountCell();
-                                                    }
-                                                });
-
-                                                action.setSortable(false);
-                                                action.setMaxWidth(480);
-
-                                                action.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SelectItemSaleTableModel, Boolean>, ObservableValue<Boolean>>() {
-                                                    @Override
-                                                    public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<SelectItemSaleTableModel, Boolean> features) {
-                                                        return new SimpleBooleanProperty(features.getValue() != null);
-                                                    }
-                                                });
-
-                                                action.setCellFactory(new Callback<TableColumn<SelectItemSaleTableModel, Boolean>, TableCell<SelectItemSaleTableModel, Boolean>>() {
-                                                    @Override
-                                                    public TableCell<SelectItemSaleTableModel, Boolean> call(TableColumn<SelectItemSaleTableModel, Boolean> personBooleanTableColumn) {
-                                                        return new AddPersonCell();
-                                                    }
-                                                });
-
-                                                seleteditemtableview.setItems(data);
-                                                seleteditemtableview.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
-                                                totalp = Float.parseFloat(df.format(Utilities.sumList(getPrice())));
-                                                totalprice.setText(df.format(totalp));
-
-                                            } catch (Exception ex) {
-                                                childController.stockval.setText("Invalid Format");
-
-                                            }
-                                        }
-                                    }
-                                }
-                            });
-                        }
-                    } else {
-                        childController.additem.setDisable(true);
-                        childController.stockval.setText(splitqnt.get(0));
-                    }
-                } catch (Exception ex) {
-                    childController.stockval.setText(splitqnt.get(0));
-                    System.out.println("null");
-                }
-
-            });
-
-            childController.additem.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-
-                    try {
-                        double totalval = Double.parseDouble(childController.qnttextfield.getText()) * s.get(0).getSalesPrice();
-                        double formatprice = Double.parseDouble(df.format(s.get(0).getSalesPrice()));
-                        double formatcost = Double.parseDouble(df.format(s.get(0).getCostPrice()));
-                        double formatotal = Double.parseDouble(df.format(totalval));
-                        double nhisprice = Double.parseDouble(df.format(s.get(0).getNhisPrice()));
-
-                        ObservableList<SelectItemSaleTableModel> ls = seleteditemtableview.getItems();
-                        if (ls.isEmpty()) {
-                            data.add(new SelectItemSaleTableModel(s.get(0).getItems().getItemDesc().toUpperCase(), s.get(0).getBatchNo(), Integer.parseInt(childController.qnttextfield.getText()), formatcost, formatprice, formatotal, nhisprice, "INACTIVE", 0.00));
-                            stage.close();
-                        } else {
-                            if (getBatchNo().contains(spiltedval.get(0))) {
-                                System.out.println("True");
-                                childController.stockval.setFont(Font.font(12));
-                                childController.stockval.setText("Already Added");
-                            } else {
-                                data.add(new SelectItemSaleTableModel(s.get(0).getItems().getItemDesc().toUpperCase(), s.get(0).getBatchNo(), Integer.parseInt(childController.qnttextfield.getText()), formatcost, formatprice, formatotal, nhisprice, "INACTIVE", 0.00));
-                                stage.close();
-                            }
-                        }
-                        itemname.setCellValueFactory(cell -> cell.getValue().getItemNameProperty());
-                        batchcode.setCellValueFactory(cell -> cell.getValue().getBatchCodeProperty());
-                        qnt.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
-                        price.setCellValueFactory(cell -> cell.getValue().getPriceProperty());
-                        total.setCellValueFactory(cell -> cell.getValue().getTotalProperty());
-                        nhisvalprice.setCellValueFactory(cell -> cell.getValue().getNHISPriceProperty());
-                        nhis.setCellValueFactory(cell -> cell.getValue().getNHISProperty());
-                        discount.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SelectItemSaleTableModel, Boolean>, ObservableValue<Boolean>>() {
-                            @Override
-                            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<SelectItemSaleTableModel, Boolean> features) {
-                                return new SimpleBooleanProperty(features.getValue() != null);
-                            }
-                        });
-
-                        discount.setCellFactory(new Callback<TableColumn<SelectItemSaleTableModel, Boolean>, TableCell<SelectItemSaleTableModel, Boolean>>() {
-                            @Override
-                            public TableCell<SelectItemSaleTableModel, Boolean> call(TableColumn<SelectItemSaleTableModel, Boolean> personBooleanTableColumn) {
-                                return new AddPersonDiscountCell();
-                            }
-                        });
-                        discountval.setCellValueFactory(cell -> cell.getValue().getDiscountValueProperty());
-
-                        action.setSortable(false);
-                        action.setMaxWidth(480);
-
-                        action.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SelectItemSaleTableModel, Boolean>, ObservableValue<Boolean>>() {
-                            @Override
-                            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<SelectItemSaleTableModel, Boolean> features) {
-                                return new SimpleBooleanProperty(features.getValue() != null);
-                            }
-                        });
-
-                        action.setCellFactory(new Callback<TableColumn<SelectItemSaleTableModel, Boolean>, TableCell<SelectItemSaleTableModel, Boolean>>() {
-                            @Override
-                            public TableCell<SelectItemSaleTableModel, Boolean> call(TableColumn<SelectItemSaleTableModel, Boolean> personBooleanTableColumn) {
-                                return new AddPersonCell();
-                            }
-                        });
-
-                        seleteditemtableview.setItems(data);
-                        seleteditemtableview.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
-                        totalp = Float.parseFloat(df.format(Utilities.sumList(getPrice())));
-                        totalprice.setText(df.format(totalp));
-
-                    } catch (Exception ex) {
-                        childController.stockval.setText("Invalid Format");
-
-                    }
-
-                }
-            });
-            Scene scene = new Scene(parent);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initOwner(parent.getScene().getWindow());
-            stage.setScene(scene);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.resizableProperty().setValue(false);
-            stage.showAndWait();
-        } catch (Exception ex) {
-            System.out.println("null");
-
-        }
-
-    }
+    //@FXML
+//    private void addtoitemtable() throws IOException {
+//        try {
+//            Stage stage = new Stage();
+//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddSalesQuantity.fxml"));
+//            Parent parent = (Parent) fxmlLoader.load();
+//            AddSalesQuantityController childController = fxmlLoader.getController();
+//            //String[] listval = listviewsales.getSelectionModel().getSelectedItem().split("[:>]");
+//            List<String> spiltedval = Arrays.asList(listval);
+//            List<Stockin> s = new StockinBL().getItemStockinBatchNo(spiltedval.get(0));
+//            childController.itemname.setText(spiltedval.get(1));
+//            String qntval = spiltedval.get(2);
+//            String qnttrim = qntval.trim();
+//            String[] qntlist = qnttrim.split("\\s+");
+//            List<String> splitqnt = Arrays.asList(qntlist);
+////        System.out.println(splitqnt.get(0));
+//            childController.stockval.setText(splitqnt.get(0));
+//
+//            childController.qnttextfield.textProperty().addListener(e -> {
+//                try {
+//                    qntval1 = Integer.parseInt(childController.qnttextfield.getText());
+//                    stockbal = Integer.parseInt(splitqnt.get(0));
+//                    bal = stockbal - qntval1;
+//                    childController.stockval.setText(String.valueOf(bal));
+//
+//                    if (childController.qnttextfield.getLength() >= 1 && qntval1 != 0) {
+//                        childController.additem.setDisable(false);
+//
+//                        System.out.println("QTY : " + qntval1);
+////                        double balval = Double.parseDouble(childController.stockval.getText());
+//                        if (bal < 0) {
+//
+//                            childController.stockval.setText(String.valueOf(bal));
+//                            childController.additem.setDisable(true);
+//                            System.out.println(childController.stockval.getText());
+//                        } else {
+//                            childController.qnttextfield.setOnKeyPressed(new EventHandler<KeyEvent>() {
+//                                @Override
+//                                public void handle(KeyEvent event) {
+//                                    if (bal >= 0) {
+//                                        if (event.getCode() == KeyCode.ENTER) {
+//                                            try {
+//                                                double totalval = Double.parseDouble(childController.qnttextfield.getText()) * s.get(0).getSalesPrice();
+//                                                double formatprice = Double.parseDouble(df.format(s.get(0).getSalesPrice()));
+//                                                double formatcost = Double.parseDouble(df.format(s.get(0).getCostPrice()));
+//                                                double formatotal = Double.parseDouble(df.format(totalval));
+//                                                double nhisprice = Double.parseDouble(df.format(s.get(0).getNhisPrice()));
+//
+//                                                ObservableList<SelectItemSaleTableModel> ls = seleteditemtableview.getItems();
+//                                                if (ls.isEmpty()) {
+//                                                    data.add(new SelectItemSaleTableModel(s.get(0).getItems().getItemDesc().toUpperCase(), s.get(0).getBatchNo(), Integer.parseInt(childController.qnttextfield.getText()), formatcost, formatprice, formatotal, nhisprice, "INACTIVE", 0.00));
+//                                                    stage.close();
+//                                                } else {
+//                                                    if (getBatchNo().contains(spiltedval.get(0))) {
+//                                                        System.out.println("True");
+//                                                        childController.stockval.setFont(Font.font(12));
+//                                                        childController.stockval.setText("Already Added");
+//                                                    } else {
+//                                                        data.add(new SelectItemSaleTableModel(s.get(0).getItems().getItemDesc().toUpperCase(), s.get(0).getBatchNo(), Integer.parseInt(childController.qnttextfield.getText()), formatcost, formatprice, formatotal, nhisprice, "INACTIVE", 0.00));
+//                                                        stage.close();
+//                                                    }
+//                                                }
+//                                                itemname.setCellValueFactory(cell -> cell.getValue().getItemNameProperty());
+//                                                batchcode.setCellValueFactory(cell -> cell.getValue().getBatchCodeProperty());
+//                                                qnt.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
+//                                                price.setCellValueFactory(cell -> cell.getValue().getPriceProperty());
+//                                                total.setCellValueFactory(cell -> cell.getValue().getTotalProperty());
+//                                                nhisvalprice.setCellValueFactory(cell -> cell.getValue().getNHISPriceProperty());
+//                                                nhis.setCellValueFactory(cell -> cell.getValue().getNHISProperty());
+//                                                discountval.setCellValueFactory(cell -> cell.getValue().getDiscountValueProperty());
+//                                                discount.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SelectItemSaleTableModel, Boolean>, ObservableValue<Boolean>>() {
+//                                                    @Override
+//                                                    public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<SelectItemSaleTableModel, Boolean> features) {
+//                                                        return new SimpleBooleanProperty(features.getValue() != null);
+//                                                    }
+//                                                });
+//
+//                                                discount.setCellFactory(new Callback<TableColumn<SelectItemSaleTableModel, Boolean>, TableCell<SelectItemSaleTableModel, Boolean>>() {
+//                                                    @Override
+//                                                    public TableCell<SelectItemSaleTableModel, Boolean> call(TableColumn<SelectItemSaleTableModel, Boolean> personBooleanTableColumn) {
+//                                                        return new AddPersonDiscountCell();
+//                                                    }
+//                                                });
+//
+//                                                action.setSortable(false);
+//                                                action.setMaxWidth(480);
+//
+//                                                action.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SelectItemSaleTableModel, Boolean>, ObservableValue<Boolean>>() {
+//                                                    @Override
+//                                                    public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<SelectItemSaleTableModel, Boolean> features) {
+//                                                        return new SimpleBooleanProperty(features.getValue() != null);
+//                                                    }
+//                                                });
+//
+//                                                action.setCellFactory(new Callback<TableColumn<SelectItemSaleTableModel, Boolean>, TableCell<SelectItemSaleTableModel, Boolean>>() {
+//                                                    @Override
+//                                                    public TableCell<SelectItemSaleTableModel, Boolean> call(TableColumn<SelectItemSaleTableModel, Boolean> personBooleanTableColumn) {
+//                                                        return new AddPersonCell();
+//                                                    }
+//                                                });
+//
+//                                                seleteditemtableview.setItems(data);
+//                                                seleteditemtableview.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+//                                                totalp = Float.parseFloat(df.format(Utilities.sumList(getPrice())));
+//                                                totalprice.setText(df.format(totalp));
+//
+//                                            } catch (Exception ex) {
+//                                                childController.stockval.setText("Invalid Format");
+//
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//                            });
+//                        }
+//                    } else {
+//                        childController.additem.setDisable(true);
+//                        childController.stockval.setText(splitqnt.get(0));
+//                    }
+//                } catch (Exception ex) {
+//                    childController.stockval.setText(splitqnt.get(0));
+//                    System.out.println("null");
+//                }
+//
+//            });
+//
+//            childController.additem.setOnAction(new EventHandler<ActionEvent>() {
+//                @Override
+//                public void handle(ActionEvent event) {
+//
+//                    try {
+//                        double totalval = Double.parseDouble(childController.qnttextfield.getText()) * s.get(0).getSalesPrice();
+//                        double formatprice = Double.parseDouble(df.format(s.get(0).getSalesPrice()));
+//                        double formatcost = Double.parseDouble(df.format(s.get(0).getCostPrice()));
+//                        double formatotal = Double.parseDouble(df.format(totalval));
+//                        double nhisprice = Double.parseDouble(df.format(s.get(0).getNhisPrice()));
+//
+//                        ObservableList<SelectItemSaleTableModel> ls = seleteditemtableview.getItems();
+//                        if (ls.isEmpty()) {
+//                            data.add(new SelectItemSaleTableModel(s.get(0).getItems().getItemDesc().toUpperCase(), s.get(0).getBatchNo(), Integer.parseInt(childController.qnttextfield.getText()), formatcost, formatprice, formatotal, nhisprice, "INACTIVE", 0.00));
+//                            stage.close();
+//                        } else {
+//                            if (getBatchNo().contains(spiltedval.get(0))) {
+//                                System.out.println("True");
+//                                childController.stockval.setFont(Font.font(12));
+//                                childController.stockval.setText("Already Added");
+//                            } else {
+//                                data.add(new SelectItemSaleTableModel(s.get(0).getItems().getItemDesc().toUpperCase(), s.get(0).getBatchNo(), Integer.parseInt(childController.qnttextfield.getText()), formatcost, formatprice, formatotal, nhisprice, "INACTIVE", 0.00));
+//                                stage.close();
+//                            }
+//                        }
+//                        itemname.setCellValueFactory(cell -> cell.getValue().getItemNameProperty());
+//                        batchcode.setCellValueFactory(cell -> cell.getValue().getBatchCodeProperty());
+//                        qnt.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
+//                        price.setCellValueFactory(cell -> cell.getValue().getPriceProperty());
+//                        total.setCellValueFactory(cell -> cell.getValue().getTotalProperty());
+//                        nhisvalprice.setCellValueFactory(cell -> cell.getValue().getNHISPriceProperty());
+//                        nhis.setCellValueFactory(cell -> cell.getValue().getNHISProperty());
+//                        discount.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SelectItemSaleTableModel, Boolean>, ObservableValue<Boolean>>() {
+//                            @Override
+//                            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<SelectItemSaleTableModel, Boolean> features) {
+//                                return new SimpleBooleanProperty(features.getValue() != null);
+//                            }
+//                        });
+//
+//                        discount.setCellFactory(new Callback<TableColumn<SelectItemSaleTableModel, Boolean>, TableCell<SelectItemSaleTableModel, Boolean>>() {
+//                            @Override
+//                            public TableCell<SelectItemSaleTableModel, Boolean> call(TableColumn<SelectItemSaleTableModel, Boolean> personBooleanTableColumn) {
+//                                return new AddPersonDiscountCell();
+//                            }
+//                        });
+//                        discountval.setCellValueFactory(cell -> cell.getValue().getDiscountValueProperty());
+//
+//                        action.setSortable(false);
+//                        action.setMaxWidth(480);
+//
+//                        action.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SelectItemSaleTableModel, Boolean>, ObservableValue<Boolean>>() {
+//                            @Override
+//                            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<SelectItemSaleTableModel, Boolean> features) {
+//                                return new SimpleBooleanProperty(features.getValue() != null);
+//                            }
+//                        });
+//
+//                        action.setCellFactory(new Callback<TableColumn<SelectItemSaleTableModel, Boolean>, TableCell<SelectItemSaleTableModel, Boolean>>() {
+//                            @Override
+//                            public TableCell<SelectItemSaleTableModel, Boolean> call(TableColumn<SelectItemSaleTableModel, Boolean> personBooleanTableColumn) {
+//                                return new AddPersonCell();
+//                            }
+//                        });
+//
+//                        seleteditemtableview.setItems(data);
+//                        seleteditemtableview.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+//                        totalp = Float.parseFloat(df.format(Utilities.sumList(getPrice())));
+//                        totalprice.setText(df.format(totalp));
+//
+//                    } catch (Exception ex) {
+//                        childController.stockval.setText("Invalid Format");
+//
+//                    }
+//
+//                }
+//            });
+//            Scene scene = new Scene(parent);
+//            stage.initModality(Modality.APPLICATION_MODAL);
+//            stage.initOwner(parent.getScene().getWindow());
+//            stage.setScene(scene);
+//            stage.initStyle(StageStyle.UNDECORATED);
+//            stage.resizableProperty().setValue(false);
+//            stage.showAndWait();
+//        } catch (Exception ex) {
+//            System.out.println("null");
+//
+//        }
+//
+//    }
 
     @FXML
     private void salesPDF(ActionEvent event) {

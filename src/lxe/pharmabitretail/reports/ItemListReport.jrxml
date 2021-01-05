@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4878c760-466e-47da-a970-5839a57c75c7">
-	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="13"/>
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="412"/>
 	<property name="ireport.y" value="0"/>
 	<style name="TableHeader" mode="Opaque" backcolor="#CCCCCC"/>
 	<style name="linecolorlight"/>
@@ -17,6 +17,7 @@
 	<field name="COLUMN_1" class="java.lang.String"/>
 	<field name="COLUMN_2" class="java.lang.String"/>
 	<field name="COLUMN_3" class="java.lang.String"/>
+	<field name="COLUMN_4" class="java.lang.String"/>
 	<variable name="ROW_COUNT" class="java.lang.Integer" calculation="Count">
 		<variableExpression><![CDATA[$F{COLUMN_0}]]></variableExpression>
 	</variable>
@@ -88,7 +89,7 @@
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement style="TableHeader" x="354" y="1" width="200" height="20" uuid="5747eb2c-81d3-4de9-9c9f-88c35285a444"/>
+				<reportElement style="TableHeader" x="402" y="1" width="152" height="20" uuid="5747eb2c-81d3-4de9-9c9f-88c35285a444"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -132,6 +133,19 @@
 					<pen lineColor="#CCCCCC"/>
 				</graphicElement>
 			</line>
+			<line>
+				<reportElement x="401" y="1" width="1" height="20" uuid="ff1e7b77-a277-4c19-bb4c-58975ccf9400"/>
+				<graphicElement>
+					<pen lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="TableHeader" x="354" y="1" width="47" height="20" uuid="f5996f25-90bb-4c29-880d-1a03f11a60bf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Volume]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -177,12 +191,12 @@
 				<textFieldExpression><![CDATA[$F{COLUMN_1}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement style="oddrow" x="354" y="0" width="200" height="15" uuid="17348629-8970-47cf-a42c-abef393ef91a"/>
+				<reportElement style="oddrow" x="402" y="0" width="152" height="15" uuid="17348629-8970-47cf-a42c-abef393ef91a"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="7"/>
 					<paragraph leftIndent="1"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{COLUMN_3}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{COLUMN_4}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement style="oddrow" x="1" y="0" width="34" height="15" uuid="5ca7b353-e9f4-4795-b2cc-cafa5e401c1b"/>
@@ -215,6 +229,19 @@
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{COLUMN_2}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement style="TableHeader" x="401" y="0" width="1" height="15" backcolor="#F2F0F0" uuid="417edcc8-7fd9-4420-a15d-079ad3c35380"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement style="oddrow" x="354" y="0" width="47" height="15" uuid="d09fa82a-f188-477e-960e-7b82db4e7e47"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COLUMN_3}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

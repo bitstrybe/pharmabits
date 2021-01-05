@@ -173,15 +173,18 @@
                   </Menu>
                   <Menu mnemonicParsing="false" text="Report">
                      <items>
-                        <Menu mnemonicParsing="false" text="Stocks">
-                          <items>
-                              <MenuItem fx:id="reorderlevel" mnemonicParsing="false" onAction="#stockreorderlevel" text="Re-Order Level Report" />
-                            <MenuItem mnemonicParsing="false" onAction="#stocksreport" text="Stock Report" />
-                          </items>
-                        </Menu>
                         <Menu mnemonicParsing="false" text="Items">
                           <items>
                             <MenuItem mnemonicParsing="false" onAction="#itemlistreport" text="Item List" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Stocks">
+                          <items>
+                              <MenuItem mnemonicParsing="false" onAction="#stocksreport" text="Stock Balance" />
+                            <MenuItem mnemonicParsing="false" onAction="#stocksreport" text="Stock Balance Details" />
+                              <MenuItem fx:id="reorderlevel" mnemonicParsing="false" onAction="#stockreorderlevel" text="Stock ROL  Report" />
+                              <MenuItem mnemonicParsing="false" onAction="#stocksreport" text="Stock Expiry Report" />
+                              <MenuItem mnemonicParsing="false" onAction="#stocksreport" text="Stock Expiry Report" />
                           </items>
                         </Menu>
                      </items>

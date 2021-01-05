@@ -20,6 +20,7 @@
     <class>lxe.pharmabitretail.entity.Forms</class>
     <class>lxe.pharmabitretail.entity.Generic</class>
     <class>lxe.pharmabitretail.entity.Userlogs</class>
+    <class>lxe.pharmabitretail.entity.Shelf</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:file:./pharmabitsdb;DATABASE_TO_UPPER=false;IGNORECASE=TRUE"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
