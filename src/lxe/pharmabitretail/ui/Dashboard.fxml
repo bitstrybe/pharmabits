@@ -16,17 +16,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-  <AnchorPane id="homebackground" fx:id="dashpane" prefHeight="708.0" prefWidth="1205.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.DashboardController">
-      <children>
-          <Label alignment="CENTER" layoutX="5.0" layoutY="21.0" prefHeight="63.0" prefWidth="284.0" text="Dashboard">
-              <font>
-                  <Font size="30.0" />
-              </font>
-          </Label>
-      <ScrollPane layoutX="7.0" layoutY="84.0" prefHeight="623.0" prefWidth="1172.0" styleClass="scroll-background">
-         <content>
-            <VBox alignment="CENTER" prefHeight="631.0" prefWidth="1174.0">
+<ScrollPane prefHeight="744.0" prefWidth="1205.0" styleClass="edge-to-edge" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lxe.pharmabitretail.ui.DashboardController">
+   <content>
+      <AnchorPane id="homebackground" fx:id="dashpane" prefHeight="754.0" prefWidth="1205.0">
+            <children>
+                <Label alignment="CENTER" layoutX="5.0" layoutY="21.0" prefHeight="63.0" prefWidth="284.0" text="Dashboard">
+                    <font>
+                        <Font size="30.0" />
+                    </font>
+                </Label>
+            <VBox alignment="CENTER" layoutX="7.0" layoutY="84.0" prefHeight="651.0" prefWidth="1174.0">
                <children>
                       <HBox prefHeight="175.0" prefWidth="1153.0">
                           <children>
@@ -212,7 +211,7 @@
                       </Pane>
                </children>
             </VBox>
-         </content>
-      </ScrollPane>
-      </children>
-  </AnchorPane>
+            </children>
+        </AnchorPane>
+   </content>
+</ScrollPane>
