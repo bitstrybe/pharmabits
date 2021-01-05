@@ -54,7 +54,7 @@ public class StockinBL extends DdsBL {
     }
 
     public List<Stockin> getAllStockinGroup() {
-        TypedQuery<Stockin> q = em.createQuery("SELECT s FROM Stockin s GROUP BY s.batchNo ORDER BY s.stockinId DESC", Stockin.class);
+        TypedQuery<Stockin> q = em.createQuery("SELECT s FROM Stockin s GROUP BY s.items ORDER BY s.stockinId DESC", Stockin.class);
         q.setMaxResults(20);
         return q.getResultList();
     }
@@ -73,7 +73,7 @@ public class StockinBL extends DdsBL {
     }
 
     public List<String> getAllStockinGroupCode() {
-        TypedQuery<String> q = em.createQuery("SELECT CONCAT(s.batchNo,s.items.itemCodeFullname,SUM(s.quantity))AS title FROM Stockin s GROUP BY s.batchNo", String.class);
+        TypedQuery<String> q = em.createQuery("SELECT CONCAT(s.batchNo,s.items.itemdesc,SUM(s.quantity))AS title FROM Stockin s GROUP BY s.batchNo", String.class);
         return q.getResultList();
     }
 

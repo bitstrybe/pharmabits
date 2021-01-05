@@ -210,9 +210,4 @@ public class Utilities {
 
         return resizedImage;
     }
-
-//    public static String decimalFormat(Object decimal){
-//        DecimalFormat df = new DecimalFormat("0.00");
-//        return df.format(decimal);
-//    }
 }

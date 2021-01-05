@@ -37,10 +37,12 @@ public class AddSalesQuantityController implements Initializable {
     private Button plusButton;
     @FXML
     private Button minusButton;
-    AtomicInteger rowCounter = new AtomicInteger(0);
+    
     @FXML
     public Button addtocartbtn;
 
+    
+    AtomicInteger rowCounter = new AtomicInteger(0);
     /**
      * Initializes the controller class.
      */

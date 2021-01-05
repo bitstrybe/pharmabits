@@ -8,6 +8,8 @@ package lxe.pharmabitretail.ui;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -21,6 +23,7 @@ import lxe.pharmabitretail.tablemodel.SelectItemSaleTableModel;
  */
 public class ItemCartController implements Initializable {
 
+//    public static final ObservableList<SelectItemSaleTableModel> data = FXCollections.observableArrayList();
     @FXML
     private JFXTextField stocksearch;
     @FXML
@@ -40,7 +43,7 @@ public class ItemCartController implements Initializable {
     @FXML
     public static TableColumn<SelectItemSaleTableModel, Boolean> discount;
     @FXML
-    public static TableColumn<SelectItemSaleTableModel, String> discountcent;
+    public static TableColumn<SelectItemSaleTableModel, Number> discountcent;
     @FXML
     public static TableColumn<SelectItemSaleTableModel, Boolean> action;
 

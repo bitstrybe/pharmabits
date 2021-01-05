@@ -27,6 +27,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lxe.pharmabitretail.bl.ReceiptBL;
@@ -38,6 +39,7 @@ import lxe.pharmabitretail.entity.UomDef;
 import lxe.pharmabitretail.tablemodel.SalesDetailsTableModel;
 import lxe.pharmabitretail.tablemodel.SalesTableModel;
 import lxe.pharmabitretail.tablemodel.SelectItemSaleTableModel;
+import lxe.pharmabitretail.utils.ShoppingCarts;
 
 /**
  * FXML Controller class
@@ -106,7 +108,6 @@ public class CatalogController implements Initializable {
     private FlowPane displaypane;
 
     public void getStockingItemList() {
-
         StockinBL sk = new StockinBL();
         List<Stockin> list = sk.getAllStockinGroup();
         ObservableList<Stockin> result = FXCollections.observableArrayList(list);
@@ -135,7 +136,15 @@ public class CatalogController implements Initializable {
                         Parent parentQtn = (Parent) fxmlLoaderQnt.load();
                         AddSalesQuantityController childControllerQnt = fxmlLoaderQnt.getController();
                         childControllerQnt.addtocartbtn.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-                            
+                            try {
+                                ShoppingCarts cat = new ShoppingCarts();
+                                cat.addToCart(stock.getBatchNo(), stock.getItems().getItemDesc(), stock.getQuantity(), stock.getCostPrice(), stock.getSalesPrice(), 100, stock.getNhisPrice(), "Sample", 1);
+                                System.out.println(cat.toString());
+                            } catch (Exception ex) {
+                                childControllerQnt.addtocartbtn.setText("Invalid Format");
+                                Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
+
+                            }
 
                         });
                         Scene scene = new Scene(parentQtn);
@@ -215,50 +224,49 @@ public class CatalogController implements Initializable {
 //        });
 //
 //    }
-    public List getBatchNo() {
-        List<String> columnData = new ArrayList<>();
-        for (SelectItemSaleTableModel item : seleteditemtableview.getItems()) {
-            columnData.add(batchcode.getCellObservableValue(item).getValue());
-        }
-        return columnData;
-    }
-
-    public List getPrice() {
-        List<Number> columnData = new ArrayList<>();
-        for (SelectItemSaleTableModel item : seleteditemtableview.getItems()) {
-            Number qunt = qnt.getCellObservableValue(item).getValue();
-            Number nhisps = nhisvalprice.getCellObservableValue(item).getValue();
-            double actprice = qnt.getCellObservableValue(item).getValue().doubleValue() * price.getCellObservableValue(item).getValue().doubleValue();
-            double discount = discountval.getCellObservableValue(item).getValue().doubleValue();
-            double nhistotal = qunt.intValue() * nhisps.doubleValue();
-            double nhistopup = actprice - nhistotal;
-
-            if (nhis.getCellObservableValue(item).getValue().equals("INACTIVE")) {
-                if (discount > 0) {
-                    double discountval2 = discount / 100;
-                    double disactval = actprice * discountval2;
-                    columnData.add(actprice - disactval);
-                } else {
-                    columnData.add(actprice);
-                }
-
-            } else if (nhis.getCellObservableValue(item).getValue().equals("ACTIVE")) {
-                if (discount > 0) {
-                    double discountval2 = discount / 100;
-                    double disactval = nhistopup * discountval2;
-//                System.out.println(nhistopup - Utilities.roundToTwoDecimalPlace(disactval, 2));
-                    System.out.println(nhistopup);
-                    columnData.add(nhistopup - disactval);
-                } else {
-                    columnData.add(nhistopup);
-                }
-
-            }
-
-        }
-        return columnData;
-    }
-
+//    public List getBatchNo() {
+//        List<String> columnData = new ArrayList<>();
+//        for (SelectItemSaleTableModel item : ItemCartController.selection.getItems()) {
+//            columnData.add(ItemCartController.batchno.getCellObservableValue(item).getValue());
+//        }
+//        return columnData;
+//    }
+//
+//    public List getPrice() {
+//        List<Number> columnData = new ArrayList<>();
+//        for (SelectItemSaleTableModel item : ItemCartController.selection.getItems()) {
+//            Number qunt = ItemCartController.quantity.getCellObservableValue(item).getValue();
+//            Number nhisps = ItemCartController.nhisprice.getCellObservableValue(item).getValue();
+//            double actprice = ItemCartController.quantity.getCellObservableValue(item).getValue().doubleValue() * ItemCartController.itemprice.getCellObservableValue(item).getValue().doubleValue();
+//            double discount = ItemCartController.discountcent.getCellObservableValue(item).getValue().doubleValue();
+//            double nhistotal = qunt.intValue() * nhisps.doubleValue();
+//            double nhistopup = actprice - nhistotal;
+//
+//            if (ItemCartController.nhis.getCellObservableValue(item).getValue().equals("INACTIVE")) {
+//                if (discount > 0) {
+//                    double discountval2 = discount / 100;
+//                    double disactval = actprice * discountval2;
+//                    columnData.add(actprice - disactval);
+//                } else {
+//                    columnData.add(actprice);
+//                }
+//
+//            } else if (ItemCartController.nhis.getCellObservableValue(item).getValue().equals("ACTIVE")) {
+//                if (discount > 0) {
+//                    double discountval2 = discount / 100;
+//                    double disactval = nhistopup * discountval2;
+////                System.out.println(nhistopup - Utilities.roundToTwoDecimalPlace(disactval, 2));
+//                    System.out.println(nhistopup);
+//                    columnData.add(nhistopup - disactval);
+//                } else {
+//                    columnData.add(nhistopup);
+//                }
+//
+//            }
+//
+//        }
+//        return columnData;
+//    }
     /**
      * Initializes the controller class.
      */

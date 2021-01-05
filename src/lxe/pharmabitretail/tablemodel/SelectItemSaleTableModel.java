@@ -28,9 +28,9 @@ public class SelectItemSaleTableModel {
     public SelectItemSaleTableModel() {
     }
 
-    public SelectItemSaleTableModel(String itemName, String batchcode, int quantity,double cost, double price, double total, double nhisvalprice, String nhis, double discountval) {
+    public SelectItemSaleTableModel(String batchno, String itemName, int quantity,double cost, double price, double total, double nhisvalprice, String nhis, double discountval) {
+        this.batchcode = new SimpleStringProperty(batchno);
         this.itemName = new SimpleStringProperty(itemName);
-        this.batchcode = new SimpleStringProperty(batchcode);
         this.quantity = new SimpleIntegerProperty(quantity);
         this.cost = new SimpleDoubleProperty(cost);
         this.price = new SimpleDoubleProperty(price);
